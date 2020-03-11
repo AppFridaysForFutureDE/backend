@@ -1,0 +1,67 @@
+swagger: "2.0"
+info:
+  description: "Dies ist die API-Spezifikation für die FFF App DE"
+  version: "1.0.0"
+  title: "FFF App DE API"
+  contact:
+    email: "fffappde@gmail.com"
+  license:
+    name: "GNU General Public License v3.0"
+    url: "https://github.com/AppFridaysForFutureDE/backend/blob/master/LICENSE"
+host: "app.fridaysforfuture.de"
+basePath: "/api/v1"
+tags:
+- name: "Website API"
+  description: "OGs und Streiks der FFF-Website"
+- name: "CMS"
+  description: "Inhalte und Artikel aus dem CMS; Definiert von Ghost"
+  externalDocs:
+    description: "Ghost API Docs"
+    url: "https://ghost.org/docs/api/v3/content/"
+schemes:
+- "https"
+- "http"
+paths:
+  /ogs:
+    get:
+      tags:
+      - "Website API"
+      summary: Alle OG-Objekte erhalten
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/OG"
+      produces:
+      - "application/json"
+definitions:
+  OG:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      name:
+        type: "string"
+      stadt:
+        type: "string"
+      bundesland:
+        type: "string"
+      long:
+        type: "number"
+      lat:
+        type: "number"
+      zusatzinfo:
+        type: "string"
+      facebook:
+        type: "string"
+      instagram:
+        type: "string"
+      twitter:
+        type: "string"
+      website:
+        type: "string"
+externalDocs:
+  description: "Legitimierter Ausgangspunkt"
+  url: "https://docs.google.com/document/d/1HVwYDT1zZY3qjW_LW5NihhqOiSL3hiJ9rkishsrZt-g/"
