@@ -52,8 +52,6 @@ definitions:
         type: "number"
       lat:
         type: "number"
-      facebookEvent:
-        type: "string"
       zusatzinfo:
         type: "string"
       facebook:
