@@ -2,7 +2,7 @@ import { RequestHandler } from 'express';
 import { Og } from '../models/ogs'
 
 // TODO: Use db instead
-const OGS: Ogs[] = [];
+const OGS: Og[] = [];
 
 export const createOg: RequestHandler = (req, res, next) => {
   const name = (req.body as {text: string}).text;
