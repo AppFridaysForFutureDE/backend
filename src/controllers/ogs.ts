@@ -1,0 +1,12 @@
+import { RequestHandler } from 'express';
+import { Og } from '../models/ogs'
+
+// TODO: Use db instead
+const OGS: Ogs[] = [];
+
+export const createOg: RequestHandler = (req, res, next) => {
+  const name = (req.body as {text: string}).text;
+  const newOg = new Og(Math.random().toString(), name);
+  OGS.push(newOg);
+  res.status(201).json({message: 'Created og', createdOg: newOg});
+};
