@@ -13,7 +13,14 @@ Dies ist das Backend der FFF App DE.
 
 
 ## Einrichten des CMS
+
 Der Admin bereich ist erreichbar unter [http://localhost:2368/ghost]
 
 Beim ersten Öffnen muss der Administrations-Account eingerichtet.
 Anschließend können dort redaktionellen Beiträge verfasst und bearbeitet werden.
+
+## Linter ausführen
+
+ESLint ist ein Tool um Code zu analysieren bevor er ausgeführt wird.
+
+`npm run lint`
