@@ -10,3 +10,7 @@ export const createOg: RequestHandler = (req, res, next) => {
   OGS.push(newOg);
   res.status(201).json({message: 'Created og', createdOg: newOg});
 };
+
+export const getOgs: RequestHandler = (req, res, next) => {
+    res.status(200).json(OGS);
+  };
