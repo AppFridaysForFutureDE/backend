@@ -21,7 +21,7 @@ Dies ist das Backend der FFF App DE.
 
 ## Einrichten des CMS
 
-Nach starten des docker containers kann das CMS unter folgender Adresse im Browser angezeigt werden:
+Nach Starten des docker containers kann das CMS unter folgender Adresse im Browser angezeigt werden:
 [http://localhost:2368/]
 
 Der Admin bereich ist erreichbar unter [http://localhost:2368/ghost]
@@ -41,6 +41,16 @@ Das Repository ist folgendermaßen aufgebaut:
 
 ## Linter ausführen
 
-ESLint ist ein Tool um Code zu analysieren bevor er ausgeführt wird.
+ESLint ist ein Tool um Statische Code Analysen durchzuführen.
 
 `npm run lint`
+
+## Manuelles Testen
+
+Nach Starten des docker containers kann die API mit Hilfe eines REST-Clients getestet werden (z.B. mit Insomnia)
+
+Die Erreichbarkeit des Servers bzw. die Funktionalität der API kann beispielsweise durch einen
+* POST Request
+* an die Adresse `http://localhost:3000/ogs/`
+* mit Json body `{ "text": "MeineOg" }`
+getestet werden.
