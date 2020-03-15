@@ -3,16 +3,6 @@ import { Og } from '../models/ogs'
 // import { Document, Model, model, Types, Schema, Query } from "mongoose"
 const mongoose = require('mongoose');
 
-// connect to Mongo daemon
-// TODO: Move this to another file
-mongoose
-  .connect(
-    'mongodb://fffapp:fffapp@mongo-db:27017/fffapp',
-    { useNewUrlParser: true }
-  )
-  .then(() => console.log('MongoDB Connected'))
-  .catch((err: Error) => console.log(err));
-
 
 // DB schema
 const ItemSchema = new mongoose.Schema({
