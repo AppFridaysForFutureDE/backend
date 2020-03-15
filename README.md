@@ -49,8 +49,4 @@ ESLint ist ein Tool um Statische Code Analysen durchzuführen.
 
 Nach Starten des docker containers kann die API mit Hilfe eines REST-Clients getestet werden (z.B. mit Insomnia)
 
-Die Erreichbarkeit des Servers bzw. die Funktionalität der API kann beispielsweise durch einen
-* POST Request
-* an die Adresse `http://localhost:3000/ogs/`
-* mit Json body `{ "text": "MeineOg" }`
-getestet werden.
+Die Erreichbarkeit des Servers bzw. die Funktionalität der API kann beispielsweise durch eine POST Request an die Adresse `http://localhost:3000/ogs/` mit JSON body `{ "text": "MeineOg" }` getestet werden.
