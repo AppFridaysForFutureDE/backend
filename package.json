@@ -29,7 +29,7 @@
     "url": "git+https://github.com/AppFridaysForFutureDE/backend.git"
   },
   "author": "FFF App AG",
-  "license": "ISC",
+  "license": "GNU GPL v3",
   "bugs": {
     "url": "https://github.com/AppFridaysForFutureDE/backend/issues"
   },
