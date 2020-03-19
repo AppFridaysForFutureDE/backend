@@ -7,7 +7,7 @@ export const createOg: RequestHandler = (req, res) => {
 
   newOg.save().then(() => {
       res.status(201).json({message: 'Created og', createdOg: ogName});
-    });   
+  });
 };
 
 export const getOgs: RequestHandler = (req, res) => {
