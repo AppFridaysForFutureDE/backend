@@ -24,7 +24,7 @@ Dies ist das Backend der FFF App DE.
 Nach Starten des docker containers kann das CMS unter folgender Adresse im Browser angezeigt werden:
 [http://localhost:2368/]
 
-Der Admin bereich ist erreichbar unter [http://localhost:2368/ghost]
+Der Adminbereich ist erreichbar unter [http://localhost:2368/ghost]
 
 Beim ersten Öffnen muss der Administrations-Account eingerichtet.
 Anschließend können dort redaktionellen Beiträge verfasst und bearbeitet werden.
@@ -35,7 +35,7 @@ Anschließend können dort redaktionellen Beiträge verfasst und bearbeitet werd
 Das Repository ist folgendermaßen aufgebaut:
 
 * Die verschiedenen Module/Services sind in docker-compose.yml aufgelistet
-* Der Typescript Code für das Main Modul wird steckt im Ordner 'src'
+* Der Typescript Code steckt im Ordner 'src'
   und wird automatisch in Javascript compiliert und im Ordner 'dist' gespeichert.
 
 
