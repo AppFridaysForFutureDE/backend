@@ -14,7 +14,7 @@ tags:
 - name: "Website API"
   description: "OGs und Streiks der FFF-Website"
 - name: "CMS"
-  description: "Inhalte und Artikel aus dem CMS; Definiert von Ghost"
+  description: "Direkt über /ghost ohne basePath verfügbar.(z.B. https://app.fridaysforfuture.de/ghost) Inhalte und Artikel aus dem CMS; Definiert von Ghost"
   externalDocs:
     description: "Ghost API Docs"
     url: "https://ghost.org/docs/api/v3/content/"
