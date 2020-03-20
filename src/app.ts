@@ -2,6 +2,12 @@ import express, {Request, Response} from 'express';
 import { json } from 'body-parser';
 import ogRoutes from './routes/ogs';
 import mongoose from 'mongoose';
+var mongoUp = true;
+
+//create server
+const app = express();
+app.use(json())
+
 
 // connect to Mongo daemon
 mongoose
@@ -10,16 +16,20 @@ mongoose
     { useNewUrlParser: true }
   )
   .then(() => console.log('MongoDB Connected'))
-  .catch((err: Error) => console.log(err));
+  .catch(function(err) {
+    console.log(err);
+    mongoUp = false;//cant use close() here because server isnt already listening
+    console.log("Server not started because of a critical error that occurred when starting mongodb");
+  });
 
-const app = express();
-
-app.use(json())
-
+//initialise routes
 app.use('/ogs', ogRoutes);
 
 app.use((err: Error, req: Request, res: Response) => {
   res.status(500).json({message: err.message});
 });
 
-app.listen(3000);
+//only start server when mongo is up
+if (mongoUp) {
+  app.listen(3000);
+}

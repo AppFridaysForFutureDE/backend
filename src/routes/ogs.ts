@@ -4,7 +4,6 @@ import {createOg, getOgs} from '../controllers/ogs';
 const router = Router();
 
 router.post('/', createOg);
-
 router.get('/', getOgs);
 
 
