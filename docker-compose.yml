@@ -30,6 +30,18 @@ services:
     volumes:
       - mysql-volume:/var/lib/mysql
 
+  express:
+    container_name: express-main-module
+    restart: always
+    build: ./
+    command: npm start
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "3000:3000"
+    links:
+      - mongo-db
+
   mongo-db:
     image: 'mongo'
     restart: always
