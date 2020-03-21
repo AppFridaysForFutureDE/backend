@@ -4,12 +4,12 @@ import ogRoutes from './routes/ogs';
 import mongoose from 'mongoose';
 var Ddos = require('ddos');
 var ddos = new Ddos({burst:10, limit:15});//probably need to adjust these
-var mongoUp = true;
+
+var mongoUp: boolean = true;
 
 //create server, add json encoding and ddos protection
 const app = express();
-app.use(json())
-app.use(ddos.express);
+app.use(json());
 
 
 // connect to Mongo daemon
