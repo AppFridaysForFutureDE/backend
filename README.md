@@ -45,6 +45,11 @@ ESLint ist ein Tool um Statische Code Analysen durchzuführen.
 
 `npm run lint`
 
+
+Mit diesem Befehl wird die automatische Code Korrektur gestartet:
+
+`npm run lint-fix`
+
 ## Manuelles Testen
 
 Nach Starten des docker containers kann die API mit Hilfe eines REST-Clients getestet werden (z.B. mit Insomnia)
