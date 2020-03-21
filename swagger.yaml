@@ -42,16 +42,20 @@ definitions:
     properties:
       id:
         type: "string"
-      name:
-        type: "string"
+        required: "true"
       stadt:
         type: "string"
+        required: "true"
       bundesland:
+        type: "string"
+      name:
         type: "string"
       long:
         type: "number"
+        required: "true"
       lat:
         type: "number"
+        required: "true"
       zusatzinfo:
         type: "string"
       facebook:

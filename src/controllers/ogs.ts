@@ -2,10 +2,12 @@ import { RequestHandler } from 'express';
 import { Og } from '../models/ogs'
 
 export const createOg: RequestHandler = async (req, res) => {
-  const ogName = (req.body as {text: string}).text;
-  const newOg = new Og({name: ogName});
-  let newOG = await newOg.save()
-  res.status(201).json({message: 'Created og', createdOg: ogName});
+  try {
+    let newOg = await new Og(req.body).save()
+    res.status(201).json({message: 'Created og', createdOg: newOg});
+  } catch (error) {
+    res.status(422).json({message: 'Could not create og', error: error});
+  }
 };
 
 export const getOgs: RequestHandler = (req, res) => {
