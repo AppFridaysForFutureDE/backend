@@ -1,10 +1,10 @@
 import express, {Request, Response} from 'express';
-var Ddos = require('ddos');
 import { json } from 'body-parser';
 import ogRoutes from './routes/ogs';
 import mongoose from 'mongoose';
-var mongoUp = true;
+var Ddos = require('ddos');
 var ddos = new Ddos({burst:10, limit:15});//probably need to adjust these
+var mongoUp = true;
 
 //create server, add json encoding and ddos protection
 const app = express();
@@ -22,10 +22,11 @@ mongoose
   .catch(function(err) {
     console.log(err);
     mongoUp = false;//cant use close() here because server isnt already listening
-    console.log("Server not started because of a critical error that occurred when starting mongodb");
+    console.log("Server not started because of a critical error that occurred when starting MongoDB");
   });
 
-//initialise routes
+//initialise routers; every router needs to use ddos
+ogRoutes.use(ddos.express);
 app.use('/ogs', ogRoutes);
 
 app.use((err: Error, req: Request, res: Response) => {
