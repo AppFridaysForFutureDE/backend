@@ -2,8 +2,8 @@ import express, {Request, Response} from 'express';
 import { json } from 'body-parser';
 import ogRoutes from './routes/ogs';
 import mongoose from 'mongoose';
-let Ddos = require('ddos');
-let ddos = new Ddos({burst:10, limit:15});//probably need to adjust these
+const Ddos = require('ddos');
+const ddos = new Ddos({burst:10, limit:15});//probably need to adjust these
 
 var mongoUp: boolean = true;
 
