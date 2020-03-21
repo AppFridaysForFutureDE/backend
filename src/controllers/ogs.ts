@@ -3,9 +3,8 @@ import { Og } from '../models/ogs'
 
 export const createOg: RequestHandler = async (req, res) => {
   try {
-    const newOg = new Og(req.body);
-    let newOG = await newOg.save()
-    res.status(201).json({message: 'Created og', createdOg: newOG});
+    let newOg = await new Og(req.body).save()
+    res.status(201).json({message: 'Created og', createdOg: newOg});
   } catch (error) {
     res.status(422).json({message: 'Could not create og', error: error});
   }
