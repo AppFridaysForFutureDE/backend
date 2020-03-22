@@ -2,8 +2,10 @@ import express, { Request, Response } from "express";
 import { json } from "body-parser";
 import ogRoutes from "./routes/ogs";
 import mongoose from "mongoose";
-const Ddos = require("ddos");
-const ddos = new Ddos({ burst: 10, limit: 15 }); //probably need to adjust these
+import Ddos from "ddos";
+
+//probably need to adjust these
+const ddos = new Ddos({ burst: 10, limit: 15 });
 
 let mongoUp = true;
 
@@ -11,7 +13,7 @@ let mongoUp = true;
 const app = express();
 app.use(json());
 
-// connect to Mongo daemon
+//connect to Mongo daemon
 mongoose
   .connect("mongodb://fffapp:fffapp@mongo-db:27017/fffapp", {
     useNewUrlParser: true
