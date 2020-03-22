@@ -15,18 +15,19 @@
     "@types/node": "^13.9.1",
     "@typescript-eslint/eslint-plugin": "^2.23.0",
     "@typescript-eslint/parser": "^2.23.0",
-    "@typescript-eslint/eslint-config-prettier": "^6.10.0",
-    "@typescript-eslint/eslint-plugin-prettier": "^3.1.2",
     "eslint": "^6.8.0",
-    "prettier": "^1.19.1",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
     "nodemon": "^2.0.2",
+    "prettier": "^1.19.1",
     "typescript": "^3.8.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "tsc && node dist/app.js",
     "start": "nodemon --watch src/ --exec \"npm run compile\" --verbose -e ts",
-    "lint": "npx eslint src/ --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
+    "lint-fix": "eslint src/ --fix --ext .js,.jsx,.ts,.tsx"
   },
   "repository": {
     "type": "git",

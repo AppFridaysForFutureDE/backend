@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 // Änderungen dieses Schemas sollten auch in swagger.yaml gespeichert werden
 const ogSchema = new mongoose.Schema({
@@ -34,7 +34,7 @@ const ogSchema = new mongoose.Schema({
   },
   website: {
     type: String
-  },
+  }
 });
 
-export const Og = mongoose.model('og', ogSchema);
+export const Og = mongoose.model("og", ogSchema);
