@@ -47,7 +47,7 @@ services:
       - mongo-db
 
   mongo-db:
-    image: 'mongo'
+    image: 'mongo:4.2.3'
     restart: always
     environment:
         - MONGO_INITDB_DATABASE=fffapp
