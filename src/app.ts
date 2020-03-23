@@ -1,18 +1,20 @@
 import express, { Request, Response } from "express";
+import fcmAdmin from "./fcm"
 import { json } from "body-parser";
 import ogRoutes from "./routes/ogs";
 import mongoose from "mongoose";
 import Ddos from "ddos";
+var mongoUp = true;
 
-//probably need to adjust these
-const ddos = new Ddos({ burst: 10, limit: 15 });
+//------Firebase Admin------
+const messageAdmin = new fcmAdmin("../de-fridaysforfuture-app-firebase-adminsdk-98yw1-c45342f3dc.json");
+messageAdmin.sendMessage("nice", "nice");
 
-let mongoUp = true;
+//------DDoS-Protection------
+const ddos = new Ddos({ burst: 10, limit: 15 });//probably need to adjust these
 
-//create server, add json encoding and ddos protection
-const app = express();
-app.use(json());
 
+//------MongoDB------
 //connect to Mongo daemon
 mongoose
   .connect("mongodb://fffapp:fffapp@mongo-db:27017/fffapp", {
@@ -26,6 +28,12 @@ mongoose
       "Server not started because of a critical error that occurred when starting MongoDB"
     );
   });
+
+
+//------Express Server------
+//create server, add json encoding and ddos protection
+const app = express();
+app.use(json());
 
 //initialise routers; every router needs to use ddos
 ogRoutes.use(ddos.express);
