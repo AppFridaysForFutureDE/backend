@@ -16,19 +16,18 @@ export default class fcmAdmin {
   /**
    * sendMessage
    */
-  public sendMessage(topic: string, payload: string) {
+  public async sendMessage(topic: string, payload: string) {
     var message = {
       data: {
         payload: payload
       },
       topic: topic
     };
-    admin.messaging().send(message)
-    .then((response) => {
+    try {
+      const response = await admin.messaging().send(message);
       console.log('Successfully sent message:', response);
-    })
-    .catch((error) => {
+    } catch (error) {
       console.log('Error sending message:', error);
-    });
+    }
   }
 }
