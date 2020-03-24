@@ -1,10 +1,10 @@
 import * as admin from "firebase-admin";
-export default class fcmAdmin {
+export default class FCMAdmin {
   private authPath: string;
 
   constructor(ap: string) {
     this.authPath = ap;
-    //Authentification
+    // Authentification
     var serviceAccount = require(this.authPath);
 
     admin.initializeApp({

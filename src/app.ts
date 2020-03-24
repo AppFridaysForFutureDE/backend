@@ -7,7 +7,7 @@ import Ddos from "ddos";
 let mongoUp = true;
 
 //------Firebase Admin------
-const messageAdmin = new fcmAdmin("../de-fridaysforfuture-app-firebase-adminsdk-98yw1-c45342f3dc.json");
+const messageAdmin = new FCMAdmin("../de-fridaysforfuture-app-firebase-adminsdk-98yw1-c45342f3dc.json");
 messageAdmin.sendMessage("nice", "nice");
 
 //------DDoS-Protection------
