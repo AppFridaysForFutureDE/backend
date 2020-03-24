@@ -2,7 +2,6 @@ import express, { Request, Response } from "express";
 import FCMAdmin from "./fcm"
 import { json } from "body-parser";
 import ogRoutes from "./routes/ogs";
-import fcmRoutes from "./routes/fcm";
 import mongoose from "mongoose";
 import Ddos from "ddos";
 let mongoUp = true;
