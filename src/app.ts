@@ -4,7 +4,7 @@ import { json } from "body-parser";
 import ogRoutes from "./routes/ogs";
 import mongoose from "mongoose";
 import Ddos from "ddos";
-var mongoUp = true;
+let mongoUp = true;
 
 //------Firebase Admin------
 const messageAdmin = new fcmAdmin("../de-fridaysforfuture-app-firebase-adminsdk-98yw1-c45342f3dc.json");
