@@ -1,9 +1,11 @@
 import express, { Request, Response } from "express";
 import FCMAdmin from "./fcm"
+import StrikeAccess from "./strikeaccess"
 import { json } from "body-parser";
 import strikeRoutes from "./routes/strikes";
 import mongoose from "mongoose";
 import Ddos from "ddos";
+var CronJob = require('cron').CronJob;
 let mongoUp = true;
 
 //------Firebase Admin------
@@ -28,6 +30,22 @@ mongoose
       "Server not started because of a critical error that occurred when starting MongoDB"
     );
   });
+
+
+//------Strike Access Cronjobs------
+const strikeA = new StrikeAccess();
+//retrieving strikes every day at 0
+var job = new CronJob("0 0 * * *", function() {
+  console.log("Retrieving Strikes");
+  strikeA.retrieveStrikes();
+}, null, true, "Europe/Berlin");
+job.start();
+//check strikes every hour from 8-20
+var job = new CronJob("0 8-20 * * *", function() {
+  console.log("Checking Strikes");
+  strikeA.checkStrikes();
+}, null, true, "Europe/Berlin");
+job.start();
 
 
 //------Express Server------
