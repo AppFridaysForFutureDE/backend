@@ -21,7 +21,7 @@ const strikeScheme = new mongoose.Schema({
     required: true
   },
   uhrzeit: {
-    type: String,
+    type: Number,
     required: true
   },
   startpunkt: {
@@ -29,7 +29,7 @@ const strikeScheme = new mongoose.Schema({
     required: true
   },
   facebookEvent: {
-    type: String,
+    type: String
   },
   zusatzinfo: {
     type: String
@@ -45,6 +45,9 @@ const strikeScheme = new mongoose.Schema({
   },
   website: {
     type: String
+  },
+  notificationSent: {
+    type: Boolean
   }
 });
 

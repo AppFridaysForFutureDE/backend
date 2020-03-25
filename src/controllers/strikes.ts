@@ -16,7 +16,6 @@ export const createOg: RequestHandler = async (req, res) => {
 
 export const getStrikes: RequestHandler = (req, res) => {
   var ogName = req.query.ogName;
-  //res.status(200).json({og: ogName});
   if (ogName == "" || ogName == null) {
     res.status(400).json({error: "No OG Name specified!"});
   } else {
