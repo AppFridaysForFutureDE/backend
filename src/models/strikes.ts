@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 // Änderungen dieses Schemas sollten auch in swagger.yaml gespeichert werden
-const ogSchema = new mongoose.Schema({
+const strikeScheme = new mongoose.Schema({
   stadt: {
     type: String,
     required: true
@@ -37,4 +37,4 @@ const ogSchema = new mongoose.Schema({
   }
 });
 
-export const Og = mongoose.model("og", ogSchema);
+export const Strike = mongoose.model("strike", strikeScheme);

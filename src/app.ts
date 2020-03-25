@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import FCMAdmin from "./fcm"
 import { json } from "body-parser";
-import ogRoutes from "./routes/ogs";
+import strikeRoutes from "./routes/strikes";
 import mongoose from "mongoose";
 import Ddos from "ddos";
 let mongoUp = true;
@@ -36,8 +36,8 @@ const app = express();
 app.use(json());
 
 //initialise routers; every router needs to use ddos
-ogRoutes.use(ddos.express);
-app.use("/ogs", ogRoutes);
+strikeRoutes.use(ddos.express);
+app.use("/strikes", strikeRoutes);
 
 
 app.use((err: Error, req: Request, res: Response) => {

@@ -1,6 +1,7 @@
 import { RequestHandler } from "express";
-import { Og } from "../models/ogs";
+import { Strike } from "../models/strikes";
 
+/*
 export const createOg: RequestHandler = async (req, res) => {
   try {
     const newOg = await new Og(req.body).save();
@@ -11,11 +12,12 @@ export const createOg: RequestHandler = async (req, res) => {
     res.status(422).json({ message: "Could not create og", error: error });
   }
 };
+*/
 
-export const getOgs: RequestHandler = (req, res) => {
-  Og.find(function(err: Error, ogs) {
+export const getStrikes: RequestHandler = (req, res) => {
+  Strike.find(function(err: Error, strikes) {
     if (err) return console.error(err);
-    console.log(ogs);
-    res.status(200).json(ogs);
+    console.log(strikes);
+    res.status(200).json(strikes);
   });
 };
