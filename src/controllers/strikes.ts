@@ -15,9 +15,15 @@ export const createOg: RequestHandler = async (req, res) => {
 */
 
 export const getStrikes: RequestHandler = (req, res) => {
-  Strike.find(function(err: Error, strikes) {
-    if (err) return console.error(err);
-    console.log(strikes);
-    res.status(200).json(strikes);
-  });
+  var ogName = req.query.ogName;
+  //res.status(200).json({og: ogName});
+  if (ogName == "" || ogName == null) {
+    res.status(400).json({error: "No OG Name specified!"});
+  } else {
+    Strike.find({name: ogName},function(err: Error, strikes) {
+      if (err) return console.error(err);
+      console.log(strikes);
+      res.status(200).json({og: ogName, strikes: strikes});
+    });
+  }
 };
