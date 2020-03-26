@@ -34,6 +34,8 @@ mongoose
 
 //------Strike Access Cronjobs------
 const strikeA = new StrikeAccess();
+console.log("Retrieving Strikes");
+strikeA.retrieveStrikes();
 //retrieving strikes every day at 0
 var job = new CronJob("0 0 * * *", function() {
   console.log("Retrieving Strikes");
@@ -56,7 +58,6 @@ app.use(json());
 //initialise routers; every router needs to use ddos
 strikeRoutes.use(ddos.express);
 app.use("/strikes", strikeRoutes);
-
 
 app.use((err: Error, req: Request, res: Response) => {
   res.status(500).json({ message: err.message });

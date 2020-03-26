@@ -6,14 +6,18 @@ export default class StrikeAccess {
   //retrieves Strikes from website api and saves them to mongodb
   //should be executed once per day
   public async retrieveStrikes() {
-    var Client = require("node-rest-client").Client();
+    var Client = require('node-rest-client').Client;
     var client = new Client();
     client.get(apiUrl, function (data, response) {
-      // parsed response body as js object
-      console.log(data);
-      //
-      //    Parse and save Data here
-      //
+      //delete all strikes
+      const res = await Strike.deleteMany({});
+      console.log("Deleted ${res.deletedCount} Strikes");
+
+      //loop through strikes and save them
+      for (int i = 0; i < data.length; i++) {
+
+      }
+
     });
   }
 
