@@ -59,9 +59,10 @@ app.use(json());
 strikeRoutes.use(DoSProtection.express);
 app.use("/strikes", strikeRoutes);
 
+/*
 app.use((err: Error, req: Request, res: Response) => {
   res.status(500).json({ message: err.message });
-});
+});*/
 
 //only start server when mongo is up
 if (mongoUp) {
