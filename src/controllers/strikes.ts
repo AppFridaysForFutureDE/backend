@@ -5,6 +5,7 @@ import { Strike } from "../models/strikes";
 export const getStrikes: RequestHandler = (req, res) => {
   var ogName = req.query.og;
   if (ogName == "" || ogName == null) {
+    console.log(res.constructor.name);
     res.status(400).json({error: "No OG specified!"});
   } else {
     Strike.find({name: ogName},function(err: Error, strikes) {
