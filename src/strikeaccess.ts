@@ -18,7 +18,6 @@ export default class StrikeAccess {
     //loop through strikes and save them
     var i: number;
     for (i = 0; i < data.length; i++) {
-      console.log(data[i][" Startpunkt"])
       const newStrike = new Strike({
         city: data[i]["Stadt"],
         bundesland: data[i][" Bundesland"],
