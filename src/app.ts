@@ -12,7 +12,7 @@ let mongoUp = true;
 const messageAdmin = new FCMAdmin("../de-fridaysforfuture-app-firebase-adminsdk-98yw1-c45342f3dc.json");
 
 
-//------DDoS-Protection------
+//------DoS-Protection------
 const DoSProtection = new Ddos({ burst: 10, limit: 15 });//probably need to adjust these
 
 
