@@ -19,19 +19,11 @@ export default class StrikeAccess {
     var i: number;
     for (i = 0; i < data.length; i++) {
       const newStrike = new Strike({
-        city: data[i]["Stadt"],
-        bundesland: data[i][" Bundesland"],
-        name: data[i][" Name"],
-        long: data[i][" lang"],
-        lat: data[i][" lat"],
-        time: data[i][" Uhrzeit"],
-        startingPoint: data[i][" Startpunkt"],
-        fbEvent: data[i][" Facebook event"],
-        additionalInfo: data[i][" zusatzinfo"],
-        facebook: data[i][" Facebook"],
-        instagram: data[i][" Instagram"],
-        twitter: data[i][" Twitter"],
-        website: data[i][" website"],
+        name: data[i][" Name"].trim(),
+        time: data[i][" Uhrzeit"].trim(),
+        startingPoint: data[i][" Startpunkt"].trim(),
+        fbEvent: data[i][" Facebook event"].trim(),
+        additionalInfo: data[i][" zusatzinfo"].trim(),
         notificationSent: false
       });
       newStrike.save();

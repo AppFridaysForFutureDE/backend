@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import FCMAdmin from "./fcm"
-import StrikeAccess from "./strikeaccess"
+import StrikeAccess from "./strikes"
 import { json } from "body-parser";
 import strikeRoutes from "./routes/strikes";
 import mongoose from "mongoose";
