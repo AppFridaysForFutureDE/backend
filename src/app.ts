@@ -1,17 +1,19 @@
 import express, { Request, Response } from "express";
 import FCMAdmin from "./fcm"
+import StrikeAccess from "./strikes"
 import { json } from "body-parser";
-import ogRoutes from "./routes/ogs";
+import strikeRoutes from "./routes/strikes";
 import mongoose from "mongoose";
 import Ddos from "ddos";
+var CronJob = require('cron').CronJob;
 let mongoUp = true;
 
 //------Firebase Admin------
 const messageAdmin = new FCMAdmin("../de-fridaysforfuture-app-firebase-adminsdk-98yw1-c45342f3dc.json");
-messageAdmin.sendMessage("nice", "nice");
 
-//------DDoS-Protection------
-const ddos = new Ddos({ burst: 10, limit: 15 });//probably need to adjust these
+
+//------DoS-Protection------
+const DoSProtection = new Ddos({ burst: 10, limit: 15 });//probably need to adjust these
 
 
 //------MongoDB------
@@ -30,15 +32,32 @@ mongoose
   });
 
 
+//------Strike Access Cronjobs------
+const strikeA = new StrikeAccess();
+console.log("Retrieving Strikes");
+strikeA.retrieveStrikes();
+//retrieving strikes every day at 0
+var job = new CronJob("0 0 * * *", function() {
+  console.log("Retrieving Strikes");
+  strikeA.retrieveStrikes();
+}, null, true, "Europe/Berlin");
+job.start();
+//check strikes every hour from 8-20
+var job = new CronJob("0 8-20 * * *", function() {
+  console.log("Checking Strikes");
+  strikeA.checkStrikes();
+}, null, true, "Europe/Berlin");
+job.start();
+
+
 //------Express Server------
 //create server, add json encoding and ddos protection
 const app = express();
 app.use(json());
 
 //initialise routers; every router needs to use ddos
-ogRoutes.use(ddos.express);
-app.use("/ogs", ogRoutes);
-
+strikeRoutes.use(DoSProtection.express);
+app.use("/strikes", strikeRoutes);
 
 app.use((err: Error, req: Request, res: Response) => {
   res.status(500).json({ message: err.message });
