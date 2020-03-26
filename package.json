@@ -10,7 +10,7 @@
     "express": "^4.17.1",
     "firebase-admin": "^8.10.0",
     "mongoose": "^5.9.4",
-    "node-rest-client": "^3.1.0"
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.3",

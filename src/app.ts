@@ -13,7 +13,7 @@ const messageAdmin = new FCMAdmin("../de-fridaysforfuture-app-firebase-adminsdk-
 
 
 //------DDoS-Protection------
-const ddos = new Ddos({ burst: 10, limit: 15 });//probably need to adjust these
+const DoSProtection = new Ddos({ burst: 10, limit: 15 });//probably need to adjust these
 
 
 //------MongoDB------
@@ -56,7 +56,7 @@ const app = express();
 app.use(json());
 
 //initialise routers; every router needs to use ddos
-strikeRoutes.use(ddos.express);
+strikeRoutes.use(DoSProtection.express);
 app.use("/strikes", strikeRoutes);
 
 app.use((err: Error, req: Request, res: Response) => {
