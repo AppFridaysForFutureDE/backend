@@ -59,7 +59,7 @@ app.use(json());
 strikeRoutes.use(DoSProtection.express);
 app.use("/strikes", strikeRoutes);
 
-app.use((err: Error, req: Request, res: Response) => {
+app.use(function (err: Error, req: Request, res: Response, next) {
   res.status(500).json({ message: err.message });
 });
 
