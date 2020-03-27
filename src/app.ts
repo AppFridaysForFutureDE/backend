@@ -1,8 +1,10 @@
 import express, { Request, Response } from "express";
 import FCMAdmin from "./fcm"
 import StrikeAccess from "./strikes"
+import OgAccess from "./ogs"
 import { json } from "body-parser";
 import strikeRoutes from "./routes/strikes";
+import ogRoutes from "./routes/ogs";
 import mongoose from "mongoose";
 import Ddos from "ddos";
 var CronJob = require('cron').CronJob;
@@ -32,16 +34,28 @@ mongoose
   });
 
 
-//------Strike Access Cronjobs------
+//------Cronjobs------
 const strikeA = new StrikeAccess();
 console.log("Retrieving Strikes");
 strikeA.retrieveStrikes();
-//retrieving strikes every day at 0
+const ogA = new OgAccess();
+console.log("Retrieving Ogs");
+ogA.retrieveOgs();
+
+//retrieving strikes every day at 0:00
 var job = new CronJob("0 0 * * *", function() {
   console.log("Retrieving Strikes");
   strikeA.retrieveStrikes();
 }, null, true, "Europe/Berlin");
 job.start();
+
+//retrieving ogs every day at 0:05
+var job = new CronJob("5 0 * * *", function() {
+  console.log("Retrieving Ogs");
+  ogA.retrieveOgs();
+}, null, true, "Europe/Berlin");
+job.start();
+
 //check strikes every hour from 8-20
 var job = new CronJob("0 8-20 * * *", function() {
   console.log("Checking Strikes");
@@ -57,7 +71,9 @@ app.use(json());
 
 //initialise routers; every router needs to use ddos
 strikeRoutes.use(DoSProtection.express);
+ogRoutes.use(DoSProtection.express);
 app.use("/apiv1/strikes", strikeRoutes);
+app.use("/apiv1/ogs", ogRoutes);
 
 app.use(function (err: Error, req: Request, res: Response, next) {
   res.status(500).json({ message: err.message });

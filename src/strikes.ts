@@ -1,5 +1,5 @@
 import { Strike } from "./models/strikes";
-const apiUrl = "https://fridaysforfuture.de/map/mapdata.json";
+const apiUrlMapdata = "https://fridaysforfuture.de/map/mapdata.json";
 
 export default class StrikeAccess {
 
@@ -8,8 +8,9 @@ export default class StrikeAccess {
   public async retrieveStrikes() {
     //fetch strike json
     const fetch = require('node-fetch');
-    const response = await fetch(apiUrl);
-    const data = await response.json();
+    const response = await fetch(apiUrlMapdata);
+    let data = [];
+    try { data = await response.json(); } catch (error) { return; }
 
     //delete all strikes
     const res = await Strike.deleteMany({});
@@ -19,11 +20,11 @@ export default class StrikeAccess {
     var i: number;
     for (i = 0; i < data.length; i++) {
       const newStrike = new Strike({
-        name: data[i][" Name"].trim(),
-        time: data[i][" Uhrzeit"].trim(),
-        startingPoint: data[i][" Startpunkt"].trim(),
-        fbEvent: data[i][" Facebook event"].trim(),
-        additionalInfo: data[i][" zusatzinfo"].trim(),
+        name: data[i][" Name"],
+        time: data[i][" Uhrzeit"],
+        startingPoint: data[i][" Startpunkt"],
+        fbEvent: data[i][" Facebook event"],
+        additionalInfo: data[i][" zusatzinfo"],
         notificationSent: false,
         retrievedAt: Date.now()
       });
