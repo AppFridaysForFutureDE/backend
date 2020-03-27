@@ -19,6 +19,9 @@ const strikeScheme = new mongoose.Schema({
   },
   notificationSent: {
     type: Boolean
+  },
+  retrievedAt: {
+    type: Date
   }
 });
 

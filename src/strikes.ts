@@ -24,7 +24,8 @@ export default class StrikeAccess {
         startingPoint: data[i][" Startpunkt"].trim(),
         fbEvent: data[i][" Facebook event"].trim(),
         additionalInfo: data[i][" zusatzinfo"].trim(),
-        notificationSent: false
+        notificationSent: false,
+        retrievedAt: Date.now()
       });
       newStrike.save();
     }
