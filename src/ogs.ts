@@ -1,7 +1,7 @@
 import { Og } from "./models/ogs";
 const apiUrlOgs = "https://fridaysforfuture.de/api/?apikey=b6475bfd9547346572aff1535ef9af91&land=";
 const bundeslaender = ["BW","BY","BE","BB","HB","HH","HE","MV","NI","NW","RP","SL","SN","ST","SH","TH"];
-const apiUrlOSM = "https://nominatim.openstreetmap.org/search?format=json&q=";
+//const apiUrlOSM = "https://nominatim.openstreetmap.org/search?format=json&q=";
 const fetch = require('node-fetch');
 
 export default class OgAccess {
