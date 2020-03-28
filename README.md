@@ -55,3 +55,17 @@ Mit diesem Befehl wird die automatische Code Korrektur gestartet:
 Nach Starten des docker containers kann die API mit Hilfe eines REST-Clients getestet werden (z.B. mit Insomnia)
 
 Die Erreichbarkeit des Servers bzw. die Funktionalität der API kann beispielsweise durch eine POST Request an die Adresse `http://localhost:3000/ogs/` mit JSON body `{ "stadt": "MeineOg", "long": 1.123, "lat": 13 }` getestet werden.
+
+## Produktivumgebung
+
+In der Produktivumgebung soll unser Server möglichst klein (ohne dev-Abhängigkeiten) und stabil sein (kein automatischer Restart bei code änderungen)
+
+Aus diesem Grund verwenden wir:
+* ein anderes Dockerfile
+* eine zusätzliche Konfiguration für docker-compose
+
+Um unsere Services auf Produktion zu starten, kann folgender Befehl verwendet werden:
+
+```
+docker-compose -f docker-compose.yml -f docker-compose-prod.yml up
+```
