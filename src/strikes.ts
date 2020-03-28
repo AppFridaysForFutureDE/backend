@@ -24,7 +24,7 @@ export default class StrikeAccess {
     for (i = 0; i < data.length; i++) {
       const newStrike = new Strike({
         name: data[i][" Name"],
-        date: this.getDate(data[i][" Uhrzeit"]),
+        date: this.toUnixTimestamp(this.getDate(data[i][" Uhrzeit"])),
         startingPoint: data[i][" Startpunkt"],
         fbEvent: data[i][" Facebook event"],
         additionalInfo: data[i][" zusatzinfo"],
@@ -50,10 +50,17 @@ export default class StrikeAccess {
   }
 
   //returns date of next weekday (1: Mon, 7: Sun)
-  public nextWeekdayDate(dayInWeek): Date {
+  public nextWeekdayDate(dayInWeek: number): Date {
     const ret = new Date();
     ret.setDate(ret.getDate() + ((dayInWeek - 1 - ret.getDay() + 7) % 7) + 1);
     return ret;
+  }
+
+  public toUnixTimestamp(d: Date): Number {
+    var x: number = d.getTime();
+    x = x / 1000;
+    console.log(x);
+    return x;
   }
 
   //checks for strikes that fulfill these conditions:
