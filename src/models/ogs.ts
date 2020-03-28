@@ -13,28 +13,28 @@ const ogScheme = new mongoose.Schema({
   lon: {
     type: Number
   },
-  WhatsApp: {
+  whatsApp: {
     type: String
   },
-  WhatsAppStud: {
+  whatsAppStud: {
     type: String
   },
-  Email: {
+  email: {
     type: String
   },
-  Instagram: {
+  instagram: {
     type: String
   },
-  Twitter: {
+  twitter: {
     type: String
   },
-  Facebook: {
+  facebook: {
     type: String
   },
-  Website: {
+  website: {
     type: String
   },
-  Telegram: {
+  telegram: {
     type: String
   },
   retrievedAt: {

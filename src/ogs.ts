@@ -50,14 +50,14 @@ export default class OgAccess {
           bundesland: bundeslaender[i],
           lat: coordinates[0],
           lon: coordinates[1],
-          WhatsApp: data[b]["WhatsApp"],
-          WhatsAppStud: data[b]["WhatsApp Studis"],
-          Email: data[b]["eMail"],
-          Instagram: data[b]["Instagram"],
-          Twitter: data[b]["Twitter"],
-          Facebook: data[b]["Facebook"],
-          Website: data[b]["Website"],
-          Telegram: data[b]["Telegram"],
+          whatsApp: data[b]["WhatsApp"],
+          whatsAppStud: data[b]["WhatsApp Studis"],
+          email: data[b]["eMail"],
+          instagram: data[b]["Instagram"],
+          twitter: data[b]["Twitter"],
+          facebook: data[b]["Facebook"],
+          website: data[b]["Website"],
+          telegram: data[b]["Telegram"],
           retrievedAt: Date.now()
         });
 
