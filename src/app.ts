@@ -72,8 +72,8 @@ app.use(json());
 //initialise routers; every router needs to use ddos
 strikeRoutes.use(DoSProtection.express);
 ogRoutes.use(DoSProtection.express);
-app.use("/apiv1/strikes", strikeRoutes);
-app.use("/apiv1/ogs", ogRoutes);
+app.use("/api/v1/strikes", strikeRoutes);
+app.use("/api/v1/ogs", ogRoutes);
 
 app.use(function (err: Error, req: Request, res: Response, next) {
   res.status(500).json({ message: err.message });
