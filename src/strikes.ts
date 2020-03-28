@@ -1,7 +1,18 @@
 import { Strike } from "./models/strikes";
+import FCMAdmin from "./fcm";
+import * as util from "./utility";
 const apiUrlMapdata = "https://fridaysforfuture.de/map/mapdata.json";
+const day: number = 86401;
 
 export default class StrikeAccess {
+
+  private messageAdmin: FCMAdmin;
+
+  constructor() {
+    this.messageAdmin = new FCMAdmin(
+      "../de-fridaysforfuture-app-firebase-adminsdk-98yw1-c45342f3dc.json"
+    );
+  }
   //retrieves Strikes from website api and saves them to mongodb
   //should be executed once per day
   public async retrieveStrikes() {
@@ -22,9 +33,11 @@ export default class StrikeAccess {
     //loop through strikes and save them
     let i: number;
     for (i = 0; i < data.length; i++) {
+      var parsed = util.getDate(data[i][" Uhrzeit"]);
       const newStrike = new Strike({
+        ogId: util.hash(data[i][" Name"]),
         name: data[i][" Name"],
-        date: this.toUnixTimestamp(this.getDate(data[i][" Uhrzeit"])),
+        date: util.toUnixTimestamp(parsed),
         startingPoint: data[i][" Startpunkt"],
         fbEvent: data[i][" Facebook event"],
         additionalInfo: data[i][" zusatzinfo"],
@@ -35,37 +48,19 @@ export default class StrikeAccess {
     }
   }
 
-  //parses a string of this scheme: "13:00 Uhr" to a date with the next friday
-  public getDate(s: string): Date {
-    const d = this.nextWeekdayDate(5);
-    d.setSeconds(0);
-    d.setMilliseconds(0);
-    const re = /[0-9]{2}/g;
-    const m = s.match(re);
-    if (m) {
-      d.setHours(+m[0], +m[1]);
-      return d;
-    }
-    return new Date();
-  }
-
-  //returns date of next weekday (1: Mon, 7: Sun)
-  public nextWeekdayDate(dayInWeek: number): Date {
-    const ret = new Date();
-    ret.setDate(ret.getDate() + ((dayInWeek - 1 - ret.getDay() + 7) % 7) + 1);
-    return ret;
-  }
-
-  public toUnixTimestamp(d: Date): Number {
-    var x: number = d.getTime();
-    x = x / 1000;
-    console.log(x);
-    return x;
-  }
-
-  //checks for strikes that fulfill these conditions:
+  //checks and notifies for strikes that fulfill these conditions:
   //-notificationSent is false
   //-strike is within 24 hours from now
   //should be executed every hour
-  public checkStrikes() {}
+  public checkStrikes() {
+    var tomorrow: number = util.toUnixTimestamp(new Date())+day;
+    Strike.find({ notificationSent: false, date: { $lt: tomorrow } }, function(err: Error, strikes) {
+      if (err) return console.error(err);
+      var i = 0;
+      for (i = 0; i < strikes.length; i++) {
+
+      }
+    });
+  }
+
 }

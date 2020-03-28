@@ -1,5 +1,4 @@
 import express, { Request, Response } from "express";
-import FCMAdmin from "./fcm";
 import StrikeAccess from "./strikes";
 import OgAccess from "./ogs";
 import { json } from "body-parser";
@@ -10,10 +9,6 @@ import Ddos from "ddos";
 const CronJob = require("cron").CronJob;
 let mongoUp = true;
 
-//------Firebase Admin------
-const messageAdmin = new FCMAdmin(
-  "../de-fridaysforfuture-app-firebase-adminsdk-98yw1-c45342f3dc.json"
-);
 
 //------DoS-Protection------
 const DoSProtection = new Ddos({ burst: 10, limit: 15 }); //probably need to adjust these
