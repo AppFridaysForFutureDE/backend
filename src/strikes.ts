@@ -58,7 +58,7 @@ export default class StrikeAccess {
       if (err) return console.error(err);
       var i = 0;
       for (i = 0; i < strikes.length; i++) {
-
+        
       }
     });
   }
