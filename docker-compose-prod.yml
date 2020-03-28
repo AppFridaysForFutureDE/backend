@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+  express:
+    container_name: express-main-module
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile-Production
+    command: npm run start-prod
+    # volumes:
+    #   - .:/usr/src/app
+    ports:
+      - "3000:3000"
+    links:
+      - mongo-db
