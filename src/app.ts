@@ -1,22 +1,22 @@
 import express, { Request, Response } from "express";
-import FCMAdmin from "./fcm"
-import StrikeAccess from "./strikes"
-import OgAccess from "./ogs"
+import FCMAdmin from "./fcm";
+import StrikeAccess from "./strikes";
+import OgAccess from "./ogs";
 import { json } from "body-parser";
 import strikeRoutes from "./routes/strikes";
 import ogRoutes from "./routes/ogs";
 import mongoose from "mongoose";
 import Ddos from "ddos";
-var CronJob = require('cron').CronJob;
+const CronJob = require("cron").CronJob;
 let mongoUp = true;
 
 //------Firebase Admin------
-const messageAdmin = new FCMAdmin("../de-fridaysforfuture-app-firebase-adminsdk-98yw1-c45342f3dc.json");
-
+const messageAdmin = new FCMAdmin(
+  "../de-fridaysforfuture-app-firebase-adminsdk-98yw1-c45342f3dc.json"
+);
 
 //------DoS-Protection------
-const DoSProtection = new Ddos({ burst: 10, limit: 15 });//probably need to adjust these
-
+const DoSProtection = new Ddos({ burst: 10, limit: 15 }); //probably need to adjust these
 
 //------MongoDB------
 //connect to Mongo daemon
@@ -33,7 +33,6 @@ mongoose
     );
   });
 
-
 //------Cronjobs------
 const strikeA = new StrikeAccess();
 console.log("Retrieving Strikes");
@@ -43,26 +42,43 @@ console.log("Retrieving Ogs");
 ogA.retrieveOgs();
 
 //retrieving strikes every day at 0:00
-var job = new CronJob("0 0 * * *", function() {
-  console.log("Retrieving Strikes");
-  strikeA.retrieveStrikes();
-}, null, true, "Europe/Berlin");
-job.start();
+const strikeJob = new CronJob(
+  "0 0 * * *",
+  function() {
+    console.log("Retrieving Strikes");
+    strikeA.retrieveStrikes();
+  },
+  null,
+  true,
+  "Europe/Berlin"
+);
+strikeJob.start();
 
 //retrieving ogs every day at 0:05
-var job = new CronJob("5 0 * * *", function() {
-  console.log("Retrieving Ogs");
-  ogA.retrieveOgs();
-}, null, true, "Europe/Berlin");
-job.start();
+const ogJob = new CronJob(
+  "5 0 * * *",
+  function() {
+    console.log("Retrieving Ogs");
+    ogA.retrieveOgs();
+  },
+  null,
+  true,
+  "Europe/Berlin"
+);
+ogJob.start();
 
 //check strikes every hour from 8-20
-var job = new CronJob("0 8-20 * * *", function() {
-  console.log("Checking Strikes");
-  strikeA.checkStrikes();
-}, null, true, "Europe/Berlin");
-job.start();
-
+const strikeNotifyJob = new CronJob(
+  "0 8-20 * * *",
+  function() {
+    console.log("Checking Strikes");
+    strikeA.checkStrikes();
+  },
+  null,
+  true,
+  "Europe/Berlin"
+);
+strikeNotifyJob.start();
 
 //------Express Server------
 //create server, add json encoding and ddos protection
@@ -75,7 +91,7 @@ ogRoutes.use(DoSProtection.express);
 app.use("/api/v1/strikes", strikeRoutes);
 app.use("/api/v1/ogs", ogRoutes);
 
-app.use(function (err: Error, req: Request, res: Response, next) {
+app.use(function(err: Error, req: Request, res: Response, next) {
   res.status(500).json({ message: err.message });
 });
 

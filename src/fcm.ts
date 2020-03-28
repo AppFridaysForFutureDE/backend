@@ -5,8 +5,7 @@ export default class FCMAdmin {
   constructor(ap: string) {
     this.authPath = ap;
     // Authentification
-    var serviceAccount = require(this.authPath);
-
+    const serviceAccount = require(this.authPath);
     admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
       databaseURL: "https://de-fridaysforfuture-app.firebaseio.com"
@@ -17,7 +16,7 @@ export default class FCMAdmin {
    * sendMessage
    */
   public async sendMessage(topic: string, payload: string) {
-    var message = {
+    const message = {
       data: {
         payload: payload
       },
@@ -25,9 +24,9 @@ export default class FCMAdmin {
     };
     try {
       const response = await admin.messaging().send(message);
-      console.log('Successfully sent message:', response);
+      console.log("Successfully sent message:", response);
     } catch (error) {
-      console.log('Error sending message:', error);
+      console.log("Error sending message:", error);
     }
   }
 }
