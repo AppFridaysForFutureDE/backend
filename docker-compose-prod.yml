@@ -6,7 +6,7 @@ services:
     restart: always
     build:
       context: .
-      dockerfile: Dockerfile-Production
+      dockerfile: Dockerfile-prod
     command: npm run start-prod
     # volumes:
     #   - .:/usr/src/app
