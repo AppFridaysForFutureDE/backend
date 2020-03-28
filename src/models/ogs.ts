@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
 
 const ogScheme = new mongoose.Schema({
+  ogId: {
+    type: String
+  },
   name: {
     type: String
   },

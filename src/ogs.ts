@@ -1,4 +1,5 @@
 import { Og } from "./models/ogs";
+import * as util from "./utility";
 const apiUrlOgs =
   "https://fridaysforfuture.de/api/?apikey=b6475bfd9547346572aff1535ef9af91&land=";
 const bundeslaender = [
@@ -23,6 +24,7 @@ const bundeslaender = [
 const fetch = require("node-fetch");
 
 export default class OgAccess {
+
   public async retrieveOgs() {
     //delete all ogs
     const res = await Og.deleteMany({});
@@ -46,6 +48,7 @@ export default class OgAccess {
         //get coordinates
         const coordinates = await this.retrieveCoordinates(data[b]["Stadt"]);
         const newOg = new Og({
+          ogId: util.hash(data[b]["Stadt"]),
           name: data[b]["Stadt"],
           bundesland: bundeslaender[i],
           lat: coordinates[0],
@@ -78,4 +81,5 @@ export default class OgAccess {
     return [lat, lon];*/
     return [0, 0];
   }
+
 }
