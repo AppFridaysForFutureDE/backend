@@ -48,7 +48,7 @@ export default class OgAccess {
   }
 
   public async retrieveCoordinates(city: String): Promise<[number, number]> {
-    var lat: number;
+    /*var lat: number;
     var lon: number;
     const response = await fetch(apiUrlOSM+city);
     let data = [];
@@ -56,7 +56,8 @@ export default class OgAccess {
     if (data[0] == undefined || data[0] == null) { return [0,0]; }
     lat = data[0]["lat"];
     lon = data[0]["lon"];
-    return [lat, lon];
+    return [lat, lon];*/
+    return [0,0];
   }
 
 }
