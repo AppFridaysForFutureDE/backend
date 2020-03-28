@@ -21,7 +21,7 @@ export default class StrikeAccess {
     for (i = 0; i < data.length; i++) {
       const newStrike = new Strike({
         name: data[i][" Name"],
-        time: data[i][" Uhrzeit"],
+        date: this.getDate(data[i][" Uhrzeit"]),
         startingPoint: data[i][" Startpunkt"],
         fbEvent: data[i][" Facebook event"],
         additionalInfo: data[i][" zusatzinfo"],
@@ -31,6 +31,29 @@ export default class StrikeAccess {
       newStrike.save();
     }
   }
+
+  //parses a string of this scheme: "13:00 Uhr" to a date with the next friday
+  public getDate(s: String): Date {
+    var d = this.nextWeekdayDate(5);
+    d.setSeconds(0);
+    d.setMilliseconds(0);
+    var re = /[0-9]{2}/g
+    var m = s.match(re);
+    if (m) {
+      d.setHours(+m[0],+m[1]);
+      return d;
+    }
+    return new Date();
+  }
+
+
+  //returns date of next weekday (1: Mon, 7: Sun)
+  public nextWeekdayDate(day_in_week): Date {
+    var ret = new Date();
+    ret.setDate(ret.getDate() + (day_in_week - 1 - ret.getDay() + 7) % 7 + 1);
+    return ret;
+  }
+
 
   //checks for strikes that fulfill these conditions:
   //-notificationSent is false

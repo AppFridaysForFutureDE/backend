@@ -42,7 +42,6 @@ export default class OgAccess {
         });
 
         await newOg.save();
-        console.log(bundeslaender[i]+b);
       }
     }
   }
