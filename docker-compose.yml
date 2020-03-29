@@ -18,6 +18,8 @@ services:
       database__connection__database: db
     depends_on:
       - mysql-db
+    links:
+      - express
 
   mysql-db:
     image: mysql:5.7
