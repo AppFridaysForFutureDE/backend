@@ -2,21 +2,16 @@ import { Strike } from "./models/strikes";
 import FCMAdmin from "./fcm";
 import * as util from "./utility";
 import * as api from "./auth/apis";
+import { messageAdmin } from "./app";
 const day = 86401;
 export default class StrikeAccess {
-  private messageAdmin: FCMAdmin;
 
-  constructor() {
-    this.messageAdmin = new FCMAdmin(
-      "../src/auth/de-fridaysforfuture-app-firebase-adminsdk-98yw1-c45342f3dc.json"
-    );
-  }
   //retrieves Strikes from website api and saves them to mongodb
   //should be executed once per day
   public async retrieveStrikes() {
     //fetch strike json
     const fetch = require("node-fetch");
-    const response = await fetch(api.urlMapdata);
+    const response = await fetch(api.urlStrikes);
     let data = [];
     try {
       data = await response.json();

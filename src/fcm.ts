@@ -31,6 +31,8 @@ export default class FCMAdmin {
       },
       topic: topic
     };
+    console.log("Sending message:");
+    console.log(message);
     try {
       const response = await admin.messaging().send(message);
       console.log("Successfully sent message:", response);
