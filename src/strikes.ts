@@ -1,16 +1,15 @@
 import { Strike } from "./models/strikes";
 import FCMAdmin from "./fcm";
 import * as util from "./utility";
-const apiUrlMapdata = "https://fridaysforfuture.de/map/mapdata.json";
+import * as api from "./auth/apis"
 const day: number = 86401;
-
 export default class StrikeAccess {
 
   private messageAdmin: FCMAdmin;
 
   constructor() {
     this.messageAdmin = new FCMAdmin(
-      "../de-fridaysforfuture-app-firebase-adminsdk-98yw1-c45342f3dc.json"
+      "../src/auth/de-fridaysforfuture-app-firebase-adminsdk-98yw1-c45342f3dc.json"
     );
   }
   //retrieves Strikes from website api and saves them to mongodb
@@ -18,7 +17,7 @@ export default class StrikeAccess {
   public async retrieveStrikes() {
     //fetch strike json
     const fetch = require("node-fetch");
-    const response = await fetch(apiUrlMapdata);
+    const response = await fetch(api.urlMapdata);
     let data = [];
     try {
       data = await response.json();
@@ -58,7 +57,7 @@ export default class StrikeAccess {
       if (err) return console.error(err);
       var i = 0;
       for (i = 0; i < strikes.length; i++) {
-        
+
       }
     });
   }
