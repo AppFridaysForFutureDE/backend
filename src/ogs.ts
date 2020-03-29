@@ -1,7 +1,7 @@
 import { Og } from "./models/ogs";
 import * as util from "./utility";
-const apiUrlOgs =
-  "https://fridaysforfuture.de/api/?apikey=b6475bfd9547346572aff1535ef9af91&land=";
+import * as api from "./auth/apis";
+
 const bundeslaender = [
   "BW",
   "BY",
@@ -24,7 +24,6 @@ const bundeslaender = [
 const fetch = require("node-fetch");
 
 export default class OgAccess {
-
   public async retrieveOgs() {
     //delete all ogs
     const res = await Og.deleteMany({});
@@ -34,7 +33,7 @@ export default class OgAccess {
     let i = 0;
     for (i = 0; i < bundeslaender.length; i++) {
       //fetch json for bundesland
-      const response = await fetch(apiUrlOgs + bundeslaender[i]);
+      const response = await fetch(api.urlOgs + bundeslaender[i]);
       let data = [];
       try {
         data = await response.json();
@@ -70,16 +69,6 @@ export default class OgAccess {
   }
 
   public async retrieveCoordinates(city: string): Promise<[number, number]> {
-    /*var lat: number;
-    var lon: number;
-    const response = await fetch(apiUrlOSM+city);
-    let data = [];
-    try { data = await response.json(); } catch (error) { return [0,0]; }
-    if (data[0] == undefined || data[0] == null) { return [0,0]; }
-    lat = data[0]["lat"];
-    lon = data[0]["lon"];
-    return [lat, lon];*/
     return [0, 0];
   }
-
 }

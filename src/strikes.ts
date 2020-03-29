@@ -1,16 +1,14 @@
 import { Strike } from "./models/strikes";
 import FCMAdmin from "./fcm";
 import * as util from "./utility";
-const apiUrlMapdata = "https://fridaysforfuture.de/map/mapdata.json";
-const day: number = 86401;
-
+import * as api from "./auth/apis";
+const day = 86401;
 export default class StrikeAccess {
-
   private messageAdmin: FCMAdmin;
 
   constructor() {
     this.messageAdmin = new FCMAdmin(
-      "../de-fridaysforfuture-app-firebase-adminsdk-98yw1-c45342f3dc.json"
+      "../src/auth/de-fridaysforfuture-app-firebase-adminsdk-98yw1-c45342f3dc.json"
     );
   }
   //retrieves Strikes from website api and saves them to mongodb
@@ -18,7 +16,7 @@ export default class StrikeAccess {
   public async retrieveStrikes() {
     //fetch strike json
     const fetch = require("node-fetch");
-    const response = await fetch(apiUrlMapdata);
+    const response = await fetch(api.urlMapdata);
     let data = [];
     try {
       data = await response.json();
@@ -32,8 +30,9 @@ export default class StrikeAccess {
 
     //loop through strikes and save them
     let i: number;
+    let parsed: Date;
     for (i = 0; i < data.length; i++) {
-      var parsed = util.getDate(data[i][" Uhrzeit"]);
+      try { parsed = util.getDate(data[i][" Uhrzeit"]); } catch { continue; }
       const newStrike = new Strike({
         ogId: util.hash(data[i][" Name"]),
         name: data[i][" Name"],
@@ -52,15 +51,15 @@ export default class StrikeAccess {
   //-notificationSent is false
   //-strike is within 24 hours from now
   //should be executed every hour
-  public checkStrikes() {
-    var tomorrow: number = util.toUnixTimestamp(new Date())+day;
-    Strike.find({ notificationSent: false, date: { $lt: tomorrow } }, function(err: Error, strikes) {
+  public checkStrikes(): void {
+    const tomorrow: number = util.toUnixTimestamp(new Date()) + day;
+    Strike.find({ notificationSent: false, date: { $lt: tomorrow } }, function(
+      err: Error,
+      strikes
+    ) {
       if (err) return console.error(err);
-      var i = 0;
-      for (i = 0; i < strikes.length; i++) {
-        
-      }
+      let i = 0;
+      for (i = 0; i < strikes.length; i++) {}
     });
   }
-
 }

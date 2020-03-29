@@ -9,7 +9,6 @@ import Ddos from "ddos";
 const CronJob = require("cron").CronJob;
 let mongoUp = true;
 
-
 //------DoS-Protection------
 const DoSProtection = new Ddos({ burst: 10, limit: 15 }); //probably need to adjust these
 
@@ -49,9 +48,9 @@ const strikeJob = new CronJob(
 );
 strikeJob.start();
 
-//retrieving ogs every day at 0:05
+//retrieving ogs at 0:05 on mondays, wednesdays and fridays
 const ogJob = new CronJob(
-  "5 0 * * *",
+  "5 0 * * 1,3,5",
   function() {
     console.log("Retrieving Ogs");
     ogA.retrieveOgs();

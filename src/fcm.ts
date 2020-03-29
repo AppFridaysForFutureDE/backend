@@ -15,7 +15,12 @@ export default class FCMAdmin {
   /**
    * sendMessage
    */
-  public async sendMessage(topic: string, payload: string, title: string, body: string) {
+  public async sendMessage(
+    topic: string,
+    payload: string,
+    title: string,
+    body: string
+  ) {
     const message = {
       notification: {
         title: title,
