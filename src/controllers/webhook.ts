@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import FCMAdmin from "./fcm";
+import FCMAdmin from "../fcm";
 const messageAdmin = new FCMAdmin("../src/auth/de-fridaysforfuture-app-firebase-adminsdk-98yw1-c45342f3dc.json");
 
 export const webhookTriggered: RequestHandler = (req, res) => {
