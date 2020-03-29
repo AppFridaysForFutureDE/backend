@@ -30,8 +30,9 @@ export default class StrikeAccess {
 
     //loop through strikes and save them
     let i: number;
+    let parsed: Date;
     for (i = 0; i < data.length; i++) {
-      const parsed = util.getDate(data[i][" Uhrzeit"]);
+      try { parsed = util.getDate(data[i][" Uhrzeit"]); } catch { continue; }
       const newStrike = new Strike({
         ogId: util.hash(data[i][" Name"]),
         name: data[i][" Name"],

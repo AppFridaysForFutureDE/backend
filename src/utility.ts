@@ -16,7 +16,7 @@ export function getDate(s: string): Date {
     d.setHours(+m[0], +m[1]);
     return d;
   }
-  return new Date();
+  throw new Error("No valid date!");
 }
 
 //converts date to unix timestamp
