@@ -19,7 +19,7 @@ services:
     depends_on:
       - mysql-db
     links:
-      - express:express.local
+      - expres.s
 
   mysql-db:
     image: mysql:5.7
@@ -32,7 +32,7 @@ services:
     volumes:
       - mysql-volume:/var/lib/mysql
 
-  express:
+  expres.s:
     container_name: express-main-module
     restart: always
     build: ./
