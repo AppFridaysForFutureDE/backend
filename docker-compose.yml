@@ -19,7 +19,7 @@ services:
     depends_on:
       - mysql-db
     links:
-      - express
+      - express:express.local
 
   mysql-db:
     image: mysql:5.7
