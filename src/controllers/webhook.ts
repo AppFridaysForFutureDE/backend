@@ -17,7 +17,7 @@ export const webhookTriggered: RequestHandler = (req, res) => {
     }
   }
   if (push) {
-    messageAdmin.sendMessage("feed_"+topic,id,"Neuer Post!","Hey, gerade wurde \""+title+"\" in der Kategorie \"" + tag + "\" veröffentlicht!");
+    messageAdmin.sendMessage("feed_"+topic,id,"Neuer Post!","Hey, gerade wurde \""+title+"\" in der Kategorie \"" + topic + "\" veröffentlicht!");
   }
   res.status(200).json({ notifSent: push });
 };
