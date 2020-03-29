@@ -9,7 +9,6 @@ import Ddos from "ddos";
 const CronJob = require("cron").CronJob;
 let mongoUp = true;
 
-
 //------DoS-Protection------
 const DoSProtection = new Ddos({ burst: 10, limit: 15 }); //probably need to adjust these
 

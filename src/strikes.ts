@@ -1,10 +1,9 @@
 import { Strike } from "./models/strikes";
 import FCMAdmin from "./fcm";
 import * as util from "./utility";
-import * as api from "./auth/apis"
-const day: number = 86401;
+import * as api from "./auth/apis";
+const day = 86401;
 export default class StrikeAccess {
-
   private messageAdmin: FCMAdmin;
 
   constructor() {
@@ -32,7 +31,7 @@ export default class StrikeAccess {
     //loop through strikes and save them
     let i: number;
     for (i = 0; i < data.length; i++) {
-      var parsed = util.getDate(data[i][" Uhrzeit"]);
+      const parsed = util.getDate(data[i][" Uhrzeit"]);
       const newStrike = new Strike({
         ogId: util.hash(data[i][" Name"]),
         name: data[i][" Name"],
@@ -51,15 +50,15 @@ export default class StrikeAccess {
   //-notificationSent is false
   //-strike is within 24 hours from now
   //should be executed every hour
-  public checkStrikes() {
-    var tomorrow: number = util.toUnixTimestamp(new Date())+day;
-    Strike.find({ notificationSent: false, date: { $lt: tomorrow } }, function(err: Error, strikes) {
+  public checkStrikes(): void {
+    const tomorrow: number = util.toUnixTimestamp(new Date()) + day;
+    Strike.find({ notificationSent: false, date: { $lt: tomorrow } }, function(
+      err: Error,
+      strikes
+    ) {
       if (err) return console.error(err);
-      var i = 0;
-      for (i = 0; i < strikes.length; i++) {
-
-      }
+      let i = 0;
+      for (i = 0; i < strikes.length; i++) {}
     });
   }
-
 }

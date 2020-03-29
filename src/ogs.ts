@@ -1,6 +1,6 @@
 import { Og } from "./models/ogs";
 import * as util from "./utility";
-import * as api from "./auth/apis"
+import * as api from "./auth/apis";
 
 const bundeslaender = [
   "BW",
@@ -24,7 +24,6 @@ const bundeslaender = [
 const fetch = require("node-fetch");
 
 export default class OgAccess {
-
   public async retrieveOgs() {
     //delete all ogs
     const res = await Og.deleteMany({});
@@ -72,5 +71,4 @@ export default class OgAccess {
   public async retrieveCoordinates(city: string): Promise<[number, number]> {
     return [0, 0];
   }
-
 }
