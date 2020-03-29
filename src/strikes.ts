@@ -16,7 +16,7 @@ export default class StrikeAccess {
   public async retrieveStrikes() {
     //fetch strike json
     const fetch = require("node-fetch");
-    const response = await fetch(api.urlMapdata);
+    const response = await fetch(api.urlStrikes);
     let data = [];
     try {
       data = await response.json();
