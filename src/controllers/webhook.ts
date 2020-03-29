@@ -2,6 +2,7 @@ import { RequestHandler } from "express";
 import { messageAdmin } from "../app";
 export const webhookTriggered: RequestHandler = (req, res) => {
   console.log("Webhook triggered");
+  console.log(req.body());
   var data = req.body();
   var title = data["post"]["current"]["title"];
   var tag = data["post"]["current"]["primary_tag"];
