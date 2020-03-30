@@ -68,7 +68,7 @@ ogJob.start();
 
 //check strikes every hour from 8-20
 const strikeNotifyJob = new CronJob(
-  "0 8-20 * * *",
+  "0 8-22 * * *",
   function() {
     console.log("Checking Strikes");
     strikeA.checkStrikes();

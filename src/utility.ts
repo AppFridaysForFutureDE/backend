@@ -7,7 +7,7 @@ export function nextWeekdayDate(dayInWeek: number): Date {
 
 //parses a string of this scheme: "13:00 Uhr" to a date with the next friday
 export function getDate(s: string): Date {
-  const d = nextWeekdayDate(5);
+  const d = nextWeekdayDate(2);
   d.setSeconds(0);
   d.setMilliseconds(0);
   const re = /[0-9]{2}/g;
