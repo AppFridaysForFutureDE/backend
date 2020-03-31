@@ -84,6 +84,9 @@ strikeNotifyJob.start();
 const app = express();
 app.use(json());
 
+//Status Monitor
+app.use(require('express-status-monitor')());
+
 //initialise routers; every router needs to use ddos
 strikeRoutes.use(DoSProtection.express);
 ogRoutes.use(DoSProtection.express);
