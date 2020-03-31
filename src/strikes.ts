@@ -1,5 +1,4 @@
 import { Strike } from "./models/strikes";
-import FCMAdmin from "./fcm";
 import * as util from "./utility";
 import * as api from "./auth/apis";
 import { messageAdmin } from "./app";
@@ -53,8 +52,10 @@ export default class StrikeAccess {
       strikes
     ) {
       if (err) return console.error(err);
-      let i = 0;
-      for (i = 0; i < strikes.length; i++) {}
+      strikes.forEach(strike => {
+        messageAdmin.sendMessage(`og_${strike["ogId"]}`,strike["ogId"],`Streikalarm in ${strike["name"]}`, `Demnächst findet hier ein Streik statt: ${strike["startingPoint"]}, ${strike["name"]}`);
+        Strike.updateOne({ ogId: strike["ogId"] }, { notificationSent: true });
+      });
     });
   }
 }
