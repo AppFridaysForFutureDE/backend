@@ -8,6 +8,7 @@
     "cron": "^1.8.2",
     "ddos": "^0.2.1",
     "express": "^4.17.1",
+    "express-status-monitor": "^1.2.10",
     "firebase-admin": "^8.10.0",
     "mongoose": "^5.9.4",
     "node-fetch": "^2.6.0",
