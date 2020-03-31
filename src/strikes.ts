@@ -53,7 +53,7 @@ export default class StrikeAccess {
     ) {
       if (err) return console.error(err);
       strikes.forEach(strike => {
-        messageAdmin.sendMessage("og_"+strike["ogId"],strike["ogId"],"Streikalarm in " + strike["name"]+"!", "Demnächst findet hier ein Streik statt: "+strike["startingPoint"]+", " +strike["name"]);
+        messageAdmin.sendMessage(`og_${strike["ogId"]}`,strike["ogId"],`Streikalarm in ${strike["name"]}`, `Demnächst findet hier ein Streik statt: ${strike["startingPoint"]}, ${strike["name"]}`);
         Strike.updateOne({ ogId: strike["ogId"] }, { notificationSent: true });
       });
     });
