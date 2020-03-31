@@ -52,11 +52,10 @@ export default class StrikeAccess {
       strikes
     ) {
       if (err) return console.error(err);
-      let i = 0;
-      for (i = 0; i < strikes.length; i++) {
-        messageAdmin.sendMessage("og_"+strikes[i]["ogId"],strikes[i]["ogId"],"Streikalarm in " + strikes[i]["name"]+"!", "Demnächst findet hier ein Streik statt: "+strikes[i]["startingPoint"]+", " +strikes[i]["name"]);
-        Strike.updateOne({ ogId: strikes[i]["ogId"] }, { notificationSent: true });
-      }
+      strikes.forEach(strike => {
+        messageAdmin.sendMessage("og_"+strike["ogId"],strike["ogId"],"Streikalarm in " + strike["name"]+"!", "Demnächst findet hier ein Streik statt: "+strike["startingPoint"]+", " +strike["name"]);
+        Strike.updateOne({ ogId: strike["ogId"] }, { notificationSent: true });
+      });
     });
   }
 }
