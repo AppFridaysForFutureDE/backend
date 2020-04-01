@@ -5,11 +5,17 @@ export default class FCMAdmin {
   constructor(ap: string) {
     this.authPath = ap;
     // Authentification
-    const serviceAccount = require(this.authPath);
-    admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount),
-      databaseURL: "https://de-fridaysforfuture-app.firebaseio.com"
-    });
+    try {
+      const serviceAccount = require(this.authPath);
+      admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount),
+        databaseURL: "https://de-fridaysforfuture-app.firebaseio.com"
+      });
+    } catch (error) {
+      console.log(
+        "Connection to firebase could not be established. Maybe the firebase credential file is missing."
+      );
+    }
   }
 
   /**
