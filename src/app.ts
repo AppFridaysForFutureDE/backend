@@ -85,7 +85,7 @@ const app = express();
 app.use(json());
 
 //Status Monitor
-app.use("/internal",require('express-status-monitor')());
+app.use("/internal", require("express-status-monitor")());
 
 //initialise routers; every router needs to use ddos
 strikeRoutes.use(DoSProtection.express);
