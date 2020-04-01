@@ -9,9 +9,10 @@ Dies ist das Backend der FFF App DE.
 3. [Node.js und npm installieren](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 4. Dieses Repo lokal clonen
 5. Ins Verzeichnis wechseln
+6. Die Datei `.env.example` kopieren und umbenennen in `.env` und einen anderen Entwickler nach den Werten fragen (Alternativ: vom Server herunterladen)
 
 
-## Server starten
+## Entwicklungsserver starten
 
 * `docker-compose up` startet alle docker container
 
@@ -35,8 +36,7 @@ Anschließend können dort redaktionellen Beiträge verfasst und bearbeitet werd
 Das Repository ist folgendermaßen aufgebaut:
 
 * Die verschiedenen Module/Services sind in docker-compose.yml aufgelistet
-* Der Typescript Code steckt im Ordner 'src'
-  und wird automatisch in Javascript compiliert und im Ordner 'dist' gespeichert.
+* Der Typescript Code steckt im Ordner 'src' und wird automatisch in Javascript compiliert und im Ordner 'dist' gespeichert.
 
 
 ## Linter ausführen
@@ -54,7 +54,7 @@ Mit diesem Befehl wird die automatische Code Korrektur gestartet:
 
 Nach Starten des docker containers kann die API mit Hilfe eines REST-Clients getestet werden (z.B. mit Insomnia)
 
-Die Erreichbarkeit des Servers bzw. die Funktionalität der API kann beispielsweise durch eine POST Request an die Adresse `http://localhost:3000/ogs/` mit JSON body `{ "stadt": "MeineOg", "long": 1.123, "lat": 13 }` getestet werden.
+Die Erreichbarkeit des Servers bzw. die Funktionalität der API kann beispielsweise durch eine GET Request an die Adresse `http://localhost:3000/api/v1/ogs` getestet werden.
 
 ## Produktivumgebung
 
@@ -64,8 +64,17 @@ Aus diesem Grund verwenden wir:
 * ein anderes Dockerfile
 * eine zusätzliche Konfiguration für docker-compose
 
-Um unsere Services auf Produktion zu starten, kann folgender Befehl verwendet werden:
+Um unsere Services auf dem Produktions-Server zu starten, sollten folgende Befehle verwendet werden:
 
 ```
-docker-compose -f docker-compose.yml -f docker-compose-prod.yml up
+// Das Docker Image muss bei Code-Änderungen neu gebaut werden
+docker-compose -f docker-compose.yml -f docker-compose-prod.yml build --no-cache
+
+// Mit diesem Setup wird der express server ohne nodemon und dev-dependencies gestartet (und auch die anderen services)
+docker-compose -f docker-compose.yml -f docker-compose-prod.yml up -d
 ```
+
+Troubleshooting:
+
+Eventuell hilft es bei Problemen einmal `npm install` auf dem Server auszuführen.
+Falls nichts hilft, geht auch ein einfaches `docker-compose up -d`
