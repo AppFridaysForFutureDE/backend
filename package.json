@@ -31,7 +31,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "tsc && node dist/app.js",
-    "start": "nodemon --watch src/ --exec \"npm run compile\" --verbose -e ts",
+    "start": "nodemon -r dotenv-safe/config --watch src/ --exec \"npm run compile\" --verbose -e ts",
     "start-prod": "node dist/app.js",
     "build": "tsc",
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
