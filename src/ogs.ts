@@ -75,6 +75,8 @@ export default class OgAccess {
       return [coordCached["lat"],coordCached["lon"]];
     }
 
+    console.log(city);
+
     //fetch json for city
     const url = `${process.env.MAPS_URL}${encodeURIComponent(city)}`;
     const response = await nodeFetch(url);
