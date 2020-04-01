@@ -1,6 +1,6 @@
 import { Og } from "./models/ogs";
 import * as util from "./utility";
-import * as api from "./auth/apis";
+import nodeFetch from "node-fetch";
 
 const bundeslaender = [
   "BW",
@@ -21,7 +21,6 @@ const bundeslaender = [
   "TH"
 ];
 //const apiUrlOSM = "https://nominatim.openstreetmap.org/search?format=json&q=";
-const fetch = require("node-fetch");
 
 export default class OgAccess {
   public async retrieveOgs() {
@@ -32,8 +31,9 @@ export default class OgAccess {
     //loop through bundeslaender
     let i = 0;
     for (i = 0; i < bundeslaender.length; i++) {
+      const url = `${process.env.OG_URL}&land=${bundeslaender[i]}`;
       //fetch json for bundesland
-      const response = await fetch(api.urlOgs + bundeslaender[i]);
+      const response = await nodeFetch(url);
       let data = [];
       try {
         data = await response.json();

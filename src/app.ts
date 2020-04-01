@@ -12,7 +12,9 @@ const CronJob = require("cron").CronJob;
 let mongoUp = true;
 
 //------FCM------
-export const messageAdmin = new FCMAdmin("../src/auth/de-fridaysforfuture-app-firebase-adminsdk-98yw1-c45342f3dc.json");
+export const messageAdmin = new FCMAdmin(
+  "../src/auth/de-fridaysforfuture-app-firebase-adminsdk-98yw1-c45342f3dc.json"
+);
 
 //------DoS-Protection------
 const DoSProtection = new Ddos({ burst: 10, limit: 15 }); //probably need to adjust these
@@ -85,7 +87,7 @@ const app = express();
 app.use(json());
 
 //Status Monitor
-app.use("/internal",require('express-status-monitor')());
+app.use("/internal", require("express-status-monitor")());
 
 //initialise routers; every router needs to use ddos
 strikeRoutes.use(DoSProtection.express);

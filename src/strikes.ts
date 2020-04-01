@@ -1,16 +1,18 @@
 import { Strike } from "./models/strikes";
 import * as util from "./utility";
-import * as api from "./auth/apis";
 import { messageAdmin } from "./app";
-const day = 86401;
-export default class StrikeAccess {
+import nodeFetch from "node-fetch";
 
+const day = 86401;
+
+export default class StrikeAccess {
   //retrieves Strikes from website api and saves them to mongodb
   //should be executed once per day
   public async retrieveStrikes() {
+    // TODO: handle missing url?
+    const url = process.env.STRIKE_URL || "";
     //fetch strike json
-    const fetch = require("node-fetch");
-    const response = await fetch(api.urlStrikes);
+    const response = await nodeFetch(url);
     let data = [];
     try {
       data = await response.json();
@@ -26,7 +28,11 @@ export default class StrikeAccess {
     let i: number;
     let parsed: Date;
     for (i = 0; i < data.length; i++) {
-      try { parsed = util.getDate(data[i][" Uhrzeit"]); } catch { continue; }
+      try {
+        parsed = util.getDate(data[i][" Uhrzeit"]);
+      } catch {
+        continue;
+      }
       const newStrike = new Strike({
         ogId: util.hash(data[i][" Name"]),
         name: data[i][" Name"],
@@ -53,7 +59,12 @@ export default class StrikeAccess {
     ) {
       if (err) return console.error(err);
       strikes.forEach(strike => {
-        messageAdmin.sendMessage(`og_${strike["ogId"]}`,strike["ogId"],`Streikalarm in ${strike["name"]}`, `Demnächst findet hier ein Streik statt: ${strike["startingPoint"]}, ${strike["name"]}`);
+        messageAdmin.sendMessage(
+          `og_${strike["ogId"]}`,
+          strike["ogId"],
+          `Streikalarm in ${strike["name"]}`,
+          `Demnächst findet hier ein Streik statt: ${strike["startingPoint"]}, ${strike["name"]}`
+        );
         Strike.updateOne({ ogId: strike["ogId"] }, { notificationSent: true });
       });
     });

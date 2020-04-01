@@ -35,7 +35,9 @@ services:
   express:
     container_name: express-main-module
     restart: always
+    image: express:dev
     build: ./
+    env_file: .env
     command: npm start
     volumes:
       - .:/usr/src/app
