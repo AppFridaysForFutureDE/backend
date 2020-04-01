@@ -4,6 +4,7 @@ services:
   express:
     container_name: express-main-module
     restart: always
+    image: express:prod
     build:
       context: .
       dockerfile: Dockerfile-prod
