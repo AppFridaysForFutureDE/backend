@@ -75,8 +75,6 @@ export default class OgAccess {
       return [coordCached["lat"],coordCached["lon"]];
     }
 
-    console.log(city);
-
     //fetch json for city
     const url = `${process.env.MAPS_URL}${encodeURIComponent(city)}`;
     const response = await nodeFetch(url);
@@ -90,8 +88,14 @@ export default class OgAccess {
     }
 
     //get lat/long from json
-    let lat = data["results"][0]["geometry"]["location"]["lat"];
-    let lon = data["results"][0]["geometry"]["location"]["lng"];
+    let lat = 0; let lon = 0;
+    try {
+      lat = data["results"][0]["geometry"]["location"]["lat"];
+      lon = data["results"][0]["geometry"]["location"]["lng"];
+    } catch {
+      console.log(`Fetch didnt work for: ${city}`)
+    }
+
 
     //save in cache
     let newCoord = new Coord({
