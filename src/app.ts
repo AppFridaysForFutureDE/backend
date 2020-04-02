@@ -8,6 +8,8 @@ import ogRoutes from "./routes/ogs";
 import webhookRoutes from "./routes/webhook";
 import mongoose from "mongoose";
 import Ddos from "ddos";
+import expressStatusMonitor from "express-status-monitor";
+
 const CronJob = require("cron").CronJob;
 let mongoUp = true;
 
@@ -87,7 +89,7 @@ const app = express();
 app.use(json());
 
 //Status Monitor
-app.use("/internal", require("express-status-monitor")());
+app.use(expressStatusMonitor({ path: "/internal/status" }));
 
 //initialise routers; every router needs to use ddos
 strikeRoutes.use(DoSProtection.express);
