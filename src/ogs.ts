@@ -4,7 +4,7 @@ import nodeFetch from "node-fetch";
 
 export default class OgAccess {
   public async retrieveOgs() {
-    const response = await nodeFetch(process.env.OG_URL);
+    const response = await nodeFetch(`${process.env.WEBSITE_URL}/localGroups`);
     let data = [];
     try {
       data = await response.json();
@@ -19,6 +19,7 @@ export default class OgAccess {
     //delete ogs
     const res = await Og.deleteMany({});
     console.log(`Deleted ${res.n} ogs`);
+    console.log(`Retrieved ${data.length} ogs`);
 
     data.forEach(async og => {
       //save og

@@ -9,10 +9,7 @@ export default class StrikeAccess {
   //retrieves Strikes from website api and saves them to mongodb
   //should be executed once per day
   public async retrieveStrikes() {
-    // TODO: handle missing url?
-    const url = process.env.STRIKE_URL || "";
-    //fetch strike json
-    const response = await nodeFetch(url);
+    const response = await nodeFetch(`${process.env.WEBSITE_URL}/strike`);
     let data = [];
     try {
       data = await response.json();
@@ -26,6 +23,7 @@ export default class StrikeAccess {
     //delete all strikes
     const res = await Strike.deleteMany({});
     console.log(`Deleted ${res.deletedCount} strikes`);
+    console.log(`Retrieved ${data.length} strikes`);
 
     //loop through strikes
     data.forEach(strike => {
