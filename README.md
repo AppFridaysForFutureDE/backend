@@ -50,6 +50,10 @@ Mit diesem Befehl wird die automatische Code Korrektur gestartet:
 
 `npm run lint-fix`
 
+## Automatische Tests
+
+`npm run test`
+
 ## Manuelles Testen
 
 Nach Starten des docker containers kann die API mit Hilfe eines REST-Clients getestet werden (z.B. mit Insomnia)
