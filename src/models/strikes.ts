@@ -4,6 +4,9 @@ const strikeScheme = new mongoose.Schema({
   ogId: {
     type: String
   },
+  name: {
+    type: String
+  },
   startingPoint: {
     type: String
   },

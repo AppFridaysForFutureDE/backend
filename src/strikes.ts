@@ -32,6 +32,7 @@ export default class StrikeAccess {
       //save strike
       const newStrike = new Strike({
         ogId: util.hash(strike["localGroupName"]),
+        name: strike["localGroupName"],
         startingPoint: strike["locationName"],
         date: util.toUnixTimestamp(new Date(strike["dateTime"])),
         eventLink: strike["eventLink"],
