@@ -7,7 +7,7 @@ const strikeScheme = new mongoose.Schema({
   name: {
     type: String
   },
-  startingPoint: {
+  location: {
     type: String
   },
   date: {
