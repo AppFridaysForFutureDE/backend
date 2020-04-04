@@ -1,4 +1,8 @@
-import { establishConnection, closeDatabase, clearDatabase } from "./db-handler";
+import {
+  establishConnection,
+  closeDatabase,
+  clearDatabase
+} from "./db-handler";
 import { Og } from "../models/ogs";
 
 beforeAll(async () => await establishConnection());
