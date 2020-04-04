@@ -19,9 +19,6 @@ const ogScheme = new mongoose.Schema({
   whatsApp: {
     type: String
   },
-  whatsAppStud: {
-    type: String
-  },
   email: {
     type: String
   },
@@ -34,10 +31,16 @@ const ogScheme = new mongoose.Schema({
   facebook: {
     type: String
   },
+  youtube: {
+    type: String
+  },
   website: {
     type: String
   },
   telegram: {
+    type: String
+  },
+  other: {
     type: String
   },
   retrievedAt: {

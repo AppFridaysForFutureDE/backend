@@ -20,31 +20,27 @@ export default class StrikeAccess {
       return;
     }
 
+    //get retrievedAt date/time
+    const now = Date.now();
+
     //delete all strikes
     const res = await Strike.deleteMany({});
-    console.log("Deleted " + res.deletedCount + " Strikes");
+    console.log(`Deleted ${res.deletedCount} strikes`);
 
-    //loop through strikes and save them
-    let i: number;
-    let parsed: Date;
-    for (i = 0; i < data.length; i++) {
-      try {
-        parsed = util.getDate(data[i][" Uhrzeit"]);
-      } catch {
-        continue;
-      }
+    //loop through strikes
+    data.forEach(strike => {
+      //save strike
       const newStrike = new Strike({
-        ogId: util.hash(data[i][" Name"]),
-        name: data[i][" Name"],
-        date: util.toUnixTimestamp(parsed),
-        startingPoint: data[i][" Startpunkt"],
-        fbEvent: data[i][" Facebook event"],
-        additionalInfo: data[i][" zusatzinfo"],
+        ogId: util.hash(strike["localGroupName"]),
+        startingPoint: strike["locationName"],
+        date: util.toUnixTimestamp(new Date(strike["dateTime"])),
+        eventLink: strike["eventLink"],
+        additionalInfo: strike["note"],
         notificationSent: false,
-        retrievedAt: Date.now()
+        retrievedAt: now
       });
       newStrike.save();
-    }
+    });
   }
 
   //checks and notifies for strikes that fulfill these conditions:

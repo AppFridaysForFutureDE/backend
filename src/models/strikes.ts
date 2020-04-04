@@ -4,16 +4,13 @@ const strikeScheme = new mongoose.Schema({
   ogId: {
     type: String
   },
-  name: {
+  startingPoint: {
     type: String
   },
   date: {
     type: Number
   },
-  startingPoint: {
-    type: String
-  },
-  fbEvent: {
+  eventLink: {
     type: String
   },
   additionalInfo: {
