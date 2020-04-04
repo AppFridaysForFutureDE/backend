@@ -30,11 +30,11 @@ export default class StrikeAccess {
       //save strike
       const newStrike = new Strike({
         ogId: util.hash(strike["localGroupName"]),
-        name: strike["localGroupName"],
-        location: strike["locationName"],
-        date: util.toUnixTimestamp(new Date(strike["dateTime"])),
-        eventLink: strike["eventLink"],
-        additionalInfo: strike["note"],
+        name: strike["localGroupName"] || "",
+        location: strike["locationName"] || "",
+        date: util.toUnixTimestamp(new Date(strike["dateTime"])) || "",
+        eventLink: strike["eventLink"] || "",
+        additionalInfo: strike["note"] || "",
         notificationSent: false,
         retrievedAt: now
       });

@@ -25,19 +25,19 @@ export default class OgAccess {
       //save og
       const newOg = new Og({
         ogId: util.hash(og["name"]),
-        name: og["name"],
-        bundesland: og["state"],
-        lat: og["lat"],
-        lon: og["lon"],
-        whatsapp: og["whatsapp"],
-        email: og["email"],
-        instagram: og["instagram"],
-        twitter: og["twitter"],
-        facebook: og["facebook"],
-        youtube: og["youtube"],
-        website: og["website"],
-        telegram: og["telegram"],
-        other: og["other"],
+        name: og["name"] || "",
+        bundesland: og["state"] || "",
+        lat: og["lat"] || "",
+        lon: og["lon"] || "",
+        whatsapp: og["whatsapp"] || "",
+        email: og["email"] || "",
+        instagram: og["instagram"] || "",
+        twitter: og["twitter"] || "",
+        facebook: og["facebook"] || "",
+        youtube: og["youtube"] || "",
+        website: og["website"] || "",
+        telegram: og["telegram"] || "",
+        other: og["other"] || "",
         retrievedAt: now
       });
       await newOg.save();
