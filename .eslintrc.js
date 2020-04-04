@@ -7,8 +7,7 @@ module.exports = {
     'jest'
   ],
   env: {
-    "jest/globals": true,
-    "eslint-env": "node"
+    "jest/globals": true
   },
   extends: [
     'eslint:recommended',
