@@ -1,9 +1,9 @@
-import { Og } from "./models/ogs"
+import { OG } from "./models/ogs"
 import * as util from "./utility";
 import nodeFetch from "node-fetch";
 
-export default class OgAccess {
-  public async retrieveOgs() {
+export default class OGAccess {
+  public async retrieveOGs() {
     const response = await nodeFetch(`${process.env.WEBSITE_URL}/localGroups`);
     let data = [];
     try {
@@ -17,13 +17,13 @@ export default class OgAccess {
     const now = Date.now();
 
     //delete ogs
-    const res = await Og.deleteMany({});
+    const res = await OG.deleteMany({});
     console.log(`Deleted ${res.n} ogs`);
     console.log(`Retrieved ${data.length} ogs`);
 
     data.forEach(async og => {
       //save og
-      const newOg = new Og({
+      const newOG = new OG({
         ogId: util.hash(og["name"]),
         name: og["name"] || "",
         bundesland: og["state"] || "",
@@ -40,7 +40,7 @@ export default class OgAccess {
         other: og["other"] || "",
         retrievedAt: now
       });
-      await newOg.save();
+      await newOG.save();
     });
   }
 }

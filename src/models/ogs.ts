@@ -48,4 +48,4 @@ const ogScheme = new mongoose.Schema({
   }
 });
 
-export const Og = mongoose.model("og", ogScheme);
+export const OG = mongoose.model("og", ogScheme);

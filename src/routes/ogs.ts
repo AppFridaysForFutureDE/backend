@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { getOgs } from "../controllers/ogs";
+import { getOGs } from "../controllers/ogs";
 
 const router = Router();
 
-router.get("/", getOgs);
+router.get("/", getOGs);
 
 export default router;
