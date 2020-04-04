@@ -1,3 +1,4 @@
+import crypto from "crypto";
 //returns date of next weekday (1: Mon, 7: Sun)
 export function nextWeekdayDate(dayInWeek: number): Date {
   const ret = new Date();
@@ -28,7 +29,6 @@ export function toUnixTimestamp(d: Date): number {
 
 //creates shortened sha256 hash
 export function hash(s: string): string {
-  const crypto = require("crypto");
   return crypto
     .createHash("sha256")
     .update(s)
