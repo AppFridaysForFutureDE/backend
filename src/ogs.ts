@@ -28,7 +28,7 @@ export default class OgAccess {
         bundesland: og["state"],
         lat: og["lat"],
         lon: og["lon"],
-        whatsApp: og["whatsapp"],
+        whatsapp: og["whatsapp"],
         email: og["email"],
         instagram: og["instagram"],
         twitter: og["twitter"],

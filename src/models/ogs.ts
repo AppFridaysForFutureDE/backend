@@ -16,7 +16,7 @@ const ogScheme = new mongoose.Schema({
   lon: {
     type: Number
   },
-  whatsApp: {
+  whatsapp: {
     type: String
   },
   email: {
