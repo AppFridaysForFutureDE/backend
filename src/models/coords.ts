@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+//DEPRECATED
 const coordScheme = new mongoose.Schema({
   city: {
     type: String

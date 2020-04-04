@@ -7,13 +7,13 @@ const strikeScheme = new mongoose.Schema({
   name: {
     type: String
   },
+  location: {
+    type: String
+  },
   date: {
     type: Number
   },
-  startingPoint: {
-    type: String
-  },
-  fbEvent: {
+  eventLink: {
     type: String
   },
   additionalInfo: {

@@ -1,4 +1,7 @@
 import crypto from "crypto";
+import { Coord } from "./models/coords";
+import nodeFetch from "node-fetch";
+
 //returns date of next weekday (1: Mon, 7: Sun)
 export function nextWeekdayDate(dayInWeek: number): Date {
   const ret = new Date();
@@ -6,6 +9,7 @@ export function nextWeekdayDate(dayInWeek: number): Date {
   return ret;
 }
 
+//DEPRECATED
 //parses a string of this scheme: "13:00 Uhr" to a date with the next friday
 export function getDate(s: string): Date {
   const d = nextWeekdayDate(5);
@@ -34,4 +38,47 @@ export function hash(s: string): string {
     .update(s)
     .digest("hex")
     .substring(0, 13);
+}
+
+//DEPRECATED
+//gets coordinates for place and checks cache first
+//relict from before the new api
+export async function retrieveCoordinates(city: string): Promise<[number, number]> {
+  //check if city is already in cache
+  let coordCached = await Coord.findOne({city: city});
+  if (coordCached != undefined && coordCached != null) {
+    return [coordCached["lat"],coordCached["lon"]];
+  }
+
+  //fetch json for city
+  const url = `${process.env.MAPS_URL}${encodeURIComponent(city)}`;
+  const response = await nodeFetch(url);
+  let data = [];
+  try {
+    data = await response.json();
+  } catch (error) {
+    console.log("Google Maps fetch failed");
+    console.log(error);
+    return [0,0];
+  }
+
+  //get lat/long from json
+  let lat = 0; let lon = 0;
+  try {
+    lat = data["results"][0]["geometry"]["location"]["lat"];
+    lon = data["results"][0]["geometry"]["location"]["lng"];
+  } catch {
+    console.log(`Fetch didnt work for: ${city}`)
+  }
+
+
+  //save in cache
+  let newCoord = new Coord({
+    city: city,
+    lat: lat,
+    lon: lon
+  });
+  await newCoord.save()
+
+  return [lat,lon];
 }

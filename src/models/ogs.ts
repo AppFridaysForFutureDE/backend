@@ -16,10 +16,7 @@ const ogScheme = new mongoose.Schema({
   lon: {
     type: Number
   },
-  whatsApp: {
-    type: String
-  },
-  whatsAppStud: {
+  whatsapp: {
     type: String
   },
   email: {
@@ -34,10 +31,16 @@ const ogScheme = new mongoose.Schema({
   facebook: {
     type: String
   },
+  youtube: {
+    type: String
+  },
   website: {
     type: String
   },
   telegram: {
+    type: String
+  },
+  other: {
     type: String
   },
   retrievedAt: {
@@ -45,4 +48,4 @@ const ogScheme = new mongoose.Schema({
   }
 });
 
-export const Og = mongoose.model("og", ogScheme);
+export const OG = mongoose.model("og", ogScheme);

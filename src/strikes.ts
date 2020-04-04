@@ -9,10 +9,7 @@ export default class StrikeAccess {
   //retrieves Strikes from website api and saves them to mongodb
   //should be executed once per day
   public async retrieveStrikes() {
-    // TODO: handle missing url?
-    const url = process.env.STRIKE_URL || "";
-    //fetch strike json
-    const response = await nodeFetch(url);
+    const response = await nodeFetch(`${process.env.WEBSITE_URL}/strike`);
     let data = [];
     try {
       data = await response.json();
@@ -20,31 +17,29 @@ export default class StrikeAccess {
       return;
     }
 
+    //get retrievedAt date/time
+    const now = Date.now();
+
     //delete all strikes
     const res = await Strike.deleteMany({});
-    console.log("Deleted " + res.deletedCount + " Strikes");
+    console.log(`Deleted ${res.deletedCount} strikes`);
+    console.log(`Retrieved ${data.length} strikes`);
 
-    //loop through strikes and save them
-    let i: number;
-    let parsed: Date;
-    for (i = 0; i < data.length; i++) {
-      try {
-        parsed = util.getDate(data[i][" Uhrzeit"]);
-      } catch {
-        continue;
-      }
+    //loop through strikes
+    data.forEach(strike => {
+      //save strike
       const newStrike = new Strike({
-        ogId: util.hash(data[i][" Name"]),
-        name: data[i][" Name"],
-        date: util.toUnixTimestamp(parsed),
-        startingPoint: data[i][" Startpunkt"],
-        fbEvent: data[i][" Facebook event"],
-        additionalInfo: data[i][" zusatzinfo"],
+        ogId: util.hash(strike["localGroupName"]),
+        name: strike["localGroupName"] || "",
+        location: strike["locationName"] || "",
+        date: util.toUnixTimestamp(new Date(strike["dateTime"])) || "",
+        eventLink: strike["eventLink"] || "",
+        additionalInfo: strike["note"] || "",
         notificationSent: false,
-        retrievedAt: Date.now()
+        retrievedAt: now
       });
       newStrike.save();
-    }
+    });
   }
 
   //checks and notifies for strikes that fulfill these conditions:
@@ -53,19 +48,21 @@ export default class StrikeAccess {
   //should be executed every hour
   public checkStrikes(): void {
     const tomorrow: number = util.toUnixTimestamp(new Date()) + day;
-    Strike.find({ notificationSent: false, date: { $lt: tomorrow } }, function(
+    const today: number = util.toUnixTimestamp(new Date());
+    Strike.find({ notificationSent: false, date: { $gt: today, $lt: tomorrow } }, function(
       err: Error,
       strikes
     ) {
       if (err) return console.error(err);
-      strikes.forEach(strike => {
+      strikes.forEach(async strike => {
+        console.log(strike);
         messageAdmin.sendMessage(
           `og_${strike["ogId"]}`,
           strike["ogId"],
           `Streikalarm in ${strike["name"]}`,
           `Demnächst findet hier ein Streik statt: ${strike["startingPoint"]}, ${strike["name"]}`
         );
-        Strike.updateOne({ ogId: strike["ogId"] }, { notificationSent: true });
+        await Strike.updateOne({ ogId: strike["ogId"] }, { notificationSent: true });
       });
     });
   }

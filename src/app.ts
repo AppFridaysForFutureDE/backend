@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import FCMAdmin from "./fcm";
 import StrikeAccess from "./strikes";
-import OgAccess from "./ogs";
+import OGAccess from "./ogs";
 import { json } from "body-parser";
 import strikeRoutes from "./routes/strikes";
 import ogRoutes from "./routes/ogs";
@@ -40,9 +40,9 @@ mongoose
 const strikeA = new StrikeAccess();
 console.log("Retrieving Strikes");
 strikeA.retrieveStrikes();
-const ogA = new OgAccess();
-console.log("Retrieving Ogs");
-ogA.retrieveOgs();
+const ogA = new OGAccess();
+console.log("Retrieving OGs");
+ogA.retrieveOGs();
 
 //retrieving strikes every day at 0:00
 const strikeJob = new CronJob(
@@ -61,8 +61,8 @@ strikeJob.start();
 const ogJob = new CronJob(
   "5 0 * * 1,3,5",
   function() {
-    console.log("Retrieving Ogs");
-    ogA.retrieveOgs();
+    console.log("Retrieving OGs");
+    ogA.retrieveOGs();
   },
   null,
   true,
