@@ -49,19 +49,21 @@ export default class StrikeAccess {
   //should be executed every hour
   public checkStrikes(): void {
     const tomorrow: number = util.toUnixTimestamp(new Date()) + day;
-    Strike.find({ notificationSent: false, date: { $lt: tomorrow } }, function(
+    const today: number = util.toUnixTimestamp(new Date());
+    Strike.find({ notificationSent: false, date: { $gt: today, $lt: tomorrow } }, function(
       err: Error,
       strikes
     ) {
       if (err) return console.error(err);
-      strikes.forEach(strike => {
+      strikes.forEach(async strike => {
+        console.log(strike);
         messageAdmin.sendMessage(
           `og_${strike["ogId"]}`,
           strike["ogId"],
           `Streikalarm in ${strike["name"]}`,
           `Demnächst findet hier ein Streik statt: ${strike["startingPoint"]}, ${strike["name"]}`
         );
-        Strike.updateOne({ ogId: strike["ogId"] }, { notificationSent: true });
+        await Strike.updateOne({ ogId: strike["ogId"] }, { notificationSent: true });
       });
     });
   }
