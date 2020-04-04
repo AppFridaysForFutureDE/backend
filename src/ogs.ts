@@ -1,110 +1,46 @@
-import { Og } from "./models/ogs";
-import { Coord } from "./models/coords";
+import { OG } from "./models/ogs"
 import * as util from "./utility";
 import nodeFetch from "node-fetch";
 
-const bundeslaender = [
-  "BW",
-  "BY",
-  "BE",
-  "BB",
-  "HB",
-  "HH",
-  "HE",
-  "MV",
-  "NI",
-  "NW",
-  "RP",
-  "SL",
-  "SN",
-  "ST",
-  "SH",
-  "TH"
-];
-//const apiUrlOSM = "https://nominatim.openstreetmap.org/search?format=json&q=";
-
-export default class OgAccess {
-  public async retrieveOgs() {
-    //loop through bundeslaender
-    let i = 0;
-    for (i = 0; i < bundeslaender.length; i++) {
-      const url = `${process.env.OG_URL}&land=${bundeslaender[i]}`;
-      //fetch json for bundesland
-      const response = await nodeFetch(url);
-      let data = [];
-      try {
-        data = await response.json();
-      } catch (error) {
-        continue;
-      }
-
-      //delete all ogs
-      const res = await Og.deleteMany({ bundesland: bundeslaender[i] });
-
-      //loop through all ogs
-      let b = 0;
-      for (b = 0; b < data.length; b++) {
-        //get coordinates
-        const coordinates = await this.retrieveCoordinates(data[b]["Stadt"]);
-        const newOg = new Og({
-          ogId: util.hash(data[b]["Stadt"]),
-          name: data[b]["Stadt"],
-          bundesland: bundeslaender[i],
-          lat: coordinates[0],
-          lon: coordinates[1],
-          whatsApp: data[b]["WhatsApp"],
-          whatsAppStud: data[b]["WhatsApp Studis"],
-          email: data[b]["eMail"],
-          instagram: data[b]["Instagram"],
-          twitter: data[b]["Twitter"],
-          facebook: data[b]["Facebook"],
-          website: data[b]["Website"],
-          telegram: data[b]["Telegram"],
-          retrievedAt: Date.now()
-        });
-
-        await newOg.save();
-      }
-    }
-  }
-
-  public async retrieveCoordinates(city: string): Promise<[number, number]> {
-    //check if city is already in cache
-    const coordCached = await Coord.findOne({ city: city });
-    if (coordCached != undefined && coordCached != null) {
-      return [coordCached["lat"], coordCached["lon"]];
-    }
-
-    //fetch json for city
-    const url = `${process.env.MAPS_URL}${encodeURIComponent(city)}`;
-    const response = await nodeFetch(url);
+export default class OGAccess {
+  public async retrieveOGs() {
+    const response = await nodeFetch(`${process.env.WEBSITE_URL}/localGroups`);
     let data = [];
     try {
       data = await response.json();
     } catch (error) {
-      console.log("Google Maps fetch failed");
       console.log(error);
-      return [0, 0];
+      return;
     }
 
-    //get lat/long from json
-    let lat = 0;
-    let lon = 0;
-    try {
-      lat = data["results"][0]["geometry"]["location"]["lat"];
-      lon = data["results"][0]["geometry"]["location"]["lng"];
-    } catch {
-      console.log(`Fetch didnt work for: ${city}`);
-    }
+    //get retrievedAt date/time
+    const now = Date.now();
 
-    //save in cache
-    const newCoord = new Coord({
-      city: city,
-      lat: lat,
-      lon: lon
+    //delete ogs
+    const res = await OG.deleteMany({});
+    console.log(`Deleted ${res.n} ogs`);
+    console.log(`Retrieved ${data.length} ogs`);
+
+    data.forEach(async og => {
+      //save og
+      const newOG = new OG({
+        ogId: util.hash(og["name"]),
+        name: og["name"] || "",
+        bundesland: og["state"] || "",
+        lat: og["lat"] || "",
+        lon: og["lon"] || "",
+        whatsapp: og["whatsapp"] || "",
+        email: og["email"] || "",
+        instagram: og["instagram"] || "",
+        twitter: og["twitter"] || "",
+        facebook: og["facebook"] || "",
+        youtube: og["youtube"] || "",
+        website: og["website"] || "",
+        telegram: og["telegram"] || "",
+        other: og["other"] || "",
+        retrievedAt: now
+      });
+      await newOG.save();
     });
-    await newCoord.save();
-
-    return [lat, lon];
   }
 }
