@@ -8,7 +8,7 @@ const day = 86401;
 export default class StrikeAccess {
   //retrieves Strikes from website api and saves them to mongodb
   //should be executed once per day
-  public async retrieveStrikes() {
+  public async retrieveStrikes(): Promise<void> {
     const response = await nodeFetch(`${process.env.WEBSITE_URL}/strike`);
     let data = [];
     try {
