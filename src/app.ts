@@ -14,9 +14,7 @@ const CronJob = require("cron").CronJob;
 let mongoUp = true;
 
 //------FCM------
-export const messageAdmin = new FCMAdmin(
-  "../src/auth/de-fridaysforfuture-app-firebase-adminsdk-98yw1-c45342f3dc.json"
-);
+export const messageAdmin = new FCMAdmin();
 
 //------DoS-Protection------
 const DoSProtection = new Ddos({ burst: 10, limit: 15 }); //probably need to adjust these
