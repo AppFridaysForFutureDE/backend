@@ -1,4 +1,4 @@
-import { OG } from "./models/ogs"
+import { OG } from "./models/ogs";
 import * as util from "./utility";
 import nodeFetch from "node-fetch";
 
