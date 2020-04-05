@@ -3,7 +3,7 @@ import * as util from "./utility";
 import nodeFetch from "node-fetch";
 
 export default class OGAccess {
-  public async retrieveOGs(): Promise<void> {
+  public async retrieveOGs() {
     const response = await nodeFetch(`${process.env.WEBSITE_URL}/localGroups`);
     let data = [];
     try {

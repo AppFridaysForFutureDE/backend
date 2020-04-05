@@ -29,7 +29,7 @@ export default class FCMAdmin {
     payload: string,
     title: string,
     body: string
-  ): Promise<void> {
+  ) {
     if (!this.firebaseReady) {
       console.log(
         "Firebase is not initialized. Maybe the firebase credential file is missing."
