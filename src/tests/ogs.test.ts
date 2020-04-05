@@ -1,13 +1,9 @@
-import {
-  establishConnection,
-  closeDatabase,
-  clearDatabase
-} from "./db-handler";
+import * as dbHandler from "../db-handler";
 import { OG } from "../models/ogs";
 
-beforeAll(async () => await establishConnection());
-afterEach(async () => await clearDatabase());
-afterAll(async () => await closeDatabase());
+beforeAll(async () => await dbHandler.establishConnection());
+afterEach(async () => await dbHandler.clearDatabase());
+afterAll(async () => await dbHandler.closeDatabase());
 
 describe("og ", () => {
   it("can be created correctly", async () => {

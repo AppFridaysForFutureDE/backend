@@ -1,3 +1,9 @@
+/**
+ * For testing, we use an in-memory database.
+ * The advantage is, that we do not need an extra
+ * test-database-docker-container running to execute tests
+ * Simply run 'npm run test'
+ */
 import mongoose from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
 
@@ -6,7 +12,7 @@ const mongod = new MongoMemoryServer();
 /**
  * Connect to the in-memory database.
  */
-export const establishConnection = async () => {
+export const establishConnection = async (): Promise<void> => {
   const uri = await mongod.getConnectionString();
 
   const mongooseOpts = {
@@ -22,7 +28,7 @@ export const establishConnection = async () => {
 /**
  * Drop database, close the connection and stop mongod.
  */
-export const closeDatabase = async () => {
+export const closeDatabase = async (): Promise<void> => {
   await mongoose.connection.dropDatabase();
   await mongoose.connection.close();
   await mongod.stop();
@@ -31,7 +37,7 @@ export const closeDatabase = async () => {
 /**
  * Remove all the data for all db collections.
  */
-export const clearDatabase = async () => {
+export const clearDatabase = async (): Promise<void> => {
   const collections = mongoose.connection.collections;
 
   for (const key in collections) {
