@@ -1,4 +1,4 @@
-import * as dbHandler from "../db-handler";
+import * as dbHandler from "../test-db-handler";
 import { OG } from "../models/ogs";
 
 beforeAll(async () => await dbHandler.establishConnection());
