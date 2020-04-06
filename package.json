@@ -36,9 +36,9 @@
   },
   "scripts": {
     "test": "jest",
-    "compile": "tsc && node dist/app.js",
+    "compile": "tsc && node dist/server.js",
     "start": "nodemon -r dotenv-safe/config --watch src/ --exec \"npm run compile\" --verbose -e ts",
-    "start-prod": "node dist/app.js",
+    "start-prod": "node dist/server.js",
     "build": "tsc",
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
     "lint-fix": "eslint src/ --fix --ext .js,.jsx,.ts,.tsx"
