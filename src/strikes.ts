@@ -1,6 +1,6 @@
 import { Strike } from "./models/strikes";
 import * as util from "./utility";
-import { messageAdmin } from "./app";
+import { FCMAdmin } from "./services/fcm";
 import nodeFetch from "node-fetch";
 
 const day = 86401;
@@ -55,7 +55,7 @@ export default class StrikeAccess {
         if (err) return console.error(err);
         strikes.forEach(async strike => {
           console.log(strike);
-          messageAdmin.sendMessage(
+          FCMAdmin.getInstance().sendMessage(
             `og_${strike["ogId"]}`,
             strike["ogId"],
             `Streikalarm in ${strike["name"]}`,

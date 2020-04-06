@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { messageAdmin } from "../app";
+import { FCMAdmin } from "../services/fcm";
 
 export const webhookTriggered: RequestHandler = (req, res) => {
   console.log("Webhook Ghost triggered");
@@ -19,7 +19,7 @@ export const webhookTriggered: RequestHandler = (req, res) => {
     }
   }
   if (push) {
-    messageAdmin.sendMessage(
+    FCMAdmin.getInstance().sendMessage(
       "feed_" + topic,
       id,
       "Neuer Post!",
