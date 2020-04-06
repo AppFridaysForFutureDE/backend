@@ -60,6 +60,7 @@ Nach Starten des docker containers kann die API mit Hilfe eines REST-Clients get
 
 Die Erreichbarkeit des Servers bzw. die Funktionalität der API kann beispielsweise durch eine GET Request an die Adresse `http://localhost:3000/api/v1/ogs` getestet werden.
 
+
 ## Produktivumgebung
 
 In der Produktivumgebung soll unser Server möglichst klein (ohne dev-Abhängigkeiten) und stabil sein (kein automatischer Restart bei code änderungen)
@@ -82,3 +83,12 @@ Troubleshooting:
 
 Eventuell hilft es bei Problemen einmal `npm install` auf dem Server auszuführen.
 Falls nichts hilft, geht auch ein einfaches `docker-compose up -d`
+
+
+## NGINX-Setup in der Produktivumgebung
+
+* Die Pfadwurzel verweist auf eine statische HTML-Seite
+* Die Pfade /socket.io und /internal/status sind passwortgeschützt und leiten zum Express-Container weiter
+* Der Pfad /api wird 30 Minuten lang gecachet und leitet zum Express-Container weiter
+* Der Pfad /ghost leitet zum Ghost-Container weiter
+* Bei einem 404 Error wird eine statische HTML-Seite zurückgegeben
