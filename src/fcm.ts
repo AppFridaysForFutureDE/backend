@@ -1,22 +1,22 @@
 import * as admin from "firebase-admin";
 export default class FCMAdmin {
-  private authPath: string;
   private firebaseReady: boolean;
 
-  constructor(ap: string) {
-    this.authPath = ap;
+  constructor() {
     // Authentification
     try {
-      const serviceAccount = require(this.authPath);
+      if (!process.env.GOOGLE_APPLICATION_CREDENTIALS) {
+        throw "Warning: Connection to firebase could not be established. No credentials provided";
+      }
+
       admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount),
-        databaseURL: "https://de-fridaysforfuture-app.firebaseio.com"
+        credential: admin.credential.applicationDefault(),
+        databaseURL: process.env.FIREBASE_URL
       });
       this.firebaseReady = true;
+      console.log("Successfully established connection to firebase.");
     } catch (error) {
-      console.log(
-        "Connection to firebase could not be established. Maybe the firebase credential file is missing."
-      );
+      console.log(error);
       this.firebaseReady = false;
     }
   }
