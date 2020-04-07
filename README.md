@@ -79,3 +79,8 @@ Troubleshooting:
 
 Eventuell hilft es bei Problemen einmal `npm install` auf dem Server auszuführen.
 Falls nichts hilft, geht auch ein einfaches `docker-compose up -d`
+
+
+## Docs
+
+In [docs](/docs/README.md) findet man die API-Doku und die nginx-Konfiguration.
