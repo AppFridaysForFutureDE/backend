@@ -1,7 +1,3 @@
-## LICENSE
-
-Die Lizenz, unter der das Backend zur Verfügung steht (GNU GPLv3)
-
 ## swagger.yaml
 
 Hier wird unsere API nach dem OpenAPI 3.0 Standard dokumentiert.
