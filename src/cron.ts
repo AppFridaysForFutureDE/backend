@@ -1,53 +1,43 @@
 import { CronJob } from "cron";
-import StrikeAccess from "./strikes";
-import OGAccess from "./ogs";
+import * as strikeAccess from "./api/strikes";
+import * as ogAccess from "./api/ogs";
 
-// TODO: Refactor to reduce code duplication
-export const startCronJobs = (): void => {
-  //retrieve strikes and ogs now
-  const strikeA = new StrikeAccess();
-  console.log("Retrieving Strikes");
-  strikeA.retrieveStrikes();
-  const ogA = new OGAccess();
-  console.log("Retrieving OGs");
-  ogA.retrieveOGs();
-
-  //retrieving strikes every day at 0:00
-  const strikeJob = new CronJob(
-    "0 0 * * *",
-    function() {
+const jobs = [
+  {
+    desc: "Retrieve Strikes",
+    tab: "0 0 * * *",
+    job: function() {
       console.log("Retrieving Strikes");
-      strikeA.retrieveStrikes();
-    },
-    null,
-    true,
-    "Europe/Berlin"
-  );
-  strikeJob.start();
-
-  //retrieving ogs at 0:05 on mondays, wednesdays and fridays
-  const ogJob = new CronJob(
-    "5 0 * * 1,3,5",
-    function() {
+      strikeAccess.retrieveStrikes();
+    }
+  },
+  {
+    desc: "Retrieve OGs",
+    tab: "5 0 * * *",
+    job: function() {
       console.log("Retrieving OGs");
-      ogA.retrieveOGs();
-    },
-    null,
-    true,
-    "Europe/Berlin"
-  );
-  ogJob.start();
-
-  //check strikes every hour from 8-20
-  const strikeNotifyJob = new CronJob(
-    "0 8-20 * * *",
-    function() {
+      ogAccess.retrieveOGs();
+    }
+  },
+  {
+    desc: "Check Strike Notifications",
+    tab: "0 8-23 * * *",
+    job: function() {
       console.log("Checking Strikes");
-      strikeA.checkStrikes();
-    },
-    null,
-    true,
-    "Europe/Berlin"
-  );
-  strikeNotifyJob.start();
+      strikeAccess.checkStrikes();
+    }
+  }
+];
+
+export const startCronJobs = (): void => {
+  jobs.forEach(job => {
+    const cronjob = new CronJob(
+      job.tab,
+      job.job,
+      null,
+      true,
+      "Europe/Berlin"
+    );
+    cronjob.start();
+  });
 };

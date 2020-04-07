@@ -2,6 +2,9 @@ import crypto from "crypto";
 import { Coord } from "./models/coords";
 import nodeFetch from "node-fetch";
 
+//A day and a second in unix time
+export const day = 86401;
+
 //returns date of next weekday (1: Mon, 7: Sun)
 export function nextWeekdayDate(dayInWeek: number): Date {
   const ret = new Date();
