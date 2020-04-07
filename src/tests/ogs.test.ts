@@ -7,6 +7,9 @@ beforeAll(async () => await dbHandler.establishConnection());
 afterEach(async () => await dbHandler.clearDatabase());
 afterAll(async () => await dbHandler.closeDatabase());
 
+// Prevent open handles when executing tests
+jest.mock("ddos");
+
 describe("get og route", () => {
   it("returns the saved og", async () => {
     const newOg = new OG({
