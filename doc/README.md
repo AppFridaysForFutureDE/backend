@@ -1,9 +1,9 @@
-## swagger.yaml
+## [swagger.yaml](swagger.yaml)
 
 Hier wird unsere API nach dem OpenAPI 3.0 Standard dokumentiert.
 
 
-## default
+## [default](default)
 
 Das ist die nginx-Config-Datei, die wir im Produktivsystem verwenden. Wir verwenden die Reverse-Proxy-Funktion von nginx zum Routing. Ausserdem schützen wir damit manche Pfade mit einem Passwort.
 
