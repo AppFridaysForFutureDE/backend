@@ -43,11 +43,13 @@ export function hash(s: string): string {
 //DEPRECATED
 //gets coordinates for place and checks cache first
 //relict from before the new api
-export async function retrieveCoordinates(city: string): Promise<[number, number]> {
+export async function retrieveCoordinates(
+  city: string
+): Promise<[number, number]> {
   //check if city is already in cache
-  let coordCached = await Coord.findOne({city: city});
+  const coordCached = await Coord.findOne({ city: city });
   if (coordCached != undefined && coordCached != null) {
-    return [coordCached["lat"],coordCached["lon"]];
+    return [coordCached["lat"], coordCached["lon"]];
   }
 
   //fetch json for city
@@ -59,26 +61,26 @@ export async function retrieveCoordinates(city: string): Promise<[number, number
   } catch (error) {
     console.log("Google Maps fetch failed");
     console.log(error);
-    return [0,0];
+    return [0, 0];
   }
 
   //get lat/long from json
-  let lat = 0; let lon = 0;
+  let lat = 0;
+  let lon = 0;
   try {
     lat = data["results"][0]["geometry"]["location"]["lat"];
     lon = data["results"][0]["geometry"]["location"]["lng"];
   } catch {
-    console.log(`Fetch didnt work for: ${city}`)
+    console.log(`Fetch didnt work for: ${city}`);
   }
 
-
   //save in cache
-  let newCoord = new Coord({
+  const newCoord = new Coord({
     city: city,
     lat: lat,
     lon: lon
   });
-  await newCoord.save()
+  await newCoord.save();
 
-  return [lat,lon];
+  return [lat, lon];
 }

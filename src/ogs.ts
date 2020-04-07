@@ -1,9 +1,9 @@
-import { OG } from "./models/ogs"
+import { OG } from "./models/ogs";
 import * as util from "./utility";
 import nodeFetch from "node-fetch";
 
 export default class OGAccess {
-  public async retrieveOGs() {
+  public async retrieveOGs(): Promise<void> {
     const response = await nodeFetch(`${process.env.WEBSITE_URL}/localGroups`);
     let data = [];
     try {
