@@ -83,4 +83,4 @@ Falls nichts hilft, geht auch ein einfaches `docker-compose up -d`
 
 ## Docs
 
-In [docs](/docs/README.md) findet man die API-Doku und die nginx-Konfiguration.
+In [docs](docs/README.md) findet man die API-Doku und die nginx-Konfiguration.
