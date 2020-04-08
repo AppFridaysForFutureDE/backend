@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { messageAdmin } from "../app";
+import { FCMAdmin } from "../services/fcm";
 
 export const webhookTriggered: RequestHandler = (req, res) => {
   console.log("Webhook Ghost triggered");
@@ -9,6 +9,7 @@ export const webhookTriggered: RequestHandler = (req, res) => {
   const tags = data["post"]["current"]["tags"];
   let topic = "";
   let push = false;
+  //TODO: foreach
   let i = 0;
   for (i = 0; i < tags.length; i++) {
     if (tags[i]["description"] == "Themenbereich") {
@@ -18,8 +19,9 @@ export const webhookTriggered: RequestHandler = (req, res) => {
       push = true;
     }
   }
+  //TODO: String Templates
   if (push) {
-    messageAdmin.sendMessage(
+    FCMAdmin.getInstance().sendMessage(
       "feed_" + topic,
       id,
       "Neuer Post!",

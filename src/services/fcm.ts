@@ -1,9 +1,11 @@
 import * as admin from "firebase-admin";
-export default class FCMAdmin {
+
+// Sends push notifications via Firebase Cloud Messaging
+export class FCMAdmin {
+  private static instance: FCMAdmin;
   private firebaseReady: boolean;
 
-  constructor() {
-    // Authentification
+  private constructor() {
     try {
       if (!process.env.GOOGLE_APPLICATION_CREDENTIALS) {
         throw "Warning: Connection to firebase could not be established. No credentials provided";
@@ -21,9 +23,14 @@ export default class FCMAdmin {
     }
   }
 
-  /**
-   * sendMessage
-   */
+  static getInstance(): FCMAdmin {
+    if (this.instance) {
+      return this.instance;
+    }
+    this.instance = new FCMAdmin();
+    return this.instance;
+  }
+
   public async sendMessage(
     topic: string,
     payload: string,
