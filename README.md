@@ -85,10 +85,6 @@ Eventuell hilft es bei Problemen einmal `npm install` auf dem Server auszuführe
 Falls nichts hilft, geht auch ein einfaches `docker-compose up -d`
 
 
-## NGINX-Setup in der Produktivumgebung
+## Docs
 
-* Die Pfadwurzel verweist auf eine statische HTML-Seite
-* Die Pfade /socket.io und /internal/status sind passwortgeschützt und leiten zum Express-Container weiter
-* Der Pfad /api wird 30 Minuten lang gecachet und leitet zum Express-Container weiter
-* Der Pfad /ghost leitet zum Ghost-Container weiter
-* Bei einem 404 Error wird eine statische HTML-Seite zurückgegeben
+In [docs](doc/README.md) findet man die API-Doku und die nginx-Konfiguration.
