@@ -1,4 +1,4 @@
-import * as dbHandler from "../test-db-handler";
+import * as dbHandler from "./test-db-handler";
 import { OG } from "../models/ogs";
 import { app } from "../app";
 import request from "supertest";
