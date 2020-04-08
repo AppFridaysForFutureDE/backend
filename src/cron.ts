@@ -21,7 +21,7 @@ const jobs = [
   },
   {
     desc: "Check Strike Notifications",
-    tab: "0 8-23 * * *",
+    tab: "0 8-20 * * *",
     job: function() {
       console.log("Checking Strikes");
       strikeAccess.checkStrikes();
