@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 import { app } from "./app";
 import { startCronJobs } from "./cron";
+import dotenv from "dotenv-safe";
+
+// load environment variables
+dotenv.config();
 
 // Connect to database
 mongoose

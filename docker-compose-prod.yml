@@ -9,7 +9,7 @@ services:
       context: .
       dockerfile: Dockerfile-prod
     env_file: .env
-    command: node -r dotenv-safe/config dist/app.js
+    command: node dist/server.js
     ports:
       - "3000:3000"
     links:
