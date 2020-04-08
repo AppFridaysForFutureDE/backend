@@ -6,7 +6,7 @@ const jobs = [
   {
     desc: "Retrieve Strikes",
     tab: "0 0 * * *",
-    job: function() {
+    job: (): void => {
       console.log("Retrieving Strikes");
       strikeAccess.retrieveStrikes();
     }
@@ -14,7 +14,7 @@ const jobs = [
   {
     desc: "Retrieve OGs",
     tab: "5 0 * * *",
-    job: function() {
+    job: (): void => {
       console.log("Retrieving OGs");
       ogAccess.retrieveOGs();
     }
@@ -22,7 +22,7 @@ const jobs = [
   {
     desc: "Check Strike Notifications",
     tab: "0 8-20 * * *",
-    job: function() {
+    job: (): void => {
       console.log("Checking Strikes");
       strikeAccess.checkStrikes();
     }
@@ -31,13 +31,7 @@ const jobs = [
 
 export const startCronJobs = (): void => {
   jobs.forEach(job => {
-    const cronjob = new CronJob(
-      job.tab,
-      job.job,
-      null,
-      true,
-      "Europe/Berlin"
-    );
+    const cronjob = new CronJob(job.tab, job.job, null, true, "Europe/Berlin");
     cronjob.start();
   });
 };
