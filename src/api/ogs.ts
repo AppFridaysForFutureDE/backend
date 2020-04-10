@@ -21,6 +21,10 @@ export async function retrieveOGs(): Promise<void> {
   console.log(`Retrieved ${data.length} ogs`);
 
   data.forEach(async og => {
+    let mail = "";
+    if (og["email"] != null && !String(og["email"]).startsWith("mailto:")) {
+      mail = "mailto:" + og["email"];
+    }
     //save og
     const newOG = new OG({
       ogId: util.hash(og["name"]),
@@ -29,7 +33,7 @@ export async function retrieveOGs(): Promise<void> {
       lat: og["lat"] || "",
       lon: og["lon"] || "",
       whatsapp: og["whatsapp"] || "",
-      email: og["email"] || "",
+      email: mail,
       instagram: og["instagram"] || "",
       twitter: og["twitter"] || "",
       facebook: og["facebook"] || "",
