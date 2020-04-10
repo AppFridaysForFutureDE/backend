@@ -13,6 +13,8 @@ mongoose
   })
   .then(
     () => {
+      console.log('db connection running yay');
+
       // Start listening to requests on port 3000
       app.listen(3000);
 

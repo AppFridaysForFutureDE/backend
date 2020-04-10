@@ -73,7 +73,7 @@ Um unsere Services auf dem Produktions-Server zu starten, sollten folgende Befeh
 
 ```
 // Das Docker Image muss bei Code-Änderungen neu gebaut werden
-docker-compose -f docker-compose.yml -f docker-compose-prod.yml build --no-cache
+docker image rm express:prod
 
 // Mit diesem Setup wird der express server ohne nodemon und dev-dependencies gestartet (und auch die anderen services)
 docker-compose -f docker-compose.yml -f docker-compose-prod.yml up -d

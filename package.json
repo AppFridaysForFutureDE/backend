@@ -39,6 +39,7 @@
     "start": "nodemon --watch src/ --exec \"npm run compile\" --verbose -e ts",
     "start-prod": "node dist/server.js",
     "build": "tsc",
+    "populate-db": "node dist/populate-db.js",
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
     "lint-fix": "eslint src/ --fix --ext .js,.jsx,.ts,.tsx"
   },
