@@ -9,7 +9,8 @@ dotenv.config();
 console.log("Connecting to database");
 mongoose
   .connect("mongodb://fffapp:fffapp@mongo-db:27017/fffapp", {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true
   })
   .then(
     () => {
