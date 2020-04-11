@@ -52,7 +52,7 @@ Mit diesem Befehl wird die automatische Code Korrektur gestartet:
 
 ## Automatische Tests
 
-`npm run test`
+`npm test`
 
 ## Manuelles Testen
 
@@ -61,13 +61,20 @@ Nach Starten des docker containers kann die API mit Hilfe eines REST-Clients get
 Die Erreichbarkeit des Servers bzw. die Funktionalität der API kann beispielsweise durch eine GET Request an die Adresse `http://localhost:3000/api/v1/ogs` getestet werden.
 
 
+## Docker
+
+Wir verwenden für unsere Applikaitonen die Virtualisierungssoftware Docker.
+
+
+Um in der Entwicklungsumgebung möglichst bequem arbeiten zu können (automatischer Restart bei Code-Änderungen)
+
+und die Produktivumgebung möglichst stabil zu halten, verwenden wir verschiedene Dockerfiles und docker-compose Konfigurationen:
+- `docker-compose.yml` enthält die Basis-Konfiguration all unserer Services
+- `docker-compose.override.yml` enthält Development-spezifische Erweiterungen
+- `docker-compose-prod.yml` enthält die Konfiguration für den Produktivbetrieb
+
+
 ## Produktivumgebung
-
-In der Produktivumgebung soll unser Server möglichst klein (ohne dev-Abhängigkeiten) und stabil sein (kein automatischer Restart bei code änderungen)
-
-Aus diesem Grund verwenden wir:
-* ein anderes Dockerfile
-* eine zusätzliche Konfiguration für docker-compose
 
 Um unsere Services auf dem Produktions-Server zu starten, sollten folgende Befehle verwendet werden:
 
@@ -75,15 +82,8 @@ Um unsere Services auf dem Produktions-Server zu starten, sollten folgende Befeh
 // Das Docker Image muss bei Code-Änderungen neu gebaut werden
 docker-compose -f docker-compose.yml -f docker-compose-prod.yml build --no-cache
 
-// Mit diesem Setup wird der express server ohne nodemon und dev-dependencies gestartet (und auch die anderen services)
 docker-compose -f docker-compose.yml -f docker-compose-prod.yml up -d
 ```
-
-Troubleshooting:
-
-Eventuell hilft es bei Problemen einmal `npm install` auf dem Server auszuführen.
-Falls nichts hilft, geht auch ein einfaches `docker-compose up -d`
-
 
 ## Docs
 
