@@ -1,2 +1,14 @@
-node_modules
 npm-debug.log
+mongo-data
+node_modules/
+dist/
+.DS_Store
+src/auth/
+.env
+.dockerignore
+.git
+.gitignore
+README.md
+LICENSE
+Dockerfile*
+docker-compose*

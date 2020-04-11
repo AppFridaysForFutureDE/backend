@@ -32,15 +32,12 @@ services:
     volumes:
       - mysql-volume:/var/lib/mysql
 
+  # This service is extended
+  # automatically by docker-compose.override.yml (in development)
+  # or explicitly by docker-compose-prod.yml (in production)
   express:
-    container_name: express-main-module
     restart: always
-    image: express:dev
-    build: ./
     env_file: .env
-    command: npm start
-    volumes:
-      - .:/usr/src/app
     ports:
       - "3000:3000"
     links:
