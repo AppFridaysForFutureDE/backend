@@ -5,15 +5,15 @@ import * as ogAccess from "./api/ogs";
 const jobs = [
   {
     desc: "Retrieve Strikes",
-    tab: "0 0 * * *",
+    tab: "5 * * * *",//beta crontab, original was "5 0 * * *"
     job: (): void => {
       console.log("Retrieving Strikes");
       strikeAccess.retrieveStrikes();
     }
   },
   {
-    desc: "Retrieve OGs",
-    tab: "5 0 * * *",
+    desc: "Retrieve OGs",//beta crontab, original was "0 0 * * *"
+    tab: "0 * * * *",
     job: (): void => {
       console.log("Retrieving OGs");
       ogAccess.retrieveOGs();
