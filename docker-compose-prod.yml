@@ -1,3 +1,5 @@
+# This file needs to be included explicitly by calling
+# docker-compose -f docker-compose.yml -f docker-compose-prod.yml up
 version: '3.1'
 
 services:
@@ -6,5 +8,3 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-prod
-    command: node dist/server.js
-    volumes: []

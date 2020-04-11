@@ -34,12 +34,7 @@ services:
 
   express:
     restart: always
-    image: express:dev
-    build: ./
     env_file: .env
-    command: npm start
-    volumes:
-      - .:/usr/src/app
     ports:
       - "3000:3000"
     links:

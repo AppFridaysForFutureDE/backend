@@ -1,0 +1,10 @@
+# This file will be used automatically in development
+# when running docker-compose up
+version: '3.1'
+
+services:
+  express:
+    image: express:dev
+    build: ./
+    volumes:
+      - .:/usr/src/app
