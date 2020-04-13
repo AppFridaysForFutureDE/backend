@@ -9,12 +9,12 @@ afterAll(async () => await dbHandler.closeDatabase());
 
 describe("get strike route", () => {
   beforeEach(async () => {
-    const newOg = new Strike({
+    const newStrike = new Strike({
       ogId: "test",
       name: "MeinOgName",
       date: 567
     });
-    await newOg.save();
+    await newStrike.save();
   });
   it("should return the example object because showPastStrikes is true", async () => {
     const responsePast = await request(app).get("/api/v1/strikes?ogId=test&showPastStrikes=true");
