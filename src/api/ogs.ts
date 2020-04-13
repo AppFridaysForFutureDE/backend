@@ -15,19 +15,19 @@ export async function retrieveOGs(): Promise<void> {
   //get retrievedAt date/time
   const now = Date.now();
 
-  //delete ogs
-  const res = await OG.deleteMany({});
-  console.log(`Deleted ${res.n} ogs`);
-  console.log(`Retrieved ${data.length} ogs`);
+  //flag old ogs
+  await OG.updateMany({}, {other: "DELETE"});
 
+  //upsert ogs
   data.forEach(async og => {
+    //add mailto prefix to mail adresses
     let mail = "";
     if (og["email"] != null && !String(og["email"]).startsWith("mailto:")) {
       mail = "mailto:" + og["email"];
     }
-    //save og
-    const newOG = new OG({
-      ogId: util.hash(og["name"]),
+    const ogid = util.hash(og["name"]);
+    OG.findOneAndUpdate({ogId: ogid}, {
+      ogId: ogid,
       name: og["name"] || "",
       bundesland: og["state"] || "",
       lat: og["lat"] || "",
@@ -42,7 +42,10 @@ export async function retrieveOGs(): Promise<void> {
       telegram: og["telegram"] || "",
       other: og["other"] || "",
       retrievedAt: now
-    });
-    await newOG.save();
+    }, {upsert: true}, function (err, og) {});
   });
+
+  //delete ogs that are still flagged
+  const del = await OG.deleteMany({other: "DELETE"});
+  console.log("Threw out " + del.n + " old OGs.");
 }
