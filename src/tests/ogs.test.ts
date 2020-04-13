@@ -7,7 +7,7 @@ beforeAll(async () => await dbHandler.establishConnection());
 afterEach(async () => await dbHandler.clearDatabase());
 afterAll(async () => await dbHandler.closeDatabase());
 
-describe("get og route", () => {
+describe("GET /api/v1/ogs", () => {
   it("returns the saved og", async () => {
     const newOg = new OG({
       ogId: "test",
