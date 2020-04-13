@@ -16,15 +16,10 @@ export async function retrieveStrikes(): Promise<void> {
   //get retrievedAt date/time
   const now = Date.now();
 
-  //delete all strikes
-  const res = await Strike.deleteMany({});
-  console.log(`Deleted ${res.deletedCount} strikes`);
-  console.log(`Retrieved ${data.length} strikes`);
-
   //loop through strikes
   data.forEach(strike => {
-    //save strike
-    const newStrike = new Strike({
+    Strike.findOneAndUpdate({strikeId: strike["id"]}, {
+      strikeId: strike["id"],
       ogId: util.hash(strike["localGroupName"]),
       name: strike["localGroupName"] || "",
       location: strike["locationName"] || "",
@@ -33,8 +28,9 @@ export async function retrieveStrikes(): Promise<void> {
       additionalInfo: strike["note"] || "",
       notificationSent: false,
       retrievedAt: now
+    }, { upsert: true}, function (err, doc) {
+      console.log("upserted strike")
     });
-    newStrike.save();
   });
 }
 

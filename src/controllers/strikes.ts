@@ -12,7 +12,14 @@ export const getStrikes: RequestHandler = (req, res) => {
       : util.toUnixTimestamp(new Date()) - util.day;
 
   if (ogId == "" || ogId == null) {
-    res.status(400).json({ error: "No OG specified!" });
+    //res.status(400).json({ error: "No OG specified!" });
+    Strike.find({ }, function(
+      err: Error,
+      strikes
+    ) {
+      if (err) return console.error(err);
+      res.status(200).json({ ogId: ogId, strikes: strikes });
+    });
   } else {
     Strike.find({ ogId: ogId, date: { $gt: minDate } }, function(
       err: Error,
