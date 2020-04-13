@@ -8,13 +8,13 @@ info:
   license:
     name: "GNU General Public License v3.0"
     url: "https://github.com/AppFridaysForFutureDE/backend/blob/master/LICENSE"
-host: "app.fridaysforfuture.de"
+host: "app.ffutu.re"
 basePath: "/api/v1"
 tags:
 - name: "Website API"
   description: "OGs und Streiks der FFF-Website"
 - name: "CMS"
-  description: "Direkt über /ghost ohne basePath verfügbar.(z.B. https://app.fridaysforfuture.de/ghost) Inhalte und Artikel aus dem CMS; Definiert von Ghost"
+  description: "Direkt über /ghost ohne basePath verfügbar.(z.B. https://app.ffutu.re/ghost) Inhalte und Artikel aus dem CMS; Definiert von Ghost"
   externalDocs:
     description: "Ghost API Docs"
     url: "https://ghost.org/docs/api/v3/content/"
@@ -27,6 +27,12 @@ paths:
       tags:
       - "Website API"
       summary: Alle OG-Objekte erhalten
+      parameters:
+        - in: query
+          name: ogId
+          type: string
+          required: false
+          description: ID der OG, die geladen werden soll.
       responses:
         200:
           description: "OK"
@@ -36,36 +42,86 @@ paths:
               $ref: "#/definitions/OG"
       produces:
       - "application/json"
+  /strikes:
+    get:
+      tags:
+      - "Website API"
+      summary: Streiks auf Pro-OG-Basis erhalten
+      parameters:
+        - in: query
+          name: ogId
+          type: string
+          required: true
+          description: ID der OG, für die Streiks geladen werden sollen.
+        - in: query
+          name: showPastStrikes
+          type: boolean
+          required: false
+          description: Legt fest, ob auch Streiks, die in der Vergangenheit liegen, zurückgegeben werden sollen.
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Strike"
+      produces:
+      - "application/json"
 definitions:
   OG:
     type: "object"
     properties:
-      id:
-        type: "string"
-        required: "true"
-      stadt:
-        type: "string"
-        required: "true"
-      bundesland:
-        type: "string"
+      ogId:
+        type: string
       name:
-        type: "string"
-      long:
-        type: "number"
-        required: "true"
+        type: string
+      bundesland:
+        type: string
       lat:
-        type: "number"
-        required: "true"
-      zusatzinfo:
-        type: "string"
-      facebook:
-        type: "string"
+        type: number
+      lon:
+        type: number
+      whatsapp:
+        type: string
+      email:
+        type: string
       instagram:
-        type: "string"
+        type: string
       twitter:
-        type: "string"
+        type: string
+      facebook:
+        type: string
+      youtube:
+        type: string
       website:
-        type: "string"
+        type: string
+      telegram:
+        type: string
+      other:
+        type: string
+      retrievedAt:
+        type: string
+        format: date
+  Strike:
+    type: "object"
+    properties:
+      ogId:
+        type: string
+      name:
+        type: string
+      location:
+        type: string
+      date:
+       type: number
+      eventLink:
+       type: string
+      additionalInfo:
+        type: string
+      notificationSent:
+        type: boolean
+      retrievedAt:
+        type: string
+        format: date
 externalDocs:
   description: "Legitimierter Ausgangspunkt"
   url: "https://docs.google.com/document/d/1HVwYDT1zZY3qjW_LW5NihhqOiSL3hiJ9rkishsrZt-g/"
