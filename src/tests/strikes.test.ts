@@ -34,14 +34,12 @@ describe("GET /api/v1/strikes", () => {
     const responseNoPast = await request(app).get(
       "/api/v1/strikes?ogId=test&showPastStrikes=false"
     );
-    expect(responseNoPast.body.ogId).toBe("test");
     expect(responseNoPast.body.strikes).toHaveLength(0);
   });
   it("should not return the example object because showPastStrikes is given, but without any value", async () => {
     const responseNoPast = await request(app).get(
       "/api/v1/strikes?ogId=test&showPastStrikes="
     );
-    expect(responseNoPast.body.ogId).toBe("test");
     expect(responseNoPast.body.strikes).toHaveLength(0);
   });
   it("edge case, should not return the example object because date is a minute too old", async () => {
@@ -54,7 +52,6 @@ describe("GET /api/v1/strikes", () => {
     const responsePast = await request(app).get(
       "/api/v1/strikes?ogId=testEdge"
     );
-    expect(responsePast.body.ogId).toBe("testEdge");
     expect(responsePast.body.strikes).toHaveLength(0);
   });
   it("edge case, should return the example object because showPastStrikes is true", async () => {
@@ -67,8 +64,6 @@ describe("GET /api/v1/strikes", () => {
     const responsePast = await request(app).get(
       "/api/v1/strikes?ogId=testEdge&showPastStrikes=true"
     );
-    expect(responsePast.body.ogId).toBe("testEdge");
     expect(responsePast.body.strikes).toHaveLength(1);
-    expect(responsePast.body.strikes[0]["name"]).toBe("MeinOgName");
   });
 });
