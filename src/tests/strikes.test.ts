@@ -54,7 +54,7 @@ describe("GET /api/v1/strikes", () => {
     );
     expect(responsePast.body.strikes).toHaveLength(0);
   });
-  it("edge case, should return the example object because showPastStrikes is true", async () => {
+  it("edge case, should return the example object", async () => {
     const newStrike = new Strike({
       ogId: "testEdge",
       name: "MeinOgName",
@@ -62,7 +62,7 @@ describe("GET /api/v1/strikes", () => {
     });
     await newStrike.save();
     const responsePast = await request(app).get(
-      "/api/v1/strikes?ogId=testEdge&showPastStrikes=true"
+      "/api/v1/strikes?ogId=testEdge"
     );
     expect(responsePast.body.strikes).toHaveLength(1);
   });
