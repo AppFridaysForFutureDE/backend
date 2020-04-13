@@ -28,9 +28,7 @@ export async function retrieveStrikes(): Promise<void> {
       additionalInfo: strike["note"] || "",
       notificationSent: false,
       retrievedAt: now
-    }, { upsert: true}, function (err, doc) {
-      console.log("upserted strike")
-    });
+    }, { upsert: true}, function (err, doc) {});
   });
 }
 
