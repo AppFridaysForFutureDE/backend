@@ -11,7 +11,7 @@ app.use(json());
 app.use("/api/v1/strikes", strikeRoutes);
 app.use("/api/v1/ogs", ogRoutes);
 app.use("/internal/webhooks/ghost", webhookRoutes);
-app.use("/share", shareRoutes);
+app.use("/p", shareRoutes);
 app.use(expressStatusMonitor({ path: "/internal/status" }));
 
 app.use(function(err: Error, req: Request, res: Response, next) {

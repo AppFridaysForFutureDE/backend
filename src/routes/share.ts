@@ -3,6 +3,6 @@ import { sharePost } from "../controllers/share";
 
 const router = Router();
 
-router.get("/p/:post", sharePost);
+router.get("/:post", sharePost);
 
 export default router;
