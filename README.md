@@ -80,4 +80,4 @@ Um unser Backend im Produktivsystem zu verwenden, sollten die Skripte `start_ser
 
 ## Docs
 
-In [doc](doc/README.md) findet man die API-Doku, zwei Skripte die nginx-Konfiguration.
+In [doc](doc/README.md) findet man die API-Doku, zwei Skripte und die nginx-Konfiguration.
