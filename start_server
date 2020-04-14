@@ -1,0 +1,4 @@
+#!/bin/sh
+# Baut Dockerimage neu und startet Server
+docker-compose -f docker-compose.yml -f docker-compose-prod.yml build --no-cache
+docker-compose -f docker-compose.yml -f docker-compose-prod.yml up -d
