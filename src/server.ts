@@ -17,9 +17,7 @@ mongoose
   .then(
     async () => {
       console.log("Populating DB");
-      await ogAccess.retrieveOGs();
-      await strikeAccess.retrieveStrikes();
-
+      await Promise.all([ogAccess.retrieveOGs(), strikeAccess.retrieveStrikes()]);
 
       console.log("Starting job scheduler");
       startCronJobs();
