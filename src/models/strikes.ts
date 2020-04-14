@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
 
 const strikeScheme = new mongoose.Schema({
+  strikeId: {
+    type: String
+  },
   ogId: {
     type: String
   },
