@@ -63,7 +63,7 @@ Die Erreichbarkeit des Servers bzw. die Funktionalität der API kann beispielswe
 
 ## Docker
 
-Wir verwenden für unsere Applikaitonen die Virtualisierungssoftware Docker.
+Wir verwenden für unsere Applikationen die Virtualisierungssoftware Docker.
 
 
 Um in der Entwicklungsumgebung möglichst bequem arbeiten zu können (automatischer Restart bei Code-Änderungen)
