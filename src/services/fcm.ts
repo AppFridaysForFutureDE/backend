@@ -33,9 +33,10 @@ export class FCMAdmin {
 
   public async sendMessage(
     topic: string,
-    payload: string,
     title: string,
-    body: string
+    body: string,
+    type: string,
+    payload: string,
   ): Promise<void> {
     if (!this.firebaseReady) {
       console.log(
@@ -49,7 +50,9 @@ export class FCMAdmin {
         body: body
       },
       data: {
-        payload: payload
+        payload: payload,
+        type: type,
+        click_action: "FLUTTER_NOTIFICATION_CLICK"
       },
       topic: topic
     };
