@@ -4,9 +4,9 @@ import nodeFetch from "node-fetch";
 export const sharePost: RequestHandler = async (req, res) => {
   const response = await nodeFetch(`https://app.fffutu.re/ghost/api/v3/content/posts/${req.params.post}/?key=${process.env.GHOST_CONTENT_KEY}`);
   let data = [];
-  let title: String = "Error";
-  let desc: String = "Error";
-  let imageUrl: String = "Error";
+  let title: String = "aaaa";
+  let desc: String = "aaaa";
+  let imageUrl: String = "aaaaaa";
   try {
     data = await response.json();
     title = data["posts"][0]["title"];
