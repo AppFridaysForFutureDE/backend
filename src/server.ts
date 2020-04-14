@@ -16,7 +16,6 @@ mongoose
   })
   .then(
     async () => {
-      console.log("Hallooooo");
       console.log("Populating DB");
       await Promise.all([ogAccess.retrieveOGs(), strikeAccess.retrieveStrikes()]);
 
