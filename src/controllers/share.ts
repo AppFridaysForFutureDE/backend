@@ -2,18 +2,16 @@ import { RequestHandler } from "express";
 import nodeFetch from "node-fetch";
 
 export const sharePost: RequestHandler = async (req, res) => {
-  console.log(req.params.post);
   const response = await nodeFetch(`https://app.fffutu.re/ghost/api/v3/content/posts/${req.params.post}/?key=${process.env.GHOST_CONTENT_KEY}`);
-  console.log(`https://app.fffutu.re/ghost/api/v3/content/posts/${req.params.post}/?key=${process.env.GHOST_CONTENT_KEY}`);
   let data = [];
   let title: String = "Error";
   let desc: String = "Error";
   let imageUrl: String = "Error";
   try {
     data = await response.json();
-    title = data[0]["title"];
-    desc = data[0]["excerpt"];
-    imageUrl = data[0]["feature_image"];
+    title = data["posts"][0]["title"];
+    desc = data["posts"][0]["excerpt"];
+    imageUrl = data["posts"][0]["feature_image"];
   } catch (error) {
     console.log(error);
   }
