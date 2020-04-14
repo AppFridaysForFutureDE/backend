@@ -3,6 +3,7 @@ import nodeFetch from "node-fetch";
 
 export const sharePost: RequestHandler = async (req, res) => {
   const response = await nodeFetch(`https://app.fffutu.re/ghost/api/v3/content/posts/${req.params.posts}/?key=${process.env.GHOST_CONTENT_KEY}`);
+  console.log(`https://app.fffutu.re/ghost/api/v3/content/posts/${req.params.posts}/?key=${process.env.GHOST_CONTENT_KEY}`);
   let data = [];
   let title: String = "Error";
   let desc: String = "Error";
