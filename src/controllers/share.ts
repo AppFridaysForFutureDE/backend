@@ -12,6 +12,9 @@ export const sharePost: RequestHandler = async (req, res) => {
     title = data["posts"][0]["title"];
     desc = data["posts"][0]["excerpt"];
     imageUrl = data["posts"][0]["feature_image"];
+    console.log(title);
+    console.log(desc);
+    console.log(imageUrl);
   } catch (error) {
     console.log(error);
   }
