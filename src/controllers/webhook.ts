@@ -23,13 +23,14 @@ export const webhookTriggered: RequestHandler = (req, res) => {
   if (push) {
     FCMAdmin.getInstance().sendMessage(
       "feed_" + topic,
-      id,
       "Neuer Post!",
       'Hey, gerade wurde "' +
         title +
         '" in der Kategorie "' +
         topic +
-        '" veröffentlicht!'
+        '" veröffentlicht!',
+      "feed",
+      id
     );
   }
   res.status(200).json({ notifSent: push });
