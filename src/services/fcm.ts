@@ -54,7 +54,7 @@ export class FCMAdmin {
         type: type,
         click_action: "FLUTTER_NOTIFICATION_CLICK"
       },
-      topic: "debug"
+      topic: topic
     };
     console.log("Sending message:");
     console.log(message);
