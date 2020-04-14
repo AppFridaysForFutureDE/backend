@@ -10,7 +10,7 @@ export const sharePost: RequestHandler = async (req, res) => {
   try {
     data = await response.json();
     title = data[0]["title"];
-    desc = data[0]["custom_excerpt"];
+    desc = data[0]["excerpt"];
     imageUrl = data[0]["feature_image"];
   } catch (error) {
     console.log(error);
