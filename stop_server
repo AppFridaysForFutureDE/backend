@@ -1,0 +1,3 @@
+#!/bin/sh
+# Beendet Server
+docker-compose down

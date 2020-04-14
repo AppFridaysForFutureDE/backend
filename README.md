@@ -76,15 +76,8 @@ und die Produktivumgebung möglichst stabil zu halten, verwenden wir verschieden
 
 ## Produktivumgebung
 
-Um unsere Services auf dem Produktions-Server zu starten, sollten folgende Befehle verwendet werden:
-
-```
-// Das Docker Image muss bei Code-Änderungen neu gebaut werden
-docker-compose -f docker-compose.yml -f docker-compose-prod.yml build --no-cache
-
-docker-compose -f docker-compose.yml -f docker-compose-prod.yml up -d
-```
+Um unser Backend im Produktivsystem zu verwenden, sollten die Skripte `start_server` und `stop_server` verwendet werden.
 
 ## Docs
 
-In [docs](doc/README.md) findet man die API-Doku und die nginx-Konfiguration.
+In [doc](doc/README.md) findet man die API-Doku, zwei Skripte die nginx-Konfiguration.
