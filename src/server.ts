@@ -2,6 +2,8 @@ import mongoose from "mongoose";
 import { app } from "./app";
 import { startCronJobs } from "./cron";
 import dotenv from "dotenv-safe";
+import * as strikeAccess from "./api/strikes";
+import * as ogAccess from "./api/ogs";
 
 console.log("Loading environment variables");
 dotenv.config();
@@ -13,12 +15,17 @@ mongoose
     useUnifiedTopology: true
   })
   .then(
-    () => {
-      console.log("Start listening to requests on port 3000");
-      app.listen(3000);
+    async () => {
+      console.log("Populating DB");
+      await ogAccess.retrieveOGs();
+      await strikeAccess.retrieveStrikes();
+
 
       console.log("Starting job scheduler");
       startCronJobs();
+
+      console.log("Start listening to requests on port 3000");
+      app.listen(3000);
 
       console.log("Server up and running");
     },
