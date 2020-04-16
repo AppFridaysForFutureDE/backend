@@ -15,3 +15,5 @@ echo "Dumped database"
 echo "Copying content folder from container..."
 docker cp backend_ghost_1:/var/lib/ghost/content "$folder/content"
 echo "Copied content folder"
+
+echo "Backup $folder was created"
