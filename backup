@@ -1,0 +1,13 @@
+#!/bin/sh
+echo "Creating Backup folder"
+folder="backups/backup_$(date +"%d-%m-%Y--%H-%M-%S")"
+mkdir "$folder"
+echo "Created folder $folder"
+
+echo "Dumping MySQL Database..."
+docker exec backend_mysql-db_1 /usr/bin/mysqldump -u root --password=root db > "$folder/database.sql"
+echo "Dumped database"
+
+echo "Copying content folder from container..."
+docker cp backend_ghost_1:/var/lib/ghost/content "$folder/content"
+echo "Copied content folder"

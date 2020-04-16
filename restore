@@ -1,0 +1,32 @@
+#!/bin/sh
+folder="backups/$1"
+
+function ask
+{
+  echo "Restore from $folder? [Y/N]"
+  read dec
+  case "$dec" in
+    "Y"|"y") restore ;;
+    "N"|"n") exit ;;
+    *) ask ;;
+  esac
+}
+
+function restore
+{
+  echo "Inserting MySQL Dump..."
+  cat "$folder/database.sql" | docker exec -i backend_mysql-db_1 /usr/bin/mysql -u root --password=root db
+  echo "Inserted MySQL Dump"
+
+  echo "Copying content folder to container..."
+  docker cp "$folder/content" backend_ghost_1:/var/lib/ghost/content
+  echo "Copied content folder"
+  echo "Backup restored"
+}
+
+if [ -d "$folder" ]; then
+  ask
+else
+  echo "Error: $folder not found. Can not continue."
+  exit 1
+fi
