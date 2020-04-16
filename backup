@@ -1,5 +1,8 @@
 #!/bin/sh
 echo "Creating Backup folder"
+if [ ! -d "backups" ]; then
+  mkdir backups
+fi
 folder="backups/backup_$(date +"%d-%m-%Y--%H-%M-%S")"
 mkdir "$folder"
 echo "Created folder $folder"
