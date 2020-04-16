@@ -1,4 +1,5 @@
 #!/bin/sh
+#This should be run as cronjob, for example daily
 echo "Creating Backup folder"
 if [ ! -d "backups" ]; then
   mkdir backups
