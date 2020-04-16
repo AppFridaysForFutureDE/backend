@@ -61,23 +61,12 @@ Nach Starten des docker containers kann die API mit Hilfe eines REST-Clients get
 Die Erreichbarkeit des Servers bzw. die Funktionalität der API kann beispielsweise durch eine GET Request an die Adresse `http://localhost:3000/api/v1/ogs` getestet werden.
 
 
-## Docker
-
-Wir verwenden für unsere Applikationen die Virtualisierungssoftware Docker.
-
-
-Um in der Entwicklungsumgebung möglichst bequem arbeiten zu können (automatischer Restart bei Code-Änderungen)
-
-und die Produktivumgebung möglichst stabil zu halten, verwenden wir verschiedene Dockerfiles und docker-compose Konfigurationen:
-- `docker-compose.yml` enthält die Basis-Konfiguration all unserer Services
-- `docker-compose.override.yml` enthält Development-spezifische Erweiterungen
-- `docker-compose-prod.yml` enthält die Konfiguration für den Produktivbetrieb
-
-
 ## Produktivumgebung
 
 Um unser Backend im Produktivsystem zu verwenden, sollten die Skripte `start_server` und `stop_server` verwendet werden.
+Um Backups von Ghost anzulegen, soll das Skript `backup` verwendet werden, am besten als wöchentlicher Cronjob. Es sichert alle Artikel, Bilder und Einstellungen.
+Um ein Backup wiederherzustellen muss das Skript `restore` mit dem Namen des Backups als Argument ausgeführt werden.
 
 ## Docs
 
-In [doc](doc/README.md) findet man die API-Doku und die nginx-Konfiguration.
+In [doc](doc/README.md) findet man die API-Doku, die nginx-Konfiguration und die Dateien der Website.
