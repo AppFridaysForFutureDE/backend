@@ -2,8 +2,6 @@ import mongoose from "mongoose";
 import { app } from "./app";
 import { startCronJobs } from "./cron";
 import dotenv from "dotenv-safe";
-import * as strikeAccess from "./api/strikes";
-import * as ogAccess from "./api/ogs";
 
 console.log("Loading environment variables");
 dotenv.config();
@@ -16,9 +14,6 @@ mongoose
   })
   .then(
     async () => {
-      console.log("Populating DB");
-      await Promise.all([ogAccess.retrieveOGs(), strikeAccess.retrieveStrikes()]);
-
       console.log("Starting job scheduler");
       startCronJobs();
 
