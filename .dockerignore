@@ -1,7 +1,7 @@
 npm-debug.log
 mongo-data
 node_modules/
-backup/
+backups/
 dist/
 .DS_Store
 src/auth/
