@@ -23,9 +23,9 @@
     console.log(fbStatus.responseText);
     const state = JSON.parse(fbStatus.responseText);
     if (state.firebaseStatus == true) {
-      document.getElementById("status").innerHtml = "Verbindung zu Firebase hergestellt";
+      document.getElementById("status").textContent = "Verbindung zu Firebase hergestellt";
     } else {
-      document.getElementById("status").innerHtml = "Verbindung zu Firebase nicht hergestellt";
+      document.getElementById("status").textContent = "Verbindung zu Firebase nicht hergestellt";
     }
   }
   </script>
