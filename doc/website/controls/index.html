@@ -20,6 +20,7 @@
   fbStatus.open("GET", url);
   fbStatus.send();
   fbStatus.onreadystatechange = (e) => {
+    console.log(fbStatus.responseText);
     const state = JSON.parse(fbStatus.responseText);
     if (state == "true") {
       document.getElementById("status").innerHtml = "Verbindung zu Firebase hergestellt";
