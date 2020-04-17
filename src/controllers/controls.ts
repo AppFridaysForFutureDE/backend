@@ -1,14 +1,16 @@
 import { RequestHandler } from "express";
 import * as strikeAccess from "../api/strikes";
 import * as ogAccess from "../api/ogs";
+import { FCMAdmin } from "../services/fcm";
 
 export const firebaseStatus: RequestHandler = (req, res) => {
-  console.log("Firebase status requested")
-  res.status(501);
+  console.log("Firebase status requested");
+  FCMAdmin.getInstance().getStatus()
+  res.status(200).json({ firebaseStatus: FCMAdmin.getInstance().getStatus() });
 };
 
 export const createBackup: RequestHandler = (req, res) => {
-  console.log("Firebase status requested")
+  console.log("Backup creation requested");
   res.status(501);
 };
 
