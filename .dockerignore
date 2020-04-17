@@ -3,7 +3,6 @@ mongo-data
 node_modules/
 dist/
 .DS_Store
-src/auth/
 .env
 .dockerignore
 .git
