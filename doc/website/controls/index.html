@@ -13,6 +13,22 @@
     font-size: 14px;
   }
   </style>
+
+  <script>
+  const fbStatus = new XMLHttpRequest();
+  const url='https://app.ffutu.re/admin/controls/firebaseStatus';
+  fbStatus.open("GET", url);
+  fbStatus.send();
+  fbStatus.onreadystatechange = (e) => {
+    const state = JSON.parse(fbStatus.responseText);
+    if (state == "true") {
+      document.getElementById("status").innerHtml = "Verbindung zu Firebase hergestellt";
+    } else {
+      document.getElementById("status").innerHtml = "Verbindung zu Firebase nicht hergestellt";
+    }
+  }
+  </script>
+
   <title>
     FFF App DE
   </title>
@@ -31,8 +47,8 @@
     	  Control Panel
       </h1>
       Firebase-Status: <span id="status">Nicht geladen</span><br/><br/>
-      <button type="button" onclick="console.log(`Backup`);">Backup erstellen</button><br/><br/>
-      <button type="button" onclick="console.log(`Datenbank`);">Datenbank aktualisieren</button>
+      <button type="button" onclick="">Backup erstellen</button><br/><br/>
+      <button type="button" onclick="">Datenbank aktualisieren</button>
     </div>
 
   </div>
