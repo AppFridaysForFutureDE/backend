@@ -1,6 +1,8 @@
 npm-debug.log
 mongo-data
 node_modules/
+backups/
+doc/
 dist/
 .DS_Store
 .env

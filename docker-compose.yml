@@ -2,6 +2,7 @@ version: '3.1'
 
 volumes:
   mysql-volume:
+  mongo-data:
 
 services:
   ghost:
@@ -52,6 +53,6 @@ services:
         - MONGO_INITDB_ROOT_PASSWORD=root
     volumes:
         - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
-        - ./mongo-data:/data/db
+        - mongo-data:/data/db
     ports:
         - '27017-27019:27017-27019'
