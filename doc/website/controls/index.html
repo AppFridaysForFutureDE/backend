@@ -38,7 +38,7 @@
   function requestPopulate() {
     const populate = new XMLHttpRequest();
     const url='/admin/controls/populateDB';
-    populate.open("GET", url);
+    populate.open("POST", url);
     populate.send();
     populate.onreadystatechange = (e) => {
       console.log(populate.responseText);

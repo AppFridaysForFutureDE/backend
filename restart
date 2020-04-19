@@ -1,0 +1,5 @@
+#!/bin/sh
+#Stops server, pulls, then starts server again
+./stop_server
+git pull
+./start_server
