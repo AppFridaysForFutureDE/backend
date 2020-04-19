@@ -64,8 +64,19 @@
       }
     }
   }
-
   </script>
+
+  <style>
+  table {
+    border-collapse: collapse;
+  }
+  table, th, td {
+    border: 1px solid black;
+  }
+  span {
+    font-family: monospace;
+  }
+  </style>
 
   <title>
     App For Future
@@ -88,11 +99,17 @@
       </h1>
       <table>
         <tr>
+          <th>Dienst</th>
+          <th>Status</th>
+          <th>Aktion</th>
+        </tr>
+
+        <tr>
           <td>
             Firebase-Status
           </td>
           <td>
-            <span id="status" style="font-family: monospace;">Nicht geladen</span>
+            <span id="status">Nicht geladen</span>
           </td>
           <td>
             <button type="button" onclick="getFirebase()">Aktualisieren</button>
@@ -104,7 +121,7 @@
             Backup
           </td>
           <td>
-            <span id="backup" style="font-family: monospace;">Nicht ausgeführt</span>
+            <span id="backup">Nicht ausgeführt</span>
           </td>
           <td>
             <button type="button" onclick="requestBackup()">Jetzt erstellen</button>
@@ -116,7 +133,7 @@
             Datenbank
           </td>
           <td>
-            <span id="populate" style="font-family: monospace;">Nicht ausgeführt</span>
+            <span id="populate">Nicht ausgeführt</span>
           </td>
           <td>
             <button type="button" onclick="requestPopulate()">Jetzt Datenbank aktualisieren</button>
