@@ -41,7 +41,7 @@
       const state = JSON.parse(backup.responseText);
       if (state.createdBackup == true) {
         alert("Backup erstellt");
-      } else if (state.createdBackup == true) {
+      } else if (state.createdBackup == false) {
         alert("Backup konnte nicht erstellt werden");
       }
     }
@@ -57,7 +57,7 @@
       const state = JSON.parse(populate.responseText);
       if (state.performedPopulate == true) {
         alert("Datenbank aktualisiert");
-      } else if (state.performedPopulate == true) {
+      } else if (state.performedPopulate == false) {
         alert("Datenbank konnte nicht aktualisiert werden");
       }
     }
