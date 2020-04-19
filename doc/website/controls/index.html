@@ -40,9 +40,9 @@
       console.log(backup.responseText);
       const state = JSON.parse(backup.responseText);
       if (state.createdBackup == true) {
-        alert("Backup erstellt");
+        document.getElementById("backup").textContent = "Backup erstellt";
       } else if (state.createdBackup == false) {
-        alert("Backup konnte nicht erstellt werden");
+        document.getElementById("backup").textContent = "Backup konnte nicht erstellt werden";
       }
     }
   }
@@ -56,9 +56,9 @@
       console.log(populate.responseText);
       const state = JSON.parse(populate.responseText);
       if (state.performedPopulate == true) {
-        alert("Datenbank aktualisiert");
+        document.getElementById("populate").textContent = "Datenbank aktualisiert";
       } else if (state.performedPopulate == false) {
-        alert("Datenbank konnte nicht aktualisiert werden");
+        document.getElementById("populate").textContent = "Datenbank konnte nicht aktualisiert werden";
       }
     }
   }
@@ -86,8 +86,8 @@
       </h1>
       Firebase-Status: <span id="status" style="font-family: monospace;">Nicht geladen</span>
       <button type="button" onclick="getFirebase()">Aktualisieren</button><br/><br/>
-      <button type="button" onclick="requestBackup()">Backup erstellen</button><br/><br/>
-      <button type="button" onclick="requestPopulate()">Datenbank aktualisieren</button>
+      <button type="button" onclick="requestBackup()">Backup erstellen</button><span id="backup" style="font-family: monospace;"></span><br/><br/>
+      <button type="button" onclick="requestPopulate()">Datenbank aktualisieren</button><span id="populate" style="font-family: monospace;"></span>
     </div>
 
   </div>
