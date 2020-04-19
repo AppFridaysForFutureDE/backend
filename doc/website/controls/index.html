@@ -15,19 +15,22 @@
   </style>
 
   <script>
-  const fbStatus = new XMLHttpRequest();
-  const url='/admin/controls/firebaseStatus';
-  fbStatus.open("GET", url);
-  fbStatus.send();
-  fbStatus.onreadystatechange = (e) => {
-    console.log(fbStatus.responseText);
-    const state = JSON.parse(fbStatus.responseText);
-    if (state.firebaseStatus == true) {
-      document.getElementById("status").textContent = "Verbindung zu Firebase hergestellt";
-    } else {
-      document.getElementById("status").textContent = "Verbindung zu Firebase nicht hergestellt";
+  function getFirebase() {
+    const fbStatus = new XMLHttpRequest();
+    const url='/admin/controls/firebaseStatus';
+    fbStatus.open("GET", url);
+    fbStatus.send();
+    fbStatus.onreadystatechange = (e) => {
+      console.log(fbStatus.responseText);
+      const state = JSON.parse(fbStatus.responseText);
+      if (state.firebaseStatus == true) {
+        document.getElementById("status").textContent = "Verbindung zu Firebase hergestellt";
+      } else {
+        document.getElementById("status").textContent = "Verbindung zu Firebase nicht hergestellt";
+      }
     }
   }
+
   </script>
 
   <title>
@@ -49,7 +52,8 @@
       <h1>
     	  Control Panel
       </h1>
-      Firebase-Status: <span id="status" style="font-family: monospace;">Nicht geladen</span><br/><br/>
+      Firebase-Status: <span id="status" style="font-family: monospace;">Nicht geladen</span>
+      <button type="button" onclick="getFirebase()">Aktualisieren</button><br/><br/>
       <button type="button" onclick="">Backup erstellen</button><br/><br/>
       <button type="button" onclick="">Datenbank aktualisieren</button>
     </div>
