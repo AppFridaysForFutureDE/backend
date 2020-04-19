@@ -12,7 +12,17 @@ export const firebaseStatus: RequestHandler = (req, res) => {
 export const createBackup: RequestHandler = async (req, res) => {
   console.log("Backup creation requested");
   const { exec } = require("child_process");
-  const e = await exec("/root/backend/backup");
+  exec("/root/backend/backup", (error, stdout, stderr) => {
+    if (error) {
+        console.log(`error: ${error.message}`);
+        return;
+    }
+    if (stderr) {
+        console.log(`stderr: ${stderr}`);
+        return;
+    }
+    console.log(`stdout: ${stdout}`);
+  });
   res.status(200).json({ createdBackup: true });
 };
 
