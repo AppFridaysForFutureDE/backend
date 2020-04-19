@@ -31,6 +31,26 @@
     }
   }
 
+  function requestBackup() {
+
+  }
+
+  function requestPopulate() {
+    const populate = new XMLHttpRequest();
+    const url='/admin/controls/populateDB';
+    populate.open("GET", url);
+    populate.send();
+    populate.onreadystatechange = (e) => {
+      console.log(populate.responseText);
+      const state = JSON.parse(populate.responseText);
+      if (state.performedPopulate == true) {
+        alert("Datenbank aktualisiert");
+      } else if (state.performedPopulate == true) {
+        alert("Datenbank konnte nicht aktualisiert werden");
+      }
+    }
+  }
+
   </script>
 
   <title>

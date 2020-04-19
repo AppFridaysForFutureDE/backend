@@ -11,7 +11,7 @@ export const firebaseStatus: RequestHandler = (req, res) => {
 
 export const createBackup: RequestHandler = (req, res) => {
   console.log("Backup creation requested");
-  res.status(501);
+  res.status(200).json({ performedPopulate: true });
 };
 
 export const populateDB: RequestHandler = async (req, res) => {
