@@ -32,7 +32,19 @@
   }
 
   function requestBackup() {
-
+    const backup = new XMLHttpRequest();
+    const url='/admin/controls/createBackup';
+    backup.open("POST", url);
+    backup.send();
+    backup.onreadystatechange = (e) => {
+      console.log(backup.responseText);
+      const state = JSON.parse(backup.responseText);
+      if (state.createdBackup == true) {
+        alert("Backup erstellt");
+      } else if (state.createdBackup == true) {
+        alert("Backup konnte nicht erstellt werden");
+      }
+    }
   }
 
   function requestPopulate() {
