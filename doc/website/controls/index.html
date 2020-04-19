@@ -15,6 +15,8 @@
   </style>
 
   <script>
+  getFirebase();
+
   function getFirebase() {
     const fbStatus = new XMLHttpRequest();
     const url='/admin/controls/firebaseStatus';
@@ -84,10 +86,43 @@
       <h1>
     	  Control Panel
       </h1>
-      Firebase-Status: <span id="status" style="font-family: monospace;">Nicht geladen</span>
-      <button type="button" onclick="getFirebase()">Aktualisieren</button><br/><br/>
-      <button type="button" onclick="requestBackup()">Backup erstellen</button><span id="backup" style="font-family: monospace;"></span><br/><br/>
-      <button type="button" onclick="requestPopulate()">Datenbank aktualisieren</button><span id="populate" style="font-family: monospace;"></span>
+      <table>
+        <tr>
+          <td>
+            Firebase-Status
+          </td>
+          <td>
+            <span id="status" style="font-family: monospace;">Nicht geladen</span>
+          </td>
+          <td>
+            <button type="button" onclick="getFirebase()">Aktualisieren</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Backup
+          </td>
+          <td>
+            <span id="backup" style="font-family: monospace;">Nicht ausgeführt</span>
+          </td>
+          <td>
+            <button type="button" onclick="requestBackup()">Jetzt erstellen</button><br/><br/>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Datenbank
+          </td>
+          <td>
+            <span id="populate" style="font-family: monospace;">Nicht ausgeführt</span>
+          </td>
+          <td>
+            <button type="button" onclick="requestPopulate()">Jetzt Datenbank aktualisieren</button>
+          </td>
+        </tr>
+      </table>
     </div>
 
   </div>
