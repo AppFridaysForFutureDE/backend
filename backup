@@ -1,10 +1,10 @@
 #!/bin/sh
 #This should be run as cronjob, for example daily
 echo "Creating Backup folder"
-if [ ! -d "backups" ]; then
+if [ ! -d "/root/backend/backups" ]; then
   mkdir backups
 fi
-folder="backups/backup_$(date +"%Y-%m-%d--%H-%M-%S")"
+folder="/root/backend/backups/backup_$(date +"%Y-%m-%d--%H-%M-%S")"
 mkdir "$folder"
 echo "Created folder $folder"
 

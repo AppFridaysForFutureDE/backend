@@ -31,6 +31,10 @@ export class FCMAdmin {
     return this.instance;
   }
 
+  public getStatus(): boolean {
+    return this.firebaseReady;
+  }
+
   public async sendMessage(
     topic: string,
     title: string,

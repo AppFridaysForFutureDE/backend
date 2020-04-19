@@ -5,7 +5,6 @@ backups/
 doc/
 dist/
 .DS_Store
-src/auth/
 .env
 .dockerignore
 .git

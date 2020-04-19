@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8"/>
+  <link rel="icon" href="https://fridaysforfuture.de/wp-content/uploads/2019/04/cropped-icon-32x32.png" sizes="32x32">
+  <link rel="icon" href="https://fridaysforfuture.de/wp-content/uploads/2019/04/cropped-icon-192x192.png" sizes="192x192">
+  <link rel="stylesheet" href="https://indestructibletype.com/fonts/Jost.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/controls.css" type="text/css" charset="utf-8" />
+  <script type="text/javascript" src="../js/controls.js"></script>
+
+  <title>
+    App For Future
+  </title>
+<head>
+
+<body>
+
+  <div class="flex-container">
+
+    <div id="image">
+      <a href="/">
+        <img src="../img/app.gif"/>
+      </a>
+    </div>
+
+  	<div id="text">
+      <h1>
+    	  Control Panel
+      </h1>
+      <table>
+        <tr>
+          <th>Dienst</th>
+          <th>Status</th>
+          <th>Aktion</th>
+        </tr>
+
+        <tr>
+          <td>
+            Firebase-Status
+          </td>
+          <td>
+            <span id="status">Nicht geladen</span>
+          </td>
+          <td>
+            <button type="button" onclick="getFirebase()">Aktualisieren</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Datenbank
+          </td>
+          <td>
+            <span id="populate">Nicht ausgeführt</span>
+          </td>
+          <td>
+            <button type="button" onclick="requestPopulate()">Jetzt Datenbank aktualisieren</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+
+</body>
+
+</html>
