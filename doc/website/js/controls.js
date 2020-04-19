@@ -1,5 +1,3 @@
-getFirebase();
-
 function getFirebase() {
   const fbStatus = new XMLHttpRequest();
   const url='/admin/controls/firebaseStatus';

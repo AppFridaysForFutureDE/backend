@@ -9,9 +9,11 @@ export const firebaseStatus: RequestHandler = (req, res) => {
   res.status(200).json({ firebaseStatus: FCMAdmin.getInstance().getStatus() });
 };
 
-export const createBackup: RequestHandler = (req, res) => {
+export const createBackup: RequestHandler = async (req, res) => {
   console.log("Backup creation requested");
-  res.status(200).json({ createdBackup: false });
+  const { exec } = require("child_process");
+  const e = await exec("/root/backend/backup");
+  res.status(200).json({ createdBackup: true });
 };
 
 export const populateDB: RequestHandler = async (req, res) => {
