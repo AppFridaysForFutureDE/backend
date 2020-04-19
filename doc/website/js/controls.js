@@ -14,22 +14,6 @@ function getFirebase() {
   }
 }
 
-function requestBackup() {
-  const backup = new XMLHttpRequest();
-  const url='/admin/controls/createBackup';
-  backup.open("POST", url);
-  backup.send();
-  backup.onreadystatechange = (e) => {
-    console.log(backup.responseText);
-    const state = JSON.parse(backup.responseText);
-    if (state.createdBackup == true) {
-      document.getElementById("backup").textContent = "Backup erstellt";
-    } else if (state.createdBackup == false) {
-      document.getElementById("backup").textContent = "Backup konnte nicht erstellt werden";
-    }
-  }
-}
-
 function requestPopulate() {
   const populate = new XMLHttpRequest();
   const url='/admin/controls/populateDB';

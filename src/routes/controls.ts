@@ -7,6 +7,5 @@ const router = Router();
 
 router.get("/firebaseStatus", firebaseStatus);
 router.post("/populateDB", populateDB);
-router.post("/createBackup", createBackup);
 
 export default router;
