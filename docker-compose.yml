@@ -3,6 +3,7 @@ version: '3.1'
 volumes:
   mysql-volume:
   mongo-data:
+  firebase-auth:
 
 services:
   ghost:
@@ -41,6 +42,8 @@ services:
     env_file: .env
     ports:
       - "3000:3000"
+    volumes:
+      - firebase-auth:src/auth
     links:
       - mongo-db
 
