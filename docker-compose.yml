@@ -43,7 +43,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - firebase-auth:src/auth
+      - firebase-auth:/var/firebase-auth
     links:
       - mongo-db
 
