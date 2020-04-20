@@ -41,6 +41,8 @@ services:
     env_file: .env
     ports:
       - "3000:3000"
+    volumes:
+      - /var/firebase-auth/:/var/firebase-auth
     links:
       - mongo-db
 

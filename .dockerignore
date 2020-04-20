@@ -2,6 +2,7 @@ npm-debug.log
 mongo-data
 node_modules/
 backups/
+src/auth
 doc/
 dist/
 .DS_Store
