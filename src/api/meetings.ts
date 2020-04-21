@@ -20,19 +20,17 @@ export async function saveAsStrike(
 
   const [day, month, year] = date.split(".").map(string => parseInt(string));
 
-  var regex = /[0-9]{2}/g;
+  const regex = /[0-9]{2}/g;
   const matches = time.match(regex);
-  var hour = 0, minutes = 0;
+  let hour = 0,
+    minutes = 0;
   if (matches != null) {
     hour = parseInt(matches[0] || "0");
     minutes = parseInt(matches[1] || "0");
   }
 
-
   const jsDate = new Date(year, month - 1, day, hour, minutes);
-  console.log(jsDate);
   const unixDate = util.toUnixTimestamp(jsDate);
-  console.log(unixDate);
 
   // TODO
   const now = Date.now();
