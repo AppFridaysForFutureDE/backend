@@ -1,7 +1,8 @@
 import { Strike } from "../models/strikes";
 import { OG } from "../models/ogs";
 import * as util from "../utility";
-const { GoogleSpreadsheet } = require("google-spreadsheet");
+import { GoogleSpreadsheet } from "google-spreadsheet";
+// import nodeFetch from "node-fetch";
 
 // TODO: Doppelte Einträge ignorieren
 export async function saveAsStrike(
@@ -41,8 +42,7 @@ export async function saveAsStrike(
       eventLink: link || "",
       additionalInfo: additionalInfo || "",
       notificationSent: true, // TODO
-      retrievedAt: now,
-      type: "meeting"
+      retrievedAt: now
     },
     { upsert: true }
   );
@@ -58,17 +58,33 @@ export async function retrieveMeetings(): Promise<void> {
   console.log(sheet.title);
   console.log(sheet.rowCount);
 
-  await Promise.all(
-    rows.map(async row => {
-      saveAsStrike(
-        row["Zeitstempel"],
-        row["Datum des Plenums"],
-        row["Uhrzeit des Plenums"],
-        row["Stadt/Ort/Region"],
-        row["Adresse des PlenumsOrtes"],
-        row["Telefonkonferenz Link"],
-        row["Zusätzliche Informationen"]
-      );
-    })
-  );
+  // const response = await nodeFetch(process.env.PLENUM_SPREADSHEET_TSV_URL || '');
+  // let rows = [];
+  // try {
+  //   console.log(response);
+  //   const buffer = await response.buffer();
+  //   console.log(buffer);
+  // } catch (error) {
+  //   console.log(error);
+  //   return;
+  // }
+
+  rows.forEach(row => {
+    saveAsStrike(
+      row["Zeitstempel"],
+      row["Datum des Plenums"],
+      row["Uhrzeit des Plenums"],
+      row["Stadt/Ort/Region"],
+      row["Adresse des PlenumsOrtes"],
+      row["Telefonkonferenz Link"],
+      row["Zusätzliche Informationen"]
+    ).then(
+      () => {
+        console.log("successfully imported row " + row["Zeitstempel"]);
+      },
+      error => {
+        console.log("error while importing row " + row["Zeitstempel"] + error);
+      }
+    );
+  });
 }
