@@ -40,7 +40,7 @@ export class FCMAdmin {
     title: string,
     body: string,
     type: string,
-    payload: string,
+    payload: string
   ): Promise<void> {
     if (!this.firebaseReady) {
       console.log(

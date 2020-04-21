@@ -5,7 +5,7 @@ import { FCMAdmin } from "../services/fcm";
 
 export const firebaseStatus: RequestHandler = (req, res) => {
   console.log("Firebase status requested");
-  FCMAdmin.getInstance().getStatus()
+  FCMAdmin.getInstance().getStatus();
   res.status(200).json({ firebaseStatus: FCMAdmin.getInstance().getStatus() });
 };
 

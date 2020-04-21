@@ -18,17 +18,22 @@ export async function retrieveStrikes(): Promise<void> {
 
   //loop through strikes
   data.forEach(strike => {
-    Strike.findOneAndUpdate({strikeId: strike["id"]}, {
-      strikeId: strike["id"],
-      ogId: util.hash(strike["localGroupName"]),
-      name: strike["localGroupName"] || "",
-      location: strike["locationName"] || "",
-      date: util.toUnixTimestamp(new Date(strike["dateTime"])) || "",
-      eventLink: strike["eventLink"] || "",
-      additionalInfo: strike["note"] || "",
-      notificationSent: false,
-      retrievedAt: now
-    }, { upsert: true}, function (err, doc) {});
+    Strike.findOneAndUpdate(
+      { strikeId: strike["id"] },
+      {
+        strikeId: strike["id"],
+        ogId: util.hash(strike["localGroupName"]),
+        name: strike["localGroupName"] || "",
+        location: strike["locationName"] || "",
+        date: util.toUnixTimestamp(new Date(strike["dateTime"])) || "",
+        eventLink: strike["eventLink"] || "",
+        additionalInfo: strike["note"] || "",
+        notificationSent: false,
+        retrievedAt: now
+      },
+      { upsert: true },
+      function(err, doc) {}
+    );
   });
 }
 

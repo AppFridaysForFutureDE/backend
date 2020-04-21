@@ -7,7 +7,7 @@ import strikeRoutes from "./routes/strikes";
 import ogRoutes from "./routes/ogs";
 import webhookRoutes from "./routes/webhook";
 import shareRoutes from "./routes/share";
-import controlRoutes from "./routes/controls"
+import controlRoutes from "./routes/controls";
 
 //Initialization
 export const app = express();
