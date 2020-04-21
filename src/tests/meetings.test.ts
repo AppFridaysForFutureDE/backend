@@ -35,6 +35,7 @@ describe("saveAsStrike", () => {
     expect(strike["notificationSent"]).toBe(true);
     expect(strike["ogId"]).toBe("0812f239a");
     expect(strike["strikeId"]).toBe("meeting_b1676449a53e2");
+    expect(strike["type"]).toBe("meeting");
     // retrievedAt: "2020-04-21T17:33:51.127Z"
     // _id: "5e9f2ec1e1d90f00a32f07fe"
   });

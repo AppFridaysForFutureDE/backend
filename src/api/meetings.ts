@@ -1,7 +1,9 @@
 import { Strike } from "../models/strikes";
 import { OG } from "../models/ogs";
 import * as util from "../utility";
+const { GoogleSpreadsheet } = require("google-spreadsheet");
 
+// TODO: Doppelte Einträge ignorieren
 export async function saveAsStrike(
   createdAt: string,
   date: string,
@@ -17,6 +19,7 @@ export async function saveAsStrike(
   }
 
   const [day, month, year] = date.split(".").map(string => parseInt(string));
+  // TODO: format could be wrong! parse dd.dd ignore rest
   const [hour, minutes] = time.split(":").map(string => parseInt(string));
 
   const jsDate = new Date(year, month - 1, day, hour, minutes);
@@ -38,8 +41,34 @@ export async function saveAsStrike(
       eventLink: link || "",
       additionalInfo: additionalInfo || "",
       notificationSent: true, // TODO
-      retrievedAt: now
+      retrievedAt: now,
+      type: "meeting"
     },
     { upsert: true }
+  );
+}
+
+export async function retrieveMeetings(): Promise<void> {
+  const doc = new GoogleSpreadsheet(process.env.PLENUM_SPREADSHEET_ID);
+  doc.useApiKey(process.env.GOOGLE_API_KEY);
+  await doc.loadInfo(); // loads document properties and worksheets
+  console.log(doc.title);
+  const sheet = doc.sheetsByIndex[0];
+  const rows = await sheet.getRows(); // can pass in { limit, offset }
+  console.log(sheet.title);
+  console.log(sheet.rowCount);
+
+  await Promise.all(
+    rows.map(async row => {
+      saveAsStrike(
+        row["Zeitstempel"],
+        row["Datum des Plenums"],
+        row["Uhrzeit des Plenums"],
+        row["Stadt/Ort/Region"],
+        row["Adresse des PlenumsOrtes"],
+        row["Telefonkonferenz Link"],
+        row["Zusätzliche Informationen"]
+      );
+    })
   );
 }
