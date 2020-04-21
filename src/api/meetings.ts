@@ -2,7 +2,6 @@ import { Strike } from "../models/strikes";
 import { OG } from "../models/ogs";
 import * as util from "../utility";
 import { GoogleSpreadsheet } from "google-spreadsheet";
-import nodeFetch from "node-fetch";
 
 // TODO: Doppelte Einträge ignorieren
 export async function saveAsStrike(
@@ -48,11 +47,8 @@ export async function saveAsStrike(
   );
 }
 
-// TODO: we need an API Key for this
 export const getRows = async (): Promise<string[]> => {
-  console.log(process.env.PLENUM_SPREADSHEET_ID);
   const doc = new GoogleSpreadsheet(process.env.PLENUM_SPREADSHEET_ID || "");
-  console.log(process.env.GOOGLE_API_KEY);
   doc.useApiKey(process.env.GOOGLE_API_KEY);
   console.log("start loading doc");
   await doc.loadInfo(); // loads document properties and worksheets
@@ -82,7 +78,7 @@ export async function retrieveMeetings(): Promise<void> {
         console.log("successfully imported row " + row["Zeitstempel"]);
       },
       error => {
-        console.log("error while importing row " + row["Zeitstempel"] + error);
+        console.log(`error while importing row ${row["Zeitstempel"]} ${error}`);
       }
     );
   });
