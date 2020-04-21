@@ -35,10 +35,55 @@ describe("saveAsStrike", () => {
     expect(strike["notificationSent"]).toBe(true);
     expect(strike["ogId"]).toBe("0812f239a");
     expect(strike["strikeId"]).toBe("meeting_b1676449a53e2");
-    expect(strike["type"]).toBe("meeting");
     // retrievedAt: "2020-04-21T17:33:51.127Z"
     // _id: "5e9f2ec1e1d90f00a32f07fe"
   });
 
   // TODO: Test without OG
+});
+
+describe("saveAsStrike with weird time format", () => {
+  it("should save the record", async () => {
+    await new OG({
+      ogId: "0812f239a",
+      name: "München"
+    }).save();
+
+    await saveAsStrike(
+      "21.04.2020 16:36:38",
+      "27.04.2020",
+      "17:00 Uhr",
+      "München",
+      "Discord",
+      "",
+      "Telko Link auf Anfrage"
+    );
+
+    const strikes = await Strike.find({});
+    const strike = strikes[0];
+    expect(strike["date"]).toBe(1587999600);
+  });
+});
+
+describe("saveAsStrike with weird time format", () => {
+  it("should save the record", async () => {
+    await new OG({
+      ogId: "0812f239a",
+      name: "München"
+    }).save();
+
+    await saveAsStrike(
+      "21.04.2020 16:36:38",
+      "27.04.2020",
+      "17 Uhr",
+      "München",
+      "Discord",
+      "",
+      "Telko Link auf Anfrage"
+    );
+
+    const strikes = await Strike.find({});
+    const strike = strikes[0];
+    expect(strike["date"]).toBe(1587999600);
+  });
 });
