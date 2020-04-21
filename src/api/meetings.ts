@@ -2,7 +2,7 @@ import { Strike } from "../models/strikes";
 import { OG } from "../models/ogs";
 import * as util from "../utility";
 import { GoogleSpreadsheet } from "google-spreadsheet";
-// import nodeFetch from "node-fetch";
+import nodeFetch from "node-fetch";
 
 // TODO: Doppelte Einträge ignorieren
 export async function saveAsStrike(
@@ -36,7 +36,7 @@ export async function saveAsStrike(
     {
       strikeId: strikeId,
       ogId: og["ogId"],
-      // name: strike["localGroupName"] || "",
+      name: "",
       location: place,
       date: unixDate,
       eventLink: link || "",
@@ -48,27 +48,26 @@ export async function saveAsStrike(
   );
 }
 
-export async function retrieveMeetings(): Promise<void> {
-  const doc = new GoogleSpreadsheet(process.env.PLENUM_SPREADSHEET_ID);
+// TODO: we need an API Key for this
+export const getRows = async (): Promise<string[]> => {
+  console.log(process.env.PLENUM_SPREADSHEET_ID);
+  const doc = new GoogleSpreadsheet(process.env.PLENUM_SPREADSHEET_ID || "");
+  console.log(process.env.GOOGLE_API_KEY);
   doc.useApiKey(process.env.GOOGLE_API_KEY);
+  console.log("start loading doc");
   await doc.loadInfo(); // loads document properties and worksheets
-  console.log(doc.title);
+  console.log("finished loading doc");
+  //console.log(doc.title);
   const sheet = doc.sheetsByIndex[0];
-  const rows = await sheet.getRows(); // can pass in { limit, offset }
   console.log(sheet.title);
+  const rows = await sheet.getRows(); // can pass in { limit, offset }
   console.log(sheet.rowCount);
+  return rows;
+};
 
-  // const response = await nodeFetch(process.env.PLENUM_SPREADSHEET_TSV_URL || '');
-  // let rows = [];
-  // try {
-  //   console.log(response);
-  //   const buffer = await response.buffer();
-  //   console.log(buffer);
-  // } catch (error) {
-  //   console.log(error);
-  //   return;
-  // }
-
+export async function retrieveMeetings(): Promise<void> {
+  const rows = await getRows();
+  // const rows = await getRowsAlt();
   rows.forEach(row => {
     saveAsStrike(
       row["Zeitstempel"],
