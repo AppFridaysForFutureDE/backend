@@ -62,17 +62,15 @@ export const getRows = async (): Promise<string[]> => {
   console.log("start loading doc");
   await doc.loadInfo(); // loads document properties and worksheets
   console.log("finished loading doc");
-  //console.log(doc.title);
   const sheet = doc.sheetsByIndex[0];
   console.log(sheet.title);
-  const rows = await sheet.getRows(); // can pass in { limit, offset }
+  const rows = await sheet.getRows();
   console.log(sheet.rowCount);
   return rows;
 };
 
 export async function retrieveMeetings(): Promise<void> {
   const rows = await getRows();
-  // const rows = await getRowsAlt();
   rows.forEach(row => {
     saveAsStrike(
       row["Zeitstempel"],
