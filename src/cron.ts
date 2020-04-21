@@ -1,5 +1,6 @@
 import { CronJob } from "cron";
 import * as strikeAccess from "./api/strikes";
+import * as meetingAccess from "./api/meetings";
 import * as ogAccess from "./api/ogs";
 
 const jobs = [
@@ -9,6 +10,14 @@ const jobs = [
     job: (): void => {
       console.log("Retrieving Strikes");
       strikeAccess.retrieveStrikes();
+    }
+  },
+  {
+    desc: "Retrieve Meetings",
+    tab: "45 * * * *",
+    job: (): void => {
+      console.log("Retrieving Meetings");
+      meetingAccess.retrieveMeetings();
     }
   },
   {

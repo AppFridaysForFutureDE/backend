@@ -1,5 +1,5 @@
 import * as dbHandler from "./test-db-handler";
-import { Strike } from "../models/Strikes";
+import { Strike } from "../models/strikes";
 import { app } from "../app";
 import request from "supertest";
 import * as util from "../utility";
