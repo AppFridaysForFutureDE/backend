@@ -43,7 +43,7 @@ export async function saveAsStrike(
     {
       strikeId: strikeId,
       ogId: og["ogId"],
-      name: "",
+      name: "Nächstest Plenum:",
       location: place,
       date: unixDate,
       eventLink: link || "",
