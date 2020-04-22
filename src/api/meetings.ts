@@ -29,7 +29,8 @@ export async function saveAsStrike(
     minutes = parseInt(matches[1] || "0");
   }
 
-  const jsDate = new Date(year, month - 1, day, hour, minutes);
+  // TODO: Fix time zone
+  const jsDate = new Date(year, month - 1, day, hour - 2, minutes);
   const unixDate = util.toUnixTimestamp(jsDate);
 
   // TODO
