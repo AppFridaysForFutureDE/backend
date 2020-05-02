@@ -18,6 +18,6 @@ export const sharePost: RequestHandler = async (req, res) => {
     console.log(error);
   }
   res.redirect(
-    `https://appforfuture.page.link/?amv=100&apn=de.fridaysforfuture.app&ibi=de.fridaysforfuture.app.official&imv=1.0.0&isi=1506077796&link=https://app.fffutu.re/feed/${req.params.post}&ofl=https://app.fffutu.re/download&st=${title}&sd=${desc}&si=${imageUrl}`
+    `https://appforfuture.page.link/?amv=100&apn=de.fridaysforfuture.app.official&ibi=de.fridaysforfuture.app.official&imv=1.0.0&isi=1506077796&link=https://app.fffutu.re/feed/${req.params.post}&ofl=https://app.fffutu.re/download&st=${title}&sd=${desc}&si=${imageUrl}`
   );
 };
