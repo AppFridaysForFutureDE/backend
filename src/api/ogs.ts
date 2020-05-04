@@ -1,5 +1,6 @@
 import { OG } from "../models/ogs";
 import { addPrefix } from "../utility";
+import { addProtocolPrefix } from "../utility";
 import * as util from "../utility";
 import nodeFetch from "node-fetch";
 
@@ -30,14 +31,14 @@ export async function retrieveOGs(): Promise<void> {
         bundesland: og["state"] || "",
         lat: og["lat"] || "",
         lon: og["lon"] || "",
-        whatsapp: addPrefix("https://", String(og["whatsapp"] || "")),
+        whatsapp: addProtocolPrefix(String(og["whatsapp"] || "")),
         email: addPrefix("mailto:", String(og["email"] || "")),
-        instagram: addPrefix("https://", String(og["instagram"] || "")),
-        twitter: addPrefix("https://", String(og["twitter"] || "")),
-        facebook: addPrefix("https://", String(og["facebook"] || "")),
-        youtube: addPrefix("https://", String(og["youtube"] || "")),
-        website: addPrefix("https://", String(og["website"] || "")),
-        telegram: addPrefix("https://", String(og["telegram"] || "")),
+        instagram: addProtocolPrefix(String(og["instagram"] || "")),
+        twitter: addProtocolPrefix(String(og["twitter"] || "")),
+        facebook: addProtocolPrefix(String(og["facebook"] || "")),
+        youtube: addProtocolPrefix(String(og["youtube"] || "")),
+        website: addProtocolPrefix(String(og["website"] || "")),
+        telegram: addProtocolPrefix(String(og["telegram"] || "")),
         other: og["other"] || "",
         retrievedAt: now
       },

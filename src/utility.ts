@@ -5,10 +5,18 @@ import nodeFetch from "node-fetch";
 //A day and a second in unix time
 export const day = 86401;
 
-//adds a prefix if prefix isnt there already and text isnt empty
+//adds a custom prefix if prefix isnt there already and text isnt empty
 export function addPrefix(prefix: string, text: string) {
-  if (text != null && !String(text).startsWith(prefix) && text != "") {
+  if (text != null && !text.startsWith(prefix) && text != "") {
     text = prefix + text;
+  }
+  return text;
+}
+
+//adds standard protocol prefix if there is none and text isnt empty
+export function addProtocolPrefix(text: string) {
+  if (text != null && text != "" && !(text.startsWith("https://") || text.startsWith("http://"))) {
+    text = "http://" + text;
   }
   return text;
 }
