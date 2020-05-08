@@ -45,6 +45,8 @@ services:
       - /var/firebase-auth/:/var/firebase-auth
     links:
       - mongo-db
+    depends_on: 
+      - mongo-db
 
   mongo-db:
     image: 'mongo:4.2.3'

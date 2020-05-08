@@ -1,4 +1,6 @@
 import { OG } from "../models/ogs";
+import { addPrefix } from "../utility";
+import { addProtocolPrefix } from "../utility";
 import * as util from "../utility";
 import nodeFetch from "node-fetch";
 
@@ -20,11 +22,6 @@ export async function retrieveOGs(): Promise<void> {
 
   //upsert ogs
   data.forEach(async og => {
-    //add mailto prefix to mail adresses
-    let mail = "";
-    if (og["email"] != null && !String(og["email"]).startsWith("mailto:")) {
-      mail = "mailto:" + og["email"];
-    }
     const ogid = util.hash(og["name"]);
     OG.findOneAndUpdate(
       { ogId: ogid },
@@ -34,14 +31,14 @@ export async function retrieveOGs(): Promise<void> {
         bundesland: og["state"] || "",
         lat: og["lat"] || "",
         lon: og["lon"] || "",
-        whatsapp: og["whatsapp"] || "",
-        email: mail,
-        instagram: og["instagram"] || "",
-        twitter: og["twitter"] || "",
-        facebook: og["facebook"] || "",
-        youtube: og["youtube"] || "",
-        website: og["website"] || "",
-        telegram: og["telegram"] || "",
+        whatsapp: addProtocolPrefix(String(og["whatsapp"] || "")),
+        email: addPrefix("mailto:", String(og["email"] || "")),
+        instagram: addProtocolPrefix(String(og["instagram"] || "")),
+        twitter: addProtocolPrefix(String(og["twitter"] || "")),
+        facebook: addProtocolPrefix(String(og["facebook"] || "")),
+        youtube: addProtocolPrefix(String(og["youtube"] || "")),
+        website: addProtocolPrefix(String(og["website"] || "")),
+        telegram: addProtocolPrefix(String(og["telegram"] || "")),
         other: og["other"] || "",
         retrievedAt: now
       },

@@ -5,26 +5,27 @@ import nodeFetch from "node-fetch";
 //A day and a second in unix time
 export const day = 86401;
 
+//adds a custom prefix if prefix isnt there already and text isnt empty
+export function addPrefix(prefix: string, text: string) {
+  if (text != null && !text.startsWith(prefix) && text != "") {
+    text = prefix + text;
+  }
+  return text;
+}
+
+//adds standard protocol prefix if there is none and text isnt empty
+export function addProtocolPrefix(text: string) {
+  if (text != null && text != "" && !(text.startsWith("https://") || text.startsWith("http://"))) {
+    text = "http://" + text;
+  }
+  return text;
+}
+
 //returns date of next weekday (1: Mon, 7: Sun)
 export function nextWeekdayDate(dayInWeek: number): Date {
   const ret = new Date();
   ret.setDate(ret.getDate() + ((dayInWeek - 1 - ret.getDay() + 7) % 7) + 1);
   return ret;
-}
-
-//DEPRECATED
-//parses a string of this scheme: "13:00 Uhr" to a date with the next friday
-export function getDate(s: string): Date {
-  const d = nextWeekdayDate(5);
-  d.setSeconds(0);
-  d.setMilliseconds(0);
-  const re = /[0-9]{2}/g;
-  const m = s.match(re);
-  if (m) {
-    d.setHours(+m[0], +m[1]);
-    return d;
-  }
-  throw new Error("No valid date!");
 }
 
 //converts date to unix timestamp
