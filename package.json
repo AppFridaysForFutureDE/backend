@@ -13,7 +13,8 @@
     "google-spreadsheet": "^3.0.11",
     "mongoose": "^5.9.4",
     "node-fetch": "^2.6.0",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "webhook-discord": "^3.7.3"
   },
   "devDependencies": {
     "@shelf/jest-mongodb": "^1.1.5",
