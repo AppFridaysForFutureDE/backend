@@ -22,7 +22,7 @@ export const populateDB: RequestHandler = async (req, res) => {
 
 export const debugPost: RequestHandler = async (req, res) => {
   //Add debug code here
-  await strikeAccess.checkStrikes
+  await strikeAccess.checkStrikes();
   res.status(200).json({ Debug: true });
 };
 
