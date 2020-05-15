@@ -6,7 +6,7 @@ import * as ogAccess from "./api/ogs";
 const jobs = [
   {
     desc: "Retrieve Strikes",
-    tab: "50 * * * *",
+    tab: "50 1 * * *",
     job: (): void => {
       console.log("Retrieving Strikes");
       strikeAccess.retrieveStrikes();

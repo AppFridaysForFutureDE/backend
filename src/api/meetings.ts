@@ -58,18 +58,21 @@ export async function saveAsStrike(
 export const getRows = async (): Promise<string[]> => {
   const doc = new GoogleSpreadsheet(process.env.PLENUM_SPREADSHEET_ID || "");
   doc.useApiKey(process.env.GOOGLE_API_KEY);
-  console.log("start loading doc");
   await doc.loadInfo(); // loads document properties and worksheets
-  console.log("finished loading doc");
   const sheet = doc.sheetsByIndex[0];
-  console.log(sheet.title);
   const rows = await sheet.getRows();
-  console.log(sheet.rowCount);
   return rows;
 };
 
 export async function retrieveMeetings(): Promise<void> {
-  const rows = await getRows();
+  let rows: string[];
+  try {
+    rows = await getRows();
+  } catch (e) {
+    console.log("Error while retrieving plenum doc");
+    console.log(e);
+    return;
+  } 
   rows.forEach(row => {
     saveAsStrike(
       row["Zeitstempel"],
