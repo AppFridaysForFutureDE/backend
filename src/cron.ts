@@ -6,7 +6,7 @@ import * as ogAccess from "./api/ogs";
 const jobs = [
   {
     desc: "Retrieve Strikes",
-    tab: "50 * * * *",
+    tab: "50 1 * * *",
     job: (): void => {
       console.log("Retrieving Strikes");
       strikeAccess.retrieveStrikes();
@@ -14,7 +14,7 @@ const jobs = [
   },
   {
     desc: "Retrieve Meetings",
-    tab: "45 * * * *",
+    tab: "45 1 * * *",
     job: (): void => {
       console.log("Retrieving Meetings");
       meetingAccess.retrieveMeetings();
@@ -22,7 +22,7 @@ const jobs = [
   },
   {
     desc: "Retrieve OGs",
-    tab: "55 * * * *",
+    tab: "55 1 * * *",
     job: (): void => {
       console.log("Retrieving OGs");
       ogAccess.retrieveOGs();
