@@ -28,6 +28,7 @@ export async function retrieveStrikes(): Promise<void> {
         date: util.toUnixTimestamp(new Date(strike["dateTime"])) || "",
         eventLink: strike["eventLink"] || "",
         additionalInfo: strike["note"] || "",
+        notificationSent: false,
         retrievedAt: now
       },
       { upsert: true },
