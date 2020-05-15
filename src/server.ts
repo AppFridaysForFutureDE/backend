@@ -4,7 +4,10 @@ import { startCronJobs } from "./cron";
 import dotenv from "dotenv-safe";
 
 console.log("Loading environment variables");
-dotenv.config();
+dotenv.config({
+  allowEmptyValues: true
+});
+
 
 console.log("Connecting to database");
 mongoose
