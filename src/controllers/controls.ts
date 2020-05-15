@@ -19,3 +19,13 @@ export const populateDB: RequestHandler = async (req, res) => {
   ]);
   res.status(200).json({ performedPopulate: true });
 };
+
+export const debugPost: RequestHandler = async (req, res) => {
+  //Add debug code here
+  res.status(200).json({ Debug: true });
+};
+
+export const debugGet: RequestHandler = async (req, res) => {
+  //Add debug code here
+  res.status(200).json({ Debug: true });
+};
