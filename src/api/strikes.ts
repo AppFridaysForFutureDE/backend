@@ -28,7 +28,6 @@ export async function retrieveStrikes(): Promise<void> {
         date: util.toUnixTimestamp(new Date(strike["dateTime"])) || "",
         eventLink: strike["eventLink"] || "",
         additionalInfo: strike["note"] || "",
-        notificationSent: false,
         retrievedAt: now
       },
       { upsert: true },
@@ -42,16 +41,11 @@ export async function retrieveStrikes(): Promise<void> {
 //-strike is within 24 hours from now
 //should be executed every hour
 export function checkStrikes(): void {
-  console.log("Checkiing strikes")
   const tomorrow: number = util.toUnixTimestamp(new Date()) + util.day;
   const today: number = util.toUnixTimestamp(new Date());
-  console.log(today);
-  console.log(tomorrow);
   Strike.find(
     { notificationSent: false, date: { $gt: today, $lt: tomorrow } },
     function(err: Error, strikes) {
-      console.log(`found ${strikes.length} strikes`);
-      console.log(strikes);
       if (err) return console.error(err);
       strikes.forEach(async strike => {
         console.log(strike);
