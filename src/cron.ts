@@ -14,7 +14,7 @@ const jobs = [
   },
   {
     desc: "Retrieve Meetings",
-    tab: "45 1 * * *",
+    tab: "45 * * * *",
     job: (): void => {
       console.log("Retrieving Meetings");
       meetingAccess.retrieveMeetings();
@@ -22,7 +22,7 @@ const jobs = [
   },
   {
     desc: "Retrieve OGs",
-    tab: "55 1 * * *",
+    tab: "55 * * * *",
     job: (): void => {
       console.log("Retrieving OGs");
       ogAccess.retrieveOGs();
