@@ -66,29 +66,30 @@ export const getRows = async (): Promise<string[]> => {
 };
 
 export async function retrieveMeetings(): Promise<void> {
+  let rows: string[];
   try {
-    const rows = await getRows();
-    rows.forEach(row => {
-      saveAsStrike(
-        row["Zeitstempel"],
-        row["Datum des Plenums"],
-        row["Uhrzeit des Plenums"],
-        row["Stadt/Ort/Region"],
-        row["Adresse des PlenumsOrtes"],
-        row["Telefonkonferenz Link"],
-        row["Zusätzliche Informationen"]
-      ).then(
-        () => {
-          console.log("successfully imported row " + row["Zeitstempel"]);
-        },
-        error => {
-          console.log(`error while importing row ${row["Zeitstempel"]} ${error}`);
-        }
-      );
-    });
+    rows = await getRows();
   } catch (e) {
     console.log("Error while retrieving plenum doc");
     console.log(e);
+    return;
   } 
-  
+  rows.forEach(row => {
+    saveAsStrike(
+      row["Zeitstempel"],
+      row["Datum des Plenums"],
+      row["Uhrzeit des Plenums"],
+      row["Stadt/Ort/Region"],
+      row["Adresse des PlenumsOrtes"],
+      row["Telefonkonferenz Link"],
+      row["Zusätzliche Informationen"]
+    ).then(
+      () => {
+        console.log("successfully imported row " + row["Zeitstempel"]);
+      },
+      error => {
+        console.log(`error while importing row ${row["Zeitstempel"]} ${error}`);
+      }
+    );
+  });
 }

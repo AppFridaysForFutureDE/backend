@@ -21,6 +21,7 @@ export async function retrieveOGs(): Promise<void> {
   //flag old ogs
   await OG.updateMany({}, { other: "DELETE" });
 
+  console.log("upsert ogs")
   //upsert ogs
   data.forEach(async og => {
     const ogid = util.hash(og["name"]);
