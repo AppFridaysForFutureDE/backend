@@ -15,7 +15,11 @@ export function addPrefix(prefix: string, text: string) {
 
 //adds standard protocol prefix if there is none and text isnt empty
 export function addProtocolPrefix(text: string) {
-  if (text != null && text != "" && !(text.startsWith("https://") || text.startsWith("http://"))) {
+  if (
+    text != null &&
+    text != "" &&
+    !(text.startsWith("https://") || text.startsWith("http://"))
+  ) {
     text = "http://" + text;
   }
   return text;

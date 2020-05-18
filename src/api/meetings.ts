@@ -73,7 +73,7 @@ export async function retrieveMeetings(): Promise<void> {
     console.log("Error while retrieving plenum doc");
     console.log(e);
     return;
-  } 
+  }
   rows.forEach(row => {
     saveAsStrike(
       row["Zeitstempel"],

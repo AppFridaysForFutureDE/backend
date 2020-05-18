@@ -6,7 +6,15 @@ import nodeFetch from "node-fetch";
 //retrieves Strikes from website api and saves them to mongodb
 export async function retrieveStrikes(): Promise<void> {
   console.log("strikes");
-  const response = await nodeFetch(/*`${process.env.WEBSITE_URL}/strike`*/"https://api.jsonbin.io/b/5ec27b662bb52645e553112f/1", { headers: { 'secret-key': '$2b$10$ceg0l3mqvyAF0WUBsD4k6eA/IUAQ73p/L09VI4b6Xc1PcxPHiuu.C' }});
+  const response = await nodeFetch(
+    /*`${process.env.WEBSITE_URL}/strike`*/ "https://api.jsonbin.io/b/5ec27b662bb52645e553112f/1",
+    {
+      headers: {
+        "secret-key":
+          "$2b$10$ceg0l3mqvyAF0WUBsD4k6eA/IUAQ73p/L09VI4b6Xc1PcxPHiuu.C"
+      }
+    }
+  );
   let data = [];
   try {
     data = await response.json();
@@ -38,7 +46,6 @@ export async function retrieveStrikes(): Promise<void> {
   });
 }
 
-
 //TODO: Use strikeId instead of og id
 //TODO: check notificationSent manually (if non existent or false => send notification)
 //checks and notifies for strikes that fulfill these conditions:
@@ -48,12 +55,20 @@ export async function retrieveStrikes(): Promise<void> {
 export function checkStrikes(): void {
   const tomorrow: number = util.toUnixTimestamp(new Date()) + util.day;
   const today: number = util.toUnixTimestamp(new Date());
-  Strike.find(
-    { date: { $gt: today, $lt: tomorrow } },
-    function(err: Error, strikes) {
-      if (err) return console.error(err);
-      strikes.forEach(async strike => {
-        console.log(strike);
+  Strike.find({ date: { $gt: today, $lt: tomorrow } }, function(
+    err: Error,
+    strikes
+  ) {
+    //check if an error occured
+    if (err) return console.error(err);
+
+    //loop through strikes
+    strikes.forEach(async strike => {
+      if (
+        strike["notificationSent"] == "false" ||
+        strike["notificationSent"] == null
+      ) {
+        //send notification
         FCMAdmin.getInstance().sendMessage(
           `og_${strike["ogId"]}`,
           `Streikalarm in ${strike["name"]}`,
@@ -61,11 +76,13 @@ export function checkStrikes(): void {
           "strike",
           strike["ogId"]
         );
+
+        //Update Notification Status of strike
         await Strike.updateOne(
-          { ogId: strike["ogId"] },
+          { strikeId: strike["strikeId"] },
           { notificationSent: true }
         );
-      });
-    }
-  );
+      }
+    });
+  });
 }
