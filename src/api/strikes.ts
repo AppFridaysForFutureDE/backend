@@ -38,6 +38,9 @@ export async function retrieveStrikes(): Promise<void> {
   });
 }
 
+
+//TODO: Use strikeId instead of og id
+//TODO: check notificationSent manually (if non existent or false => send notification)
 //checks and notifies for strikes that fulfill these conditions:
 //-notificationSent is false
 //-strike is within 24 hours from now
@@ -46,7 +49,7 @@ export function checkStrikes(): void {
   const tomorrow: number = util.toUnixTimestamp(new Date()) + util.day;
   const today: number = util.toUnixTimestamp(new Date());
   Strike.find(
-    { notificationSent: false, date: { $gt: today, $lt: tomorrow } },
+    { date: { $gt: today, $lt: tomorrow } },
     function(err: Error, strikes) {
       if (err) return console.error(err);
       strikes.forEach(async strike => {
