@@ -17,6 +17,7 @@ export async function retrieveStrikes(): Promise<void> {
   //get retrievedAt date/time
   const now = Date.now();
 
+  console.log("upsert strikes");
   //loop through strikes
   data.forEach(strike => {
     Strike.findOneAndUpdate(
