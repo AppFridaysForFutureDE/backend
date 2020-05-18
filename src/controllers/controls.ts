@@ -19,9 +19,3 @@ export const populateDB: RequestHandler = async (req, res) => {
   ]);
   res.status(200).json({ performedPopulate: true });
 };
-
-export const checkStrikes: RequestHandler = async (req, res) => {
-  console.log("Checking Strikes");
-  await Promise.all([strikeAccess.checkStrikes()]);
-  res.status(200).json({ performedPopulate: true });
-};

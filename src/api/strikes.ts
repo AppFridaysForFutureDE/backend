@@ -6,15 +6,7 @@ import nodeFetch from "node-fetch";
 //retrieves Strikes from website api and saves them to mongodb
 export async function retrieveStrikes(): Promise<void> {
   console.log("strikes");
-  const response = await nodeFetch(
-    /*`${process.env.WEBSITE_URL}/strike`*/ "https://api.jsonbin.io/b/5ec27b662bb52645e553112f/1",
-    {
-      headers: {
-        "secret-key":
-          "$2b$10$ceg0l3mqvyAF0WUBsD4k6eA/IUAQ73p/L09VI4b6Xc1PcxPHiuu.C"
-      }
-    }
-  );
+  const response = await nodeFetch(`${process.env.WEBSITE_URL}/strike`);
   let data = [];
   try {
     data = await response.json();
@@ -25,7 +17,6 @@ export async function retrieveStrikes(): Promise<void> {
   //get retrievedAt date/time
   const now = Date.now();
 
-  console.log("upsert strikes");
   //loop through strikes
   data.forEach(strike => {
     Strike.findOneAndUpdate(
@@ -46,10 +37,8 @@ export async function retrieveStrikes(): Promise<void> {
   });
 }
 
-//TODO: Use strikeId instead of og id
-//TODO: check notificationSent manually (if non existent or false => send notification)
 //checks and notifies for strikes that fulfill these conditions:
-//-notificationSent is false
+//-notificationSent is false or not set
 //-strike is within 24 hours from now
 //should be executed every hour
 export function checkStrikes(): void {

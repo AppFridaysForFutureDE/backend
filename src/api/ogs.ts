@@ -4,17 +4,10 @@ import { addProtocolPrefix } from "../utility";
 import * as util from "../utility";
 import nodeFetch from "node-fetch";
 
+//retrieves ogs from website api and saves them to mongodb
 export async function retrieveOGs(): Promise<void> {
   console.log("ogs");
-  const response = await nodeFetch(
-    /*`${process.env.WEBSITE_URL}/localGroups`*/ "https://api.jsonbin.io/b/5ec27b70e91d1e45d10c7e30/1",
-    {
-      headers: {
-        "secret-key":
-          "$2b$10$ceg0l3mqvyAF0WUBsD4k6eA/IUAQ73p/L09VI4b6Xc1PcxPHiuu.C"
-      }
-    }
-  );
+  const response = await nodeFetch(`${process.env.WEBSITE_URL}/localGroups`);
   let data = [];
   try {
     data = await response.json();
@@ -29,7 +22,6 @@ export async function retrieveOGs(): Promise<void> {
   //flag old ogs
   await OG.updateMany({}, { other: "DELETE" });
 
-  console.log("upsert ogs");
   //upsert ogs
   data.forEach(async og => {
     const ogid = util.hash(og["name"]);
