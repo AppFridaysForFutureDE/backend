@@ -5,7 +5,7 @@ import * as util from "../utility";
 import nodeFetch from "node-fetch";
 
 export async function retrieveOGs(): Promise<void> {
-  const response = await nodeFetch(`${process.env.WEBSITE_URL}/localGroups`);
+  const response = await nodeFetch(/*`${process.env.WEBSITE_URL}/localGroups`*/"https://api.jsonbin.io/b/5ec27b70e91d1e45d10c7e30/1");
   let data = [];
   try {
     data = await response.json();
