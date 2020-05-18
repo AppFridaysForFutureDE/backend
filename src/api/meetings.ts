@@ -2,7 +2,6 @@ import { Strike } from "../models/strikes";
 import { OG } from "../models/ogs";
 import * as util from "../utility";
 import { GoogleSpreadsheet } from "google-spreadsheet";
-import { resolve } from "dns";
 
 // TODO: Doppelte Einträge ignorieren
 export async function saveAsStrike(

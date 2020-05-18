@@ -6,7 +6,6 @@ import nodeFetch from "node-fetch";
 
 //retrieves ogs from website api and saves them to mongodb
 export async function retrieveOGs(): Promise<void> {
-  console.log("ogs");
   const response = await nodeFetch(`${process.env.WEBSITE_URL}/localGroups`);
   let data = [];
   try {

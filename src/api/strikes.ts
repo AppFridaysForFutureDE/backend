@@ -5,7 +5,6 @@ import nodeFetch from "node-fetch";
 
 //retrieves Strikes from website api and saves them to mongodb
 export async function retrieveStrikes(): Promise<void> {
-  console.log("strikes");
   const response = await nodeFetch(`${process.env.WEBSITE_URL}/strike`);
   let data = [];
   try {
