@@ -30,8 +30,7 @@ export async function retrieveStrikes(): Promise<void> {
         additionalInfo: strike["note"] || "",
         retrievedAt: now
       },
-      { upsert: true },
-      function(err, doc) {}
+      { upsert: true }
     );
   });
 }
