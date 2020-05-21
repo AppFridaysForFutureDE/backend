@@ -28,7 +28,6 @@ export async function retrieveStrikes(): Promise<void> {
         date: util.toUnixTimestamp(new Date(strike["dateTime"])) || "",
         eventLink: strike["eventLink"] || "",
         additionalInfo: strike["note"] || "",
-        notificationSent: false,
         retrievedAt: now
       },
       { upsert: true },
@@ -38,18 +37,26 @@ export async function retrieveStrikes(): Promise<void> {
 }
 
 //checks and notifies for strikes that fulfill these conditions:
-//-notificationSent is false
+//-notificationSent is false or not set
 //-strike is within 24 hours from now
 //should be executed every hour
 export function checkStrikes(): void {
   const tomorrow: number = util.toUnixTimestamp(new Date()) + util.day;
   const today: number = util.toUnixTimestamp(new Date());
-  Strike.find(
-    { notificationSent: false, date: { $gt: today, $lt: tomorrow } },
-    function(err: Error, strikes) {
-      if (err) return console.error(err);
-      strikes.forEach(async strike => {
-        console.log(strike);
+  Strike.find({ date: { $gt: today, $lt: tomorrow } }, function(
+    err: Error,
+    strikes
+  ) {
+    //check if an error occured
+    if (err) return console.error(err);
+
+    //loop through strikes
+    strikes.forEach(async strike => {
+      if (
+        strike["notificationSent"] == "false" ||
+        strike["notificationSent"] == null
+      ) {
+        //send notification
         FCMAdmin.getInstance().sendMessage(
           `og_${strike["ogId"]}`,
           `Streikalarm in ${strike["name"]}`,
@@ -57,11 +64,13 @@ export function checkStrikes(): void {
           "strike",
           strike["ogId"]
         );
+
+        //Update Notification Status of strike
         await Strike.updateOne(
-          { ogId: strike["ogId"] },
+          { strikeId: strike["strikeId"] },
           { notificationSent: true }
         );
-      });
-    }
-  );
+      }
+    });
+  });
 }

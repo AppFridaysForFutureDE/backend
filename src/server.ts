@@ -8,7 +8,6 @@ dotenv.config({
   allowEmptyValues: true
 });
 
-
 console.log("Connecting to database");
 mongoose
   .connect("mongodb://fffapp:fffapp@mongo-db:27017/fffapp", {

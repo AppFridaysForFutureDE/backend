@@ -4,6 +4,7 @@ import { addProtocolPrefix } from "../utility";
 import * as util from "../utility";
 import nodeFetch from "node-fetch";
 
+//retrieves ogs from website api and saves them to mongodb
 export async function retrieveOGs(): Promise<void> {
   const response = await nodeFetch(`${process.env.WEBSITE_URL}/localGroups`);
   let data = [];
