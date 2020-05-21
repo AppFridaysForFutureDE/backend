@@ -19,3 +19,9 @@ export const populateDB: RequestHandler = async (req, res) => {
   ]);
   res.status(200).json({ performedPopulate: true });
 };
+
+export const saveLiveticker: RequestHandler = async (req, res) => {
+  console.log("Saving liveticker");
+
+  res.status(200).json({ savedLiveticker: true });
+};
