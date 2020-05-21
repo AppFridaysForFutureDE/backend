@@ -10,7 +10,6 @@ import shareRoutes from "./routes/share";
 import controlRoutes from "./routes/controls";
 import liveeventRoutes from "./routes/liveevent";
 
-
 //Initialization
 export const app = express();
 app.use(json());

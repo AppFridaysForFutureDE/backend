@@ -25,8 +25,7 @@ export const populateDB: RequestHandler = async (req, res) => {
 export const saveLiveevent: RequestHandler = async (req, res) => {
   console.log("Saving liveevent");
 
-  parseFormdata(req, function (err, data) {
+  parseFormdata(req, function(err, data) {
     res.status(200).json({ fields: data.fields });
   });
-
 };
