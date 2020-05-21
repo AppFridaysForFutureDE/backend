@@ -26,6 +26,7 @@ export const saveLiveevent: RequestHandler = async (req, res) => {
   console.log("Saving liveevent");
 
   parseFormdata(req, function(err, data) {
+    if (err) throw err;
     res.status(200).json({ fields: data.fields });
   });
 };
