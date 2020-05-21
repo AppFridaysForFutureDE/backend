@@ -65,7 +65,7 @@ describe("saveAsStrike with weird time format", () => {
   });
 });
 
-describe("saveAsStrike with weird time format", () => {
+describe("saveAsStrike with another weird time format", () => {
   it("should save the record", async () => {
     await new OG({
       ogId: "0812f239a",

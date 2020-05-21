@@ -28,10 +28,11 @@ export const saveLiveevent: RequestHandler = async (req, res) => {
     {
       isActive: req.body.isActive,
       actionText: req.body.actionText,
-      actionUrl: req.body.actionUrl
+      actionUrl: req.body.actionUrl,
+      inApp: req.body.inApp
     },
     { upsert: true },
-    function(err, doc) {
+    function(err) {
       res.status(200).json({ err: err });
     }
   );
