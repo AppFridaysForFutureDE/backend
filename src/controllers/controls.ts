@@ -26,7 +26,7 @@ export const saveLiveevent: RequestHandler = async (req, res) => {
   Liveevent.findOneAndUpdate(
     { liveeventId: req.body.id },
     {
-      isAction: req.body.isAction,
+      isActive: req.body.isAction,
       actionText: req.body.actionText,
       actionUrl: req.body.actionUrl
     },

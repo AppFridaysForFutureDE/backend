@@ -4,7 +4,7 @@ const liveeventScheme = new mongoose.Schema({
   liveeventId: {
     type: Number
   },
-  isAction: {
+  isActive: {
     type: Boolean
   },
   actionText: {
