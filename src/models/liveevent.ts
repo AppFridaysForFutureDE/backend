@@ -15,4 +15,4 @@ const liveeventScheme = new mongoose.Schema({
   }
 });
 
-export const Liveevent = mongoose.model("liveticker", liveeventScheme);
+export const Liveevent = mongoose.model("liveevent", liveeventScheme);
