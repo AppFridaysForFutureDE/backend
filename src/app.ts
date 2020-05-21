@@ -13,6 +13,7 @@ import liveeventRoutes from "./routes/liveevent";
 //Initialization
 export const app = express();
 app.use(json());
+app.use(express.urlencoded());
 
 //API Routes
 app.use("/api/v1/strikes", strikeRoutes);
