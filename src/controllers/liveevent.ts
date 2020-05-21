@@ -6,10 +6,7 @@ export const getLiveevent: RequestHandler = (req, res) => {
   if (liveeventId == "" || liveeventId == null) {
     liveeventId = 0;
   }
-  Liveevent.findOne({ liveeventId: liveeventId }, function(
-    err: Error,
-    event
-  ) {
+  Liveevent.findOne({ liveeventId: liveeventId }, function(err: Error, event) {
     if (err) return console.error(err);
     res.status(200).json({ liveeventId: liveeventId, liveevent: event });
   });
