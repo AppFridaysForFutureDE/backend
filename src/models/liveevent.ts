@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const liveeventScheme = new mongoose.Schema({
-  livetickerId: {
+  liveeventId: {
     type: Number
   },
   isAction: {
