@@ -7,6 +7,6 @@ const router = Router();
 
 router.get("/firebaseStatus", firebaseStatus);
 router.post("/populateDB", populateDB);
-router.post("/liveticker", saveLiveevent);
+router.post("/liveevent", saveLiveevent);
 
 export default router;
