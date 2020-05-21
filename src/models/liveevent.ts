@@ -12,6 +12,9 @@ const liveeventScheme = new mongoose.Schema({
   },
   actionUrl: {
     type: String
+  },
+  inApp: {
+    type: Boolean
   }
 });
 
