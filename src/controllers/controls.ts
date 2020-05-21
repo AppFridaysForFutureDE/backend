@@ -32,7 +32,7 @@ export const saveLiveevent: RequestHandler = async (req, res) => {
     },
     { upsert: true },
     function(err, doc) {
-      res.status(200).json({ saved: err});
+      res.status(200).json({ err: err });
     }
   );
 };
