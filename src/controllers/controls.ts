@@ -23,6 +23,16 @@ export const populateDB: RequestHandler = async (req, res) => {
 
 export const saveLiveevent: RequestHandler = async (req, res) => {
   console.log("Saving liveevent");
-  Liveevent
-  console.log(req.body);
+  Liveevent.findOneAndUpdate(
+    { liveeventId: req.body.id },
+    {
+      isAction: req.body.isAction,
+      actionText: req.body.actionText,
+      actionUrl: req.body.actionUrl
+    },
+    { upsert: true },
+    function(err, doc) {
+      res.status(200).json({ error: err, document: doc });
+    }
+  );
 };
