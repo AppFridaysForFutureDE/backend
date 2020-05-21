@@ -26,13 +26,13 @@ export const saveLiveevent: RequestHandler = async (req, res) => {
   Liveevent.findOneAndUpdate(
     { liveeventId: req.body.id },
     {
-      isActive: req.body.isAction,
+      isActive: req.body.isActive,
       actionText: req.body.actionText,
       actionUrl: req.body.actionUrl
     },
     { upsert: true },
     function(err, doc) {
-      res.status(200).json({ error: err, document: doc });
+      res.status(200).json({ saved: err});
     }
   );
 };
