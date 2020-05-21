@@ -8,14 +8,17 @@ import ogRoutes from "./routes/ogs";
 import webhookRoutes from "./routes/webhook";
 import shareRoutes from "./routes/share";
 import controlRoutes from "./routes/controls";
+import liveeventRoutes from "./routes/liveevent";
 
 //Initialization
 export const app = express();
 app.use(json());
+app.use(express.urlencoded());
 
 //API Routes
 app.use("/api/v1/strikes", strikeRoutes);
 app.use("/api/v1/ogs", ogRoutes);
+app.use("/api/v1/liveevent", liveeventRoutes);
 
 //Internal Routes
 app.use("/internal/webhooks/ghost", webhookRoutes);
