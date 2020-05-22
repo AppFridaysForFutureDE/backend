@@ -47,7 +47,7 @@ export async function saveAsStrike(
       date: unixDate,
       eventLink: link || "",
       additionalInfo: additionalInfo || "",
-      notificationSent: true, // TODO
+      notificationSent: true,
       retrievedAt: now
     },
     { upsert: true }
