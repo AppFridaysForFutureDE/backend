@@ -14,12 +14,13 @@ export const getStrikes: RequestHandler = (req, res) => {
   if (ogId == "" || ogId == null) {
     res.status(400).json({ error: "No OG specified!" });
   } else {
-    Strike.find({ ogId: ogId, date: { $gt: minDate } }, function(
-      err: Error,
-      strikes
-    ) {
-      if (err) return console.error(err);
-      res.status(200).json({ ogId: ogId, strikes: strikes });
-    });
+    // TODO: Remove strikeId not equal 866 (hotfix to hide specific strike in app)
+    Strike.find(
+      { ogId: ogId, date: { $gt: minDate }, strikeId: { $ne: "866" } },
+      function(err: Error, strikes) {
+        if (err) return console.error(err);
+        res.status(200).json({ ogId: ogId, strikes: strikes });
+      }
+    );
   }
 };
