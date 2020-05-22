@@ -3,12 +3,12 @@ import { json } from "body-parser";
 import expressStatusMonitor from "express-status-monitor";
 
 //routes
-import strikeRoutes from "./routes/strikes";
-import ogRoutes from "./routes/ogs";
-import webhookRoutes from "./routes/webhook";
-import shareRoutes from "./routes/share";
-import controlRoutes from "./routes/controls";
-import liveeventRoutes from "./routes/liveevent";
+import { strikeRoutes } from "./routes";
+import { ogRoutes } from "./routes";
+import { webhookRoutes } from "./routes";
+import { shareRoutes } from "./routes";
+import { controlsRoutes } from "./routes";
+import { liveeventRoutes } from "./routes";
 
 //Initialization
 export const app = express();
@@ -27,7 +27,7 @@ app.use("/internal/webhooks/ghost", webhookRoutes);
 app.use("/p", shareRoutes);
 
 //Admin Routes
-app.use("/admin/controls", controlRoutes);
+app.use("/admin/controls", controlsRoutes);
 app.use(expressStatusMonitor({ path: "/admin/status" }));
 
 app.use(function(err: Error, req: Request, res: Response, next) {
