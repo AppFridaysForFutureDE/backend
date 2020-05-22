@@ -1,12 +1,8 @@
 import { Router } from "express";
-import { firebaseStatus } from "./controllers/controls";
-import { populateDB } from "./controllers/controls";
-import { saveLiveevent } from "./controllers/controls";
-import { getLiveevent } from "./controllers/liveevent";
-import { getOGs } from "./controllers/ogs";
-import { sharePost } from "./controllers/share";
-import { getStrikes } from "./controllers/strikes";
-import { webhookTriggered } from "./controllers/webhook";
+import { populateDB, saveLiveevent, firebaseStatus } from "./endpoints/controls";
+import { getLiveevent, getOGs, getStrikes } from "./endpoints/api";
+import { sharePost } from "./endpoints/share";
+import { webhookTriggered } from "./endpoints/webhook";
 
 export const controlsRoutes = Router();
 export const liveeventRoutes = Router();
