@@ -42,7 +42,7 @@ export const getOGs: RequestHandler = (req, res) => {
     if (ogId == "" || ogId == null) {
       res.status(400).json({ error: "No OG specified!" });
     } else {
-      Strike.find({ ogId: ogId, date: { $gt: minDate } }, function(
+      Strike.find({ ogId: ogId, date: { $gt: minDate }, strikeId: { $ne: "866" } }, function(
         err: Error,
         strikes
       ) {
