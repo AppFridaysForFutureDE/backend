@@ -43,7 +43,10 @@ export async function retrieveOGs(): Promise<void> {
         other: og["other"] || "",
         retrievedAt: now
       },
-      { upsert: true }
+      { upsert: true }, 
+      function (err, doc) {
+        if (err) { console.log(err); }
+      }
     );
   });
 
