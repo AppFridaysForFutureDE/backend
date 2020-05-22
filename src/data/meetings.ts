@@ -51,10 +51,7 @@ export async function saveAsStrike(
       notificationSent: true, // TODO
       retrievedAt: now
     },
-    { upsert: true },
-    function (err, doc) {
-      if (err) { console.log(err); }
-    }
+    { upsert: true }
   );
 }
 
