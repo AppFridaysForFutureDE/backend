@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { Liveevent } from "../models/liveevent";
+import { Liveevent } from "../models/liveeventModel";
 
 export const getLiveevent: RequestHandler = (req, res) => {
   let liveeventId = req.query.liveeventId;

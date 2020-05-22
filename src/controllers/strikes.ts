@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { Strike } from "../models/strikes";
+import { Strike } from "../models/strikesModel";
 import * as util from "../utility";
 
 export const getStrikes: RequestHandler = (req, res) => {

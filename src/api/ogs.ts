@@ -1,4 +1,4 @@
-import { OG } from "../models/ogs";
+import { OG } from "../models/ogsModel";
 import { addPrefix } from "../utility";
 import { addProtocolPrefix } from "../utility";
 import * as util from "../utility";

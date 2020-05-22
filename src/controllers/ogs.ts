@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { OG } from "../models/ogs";
+import { OG } from "../models/ogsModel";
 
 export const getOGs: RequestHandler = (req, res) => {
   const ogId = req.query.ogId;

@@ -1,5 +1,5 @@
-import { Strike } from "../models/strikes";
-import { OG } from "../models/ogs";
+import { Strike } from "../models/strikesModel";
+import { OG } from "../models/ogsModel";
 import * as util from "../utility";
 import { GoogleSpreadsheet } from "google-spreadsheet";
 
