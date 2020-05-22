@@ -33,7 +33,6 @@ export async function saveAsStrike(
   const jsDate = new Date(year, month - 1, day, hour - 2, minutes);
   const unixDate = util.toUnixTimestamp(jsDate);
 
-  // TODO
   const now = Date.now();
 
   const strikeId = "meeting_" + util.hash(createdAt + ogName);
