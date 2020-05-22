@@ -18,17 +18,12 @@ export const webhookTriggered: RequestHandler = (req, res) => {
       push = true;
     }
   });
-  
-  //TODO: String Templates
+
   if (push) {
     FCMAdmin.getInstance().sendMessage(
-      "feed_" + topic,
+      `feed_${topic}`,
       "Neuer Post!",
-      'Hey, gerade wurde "' +
-        title +
-        '" in der Kategorie "' +
-        topic +
-        '" veröffentlicht!',
+      `Hey, gerade wurde "${title}" in der Kategorie "${topic}" veröffentlicht!`,
       "feed",
       id
     );
