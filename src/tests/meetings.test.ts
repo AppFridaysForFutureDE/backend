@@ -1,7 +1,7 @@
 import * as dbHandler from "./test-db-handler";
-import { Strike } from "../models/strikes";
-import { OG } from "../models/ogs";
-import { saveAsStrike } from "../api/meetings";
+import { Strike } from "../models/strikesModel";
+import { OG } from "../models/ogsModel";
+import { saveAsStrike } from "../data/meetings";
 // const { GoogleSpreadsheet } = require("google-spreadsheet");
 
 beforeAll(async () => await dbHandler.establishConnection());
