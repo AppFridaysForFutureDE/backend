@@ -1,7 +1,7 @@
 import { CronJob } from "cron";
-import * as strikeAccess from "./api/strikes";
-import * as meetingAccess from "./api/meetings";
-import * as ogAccess from "./api/ogs";
+import * as strikeAccess from "./data/strikes";
+import * as meetingAccess from "./data/meetings";
+import * as ogAccess from "./data/ogs";
 
 const jobs = [
   {

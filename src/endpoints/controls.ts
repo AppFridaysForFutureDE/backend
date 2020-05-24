@@ -1,9 +1,9 @@
 import { RequestHandler } from "express";
-import * as strikeAccess from "../api/strikes";
-import * as meetingAccess from "../api/meetings";
-import * as ogAccess from "../api/ogs";
+import * as strikeAccess from "../data/strikes";
+import * as meetingAccess from "../data/meetings";
+import * as ogAccess from "../data/ogs";
 import { FCMAdmin } from "../services/fcm";
-import { Liveevent } from "../models/liveevent";
+import { Liveevent } from "../models/liveeventModel";
 
 export const firebaseStatus: RequestHandler = (req, res) => {
   console.log("Firebase status requested");

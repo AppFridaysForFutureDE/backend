@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { app } from "./app";
+import { app } from "./express/app";
 import { startCronJobs } from "./cron";
 import dotenv from "dotenv-safe";
 

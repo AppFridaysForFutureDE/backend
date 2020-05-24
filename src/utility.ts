@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import { Coord } from "./models/coords";
+import { Coord } from "./models/coordsModel";
 import nodeFetch from "node-fetch";
 
 //A day and a second in unix time

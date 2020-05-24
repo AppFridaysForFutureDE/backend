@@ -1,4 +1,4 @@
-import { Strike } from "../models/strikes";
+import { Strike } from "../models/strikesModel";
 import * as util from "../utility";
 import { FCMAdmin } from "../services/fcm";
 import nodeFetch from "node-fetch";

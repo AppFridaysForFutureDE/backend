@@ -1,5 +1,5 @@
-import { Strike } from "../models/strikes";
-import { OG } from "../models/ogs";
+import { Strike } from "../models/strikesModel";
+import { OG } from "../models/ogsModel";
 import * as util from "../utility";
 import { GoogleSpreadsheet } from "google-spreadsheet";
 
@@ -33,7 +33,6 @@ export async function saveAsStrike(
   const jsDate = new Date(year, month - 1, day, hour - 2, minutes);
   const unixDate = util.toUnixTimestamp(jsDate);
 
-  // TODO
   const now = Date.now();
 
   const strikeId = "meeting_" + util.hash(createdAt + ogName);
@@ -48,7 +47,7 @@ export async function saveAsStrike(
       date: unixDate,
       eventLink: link || "",
       additionalInfo: additionalInfo || "",
-      notificationSent: true, // TODO
+      notificationSent: true,
       retrievedAt: now
     },
     { upsert: true }

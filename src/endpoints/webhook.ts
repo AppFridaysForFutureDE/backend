@@ -9,26 +9,21 @@ export const webhookTriggered: RequestHandler = (req, res) => {
   const tags = data["post"]["current"]["tags"];
   let topic = "";
   let push = false;
-  //TODO: foreach
-  let i = 0;
-  for (i = 0; i < tags.length; i++) {
-    if (tags[i]["description"] == "Themenbereich") {
-      topic = tags[i]["name"];
+
+  tags.array.forEach(tag => {
+    if (tag["description"] == "Themenbereich") {
+      topic = tag["name"];
     }
-    if (tags[i]["name"] == "Push") {
+    if (tag["name"] == "Push") {
       push = true;
     }
-  }
-  //TODO: String Templates
+  });
+
   if (push) {
     FCMAdmin.getInstance().sendMessage(
-      "feed_" + topic,
+      `feed_${topic}`,
       "Neuer Post!",
-      'Hey, gerade wurde "' +
-        title +
-        '" in der Kategorie "' +
-        topic +
-        '" veröffentlicht!',
+      `Hey, gerade wurde "${title}" in der Kategorie "${topic}" veröffentlicht!`,
       "feed",
       id
     );
