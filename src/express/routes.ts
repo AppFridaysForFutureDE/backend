@@ -1,5 +1,9 @@
 import { Router } from "express";
-import { populateDB, saveLiveevent, firebaseStatus } from "../endpoints/controls";
+import {
+  populateDB,
+  saveLiveevent,
+  firebaseStatus
+} from "../endpoints/controls";
 import { getLiveevent, getOGs, getStrikes } from "../endpoints/api";
 import { sharePost } from "../endpoints/share";
 import { webhookTriggered } from "../endpoints/webhook";
