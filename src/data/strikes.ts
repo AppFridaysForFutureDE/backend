@@ -64,7 +64,7 @@ export function checkStrikes(): void {
         FCMAdmin.getInstance().sendMessage(
           `og_${strike["ogId"]}`,
           `Streikalarm in ${strike["name"]}`,
-          `Demnächst findet hier ein Streik statt: ${strike["startingPoint"]}, ${strike["name"]}`,
+          `Demnächst findet hier ein Streik statt: ${strike["location"]}, ${strike["name"]}`,
           "strike",
           strike["ogId"]
         );
