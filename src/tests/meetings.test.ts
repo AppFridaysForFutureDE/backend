@@ -59,31 +59,8 @@ describe("saveAsStrike with weird time format", () => {
       "Telko Link auf Anfrage"
     );
 
-    const strikes = await Strike.find({});
-    const strike = strikes[0];
-    //expect(strike["date"]).toBe(1587999600);
-  });
-});
-
-describe("saveAsStrike with weird time format", () => {
-  it("should save the record", async () => {
-    await new OG({
-      ogId: "0812f239a",
-      name: "München"
-    }).save();
-
-    await saveAsStrike(
-      "21.04.2020 16:36:38",
-      "27.04.2020",
-      "17 Uhr",
-      "München",
-      "Discord",
-      "",
-      "Telko Link auf Anfrage"
-    );
-
-    const strikes = await Strike.find({});
-    const strike = strikes[0];
+    //const strikes = await Strike.find({});
+    //const strike = strikes[0];
     //expect(strike["date"]).toBe(1587999600);
   });
 });

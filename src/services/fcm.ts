@@ -56,7 +56,7 @@ export class FCMAdmin {
       data: {
         payload: payload,
         type: type,
-        click_action: "FLUTTER_NOTIFICATION_CLICK"
+        click_action: "FLUTTER_NOTIFICATION_CLICK" // eslint-disable-line
       },
       topic: topic
     };

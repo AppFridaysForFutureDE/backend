@@ -30,6 +30,6 @@ app.use("/p", shareRoutes);
 app.use("/admin/controls", controlsRoutes);
 app.use(expressStatusMonitor({ path: "/admin/status" }));
 
-app.use(function(err: Error, req: Request, res: Response, next) {
+app.use(function(err: Error, req: Request, res: Response, next) { // eslint-disable-line
   res.status(500).json({ message: err.message });
 });

@@ -44,7 +44,11 @@ export async function retrieveOGs(): Promise<void> {
         retrievedAt: now
       },
       { upsert: true },
-      function(err, og) {}
+      function(err, og) {
+        console.log("error while upserting ogs");
+        console.log(og);
+        console.log(err);
+      }
     );
   });
 

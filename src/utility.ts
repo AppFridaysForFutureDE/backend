@@ -6,7 +6,7 @@ import nodeFetch from "node-fetch";
 export const day = 86401;
 
 //adds a custom prefix if prefix isnt there already and text isnt empty
-export function addPrefix(prefix: string, text: string) {
+export function addPrefix(prefix: string, text: string): string {
   if (text != null && !text.startsWith(prefix) && text != "") {
     text = prefix + text;
   }
@@ -14,7 +14,7 @@ export function addPrefix(prefix: string, text: string) {
 }
 
 //adds standard protocol prefix if there is none and text isnt empty
-export function addProtocolPrefix(text: string) {
+export function addProtocolPrefix(text: string): string {
   if (
     text != null &&
     text != "" &&

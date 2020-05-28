@@ -31,7 +31,11 @@ export async function retrieveStrikes(): Promise<void> {
         retrievedAt: now
       },
       { upsert: true },
-      function(err, doc) {}
+      function(err, doc) {
+        console.log("error while updating strikes");
+        console.log(doc);
+        console.log(err);
+      }
     );
   });
 }
