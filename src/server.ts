@@ -16,8 +16,8 @@ mongoose
   })
   .then(
     async () => {
-      process.env.TZ = 'Europe/Berlin';
-
+      console.log(process.env.TZ);
+      
       console.log("Starting job scheduler");
       startCronJobs();
 
