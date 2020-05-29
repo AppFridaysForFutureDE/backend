@@ -4,7 +4,10 @@ import { OG } from "../models/ogsModel";
 import { saveAsStrike } from "../data/meetings";
 // const { GoogleSpreadsheet } = require("google-spreadsheet");
 
-beforeAll(async () => await dbHandler.establishConnection());
+beforeAll(async () => {
+  await dbHandler.establishConnection();
+  process.env.TZ="Europe/Berlin";
+});
 afterEach(async () => await dbHandler.clearDatabase());
 afterAll(async () => await dbHandler.closeDatabase());
 
