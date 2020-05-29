@@ -7,6 +7,7 @@ import { saveAsStrike } from "../data/meetings";
 beforeAll(async () => {
   await dbHandler.establishConnection();
   process.env.TZ="Europe/Berlin";
+  console.log(new Date())
 });
 afterEach(async () => await dbHandler.clearDatabase());
 afterAll(async () => await dbHandler.closeDatabase());
