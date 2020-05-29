@@ -16,8 +16,6 @@ mongoose
   })
   .then(
     async () => {
-      console.log(process.env.TZ);
-      
       console.log("Starting job scheduler");
       startCronJobs();
 
