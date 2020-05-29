@@ -30,7 +30,7 @@ export async function saveAsStrike(
   }
 
   // TODO: Fix time zone
-  const jsDate = new Date(year, month - 1, day, hour - 2, minutes);
+  const jsDate = new Date(year, month - 1, day, hour, minutes);
   const unixDate = util.toUnixTimestamp(jsDate);
 
   const now = Date.now();
