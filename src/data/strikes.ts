@@ -31,7 +31,11 @@ export async function retrieveStrikes(): Promise<void> {
         retrievedAt: now
       },
       { upsert: true },
-      function(err, doc) {}
+      function(err, doc) {
+        console.log("error while updating strikes");
+        console.log(doc);
+        console.log(err);
+      }
     );
   });
 }
@@ -60,7 +64,7 @@ export function checkStrikes(): void {
         FCMAdmin.getInstance().sendMessage(
           `og_${strike["ogId"]}`,
           `Streikalarm in ${strike["name"]}`,
-          `Demnächst findet hier ein Streik statt: ${strike["startingPoint"]}, ${strike["name"]}`,
+          `Demnächst findet hier ein Streik statt: ${strike["location"]}, ${strike["name"]}`,
           "strike",
           strike["ogId"]
         );

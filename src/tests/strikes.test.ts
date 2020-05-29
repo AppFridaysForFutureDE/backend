@@ -1,6 +1,6 @@
 import * as dbHandler from "./test-db-handler";
-import { Strike } from "../models/strikes";
-import { app } from "../app";
+import { Strike } from "../models/strikesModel";
+import { app } from "../express/app";
 import request from "supertest";
 import * as util from "../utility";
 

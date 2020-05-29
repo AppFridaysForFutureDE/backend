@@ -1,6 +1,6 @@
 import * as dbHandler from "./test-db-handler";
-import { OG } from "../models/ogs";
-import { app } from "../app";
+import { OG } from "../models/ogsModel";
+import { app } from "../express/app";
 import request from "supertest";
 
 beforeAll(async () => await dbHandler.establishConnection());
