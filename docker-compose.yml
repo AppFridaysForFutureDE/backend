@@ -19,7 +19,7 @@ services:
       database__connection__database: db
       url: https://app.fffutu.re/ghost
     volumes:
-      - content/:/var/lib/ghost/content/
+      - /var/ghost/content/:/var/lib/ghost/content/
     depends_on:
       - mysql-db
     links:
