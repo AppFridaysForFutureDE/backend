@@ -17,7 +17,7 @@ services:
       database__connection__user: ghost-user
       database__connection__password: supersecret
       database__connection__database: db
-      url: http://78.46.199.56/ghost
+      url: http://78.46.199.56
     volumes:
       - /var/ghost/content/:/var/lib/ghost/content/
     depends_on:
