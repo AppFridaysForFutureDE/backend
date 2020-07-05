@@ -23,7 +23,7 @@ export class UserManager {
    * return: true, if creation was successful
    */
   public createUser(user: {username: string, password: string, admin: boolean}, sessionID: string): boolean {
-    console.log(`createUser(user: {username: ${user.username}, password: ${user.password}, admin: ${user.admin}}, sessionID: ${sessionID}`);
+    console.log(`createUser(user: {username: ${user.username}, password: ${user.password}, admin: ${user.admin}}, sessionID: ${sessionID})`);
     return false;
   }
 
@@ -37,7 +37,7 @@ export class UserManager {
    * return: true, if update was successful
    */
   public updateUser(user: {username: string, password: string, admin: boolean}, sessionID: string): boolean {
-    console.log(`updateUser(user: {username: ${user.username}, password: ${user.password}, admin: ${user.admin}}, sessionID: ${sessionID}`);
+    console.log(`updateUser(user: {username: ${user.username}, password: ${user.password}, admin: ${user.admin}}, sessionID: ${sessionID})`);
     return false;
   }
 
@@ -51,7 +51,7 @@ export class UserManager {
    * return: true, if removal was successful
    */
   public removeUser(username: string, sessionID: string): boolean {
-    console.log(`removeUser(username: ${username}, sessionID: ${sessionID}`);
+    console.log(`removeUser(username: ${username}, sessionID: ${sessionID})`);
     return false;
   }
 
@@ -69,7 +69,7 @@ export class UserManager {
    * }
    */
   public login(username: string, password: string): { valid: boolean, sessionID: string} {
-    console.log(`login(username: ${username}, password: ${password}`);
+    console.log(`login(username: ${username}, password: ${password})`);
     return { valid: false, sessionID: ""};
   }
 
@@ -80,7 +80,7 @@ export class UserManager {
    * sessionID: the session id of the session to end
    */
   public logout(sessionID: string) {
-    console.log(`logout(sessionID: ${sessionID}`);
+    console.log(`logout(sessionID: ${sessionID})`);
   }
 
   /**
@@ -96,7 +96,7 @@ export class UserManager {
    * }
    */
   public checkSessionID(sessionID: string): { valid: boolean, admin: boolean } {
-    console.log(`checkSessionID(sessionID: ${sessionID}`);
+    console.log(`checkSessionID(sessionID: ${sessionID})`);
     return {valid: false, admin: false};
   }
 }
