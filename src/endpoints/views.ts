@@ -10,8 +10,10 @@ export const loginView: RequestHandler = async (req, res) => {
 export const controlsView: RequestHandler = async (req, res) => {
     //redirect to login if wrong/missing session id
     console.log("controls page");
+    var status = FCMAdmin.getInstance().getStatus();
+    console.log(status);
     res.render("controls", {
-        firebaseStatus: FCMAdmin.getInstance().getStatus(),
+        firebaseStatus: status,
         admin: false
     });
 }
