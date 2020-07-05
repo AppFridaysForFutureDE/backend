@@ -12,7 +12,7 @@ export const app = express();
 app.use(json());
 app.use(cookieParser());
 app.use(express.urlencoded());
-app.set('views', path.join(__dirname, '../views'));
+app.set('views', path.join(__dirname, '../../src/views'));
 app.set("view engine", "ejs");
 
 //API Routes
