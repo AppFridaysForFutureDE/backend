@@ -5,37 +5,41 @@ import * as ogAccess from "../data/ogs";
 import { Liveevent } from "../models/liveeventModel";
 import { UserManager } from "../userManager";
 
+//TODO: check session id in only one middleware function => less code redundancy
+
 export const populateDB: RequestHandler = async (req, res) => {
   let sessID = req.cookies["fff_sessionid"];
   if (!UserManager.getInstance().checkSessionID(sessID)) {
     res.status(401).end();
+  } else {
+    await Promise.all([
+      ogAccess.retrieveOGs(),
+      strikeAccess.retrieveStrikes(),
+      meetingAccess.retrieveMeetings()
+    ]);
+    res.status(200).json({ performedPopulate: true });
   }
-  await Promise.all([
-    ogAccess.retrieveOGs(),
-    strikeAccess.retrieveStrikes(),
-    meetingAccess.retrieveMeetings()
-  ]);
-  res.status(200).json({ performedPopulate: true });
 };
 
 export const saveLiveevent: RequestHandler = async (req, res) => {
   let sessID = req.cookies["fff_sessionid"];
   if (!UserManager.getInstance().checkSessionID(sessID)) {
     res.status(401).end();
+  } else {
+    Liveevent.findOneAndUpdate(
+      { liveeventId: req.body.id },
+      {
+        isActive: req.body.isActive,
+        actionText: req.body.actionText,
+        actionUrl: req.body.actionUrl,
+        inApp: req.body.inApp
+      },
+      { upsert: true },
+      function(err, doc) {
+        res.status(200).json({ err: err, doc: doc });
+      }
+    );
   }
-  Liveevent.findOneAndUpdate(
-    { liveeventId: req.body.id },
-    {
-      isActive: req.body.isActive,
-      actionText: req.body.actionText,
-      actionUrl: req.body.actionUrl,
-      inApp: req.body.inApp
-    },
-    { upsert: true },
-    function(err, doc) {
-      res.status(200).json({ err: err, doc: doc });
-    }
-  );
 };
 
 export const login: RequestHandler = async (req, res) => {
@@ -44,9 +48,10 @@ export const login: RequestHandler = async (req, res) => {
   let { valid, sessionID } = UserManager.getInstance().login(username, password);
   if(!valid) {
     res.redirect("/views/panel/login?err=true");
+  } else {
+    res.cookie("fff_sessionid", sessionID);
+    res.redirect("/views/panel/controls");
   }
-  res.cookie("fff_sessionid", sessionID);
-  res.redirect("/views/panel/controls");
 };
 
 export const logout: RequestHandler = async (req, res) => {
