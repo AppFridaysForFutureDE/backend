@@ -40,7 +40,7 @@
   "scripts": {
     "test": "jest",
     "compile": "tsc && node dist/server.js",
-    "prestart": "copyfiles views/*.ejs dist/",
+    "prestart": "copyfiles src/views/*.ejs dist/",
     "start": "nodemon --watch src/ --exec \"npm run compile\" --verbose -e ts",
     "start-prod": "node dist/server.js",
     "build": "tsc",
