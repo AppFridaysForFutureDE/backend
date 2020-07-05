@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import { json } from "body-parser";
 import cookieParser from "cookie-parser";
 import expressStatusMonitor from "express-status-monitor";
+import path from "path";
 
 //routes
 import { strikeRoutes, ogRoutes, webhookRoutes, shareRoutes, controlsRoutes, liveeventRoutes, viewRoutes } from "./routes";
@@ -11,6 +12,7 @@ export const app = express();
 app.use(json());
 app.use(cookieParser());
 app.use(express.urlencoded());
+app.set('views', path.join(__dirname, 'views'));
 app.set("view engine", "ejs");
 
 //API Routes
