@@ -145,22 +145,6 @@
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
   <script>
-    function getFirebase() {
-      const fbStatus = new XMLHttpRequest();
-      const url = '/admin/controls/firebaseStatus';
-      fbStatus.open("GET", url);
-      fbStatus.send();
-      fbStatus.onreadystatechange = (e) => {
-        console.log(fbStatus.responseText);
-        const state = JSON.parse(fbStatus.responseText);
-        if (state.firebaseStatus == true) {
-          document.getElementById("status").textContent = "Verbindung zu Firebase hergestellt";
-        } else {
-          document.getElementById("status").textContent = "Verbindung zu Firebase nicht hergestellt";
-        }
-      }
-    }
-
     function requestPopulate() {
       const populate = new XMLHttpRequest();
       const url = '/admin/controls/populateDB';
@@ -211,6 +195,15 @@
                 Online-Monitor
               </a>
             </li>
+            <% if (admin) { %>
+              <!-- Render Admin Only tabs here -->
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#UserPage">
+                  <span data-feather="users"></span>
+                  Benutzerverwaltung
+                </a>
+              </li>
+            <% } %>
           </ul>
         </div>
       </nav>
@@ -261,14 +254,20 @@
               Firebase-Status
             </h3>
             <hr class="my-4">
-            <span id="status">Nicht geladen</span><br><br>
-            <button class="btn btn-primary" type="button" onclick="getFirebase()">Aktualisieren</button>
+            <span id="status"><%= firebaseStatus %></span>
           </div>
 
           <div id="MonitorPage" class="tab-pane fade">
             <iframe id="statusframe" style="width: 70vw;height: 100vh;position: relative;" scrolling="no" src=""
               frameborder="0" allowfullscreen></iframe>
           </div>
+
+          <% if (admin) { %>
+            <!-- Render Admin Only tabs here -->
+            <div id="UserPage" class="tab-pane fade">
+              yep this dude is an admin
+            </div>
+          <% } %>
         </div>
 
         <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>

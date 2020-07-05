@@ -2,14 +2,7 @@ import { RequestHandler } from "express";
 import * as strikeAccess from "../data/strikes";
 import * as meetingAccess from "../data/meetings";
 import * as ogAccess from "../data/ogs";
-import { FCMAdmin } from "../services/fcm";
 import { Liveevent } from "../models/liveeventModel";
-
-export const firebaseStatus: RequestHandler = (req, res) => {
-  console.log("Firebase status requested");
-  FCMAdmin.getInstance().getStatus();
-  res.status(200).json({ firebaseStatus: FCMAdmin.getInstance().getStatus() });
-};
 
 export const populateDB: RequestHandler = async (req, res) => {
   console.log("Populating DB");
@@ -36,4 +29,25 @@ export const saveLiveevent: RequestHandler = async (req, res) => {
       res.status(200).json({ err: err, doc: doc });
     }
   );
+};
+
+export const login: RequestHandler = async (req, res) => {
+  res.status(200).json({ message: "not implemented" });
+};
+
+export const logout: RequestHandler = async (req, res) => {
+  res.status(200).json({ message: "not implemented" });
+};
+
+//only admin from here
+export const remove: RequestHandler = async (req, res) => {
+  res.status(200).json({ message: "not implemented" });
+};
+
+export const register: RequestHandler = async (req, res) => {
+  res.status(200).json({ message: "not implemented" });
+};
+
+export const privilege: RequestHandler = async (req, res) => {
+  res.status(200).json({ message: "not implemented" });
 };

@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import { json } from "body-parser";
+import cookieParser from "cookie-parser";
 import expressStatusMonitor from "express-status-monitor";
 
 //routes
@@ -8,6 +9,7 @@ import { strikeRoutes, ogRoutes, webhookRoutes, shareRoutes, controlsRoutes, liv
 //Initialization
 export const app = express();
 app.use(json());
+app.use(cookieParser());
 app.use(express.urlencoded());
 app.set("view engine", "ejs");
 
@@ -27,7 +29,7 @@ app.use("/admin/controls", controlsRoutes);
 app.use(expressStatusMonitor({ path: "/admin/status" }));
 
 //View Routes
-app.use("/panel", viewRoutes);
+app.use("/views", viewRoutes);
 
 app.use(function(err: Error, req: Request, res: Response, next) { // eslint-disable-line
   res.status(500).json({ message: err.message });
