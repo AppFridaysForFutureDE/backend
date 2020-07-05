@@ -1,15 +1,15 @@
 // Manages users
-export class userManager {
-  private static instance: userManager;
+export class UserManager {
+  private static instance: UserManager;
 
   private constructor() {
   }
 
-  static getInstance(): userManager {
+  static getInstance(): UserManager {
     if (this.instance) {
       return this.instance;
     }
-    this.instance = new userManager();
+    this.instance = new UserManager();
     return this.instance;
   }
 

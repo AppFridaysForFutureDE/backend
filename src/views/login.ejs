@@ -90,36 +90,27 @@
 </head>
 
 <body class="text-center">
-  <form class="form-signin">
+  <form class="form-signin" action="/admin/controls/user/login">
     <img class="mb-4" src="../img/fff.png" alt="" width="72" height="72">
 
     <h1 class="h3 mb-3 font-weight-normal">Login</h1>
 
     <label for="inputUsername" class="sr-only">Benutzername</label>
-    <input type="text" id="inputUsername" class="form-control" placeholder="Benutzername" required autofocus>
+    <input name="username" type="text" id="inputUsername" class="form-control" placeholder="Benutzername" required autofocus>
 
     <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Passwort" required>
+    <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Passwort" required>
 
-    <button class="btn btn-lg btn-primary btn-block" type="button" onclick="login()">Anmelden</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Anmelden</button>
 
     <br>
-    <div id="errAl" class="alert alert-danger alert-dismissible fade show" role="alert">
-      <strong>Mist!</strong> Die Zugangsdaten scheinen falsch zu sein.
-    </div>
+    <% if (err) { %>
+      <div id="errAl" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Mist!</strong> Die Zugangsdaten scheinen falsch zu sein.
+      </div>
+    <% } %>
   </form>
 
-
-
-  <script>
-    function login(e) {
-
-    }
-
-    window.onload = function () {
-      $('#errAl').hide();
-    }
-  </script>
 </body>
 
 </html>

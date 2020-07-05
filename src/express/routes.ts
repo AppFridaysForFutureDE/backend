@@ -4,7 +4,8 @@ import {
   saveLiveevent,
   login,
   logout,
-  register,
+  create,
+  update,
   remove
 } from "../endpoints/controls";
 import { getLiveevent, getOGs, getStrikes } from "../endpoints/api";
@@ -24,7 +25,8 @@ controlsRoutes.post("/action/populateDB", populateDB);
 controlsRoutes.post("/action/liveevent", saveLiveevent);
 controlsRoutes.post("/user/login", login);
 controlsRoutes.post("/user/logout", logout);
-controlsRoutes.post("/user/register", register);
+controlsRoutes.post("/user/create", create);
+controlsRoutes.post("/user/update", update);
 controlsRoutes.post("/user/remove", remove);
 
 liveeventRoutes.get("/", getLiveevent);
