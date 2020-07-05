@@ -31,7 +31,7 @@ app.use("/admin/controls", controlsRoutes);
 app.use(expressStatusMonitor({ path: "/admin/status" }));
 
 //View Routes
-app.use("/views", viewRoutes);
+app.use("/", viewRoutes);
 
 app.use(function(err: Error, req: Request, res: Response, next) { // eslint-disable-line
   res.status(500).json({ message: err.message });
