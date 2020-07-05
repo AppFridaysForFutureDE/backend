@@ -6,6 +6,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
+    "copyfiles": "^2.3.0",
     "cron": "^1.8.2",
     "dotenv-safe": "^8.2.0",
     "ejs": "^3.1.3",
@@ -39,6 +40,7 @@
   "scripts": {
     "test": "jest",
     "compile": "tsc && node dist/server.js",
+    "prestart": "copyfiles *.ejs dist/",
     "start": "nodemon --watch src/ --exec \"npm run compile\" --verbose -e ts",
     "start-prod": "node dist/server.js",
     "build": "tsc",
