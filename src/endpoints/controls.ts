@@ -47,7 +47,3 @@ export const remove: RequestHandler = async (req, res) => {
 export const register: RequestHandler = async (req, res) => {
   res.status(200).json({ message: "not implemented" });
 };
-
-export const privilege: RequestHandler = async (req, res) => {
-  res.status(200).json({ message: "not implemented" });
-};

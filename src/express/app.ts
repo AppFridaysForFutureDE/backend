@@ -5,14 +5,22 @@ import expressStatusMonitor from "express-status-monitor";
 import path from "path";
 
 //routes
-import { strikeRoutes, ogRoutes, webhookRoutes, shareRoutes, controlsRoutes, liveeventRoutes, viewRoutes } from "./routes";
+import {
+  strikeRoutes,
+  ogRoutes,
+  webhookRoutes,
+  shareRoutes,
+  controlsRoutes,
+  liveeventRoutes,
+  viewRoutes
+} from "./routes";
 
 //Initialization
 export const app = express();
 app.use(json());
 app.use(cookieParser());
 app.use(express.urlencoded());
-app.set('views', path.join(__dirname, '../../src/views'));
+app.set("views", path.join(__dirname, "../../src/views"));
 app.set("view engine", "ejs");
 
 //API Routes

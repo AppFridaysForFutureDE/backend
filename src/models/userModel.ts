@@ -7,12 +7,18 @@ const userScheme = new mongoose.Schema({
   passwordHash: {
     type: String
   },
+  salt: {
+    type: String
+  },
   admin: {
     type: Boolean
   },
   activeSession: {
     type: String
-  }
+  },
+  expiration: {
+    type: Number
+  } 
 });
 
 export const User = mongoose.model("user", userScheme);

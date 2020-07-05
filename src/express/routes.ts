@@ -5,8 +5,7 @@ import {
   login,
   logout,
   register,
-  remove,
-  privilege
+  remove
 } from "../endpoints/controls";
 import { getLiveevent, getOGs, getStrikes } from "../endpoints/api";
 import { sharePost } from "../endpoints/share";
@@ -23,11 +22,10 @@ export const viewRoutes = Router();
 
 controlsRoutes.post("/action/populateDB", populateDB);
 controlsRoutes.post("/action/liveevent", saveLiveevent);
-controlsRoutes.post("/user/login", );
-controlsRoutes.post("/user/logout", );
-controlsRoutes.post("/user/register", );
-controlsRoutes.post("/user/delete", );
-controlsRoutes.post("/user/privilege", );
+controlsRoutes.post("/user/login", login);
+controlsRoutes.post("/user/logout", logout);
+controlsRoutes.post("/user/register", register);
+controlsRoutes.post("/user/remove", remove);
 
 liveeventRoutes.get("/", getLiveevent);
 
