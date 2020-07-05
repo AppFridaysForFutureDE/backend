@@ -13,7 +13,7 @@ export const controlsView: RequestHandler = async (req, res) => {
     var status = FCMAdmin.getInstance().getStatus();
     console.log(status);
     res.render("controls", {
-        firebaseStatus: status,
-        admin: false
+        firebaseStatus: status ? "Verbunden" : "Nicht verbunden",
+        admin: true
     });
 }
