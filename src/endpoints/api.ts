@@ -2,7 +2,7 @@ import { RequestHandler } from "express";
 import { OG } from "../models/ogsModel";
 import { Liveevent } from "../models/liveeventModel";
 import { Strike } from "../models/strikesModel";
-import * as util from "../utility";
+import Utility from "../utility";
 
 export const getOGs: RequestHandler = (req, res) => {
   const ogId = req.query.ogId;
@@ -37,7 +37,7 @@ export const getStrikes: RequestHandler = (req, res) => {
   const minDate =
     req.query.showPastStrikes == "true"
       ? 0
-      : util.toUnixTimestamp(new Date()) - util.day;
+      : Utility.toUnixTimestamp(new Date()) - Utility.Day;
 
   if (ogId == "" || ogId == null) {
     res.status(400).json({ error: "No OG specified!" });

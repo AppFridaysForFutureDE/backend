@@ -9,7 +9,7 @@ import { UserManager } from "../userManager";
 
 export const populateDB: RequestHandler = async (req, res) => {
   let sessID = req.cookies["fff_sessionid"];
-  if (!UserManager.checkSessionID(sessID).valid) {
+  if (!(await UserManager.checkSessionID(sessID)).valid) {
     res.status(401).end();
   } else {
     await Promise.all([
@@ -23,7 +23,7 @@ export const populateDB: RequestHandler = async (req, res) => {
 
 export const saveLiveevent: RequestHandler = async (req, res) => {
   let sessID = req.cookies["fff_sessionid"];
-  if (!UserManager.checkSessionID(sessID).valid) {
+  if (!(await UserManager.checkSessionID(sessID)).valid) {
     res.status(401).end();
   } else {
     Liveevent.findOneAndUpdate(
@@ -45,7 +45,7 @@ export const saveLiveevent: RequestHandler = async (req, res) => {
 export const login: RequestHandler = async (req, res) => {
   let username = req.body.username;
   let password = req.body.password;
-  let { valid, sessionID } = UserManager.login(username, password);
+  let { valid, sessionID } = await UserManager.login(username, password);
   if(!valid) {
     res.redirect("/views/panel/login?err=true");
   } else {
@@ -56,14 +56,14 @@ export const login: RequestHandler = async (req, res) => {
 
 export const logout: RequestHandler = async (req, res) => {
   let sessID = req.cookies["fff_sessionid"];
-  UserManager.logout(sessID);
+  await UserManager.logout(sessID);
   res.redirect("/views/panel/login");
 };
 
 export const remove: RequestHandler = async (req, res) => {
   let username = req.body.username;
   let sessID = req.cookies["fff_sessionid"];
-  let success = UserManager.removeUser(username, sessID);
+  let success = await UserManager.removeUser(username, sessID);
   res.status(200).json({ success: success });
 };
 
@@ -71,7 +71,7 @@ export const create: RequestHandler = async (req, res) => {
   let username = req.body.username;
   let admin: boolean = req.body.admin;
   let sessID = req.cookies["fff_sessionid"];
-  let success = UserManager.createUser({username, admin}, sessID);
+  let success = await UserManager.createUser({username, admin}, sessID);
   res.status(200).json({ success: success });
 };
 
@@ -80,6 +80,6 @@ export const update: RequestHandler = async (req, res) => {
   let password = req.body.password;
   let admin: boolean = req.body.admin;
   let sessID = req.cookies["fff_sessionid"];
-  let success = UserManager.updateUser({username, password, admin}, sessID);
+  let success = await UserManager.updateUser({username, password, admin}, sessID);
   res.status(200).json({ success: success });
 };
