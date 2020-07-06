@@ -1,18 +1,8 @@
 // Manages users
-export class UserManager {
-  private static instance: UserManager;
-
-  private constructor() {
-  }
-
-  static getInstance(): UserManager {
-    if (this.instance) {
-      return this.instance;
-    }
-    this.instance = new UserManager();
-    return this.instance;
-  }
-
+//only static methods: no huge amounts of instances
+//singleton scheme isnt used as this class doesnt handle services that can only be used by one instance at a time
+export abstract class UserManager {
+  
   /**
    * Creates a new user (or changes existing users details)
    * 
@@ -22,8 +12,8 @@ export class UserManager {
    * 
    * return: true, if creation was successful
    */
-  public createUser(user: {username: string, password: string, admin: boolean}, sessionID: string): boolean {
-    console.log(`createUser(user: {username: ${user.username}, password: ${user.password}, admin: ${user.admin}}, sessionID: ${sessionID})`);
+  public static createUser(user: {username: string, admin: boolean}, sessionID: string): boolean {
+    console.log(`createUser(user: {username: ${user.username}, admin: ${user.admin}}, sessionID: ${sessionID})`);
     return false;
   }
 
@@ -36,7 +26,7 @@ export class UserManager {
    * 
    * return: true, if update was successful
    */
-  public updateUser(user: {username: string, password: string, admin: boolean}, sessionID: string): boolean {
+  public static updateUser(user: {username: string, password: string, admin: boolean}, sessionID: string): boolean {
     console.log(`updateUser(user: {username: ${user.username}, password: ${user.password}, admin: ${user.admin}}, sessionID: ${sessionID})`);
     return false;
   }
@@ -50,7 +40,7 @@ export class UserManager {
    * 
    * return: true, if removal was successful
    */
-  public removeUser(username: string, sessionID: string): boolean {
+  public static removeUser(username: string, sessionID: string): boolean {
     console.log(`removeUser(username: ${username}, sessionID: ${sessionID})`);
     return false;
   }
@@ -68,7 +58,7 @@ export class UserManager {
    *    sessionID: the created sessionID
    * }
    */
-  public login(username: string, password: string): { valid: boolean, sessionID: string} {
+  public static login(username: string, password: string): { valid: boolean, sessionID: string} {
     console.log(`login(username: ${username}, password: ${password})`);
     return { valid: false, sessionID: ""};
   }
@@ -79,7 +69,7 @@ export class UserManager {
    * params:
    * sessionID: the session id of the session to end
    */
-  public logout(sessionID: string) {
+  public static logout(sessionID: string) {
     console.log(`logout(sessionID: ${sessionID})`);
   }
 
@@ -95,7 +85,7 @@ export class UserManager {
    *    admin: true, if session has admin privileges
    * }
    */
-  public checkSessionID(sessionID: string): { valid: boolean, admin: boolean } {
+  public static checkSessionID(sessionID: string): { valid: boolean, admin: boolean } {
     console.log(`checkSessionID(sessionID: ${sessionID})`);
     return {valid: false, admin: false};
   }

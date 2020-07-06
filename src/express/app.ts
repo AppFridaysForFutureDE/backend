@@ -34,7 +34,7 @@ app.use("/internal/webhooks/ghost", webhookRoutes);
 //Public Routes
 app.use("/p", shareRoutes);
 
-//Admin Routes
+//Controls Routes
 app.use("/admin/controls", controlsRoutes);
 app.use(expressStatusMonitor({ path: "/admin/status" }));
 

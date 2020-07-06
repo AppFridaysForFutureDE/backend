@@ -5,7 +5,7 @@ import { UserManager } from "../userManager";
 export const loginView: RequestHandler = async (req, res) => {
     //redirect to controls if good session id
     let sessID = req.cookies["fff_sessionid"];
-    let { valid, admin } = UserManager.getInstance().checkSessionID(sessID);
+    let { valid, admin } = UserManager.checkSessionID(sessID);
     if (valid) {
         res.redirect("/views/panel/controls");
     } else if (req.query.err == "true") {
@@ -18,7 +18,7 @@ export const loginView: RequestHandler = async (req, res) => {
 export const controlsView: RequestHandler = async (req, res) => {
     //redirect to login if wrong/missing session id
     let sessID = req.cookies["fff_sessionid"];
-    let { valid, admin } = UserManager.getInstance().checkSessionID(sessID);
+    let { valid, admin } = UserManager.checkSessionID(sessID);
     if (!valid) {
         res.redirect("/views/panel/login");
     } else {
