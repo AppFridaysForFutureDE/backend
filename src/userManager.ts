@@ -112,7 +112,7 @@ export abstract class UserManager {
   public static async login(username: string, password: string): Promise<{ valid: boolean; sessionID: string; }> {
     console.log(`login(username: ${username}, password: ${password})`);
 
-    let user = await User.findOne({ username: username }); //check if user exists
+    let user = await User.findOne({ name: username }); //check if user exists
     console.log(`user from database: ${user}`)
     if (user == null || user == undefined) {
       console.log("user doesnt exist");
