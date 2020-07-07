@@ -7,9 +7,9 @@ import Utility from "./utility";
 //only static methods: no huge amounts of instances
 //singleton scheme isnt used as this class doesnt handle services that can only be used by one instance at a time
 export abstract class UserManager {
-
+  
   public static hashPassword(password: string, salt: string): string {
-    console.log(password);
+    console.log(`salt: ${salt}`);
     let hash = crypto.createHmac('sha512', salt);
     hash.update(password);
     return hash.digest('hex');
@@ -60,7 +60,7 @@ export abstract class UserManager {
 
     if (valid) {
       let salt = this.generateRandomString(16);
-      let pwHash = this.hashPassword(user.password.toString(), salt);
+      let pwHash = this.hashPassword(user.password, salt);
       await User.findOneAndUpdate({ name: user.username }, {
         passwordHash: pwHash,
         salt: salt,
@@ -120,7 +120,7 @@ export abstract class UserManager {
 
     if (user["passwordHash"] == "") { //first time logging in (create new password)
       let salt = this.generateRandomString(16);
-      let pwHash = this.hashPassword(password.toString(), salt);
+      let pwHash = this.hashPassword(password, salt);
       await User.findOneAndUpdate({ name: username }, {
         passwordHash: pwHash,
         salt: salt,
