@@ -22,9 +22,10 @@ if (process.env.FFF_USER && process.env.FFF_PW) {
     },
     { upsert: true },
     function (err, doc) {
-      console.log("error while creating user from env");
-      console.log(doc);
-      console.log(err);
+      if (err) {
+        console.log("error while creating user from env");
+        console.log(err);
+      }
     }
   );
 }
