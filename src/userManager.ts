@@ -59,7 +59,7 @@ export abstract class UserManager {
 
     if (valid) {
       let salt = this.generateRandomString(16);
-      let pwHash = this.hashPassword(user.password, salt);
+      let pwHash = this.hashPassword(user.password.toString(), salt);
       await User.findOneAndUpdate({ name: user.username }, {
         passwordHash: pwHash,
         salt: salt,
@@ -119,7 +119,7 @@ export abstract class UserManager {
 
     if (user["passwordHash"] == "") { //first time logging in (create new password)
       let salt = this.generateRandomString(16);
-      let pwHash = this.hashPassword(password, salt);
+      let pwHash = this.hashPassword(password.toString(), salt);
       await User.findOneAndUpdate({ name: username }, {
         passwordHash: pwHash,
         salt: salt,
