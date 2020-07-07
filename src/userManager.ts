@@ -127,6 +127,7 @@ export abstract class UserManager {
       });
     }
 
+    console.log(user);
     let pwHash = this.hashPassword(password, user["salt"]);
 
     if (pwHash == user["passwordHash"]) { //check if hashes match
