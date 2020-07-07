@@ -293,7 +293,7 @@
                 <tr>
                   <th scope="row"><%= i %></th>
                   <td>
-                    <% if (!users[i]["active"]) { %>
+                    <% if (users[i]["active"]) { %>
                       <span data-feather="check"></span>
                     <% } else { %>
                       <span data-feather="x"></span>
