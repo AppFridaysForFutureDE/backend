@@ -113,7 +113,7 @@ export abstract class UserManager {
   public static async login(username: string, password: string): Promise<{ valid: boolean; sessionID: string; }> {
     console.log(`login(username: ${username}, password: ${password})`);
 
-    let user = User.findOne({ username: username }); //check if user exists
+    let user = await User.findOne({ username: username }); //check if user exists
     if (user == null || user == undefined) {
       return { valid: false, sessionID: "" }; //user doesnt exist
     }
@@ -127,7 +127,6 @@ export abstract class UserManager {
       });
     }
 
-    console.log(user);
     let pwHash = this.hashPassword(password, user["salt"]);
 
     if (pwHash == user["passwordHash"]) { //check if hashes match
