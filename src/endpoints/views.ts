@@ -27,7 +27,7 @@ export const controlsView: RequestHandler = async (req, res) => {
         //gather all the data for serverside rendering
         const status = FCMAdmin.getInstance().getStatus() ? "Verbunden" : "Nicht verbunden";
         let usr = (await User.find({})).map(function (userdoc) {
-            console.log(`is ${userdoc["name"]} online? ${userdoc["activeSession"] != ""}`)
+            console.log(`${userdoc["name"]} session id? ${userdoc["activeSession"]}`)
             return {
                 name: userdoc["name"],
                 active: (userdoc["activeSession"] != ""),
