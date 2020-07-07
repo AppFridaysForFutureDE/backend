@@ -11,23 +11,24 @@ dotenv.config({
 });
 
 console.log("Creating user from env");
-console.log(dotenv.FFF_PW);
-console.log(dotenv.FFF_USER);
-let pwSalt = UserManager.generateRandomString(16);
-let pwHash = UserManager.hashPassword(dotenv.FFF_PW, pwSalt);
-User.findOneAndUpdate(
-  { name: dotenv.FFF_USER },
-  {
-    passwordHash: pwHash,
-    salt: pwSalt
-  },
-  { upsert: true },
-  function(err, doc) {
-    console.log("error while creating user from env");
-    console.log(doc);
-    console.log(err);
-  }
-);
+if (process.env.FFF_USER && process.env.FFF_PW) {
+  let pwSalt = UserManager.generateRandomString(16);
+  let pwHash = UserManager.hashPassword(process.env.FFF_PW, pwSalt);
+  User.findOneAndUpdate(
+    { name: process.env.FFF_USER },
+    {
+      passwordHash: pwHash,
+      salt: pwSalt
+    },
+    { upsert: true },
+    function (err, doc) {
+      console.log("error while creating user from env");
+      console.log(doc);
+      console.log(err);
+    }
+  );
+}
+
 
 console.log("Connecting to database");
 mongoose
