@@ -116,7 +116,8 @@ export abstract class UserManager {
     if (user == null || user == undefined) {
       return { valid: false, sessionID: "" }; //user doesnt exist
     }
-
+    
+    console.log(user["passwordHash"])
     if (user["passwordHash"] == "") { //first time logging in (create new password)
       console.log("first time")
       let salt = this.generateRandomString(16);
