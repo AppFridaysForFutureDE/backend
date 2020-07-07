@@ -127,7 +127,6 @@ export abstract class UserManager {
     }
 
     let pwHash = this.hashPassword(password, user["salt"]);
-    console.log(`tested hash: ${pwHash}; saved hash: ${user["passwordHash"]}`)
     if (pwHash == user["passwordHash"]) { //check if hashes match
       let sessID = "fff_id_" + this.generateRandomString(16); //creates session id
       await User.findOneAndUpdate({ name: username }, {

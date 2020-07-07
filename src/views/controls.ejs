@@ -294,9 +294,9 @@
                   <th scope="row"><%= i %></th>
                   <td>
                     <% if (users[i]["active"]) { %>
-                      <span data-feather="check"></span>
+                    <span data-feather="check"></span>
                     <% } else { %>
-                      <span data-feather="x"></span>
+                    <span data-feather="x"></span>
                     <% } %>
                   </td>
                   <td><%= users[i]["name"] %></td>
@@ -307,11 +307,13 @@
                 </tr>
                 <% } %>
                 <tr>
-                  <th scope="row"></th>
-                  <td></td>
-                  <td>form name</td>
-                  <td>form admin</td>
-                  <td>form absenden</td>
+                  <form action="/admin/controls/user/create" method="post">
+                    <th scope="row"><span data-feather="plus"></span></th>
+                    <td></td>
+                    <td><input type="text" name="username"></td>
+                    <td><input type="checkbox" name="admin"></td>
+                    <td><input type="submit" value="Erstellen"></td>
+                  </form>
                 </tr>
               </tbody>
             </table>

@@ -57,14 +57,14 @@ export const login: RequestHandler = async (req, res) => {
 export const logout: RequestHandler = async (req, res) => {
   let sessID = req.cookies["fff_sessionid"];
   await UserManager.logout(sessID);
-  res.redirect("/views/panel/login");
+  res.redirect("/views/panel/controls");
 };
 
 export const remove: RequestHandler = async (req, res) => {
   let username = req.body.username;
   let sessID = req.cookies["fff_sessionid"];
   let success = await UserManager.removeUser(username, sessID);
-  res.status(200).json({ success: success });
+  res.redirect("/views/panel/controls");
 };
 
 export const create: RequestHandler = async (req, res) => {
@@ -72,7 +72,7 @@ export const create: RequestHandler = async (req, res) => {
   let admin: boolean = req.body.admin;
   let sessID = req.cookies["fff_sessionid"];
   let success = await UserManager.createUser({username, admin}, sessID);
-  res.status(200).json({ success: success });
+  res.redirect("/views/panel/controls");
 };
 
 export const update: RequestHandler = async (req, res) => {
@@ -81,5 +81,5 @@ export const update: RequestHandler = async (req, res) => {
   let admin: boolean = req.body.admin;
   let sessID = req.cookies["fff_sessionid"];
   let success = await UserManager.updateUser({username, password, admin}, sessID);
-  res.status(200).json({ success: success });
+  res.redirect("/views/panel/controls");
 };
