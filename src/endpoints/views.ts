@@ -29,7 +29,7 @@ export const controlsView: RequestHandler = async (req, res) => {
         let usr = (await User.find({})).map(function (userdoc) {
             return {
                 name: userdoc["name"],
-                active: userdoc["activeSession"] == "" ? "&#1f534" : "&#1f7e2",
+                active: userdoc["activeSession"] == "",
                 admin: userdoc["admin"] ? "Ja" : "Nein"
             };
         });

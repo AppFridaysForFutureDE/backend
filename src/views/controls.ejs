@@ -278,7 +278,7 @@
               Benutzerübersicht
             </h3>
             <hr class="my-4">
-            <table class="table">
+            <table class="table table-striped">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -292,7 +292,13 @@
                 <% for(var i=0; i<users.length; i++) {%>
                 <tr>
                   <th scope="row"><%= i %></th>
-                  <td><%= users[i]["active"] %></td>
+                  <td>
+                    <% if (users[i]["active"]) { %>
+                      <span data-feather="check"></span>
+                    <% } else { %>
+                      <span data-feather="x"></span>
+                    <% } %>
+                  </td>
                   <td><%= users[i]["name"] %></td>
                   <td><%= users[i]["admin"] %></td>
                   <td>
