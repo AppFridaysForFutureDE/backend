@@ -7,7 +7,7 @@ import Utility from "./utility";
 //only static methods: no huge amounts of instances
 //singleton scheme isnt used as this class doesnt handle services that can only be used by one instance at a time
 export abstract class UserManager {
-  
+
   public static hashPassword(password: string, salt: string): string {
     console.log(typeof salt);
     console.log(salt);
@@ -18,6 +18,15 @@ export abstract class UserManager {
 
   public static generateRandomString(length: number): string {
     return crypto.randomBytes(Math.ceil(length / 2)).toString("hex").slice(0, length);
+  }
+
+  public static async createSessionID(username: string) {
+    let sessID = "fff_id_" + this.generateRandomString(16); //creates session id
+    await User.findOneAndUpdate({ name: username }, {
+      activeSession: sessID,
+      expiration: Utility.toUnixTimestamp(new Date()) + Utility.Day //expires after a day
+    });
+    return { valid: true, sessionID: sessID }
   }
 
   /**
@@ -117,7 +126,7 @@ export abstract class UserManager {
     if (user == null || user == undefined) {
       return { valid: false, sessionID: "" }; //user doesnt exist
     }
-    
+
     if (user["passwordHash"] == undefined || user["passwordHash"] == null) { //first time logging in (create new password)
       console.log("first time")
       let salt = this.generateRandomString(16);
@@ -127,16 +136,14 @@ export abstract class UserManager {
         passwordHash: pwHash,
         salt: salt,
       });
+
+      //create session id
+      return await this.createSessionID(username);
     }
 
     let pwHash = this.hashPassword(password, user["salt"]);
     if (pwHash == user["passwordHash"]) { //check if hashes match
-      let sessID = "fff_id_" + this.generateRandomString(16); //creates session id
-      await User.findOneAndUpdate({ name: username }, {
-        activeSession: sessID,
-        expiration: Utility.toUnixTimestamp(new Date()) + Utility.Day //expires after a day
-      });
-      return { valid: true, sessionID: sessID }
+      return await this.createSessionID(username);
     }
     return { valid: false, sessionID: "" };
   }
