@@ -30,7 +30,7 @@ export const controlsView: RequestHandler = async (req, res) => {
             return {
                 name: userdoc["name"],
                 active: userdoc["activeSession"] == "",
-                admin: userdoc["admin"] ? "Ja" : "Nein"
+                rights: userdoc["admin"] ? "Administrator" : "Developer"
             };
         });
 
