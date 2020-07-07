@@ -113,6 +113,7 @@ export abstract class UserManager {
     console.log(`login(username: ${username}, password: ${password})`);
 
     let user = await User.findOne({ username: username }); //check if user exists
+    console.log(`user from database: ${user}`)
     if (user == null || user == undefined) {
       console.log("user doesnt exist");
       return { valid: false, sessionID: "" }; //user doesnt exist
