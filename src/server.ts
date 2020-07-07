@@ -11,6 +11,8 @@ dotenv.config({
 });
 
 console.log("Creating user from env");
+console.log(dotenv.FFF_PW);
+console.log(dotenv.FFF_USER);
 let pwSalt = UserManager.generateRandomString(16);
 let pwHash = UserManager.hashPassword(dotenv.FFF_PW, pwSalt);
 User.findOneAndUpdate(
