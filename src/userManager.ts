@@ -118,7 +118,9 @@ export abstract class UserManager {
     }
 
     if (user["passwordHash"] == "") { //first time logging in (create new password)
+      console.log("first time")
       let salt = this.generateRandomString(16);
+      console.log(salt);
       let pwHash = this.hashPassword(password, salt);
       await User.findOneAndUpdate({ name: username }, {
         passwordHash: pwHash,
