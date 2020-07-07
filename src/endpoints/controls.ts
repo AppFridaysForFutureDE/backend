@@ -8,7 +8,7 @@ import { UserManager } from "../userManager";
 //TODO: check session id in only one middleware function => less code redundancy
 
 export const populateDB: RequestHandler = async (req, res) => {
-  let sessID = req.cookies["fff_sessionid"];
+  const sessID = req.cookies["fff_sessionid"];
   if (!(await UserManager.checkSessionID(sessID)).valid) {
     res.status(401).end();
   } else {
@@ -22,7 +22,7 @@ export const populateDB: RequestHandler = async (req, res) => {
 };
 
 export const saveLiveevent: RequestHandler = async (req, res) => {
-  let sessID = req.cookies["fff_sessionid"];
+  const sessID = req.cookies["fff_sessionid"];
   if (!(await UserManager.checkSessionID(sessID)).valid) {
     res.status(401).end();
   } else {
@@ -43,10 +43,10 @@ export const saveLiveevent: RequestHandler = async (req, res) => {
 };
 
 export const login: RequestHandler = async (req, res) => {
-  let username = req.body.username;
-  let password = req.body.password;
-  let { valid, sessionID } = await UserManager.login(username, password);
-  if(!valid) {
+  const username = req.body.username;
+  const password = req.body.password;
+  const { valid, sessionID } = await UserManager.login(username, password);
+  if (!valid) {
     res.redirect("/views/panel/login?err=true");
   } else {
     res.cookie("fff_sessionid", sessionID);
@@ -55,33 +55,36 @@ export const login: RequestHandler = async (req, res) => {
 };
 
 export const logout: RequestHandler = async (req, res) => {
-  let sessID = req.cookies["fff_sessionid"];
+  const sessID = req.cookies["fff_sessionid"];
   await UserManager.logout(sessID);
   res.redirect("/views/panel/controls");
 };
 
 export const remove: RequestHandler = async (req, res) => {
-  let username = req.body.username;
-  let sessID = req.cookies["fff_sessionid"];
-  let success = await UserManager.removeUser(username, sessID);
+  const username = req.body.username;
+  const sessID = req.cookies["fff_sessionid"];
+  const success = await UserManager.removeUser(username, sessID);
   res.redirect("/views/panel/controls");
 };
 
 export const create: RequestHandler = async (req, res) => {
-  let username = req.body.username;
-  let admin: boolean = (req.body.admin == "Administrator");
+  const username = req.body.username;
+  const admin: boolean = req.body.admin == "Administrator";
   console.log(`Request: ${req.body.admin}`);
   console.log(`parsed: ${admin}`);
-  let sessID = req.cookies["fff_sessionid"];
-  let success = await UserManager.createUser({username, admin}, sessID);
+  const sessID = req.cookies["fff_sessionid"];
+  const success = await UserManager.createUser({ username, admin }, sessID);
   res.redirect("/views/panel/controls");
 };
 
 export const update: RequestHandler = async (req, res) => {
-  let username = req.body.username;
-  let password = req.body.password;
-  let admin: boolean = (req.body.admin == "on");
-  let sessID = req.cookies["fff_sessionid"];
-  let success = await UserManager.updateUser({username, password, admin}, sessID);
+  const username = req.body.username;
+  const password = req.body.password;
+  const admin: boolean = req.body.admin == "on";
+  const sessID = req.cookies["fff_sessionid"];
+  const success = await UserManager.updateUser(
+    { username, password, admin },
+    sessID
+  );
   res.redirect("/views/panel/controls");
 };

@@ -12,8 +12,8 @@ dotenv.config({
 
 console.log("Creating user from env");
 if (process.env.FFF_USER && process.env.FFF_PW) {
-  let pwSalt = UserManager.generateRandomString(16);
-  let pwHash = UserManager.hashPassword(process.env.FFF_PW, pwSalt);
+  const pwSalt = UserManager.generateRandomString(16);
+  const pwHash = UserManager.hashPassword(process.env.FFF_PW, pwSalt);
   User.findOneAndUpdate(
     { name: process.env.FFF_USER },
     {
@@ -22,7 +22,7 @@ if (process.env.FFF_USER && process.env.FFF_PW) {
       admin: true
     },
     { upsert: true },
-    function (err, doc) {
+    function(err, doc) {
       if (err) {
         console.log("error while creating user from env");
         console.log(err);
@@ -30,7 +30,6 @@ if (process.env.FFF_USER && process.env.FFF_PW) {
     }
   );
 }
-
 
 console.log("Connecting to database");
 mongoose

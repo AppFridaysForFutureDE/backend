@@ -96,5 +96,4 @@ export default class Utility {
 
     return [lat, lon];
   }
-
 }

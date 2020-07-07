@@ -18,7 +18,7 @@ const userScheme = new mongoose.Schema({
   },
   expiration: {
     type: Number
-  } 
+  }
 });
 
 export const User = mongoose.model("user", userScheme);
