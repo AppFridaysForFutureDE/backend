@@ -120,17 +120,13 @@ export abstract class UserManager {
    * }
    */
   public static async login(username: string, password: string): Promise<{ valid: boolean; sessionID: string; }> {
-    console.log(`login(username: ${username}, password: ${password})`);
-
     let user = await User.findOne({ name: username }); //check if user exists
     if (user == null || user == undefined) {
       return { valid: false, sessionID: "" }; //user doesnt exist
     }
 
     if (user["passwordHash"] == undefined || user["passwordHash"] == null) { //first time logging in (create new password)
-      console.log("first time")
       let salt = this.generateRandomString(16);
-      console.log(salt);
       let pwHash = this.hashPassword(password, salt);
       await User.findOneAndUpdate({ name: username }, {
         passwordHash: pwHash,
@@ -173,8 +169,6 @@ export abstract class UserManager {
    * }
    */
   public static async checkSessionID(sessionID: string): Promise<{ valid: boolean, admin: boolean }> {
-    console.log(`checkSessionID(sessionID: ${sessionID})`);
-
     let res = await User.findOne({ activeSession: sessionID });
     if (res == null || res == undefined) {
       return { valid: false, admin: false }; //session id doesnt exist

@@ -70,6 +70,8 @@ export const remove: RequestHandler = async (req, res) => {
 export const create: RequestHandler = async (req, res) => {
   let username = req.body.username;
   let admin: boolean = (req.body.admin == "Administrator");
+  console.log(`Request: ${req.body.admin}`);
+  console.log(`parsed: ${admin}`);
   let sessID = req.cookies["fff_sessionid"];
   let success = await UserManager.createUser({username, admin}, sessID);
   res.redirect("/views/panel/controls");
