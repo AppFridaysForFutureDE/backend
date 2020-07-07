@@ -18,7 +18,8 @@ if (process.env.FFF_USER && process.env.FFF_PW) {
     { name: process.env.FFF_USER },
     {
       passwordHash: pwHash,
-      salt: pwSalt
+      salt: pwSalt,
+      admin: true
     },
     { upsert: true },
     function (err, doc) {

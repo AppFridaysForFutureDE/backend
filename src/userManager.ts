@@ -113,14 +113,11 @@ export abstract class UserManager {
     console.log(`login(username: ${username}, password: ${password})`);
 
     let user = await User.findOne({ name: username }); //check if user exists
-    console.log(`user from database: ${user}`)
     if (user == null || user == undefined) {
-      console.log("user doesnt exist");
       return { valid: false, sessionID: "" }; //user doesnt exist
     }
 
     if (user["passwordHash"] == "") { //first time logging in (create new password)
-      console.log("first time")
       let salt = this.generateRandomString(16);
       let pwHash = this.hashPassword(password, salt);
       await User.findOneAndUpdate({ name: username }, {
@@ -132,7 +129,6 @@ export abstract class UserManager {
     let pwHash = this.hashPassword(password, user["salt"]);
     console.log(`tested hash: ${pwHash}; saved hash: ${user["passwordHash"]}`)
     if (pwHash == user["passwordHash"]) { //check if hashes match
-      console.log("creating session");
       let sessID = "fff_id_" + this.generateRandomString(16); //creates session id
       await User.findOneAndUpdate({ name: username }, {
         activeSession: sessID,
@@ -140,7 +136,6 @@ export abstract class UserManager {
       });
       return { valid: true, sessionID: sessID }
     }
-    console.log("not creating session");
     return { valid: false, sessionID: "" };
   }
 
