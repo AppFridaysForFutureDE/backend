@@ -95,8 +95,7 @@ export abstract class UserManager {
 
   /**
    * Creates sessionid if credentials are correct
-   * TODO
-   * If database is empty, user is created
+   * 
    * If user logs in for the first time, password is set
    * 
    * params:
@@ -117,7 +116,7 @@ export abstract class UserManager {
       return { valid: false, sessionID: "" }; //user doesnt exist
     }
     
-    console.log(user["passwordHash"])
+    console.log(user);
     if (user["passwordHash"] == "") { //first time logging in (create new password)
       console.log("first time")
       let salt = this.generateRandomString(16);
