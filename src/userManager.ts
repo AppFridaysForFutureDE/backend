@@ -9,6 +9,8 @@ import Utility from "./utility";
 export abstract class UserManager {
   
   public static hashPassword(password: string, salt: string): string {
+    console.log(typeof salt);
+    console.log(salt);
     let hash = crypto.createHmac('sha512', salt);
     hash.update(password);
     return hash.digest('hex');
