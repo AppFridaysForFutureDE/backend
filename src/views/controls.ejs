@@ -195,15 +195,23 @@
                 Online-Monitor
               </a>
             </li>
+
             <% if (admin) { %>
-              <!-- Render Admin Only tabs here -->
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#UserPage">
-                  <span data-feather="users"></span>
-                  Benutzerverwaltung
-                </a>
-              </li>
+            <!-- Render Admin Only tabs here -->
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#UserPage">
+                <span data-feather="users"></span>
+                Benutzerverwaltung
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#LogPage">
+                <span data-feather="archive"></span>
+                Logs
+              </a>
+            </li>
             <% } %>
+
           </ul>
         </div>
       </nav>
@@ -263,10 +271,45 @@
           </div>
 
           <% if (admin) { %>
-            <!-- Render Admin Only tabs here -->
-            <div id="UserPage" class="tab-pane fade">
-              yep this dude is an admin
-            </div>
+          <!-- Render Admin Only tabs here -->
+          <div id="UserPage" class="tab-pane fade">
+            <br>
+            <h3>
+              Benutzerübersicht
+            </h3>
+            <hr class="my-4">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Gerade aktiv</th>
+                  <th scope="col">Admin</th>
+                  <th scope="col">Aktionen</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for(var i=0; i<users.length; i++) {%>
+                <tr>
+                  <th scope="row"><%= i %></th>
+                  <td><%= users[i]["name"] %></td>
+                  <td><%= users[i]["sessionID"] == "" ? "Nein" : "Ja" %></td>
+                  <td><%= users[i]["admin"] ? : "Ja" : "Nein" %></td>
+                  <td>
+                    //actions here
+                  </td>
+                </tr>
+                <% } %>
+                <tr>
+                  <td>//add user here</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div id="LogPage" class="tab-pane fade">
+            Not yet implemented
+          </div>
           <% } %>
         </div>
 

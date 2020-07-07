@@ -132,7 +132,7 @@ export abstract class UserManager {
       let sessID = "fff_id_" + this.generateRandomString(16); //creates session id
       await User.findOneAndUpdate({ name: username }, {
         activeSession: sessID,
-        expiration: Utility.toUnixTimestamp(new Date()) + 10//Utility.Day //expires after a day
+        expiration: Utility.toUnixTimestamp(new Date()) + Utility.Day //expires after a day
       });
       return { valid: true, sessionID: sessID }
     }
