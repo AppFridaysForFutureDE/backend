@@ -78,7 +78,7 @@ export const create: RequestHandler = async (req, res) => {
 export const update: RequestHandler = async (req, res) => {
   let username = req.body.username;
   let password = req.body.password;
-  let admin: boolean = req.body.admin;
+  let admin: boolean = (req.body.admin == "on");
   let sessID = req.cookies["fff_sessionid"];
   let success = await UserManager.updateUser({username, password, admin}, sessID);
   res.redirect("/views/panel/controls");
