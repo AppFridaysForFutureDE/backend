@@ -2,11 +2,30 @@ import mongoose from "mongoose";
 import { app } from "./express/app";
 import { startCronJobs } from "./cron";
 import dotenv from "dotenv-safe";
+import { User } from "./models/userModel";
+import { UserManager } from "./userManager";
 
 console.log("Loading environment variables");
 dotenv.config({
   allowEmptyValues: true
 });
+
+console.log("Creating user from env");
+let pwSalt = UserManager.generateRandomString(16);
+let pwHash = UserManager.hashPassword(dotenv.FFF_PW, pwSalt);
+User.findOneAndUpdate(
+  { name: dotenv.FFF_USER },
+  {
+    passwordHash: pwHash,
+    salt: pwSalt
+  },
+  { upsert: true },
+  function(err, doc) {
+    console.log("error while creating user from env");
+    console.log(doc);
+    console.log(err);
+  }
+);
 
 console.log("Connecting to database");
 mongoose

@@ -8,13 +8,13 @@ import Utility from "./utility";
 //singleton scheme isnt used as this class doesnt handle services that can only be used by one instance at a time
 export abstract class UserManager {
 
-  private static hashPassword(password: string, salt: string): string {
+  public static hashPassword(password: string, salt: string): string {
     let hash = crypto.createHmac('sha512', salt);
     hash.update(password);
     return hash.digest('hex');
   }
 
-  private static generateRandomString(length: number): string {
+  public static generateRandomString(length: number): string {
     return crypto.randomBytes(Math.ceil(length / 2)).toString("hex").slice(0, length);
   }
 
@@ -115,6 +115,15 @@ export abstract class UserManager {
     let user = User.findOne({ username: username }); //check if user exists
     if (user == null || user == undefined) {
       return { valid: false, sessionID: "" }; //user doesnt exist
+    }
+
+    if (user["passwordHash"] == "") { //first time logging in (create new password)
+      let salt = this.generateRandomString(16);
+      let pwHash = this.hashPassword(password, salt);
+      await User.findOneAndUpdate({ name: username }, {
+        passwordHash: pwHash,
+        salt: salt,
+      });
     }
 
     let pwHash = this.hashPassword(password, user["salt"]);
