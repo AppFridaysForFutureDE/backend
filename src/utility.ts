@@ -5,8 +5,9 @@ import nodeFetch from "node-fetch";
 //TODO: Make static class
 
 export default class Utility {
-  //A day and a second in unix time
+  //unix time
   public static readonly Day = 86401;
+  public static readonly Hour = 3600;
 
   //adds a custom prefix if prefix isnt there already and text isnt empty
   public static addPrefix(prefix: string, text: string): string {
