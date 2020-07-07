@@ -23,10 +23,20 @@ export const controlsView: RequestHandler = async (req, res) => {
     if (!valid) {
         res.redirect("/views/panel/login");
     } else {
-        const status = FCMAdmin.getInstance().getStatus();
-        let usr = await User.find({});
+
+        //gather all the data for serverside rendering
+        const status = FCMAdmin.getInstance().getStatus() ? "Verbunden" : "Nicht verbunden";
+        let usr = (await User.find({})).map(function (userdoc) {
+            return {
+                name: userdoc["name"],
+                active: userdoc["activeSession"] == "" ? "Nein" : "Ja",
+                admin: userdoc["admin"] ? "Ja" : "Nein"
+            };
+        });
+
+        //render
         res.render("controls", {
-            firebaseStatus: status ? "Verbunden" : "Nicht verbunden",
+            firebaseStatus: status,
             admin: admin,
             users: usr
         });
