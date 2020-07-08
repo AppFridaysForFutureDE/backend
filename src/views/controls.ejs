@@ -306,7 +306,10 @@
                   <td><%= users[i]["name"] %></td>
                   <td><%= users[i]["rights"] %></td>
                   <td>
-                    //actions here
+                    <form action="/admin/controls/user/remove" method="post">
+                      <input type="hidden" name="username" value="<%= users[i]["name"] %>">
+                      <input type="submit" value="Entfernen" class="btn btn-primary">
+                    </form>
                   </td>
                 </tr>
                 <% } %>
