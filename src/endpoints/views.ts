@@ -45,6 +45,8 @@ export const controlsView: RequestHandler = async (req, res) => {
       };
     });
 
+    console.log(currentUser);
+
     //render
     res.render("controls", {
       firebaseStatus: status,
