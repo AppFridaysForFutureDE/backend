@@ -88,7 +88,9 @@ export abstract class UserManager {
 
     const { valid, admin } = await UserManager.checkSessionID(sessionID);
 
-    if (valid) {
+    const sessionName = (await User.find({ activeSession: sessionID }))["name"];
+    //normal users can only modify themselves
+    if (admin || user.username == sessionName) {
       const salt = this.generateRandomString(16);
       const pwHash = this.hashPassword(user.password, salt);
       await User.findOneAndUpdate(

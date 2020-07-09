@@ -43,7 +43,8 @@ export const controlsView: RequestHandler = async (req, res) => {
     const currentUser = (await User.find({ activeSession: sessID })).map(function(userdoc) {
       return {
         name: userdoc["name"],
-        admin: userdoc["admin"]
+        admin: userdoc["admin"],
+        rights: userdoc["admin"] ? "Administrator" : "Developer"
       };
     })[0];
 
