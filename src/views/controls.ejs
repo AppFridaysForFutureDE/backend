@@ -282,53 +282,55 @@
               Benutzerübersicht
             </h3>
             <hr class="my-4">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Online</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Rechte</th>
-                  <th scope="col">Aktionen</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% for(var i=0; i<users.length; i++) {%>
-                <tr>
-                  <th scope="row"><%= i %></th>
-                  <td>
-                    <% if (users[i]["active"]) { %>
-                    <span data-feather="check"></span>
-                    <% } else { %>
-                    <span data-feather="x"></span>
-                    <% } %>
-                  </td>
-                  <td><%= users[i]["name"] %></td>
-                  <td><%= users[i]["rights"] %></td>
-                  <td>
-                    <form action="/admin/controls/user/remove" method="post">
-                      <input type="hidden" name="username" value="<%= users[i]["name"] %>">
-                      <input type="submit" value="Entfernen" class="btn btn-primary btn-sm">
-                    </form>
-                  </td>
-                </tr>
-                <% } %>
-                <tr>
-                  <form action="/admin/controls/user/create" method="post">
-                    <th scope="row"></th>
-                    <td></td>
-                    <td><input type="text" name="username" class="form-control" ></td>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Online</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Rechte</th>
+                    <th scope="col">Aktionen</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for(var i=0; i<users.length; i++) {%>
+                  <tr>
+                    <th scope="row"><%= i %></th>
                     <td>
-                      <select class="form-control" name="admin">
-                        <option>Administrator</option>
-                        <option>Developer</option>
-                      </select>
+                      <% if (users[i]["active"]) { %>
+                      <span data-feather="check"></span>
+                      <% } else { %>
+                      <span data-feather="x"></span>
+                      <% } %>
                     </td>
-                    <td><input type="submit" value="Erstellen" class="btn btn-primary"></td>
-                  </form>
-                </tr>
-              </tbody>
-            </table>
+                    <td><%= users[i]["name"] %></td>
+                    <td><%= users[i]["rights"] %></td>
+                    <td>
+                      <form action="/admin/controls/user/remove" method="post">
+                        <input type="hidden" name="username" value="<%= users[i]["name"] %>">
+                        <input type="submit" value="Entfernen" class="btn btn-primary btn-sm">
+                      </form>
+                    </td>
+                  </tr>
+                  <% } %>
+                  <tr>
+                    <form action="/admin/controls/user/create" method="post">
+                      <th scope="row"></th>
+                      <td></td>
+                      <td><input type="text" name="username" class="form-control"></td>
+                      <td>
+                        <select class="form-control" name="admin">
+                          <option>Administrator</option>
+                          <option>Developer</option>
+                        </select>
+                      </td>
+                      <td><input type="submit" value="Erstellen" class="btn btn-primary"></td>
+                    </form>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
 
           <div id="LogPage" class="tab-pane fade">
