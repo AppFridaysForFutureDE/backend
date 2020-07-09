@@ -38,12 +38,14 @@ export const controlsView: RequestHandler = async (req, res) => {
         rights: userdoc["admin"] ? "Administrator" : "Developer"
       };
     });
+
+    //TODO: Refactor
     const currentUser = (await User.find({ activeSession: sessID })).map(function(userdoc) {
       return {
         name: userdoc["name"],
         admin: userdoc["admin"]
       };
-    });
+    })[0];
 
     console.log(currentUser);
 
