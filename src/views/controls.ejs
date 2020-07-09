@@ -166,10 +166,25 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-    <span class="navbar-brand col-md-3 col-lg-2 mr-0 px-3">Control Panel</span>
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <!-- navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow -->
+  <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+    <a class="navbar-brand mr-0 mr-md-2" href="/">Control Panel</a>
+
+    <div class="navbar-nav-scroll">
+
+    </div>
+
+    <ul class="navbar-nav ml-md-auto">
+      <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse"
+        data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </ul>
+
+
+    <li class="nav-item dropdown d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
         <%= %>
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -180,11 +195,8 @@
         </form>
       </div>
     </li>
-    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse"
-      data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  </nav>
+  </header>
+
   <div class="container-fluid">
     <div class="row">
       <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
