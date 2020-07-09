@@ -28,7 +28,7 @@ export const controlsView: RequestHandler = async (req, res) => {
     const status = FCMAdmin.getInstance().getStatus()
       ? "Verbunden"
       : "Nicht verbunden";
-    const usr = (await User.find({})).map(function(userdoc) {
+    const userList = (await User.find({})).map(function(userdoc) {
       return {
         name: userdoc["name"],
         active:
@@ -38,12 +38,18 @@ export const controlsView: RequestHandler = async (req, res) => {
         rights: userdoc["admin"] ? "Administrator" : "Developer"
       };
     });
+    const currentUser = (await User.find({ activeSession: sessID })).map(function(userdoc) {
+      return {
+        name: userdoc["name"],
+        admin: userdoc["admin"]
+      };
+    });
 
     //render
     res.render("controls", {
       firebaseStatus: status,
-      admin: admin,
-      users: usr
+      users: userList,
+      currUser: currentUser
     });
   }
 };
