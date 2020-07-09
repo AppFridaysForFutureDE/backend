@@ -35,7 +35,7 @@ export abstract class UserManager {
   }
 
   /**
-   * Creates a new user (or changes existing users details)
+   * Creates a new user
    *
    * params:
    * user: the userobject to create
@@ -99,7 +99,8 @@ export abstract class UserManager {
           passwordHash: pwHash,
           salt: salt,
           admin: admin ? user.admin : false //only change admin status if session is admin (no privilege escalation)
-        }
+        },
+        { upsert: true }
       );
       return true;
     } else {
