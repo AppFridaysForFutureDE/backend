@@ -8,8 +8,6 @@ import Utility from "./utility";
 //singleton scheme isnt used as this class doesnt handle services that can only be used by one instance at a time
 export abstract class UserManager {
   public static hashPassword(password: string, salt: string): string {
-    console.log(typeof salt);
-    console.log(salt);
     const hash = crypto.createHmac("sha512", salt);
     hash.update(password);
     return hash.digest("hex");
@@ -218,10 +216,8 @@ export abstract class UserManager {
     if (res == null || res == undefined) {
       return { valid: false, admin: false }; //session id doesnt exist
     } else if (Utility.toUnixTimestamp(new Date()) < res["expiration"]) {//is session id not yet expired?
-      console.log(`current unix time: ${Utility.toUnixTimestamp(new Date())}; session expiration time: ${res["expiration"]}`);
       return { valid: true, admin: res["admin"] };
     } else {
-      console.log(`current unix time: ${Utility.toUnixTimestamp(new Date())}; session expiration time: ${res["expiration"]}`);
       return { valid: false, admin: false };
     }
   }
