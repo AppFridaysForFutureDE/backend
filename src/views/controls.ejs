@@ -180,7 +180,7 @@
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
         <span class="dropdown-item-text"><%= currUser.rights %></span>
         <div class="dropdown-divider"></div>
-        <span class="dropdown-item-text">Passwort ändern</span>
+        <nobr><span class="dropdown-item-text">Passwort ändern</span></nobr>
         <form action="/admin/controls/user/update" method="post" class="px-4 py-3">
           <div class="form-group">
             <input type="hidden" name="username" value="<%= currUser.name %>">

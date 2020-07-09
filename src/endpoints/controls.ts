@@ -86,5 +86,9 @@ export const update: RequestHandler = async (req, res) => {
     { username, password, admin },
     sessID
   );
-  res.redirect("/views/panel/controls");
+  if (success) {
+    res.redirect("/admin/controls/logout");
+  } else {
+    res.redirect("/views/panel/controls");
+  }
 };
