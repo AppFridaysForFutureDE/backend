@@ -171,14 +171,14 @@
     <span class="navbar-brand col-md-3 col-lg-2 mr-0 px-3">Control Panel</span>
 
     <!-- User menu -->
-    <li class="nav-item dropdown pr-.5">
+    <li class="nav-item dropdown pr-2">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
         <%= currUser.name %>
       </button>
 
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-        <span class="dropdown-item-text pr-1"><%= currUser.rights %></span>
+        <span class="dropdown-item-text pr-3"><%= currUser.rights %></span>
         <div class="dropdown-divider"></div>
         <nobr><span class="dropdown-item-text">Passwort ändern</span></nobr>
         <form action="/admin/controls/user/update" method="post" class="px-4 py-3">
