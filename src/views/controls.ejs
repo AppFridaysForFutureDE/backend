@@ -178,9 +178,9 @@
       </button>
 
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-        <span class="dropdown-item-text"><%= currUser.name %></span>
+        <span class="dropdown-item-text"><%= currUser.rights %></span>
         <div class="dropdown-divider"></div>
-        <form action="/admin/controls/user/update" method="post">
+        <form action="/admin/controls/user/update" method="post" class="px-4 py-3">
           <div class="form-group">
             <label for="exampleDropdownFormPassword1">Passwort ändern:</label>
             <input type="hidden" name="username" value="<%= currUser.name %>">
