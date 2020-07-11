@@ -87,6 +87,7 @@ export abstract class UserManager {
     const { valid, admin } = await UserManager.checkSessionID(sessionID);
 
     const sessionName = (await User.find({ activeSession: sessionID }))["name"];
+    console.log(sessionName);
     //users can only modify their own passwords
     if (sessionName) {
       const salt = this.generateRandomString(16);
