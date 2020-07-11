@@ -77,22 +77,22 @@ export abstract class UserManager {
    * return: true, if update was successful
    */
   public static async changePassword(
-    user: { username: string; password: string },
+    password: string,
     sessionID: string
   ): Promise<boolean> {
     console.log(
-      `updateUser(user: {username: ${user.username}, password: ${user.password}, sessionID: ${sessionID})`
+      `changePassword(password: ${user.password}, sessionID: ${sessionID})`
     );
 
     const { valid, admin } = await UserManager.checkSessionID(sessionID);
 
     const sessionName = (await User.find({ activeSession: sessionID }))["name"];
     //users can only modify their own passwords
-    if (user.username == sessionName) {
+    if (sessionName) {
       const salt = this.generateRandomString(16);
-      const pwHash = this.hashPassword(user.password, salt);
+      const pwHash = this.hashPassword(password, salt);
       await User.findOneAndUpdate(
-        { name: user.username },
+        { name: sessionName },
         {
           passwordHash: pwHash,
           salt: salt,

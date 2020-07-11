@@ -80,7 +80,7 @@ export const changePassword: RequestHandler = async (req, res) => {
   const password = req.body.password;
   const sessID = req.cookies["fff_sessionid"];
   const success = await UserManager.changePassword(
-    { username, password },
+    password,
     sessID
   );
   if (success) {
