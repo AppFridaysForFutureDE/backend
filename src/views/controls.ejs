@@ -171,13 +171,13 @@
     <span class="navbar-brand col-md-3 col-lg-2 mr-0 px-3">Control Panel</span>
 
     <!-- User menu -->
-    <li class="nav-item dropdown">
-      <button class="btn btn-secondary dropdown-toggle pr-2" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+    <li class="nav-item dropdown pr-2">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
         <%= currUser.name %>
       </button>
 
-      <div class="dropdown-menu dropdown-menu-right pr-2" aria-labelledby="navbarDropdown">
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
         <span class="dropdown-item-text" style="margin-right: 6rem;"><%= currUser.rights %></span>
         <div class="dropdown-divider"></div>
         <nobr><span class="dropdown-item-text">Passwort ändern</span></nobr>
