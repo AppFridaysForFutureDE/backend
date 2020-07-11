@@ -85,7 +85,7 @@ export const update: RequestHandler = async (req, res) => {
     sessID
   );
   if (success) {
-    res.redirect("/user/logout");
+    res.redirect("/admin/controls/user/logout");
   } else {
     res.redirect("/views/panel/controls");
   }
