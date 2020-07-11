@@ -35,7 +35,8 @@ export const controlsView: RequestHandler = async (req, res) => {
           userdoc["activeSession"] != "" &&
           userdoc["activeSession"] != undefined &&
           Utility.toUnixTimestamp(new Date()) < userdoc["expiration"],
-        rights: userdoc["admin"] ? "Administrator" : "Developer"
+        rights: userdoc["admin"] ? "Administrator" : "Developer",
+        admin: userdoc["admin"]
       };
     });
 
