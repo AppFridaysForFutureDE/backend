@@ -81,7 +81,7 @@ export abstract class UserManager {
     sessionID: string
   ): Promise<boolean> {
     console.log(
-      `changePassword(password: ${user.password}, sessionID: ${sessionID})`
+      `changePassword(password: ${password}, sessionID: ${sessionID})`
     );
 
     const { valid, admin } = await UserManager.checkSessionID(sessionID);
