@@ -75,18 +75,17 @@ export const create: RequestHandler = async (req, res) => {
   res.redirect("/views/panel/controls");
 };
 
-export const update: RequestHandler = async (req, res) => {
+export const changePassword: RequestHandler = async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
-  const admin: boolean = req.body.admin == "on";
   const sessID = req.cookies["fff_sessionid"];
-  const success = await UserManager.updateUser(
-    { username, password, admin },
+  const success = await UserManager.changePassword(
+    { username, password },
     sessID
   );
   if (success) {
+    UserManager.logout(sessID);
     res.redirect("/admin/controls/user/logout");
-  } else {
-    res.redirect("/views/panel/controls");
   }
+  res.redirect("/views/panel/controls");
 };

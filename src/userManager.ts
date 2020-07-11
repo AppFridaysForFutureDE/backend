@@ -76,19 +76,19 @@ export abstract class UserManager {
    *
    * return: true, if update was successful
    */
-  public static async updateUser(
-    user: { username: string; password: string; admin: boolean },
+  public static async changePassword(
+    user: { username: string; password: string },
     sessionID: string
   ): Promise<boolean> {
     console.log(
-      `updateUser(user: {username: ${user.username}, password: ${user.password}, admin: ${user.admin}}, sessionID: ${sessionID})`
+      `updateUser(user: {username: ${user.username}, password: ${user.password}, sessionID: ${sessionID})`
     );
 
     const { valid, admin } = await UserManager.checkSessionID(sessionID);
 
     const sessionName = (await User.find({ activeSession: sessionID }))["name"];
-    //normal users can only modify themselves
-    if (admin || user.username == sessionName) {
+    //users can only modify their own passwords
+    if (user.username == sessionName) {
       const salt = this.generateRandomString(16);
       const pwHash = this.hashPassword(user.password, salt);
       await User.findOneAndUpdate(
@@ -96,7 +96,6 @@ export abstract class UserManager {
         {
           passwordHash: pwHash,
           salt: salt,
-          admin: admin ? user.admin : false //only change admin status if session is admin (no privilege escalation)
         },
         { upsert: true }
       );

@@ -181,7 +181,7 @@
         <span class="dropdown-item-text" style="margin-right: 6rem;"><%= currUser.rights %></span>
         <div class="dropdown-divider"></div>
         <nobr><span class="dropdown-item-text">Passwort ändern</span></nobr>
-        <form action="/admin/controls/user/update" method="post" class="px-4 py-3">
+        <form action="/admin/controls/user/changePassword" method="post" class="px-4 py-3">
           <div class="form-group">
             <input type="hidden" name="username" value="<%= currUser.name %>">
             <input type="password" class="form-control" id="exampleDropdownFormPassword1" name="password" placeholder="neues Passwort">
