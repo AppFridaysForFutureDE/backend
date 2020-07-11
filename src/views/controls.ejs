@@ -335,7 +335,7 @@
                         <input type="hidden" name="username" value="<%= users[i]["name"] %>">
                         <input type="submit" value="Entfernen" class="btn btn-primary btn-sm">
                       </form>
-                      <% if(user[i]["admin"]) { %> 
+                      <% if(users[i]["admin"]) { %> 
                       <form action="/admin/controls/user/makeAdmin" method="post" style="display: inline;">
                         <input type="hidden" name="username" value="<%= users[i]["name"] %>">
                         <input type="submit" value="Zum Administrator machen" class="btn btn-primary btn-sm">
