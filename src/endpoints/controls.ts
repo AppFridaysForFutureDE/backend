@@ -85,7 +85,6 @@ export const changePassword: RequestHandler = async (req, res) => {
   );
   if (success) {
     UserManager.logout(sessID);
-    res.redirect("/admin/controls/user/logout");
   }
   res.redirect("/views/panel/controls");
 };
