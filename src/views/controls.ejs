@@ -331,13 +331,13 @@
                     <td><%= users[i]["name"] %></td>
                     <td><%= users[i]["rights"] %></td>
                     <td>
-                      <form action="/admin/controls/user/remove" method="post">
+                      <form action="/admin/controls/user/remove" method="post" style="display: inline;">
                         <input type="hidden" name="username" value="<%= users[i]["name"] %>">
                         <input type="submit" value="Entfernen" class="btn btn-primary btn-sm">
                       </form>
-                      <form action="/admin/controls/user/makeAdmin" method="post">
-                        <input type="hidden" style="display: inline;" name="username" value="<%= users[i]["name"] %>">
-                        <input type="submit" style="display: inline;" value="Zum Administrator machen" class="btn btn-primary btn-sm pt-3">
+                      <form action="/admin/controls/user/makeAdmin" method="post" style="display: inline;">
+                        <input type="hidden" name="username" value="<%= users[i]["name"] %>">
+                        <input type="submit" value="Zum Administrator machen" class="btn btn-primary btn-sm pt-3">
                       </form>
                     </td>
                   </tr>
