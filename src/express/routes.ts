@@ -6,7 +6,8 @@ import {
   logout,
   create,
   changePassword,
-  remove
+  remove,
+  makeAdmin
 } from "../endpoints/controls";
 import { getLiveevent, getOGs, getStrikes } from "../endpoints/api";
 import { sharePost } from "../endpoints/share";
@@ -28,6 +29,7 @@ controlsRoutes.post("/user/logout", logout);
 controlsRoutes.post("/user/create", create);
 controlsRoutes.post("/user/changePassword", changePassword);
 controlsRoutes.post("/user/remove", remove);
+controlsRoutes.post("/user/makeAdmin", makeAdmin);
 
 liveeventRoutes.get("/", getLiveevent);
 

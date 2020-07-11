@@ -335,6 +335,10 @@
                         <input type="hidden" name="username" value="<%= users[i]["name"] %>">
                         <input type="submit" value="Entfernen" class="btn btn-primary btn-sm">
                       </form>
+                      <form action="/admin/controls/user/makeAdmin" method="post">
+                        <input type="hidden" name="username" value="<%= users[i]["name"] %>">
+                        <input type="submit" value="Zum Administrator machen" class="btn btn-primary btn-sm">
+                      </form>
                     </td>
                   </tr>
                   <% } %>

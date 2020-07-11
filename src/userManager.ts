@@ -71,7 +71,7 @@ export abstract class UserManager {
    * changePassword
    *
    * params:
-   * the new password: the userobject to update
+   * password: the new password
    * sessionID: the session id of the user
    *
    * return: true, if update was successful
@@ -87,7 +87,6 @@ export abstract class UserManager {
     const { valid, admin } = await UserManager.checkSessionID(sessionID);
 
     const curruser = (await User.findOne({ activeSession: sessionID }));
-    console.log(curruser);
     //users can only modify their own passwords
     if (curruser) {
       const salt = this.generateRandomString(16);
@@ -99,6 +98,39 @@ export abstract class UserManager {
           salt: salt,
         },
         { upsert: true }
+      );
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * makeAdmin
+   *
+   * params:
+   * username: the username to make admin
+   * sessionID: the session id of the user that wants to make the user admin
+   *
+   * return: true, if update was successful
+   */
+  public static async makeAdmin(
+    username: string,
+    sessionID: string
+  ): Promise<boolean> {
+    console.log(
+      `makeAdmin(username: ${username}, sessionID: ${sessionID})`
+    );
+
+    const { valid, admin } = await UserManager.checkSessionID(sessionID);
+
+    //admins only can make someone an admin
+    if (admin) {
+      await User.findOneAndUpdate(
+        { name: username },
+        {
+          admin: true
+        }
       );
       return true;
     } else {
