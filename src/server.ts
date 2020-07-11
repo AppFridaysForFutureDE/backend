@@ -11,14 +11,10 @@ dotenv.config({
 });
 
 console.log("Creating user from env");
-if (process.env.FFF_USER && process.env.FFF_PW) {
-  const pwSalt = UserManager.generateRandomString(16);
-  const pwHash = UserManager.hashPassword(process.env.FFF_PW, pwSalt);
+if (process.env.FFF_USER) {
   User.findOneAndUpdate(
     { name: process.env.FFF_USER },
     {
-      passwordHash: pwHash,
-      salt: pwSalt,
       admin: true
     },
     { upsert: true },
