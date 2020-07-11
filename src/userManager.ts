@@ -68,11 +68,11 @@ export abstract class UserManager {
   }
 
   /**
-   * updateUser
+   * changePassword
    *
    * params:
-   * user: the userobject to update
-   * sessionID: the session id of the session that wants to update the user
+   * the new password: the userobject to update
+   * sessionID: the session id of the user
    *
    * return: true, if update was successful
    */
@@ -86,14 +86,14 @@ export abstract class UserManager {
 
     const { valid, admin } = await UserManager.checkSessionID(sessionID);
 
-    const sessionName = (await User.find({ activeSession: sessionID }))["name"];
-    console.log(sessionName);
+    const curruser = (await User.findOne({ activeSession: sessionID }));
+    console.log(curruser);
     //users can only modify their own passwords
-    if (sessionName) {
+    if (curruser) {
       const salt = this.generateRandomString(16);
       const pwHash = this.hashPassword(password, salt);
       await User.findOneAndUpdate(
-        { name: sessionName },
+        { name: curruser["name"] },
         {
           passwordHash: pwHash,
           salt: salt,
