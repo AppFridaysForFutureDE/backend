@@ -40,7 +40,6 @@ export const create: RequestHandler = async (req, res) => {
   const admin: boolean = req.body.admin == "Administrator";
   if (req.auth.admin) {
     const success = await UserManager.createUser({ username, admin });
-    console.log("redirect to control panel");
     res.redirect("/views/panel/controls" + success ? "" : "?err=true");
   } else {
     res.status(401).end();
@@ -57,6 +56,7 @@ export const changePassword: RequestHandler = async (req, res) => {
     if (success) {
       UserManager.logout(req.auth.session);
     }
+    console.log("redirecting to /views/panel/controls" + success ? "" : "?err=true");
     res.redirect("/views/panel/controls" + success ? "" : "?err=true");
   } else {
     res.status(401).end();
