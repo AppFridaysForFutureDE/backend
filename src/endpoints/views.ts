@@ -14,6 +14,7 @@ export const loginView: RequestHandler = async (req, res) => {
 
 export const controlsView: RequestHandler = async (req, res) => {
   //redirect to login if wrong/missing session id
+  console.log("control panel endpoint requested");
   if (req.auth.valid) {
     //gather all the data for serverside rendering
     const status = FCMAdmin.getInstance().getStatus()
@@ -43,7 +44,9 @@ export const controlsView: RequestHandler = async (req, res) => {
       users: userList,
       currUser: currentUser
     });
+    console.log("renderd control panel");
   } else {
+    console.log("control panel endpoint denied => 401");
     res.status(401).end();
   }
 };
