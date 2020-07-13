@@ -185,13 +185,14 @@
         <nobr><span class="dropdown-item-text">Passwort ändern</span></nobr>
         <form action="/admin/controls/user/changePassword" method="post" class="px-4 py-3">
           <div class="form-group">
-            <input type="password" class="form-control" id="exampleDropdownFormPassword1" name="password" placeholder="neues Passwort">
+            <input type="password" class="form-control" id="exampleDropdownFormPassword1" name="password"
+              placeholder="neues Passwort">
           </div>
           <button type="submit" class="btn btn-primary">Ändern</button>
         </form>
 
         <div class="dropdown-divider"></div>
-        
+
         <form class="form-inline" action="/admin/controls/user/logout" method="post">
           <button class="dropdown-item" type="submit">Logout</button>
         </form>
@@ -328,7 +329,7 @@
                         <input type="hidden" name="username" value="<%= users[i]["name"] %>">
                         <input type="submit" value="Entfernen" class="btn btn-primary btn-sm">
                       </form>
-                      <% if(!users[i]["admin"]) { %> 
+                      <% if(!users[i]["admin"]) { %>
                       <form action="/admin/controls/user/makeAdmin" method="post" style="display: inline;">
                         <input type="hidden" name="username" value="<%= users[i]["name"] %>">
                         <input type="submit" value="Zum Administrator machen" class="btn btn-primary btn-sm">
@@ -371,11 +372,16 @@
   <script>
     feather.replace()
 
-    $(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
-      if ($(e.target).text().includes("Online-Monitor")) {
-        document.getElementById('statusframe').src = "/admin/status";
-      }
-    });
+    // Javascript to enable link to tab
+    var url = document.location.toString();
+    if (url.match('#')) {
+      $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+    }
+
+    // Change hash for page-reload
+    $('.nav-tabs a').on('shown.bs.tab', function (e) {
+      window.location.hash = e.target.hash;
+    })
   </script>
 </body>
 
