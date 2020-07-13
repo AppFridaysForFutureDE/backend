@@ -34,7 +34,7 @@ export const controlsView: RequestHandler = async (req, res) => {
     });
 
 
-    const le = await Liveevent.findOne({ liveeventId: 0 })["liveevent"];
+    const le = await Liveevent.findOne({ liveeventId: 0 });
 
     const currentUser = {
       name: req.auth.name,
