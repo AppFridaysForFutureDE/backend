@@ -24,7 +24,7 @@ app.set("views", path.join(__dirname, "../../src/views"));
 app.set("view engine", "ejs");
 
 //Auth properties
-app.use(async function(req: Request, res: Response, next) {
+app.use(async function (req: Request, res: Response, next) {
   let { valid, admin, name } = await UserManager.checkSessionID(req.cookies["fff_sessionid"]);
   req.auth = {
     valid: valid,
@@ -52,14 +52,19 @@ app.use("/admin/controls", controlsRoutes);
 //View Routes
 app.use("/views", viewRoutes);
 
-//Error Fallback
-app.use(function(err: Error, req: Request, res: Response, next) {
+//Express Error Fallback
+app.use(function (err: Error, req: Request, res: Response, next) {
+  res.status(500).json({ message: err.message });
+});
+
+//401 Fallback
+app.use(function (req: Request, res: Response, next) {
   console.log("custom error middleware triggered");
   if (res.statusCode == 401) {
     res.redirect("/views/panel/login");
-  } else {
-    res.status(500).json({ message: err.message });
   }
+  next();
 });
+
 
 

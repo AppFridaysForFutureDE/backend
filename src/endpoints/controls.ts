@@ -29,7 +29,7 @@ export const remove: RequestHandler = async (req, res) => {
   const username = req.body.username;
   if (req.auth.admin) {
     let success = await UserManager.removeUser(username);
-    res.redirect("/views/panel/controls" + success ? "" : "?err=true");
+    res.redirect("/views/panel/controls".concat(success ? "" : "?err=true"));
   } else {
     res.status(401).end();
   }
@@ -40,7 +40,7 @@ export const create: RequestHandler = async (req, res) => {
   const admin: boolean = req.body.admin == "Administrator";
   if (req.auth.admin) {
     const success = await UserManager.createUser({ username, admin });
-    res.redirect("/views/panel/controls" + success ? "" : "?err=true");
+    res.redirect("/views/panel/controls".concat(success ? "" : "?err=true"));
   } else {
     res.status(401).end();
   }
@@ -56,7 +56,6 @@ export const changePassword: RequestHandler = async (req, res) => {
     if (success) {
       await UserManager.logout(req.auth.session);
     }
-    console.log("redirecting to /views/panel/controls".concat(success ? "" : "?err=true"));
     res.redirect("/views/panel/controls".concat(success ? "" : "?err=true"));
   } else {
     res.status(401).end();
@@ -69,7 +68,7 @@ export const makeAdmin: RequestHandler = async (req, res) => {
     const success = await UserManager.makeAdmin(
       username
     );
-    res.redirect("/views/panel/controls" + success ? "" : "?err=true");
+    res.redirect("/views/panel/controls".concat(success ? "" : "?err=true"));
   } else {
     res.status(401).end();
   }
