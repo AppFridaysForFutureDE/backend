@@ -57,14 +57,5 @@ app.use(function (err: Error, req: Request, res: Response, next) {
   res.status(500).json({ message: err.message });
 });
 
-//401 Fallback
-app.use(function (req: Request, res: Response, next) {
-  console.log("custom error middleware triggered");
-  if (res.statusCode == 401) {
-    res.redirect("/views/panel/login");
-  }
-  next();
-});
-
 
 
