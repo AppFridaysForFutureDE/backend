@@ -54,6 +54,7 @@ app.use("/views", viewRoutes);
 
 //Error Fallback
 app.use(function(err: Error, req: Request, res: Response, next) {
+  console.log("custom error middleware triggered");
   if (res.statusCode == 401) {
     res.redirect("/views/panel/login")
   } else {
