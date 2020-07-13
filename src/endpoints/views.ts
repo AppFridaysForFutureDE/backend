@@ -1,6 +1,7 @@
 import { RequestHandler } from "express";
 import { FCMAdmin } from "../services/fcm";
 import { User } from "../models/userModel";
+import { Liveevent } from "../models/liveeventModel";
 import Utility from "../utility";
 
 export const loginView: RequestHandler = async (req, res) => {
@@ -19,6 +20,7 @@ export const controlsView: RequestHandler = async (req, res) => {
     const status = FCMAdmin.getInstance().getStatus()
       ? "Verbunden"
       : "Nicht verbunden";
+
     const userList = (await User.find({})).map(function(userdoc) {
       return {
         name: userdoc["name"],
@@ -31,6 +33,9 @@ export const controlsView: RequestHandler = async (req, res) => {
       };
     });
 
+
+    const le = await Liveevent.findOne({ liveeventId: 0 })["liveevent"];
+
     const currentUser = {
       name: req.auth.name,
       admin: req.auth.admin,
@@ -41,7 +46,8 @@ export const controlsView: RequestHandler = async (req, res) => {
     res.render("controls", {
       firebaseStatus: status,
       users: userList,
-      currUser: currentUser
+      currUser: currentUser,
+      liveevent: le
     });
   } else {
     res.redirect("/views/panel/login");

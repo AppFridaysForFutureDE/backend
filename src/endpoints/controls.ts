@@ -86,7 +86,7 @@ export const populateDB: RequestHandler = async (req, res) => {
       strikeAccess.retrieveStrikes(),
       meetingAccess.retrieveMeetings()
     ]);
-    res.status(200).json({ performedPopulate: true });
+    res.redirect("/views/panel/controls");
   } else {
     res.redirect("/views/panel/login");
   }
@@ -104,11 +104,7 @@ export const saveLiveevent: RequestHandler = async (req, res) => {
       },
       { upsert: true }
     );
-    if (result) {
-      res.status(200).json({ err: result.errors });
-    } else {
-      res.status(200).json({ err: "Database access resulted in null" });
-    }
+    res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
   } else {
     res.redirect("/views/panel/login");
   }
