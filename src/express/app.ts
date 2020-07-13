@@ -25,11 +25,13 @@ app.set("view engine", "ejs");
 
 //Auth properties
 app.use(async function(req: Request, res: Response, next) {
-  req.auth.session = req.cookies["fff_sessionid"];
-  let { valid, admin, name } = await UserManager.checkSessionID(req.auth.session);
-  req.auth.valid = valid;
-  req.auth.admin = admin && valid;
-  req.auth.name = name;
+  let { valid, admin, name } = await UserManager.checkSessionID(req.cookies["fff_sessionid"]);
+  req.auth = {
+    valid: valid,
+    admin: admin,
+    name: name,
+    session: req.cookies["fff_sessionid"]
+  };
   next();
 });
 
