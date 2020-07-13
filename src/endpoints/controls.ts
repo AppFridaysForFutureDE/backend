@@ -31,7 +31,7 @@ export const remove: RequestHandler = async (req, res) => {
     let success = await UserManager.removeUser(username);
     res.redirect("/views/panel/controls" + success ? "" : "?err=true");
   } else {
-    res.status(401).end();
+    res.status(401);
   }
 };
 
@@ -42,7 +42,7 @@ export const create: RequestHandler = async (req, res) => {
     const success = await UserManager.createUser({ username, admin });
     res.redirect("/views/panel/controls" + success ? "" : "?err=true");
   } else {
-    res.status(401).end();
+    res.status(401);
   }
 };
 
@@ -58,7 +58,7 @@ export const changePassword: RequestHandler = async (req, res) => {
     }
     res.redirect("/views/panel/controls" + success ? "" : "?err=true");
   } else {
-    res.status(401).end();
+    res.status(401);
   }
 };
 
@@ -70,7 +70,7 @@ export const makeAdmin: RequestHandler = async (req, res) => {
     );
     res.redirect("/views/panel/controls" + success ? "" : "?err=true");
   } else {
-    res.status(401).end();
+    res.status(401);
   }
 };
 
@@ -88,7 +88,7 @@ export const populateDB: RequestHandler = async (req, res) => {
     ]);
     res.status(200).json({ performedPopulate: true });
   } else {
-    res.status(401).end();
+    res.status(401);
   }
 };
 
@@ -110,6 +110,6 @@ export const saveLiveevent: RequestHandler = async (req, res) => {
       res.status(200).json({ err: "Database access resulted in null" });
     }
   } else {
-    res.status(401).end();
+    res.status(401);
   }
 };

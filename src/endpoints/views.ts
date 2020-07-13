@@ -14,9 +14,7 @@ export const loginView: RequestHandler = async (req, res) => {
 
 export const controlsView: RequestHandler = async (req, res) => {
   //redirect to login if wrong/missing session id
-  if (!req.auth.valid) {
-    res.status(401).end();
-  } else {
+  if (req.auth.valid) {
     //gather all the data for serverside rendering
     const status = FCMAdmin.getInstance().getStatus()
       ? "Verbunden"
@@ -33,14 +31,11 @@ export const controlsView: RequestHandler = async (req, res) => {
       };
     });
 
-    //TODO: Refactor
-    const currentUser = (await User.find({ activeSession: req.auth.session })).map(function(userdoc) {
-      return {
-        name: userdoc["name"],
-        admin: userdoc["admin"],
-        rights: userdoc["admin"] ? "Administrator" : "Developer"
-      };
-    })[0];
+    const currentUser = {
+      name: req.auth.name,
+      admin: req.auth.admin,
+      rights: req.auth.admin ? "Administrator" : "Developer"
+    }
 
     //render
     res.render("controls", {
@@ -48,5 +43,7 @@ export const controlsView: RequestHandler = async (req, res) => {
       users: userList,
       currUser: currentUser
     });
+  } else {
+    res.status(401);
   }
 };
