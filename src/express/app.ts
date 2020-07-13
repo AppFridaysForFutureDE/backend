@@ -56,10 +56,11 @@ app.use("/views", viewRoutes);
 app.use(function(err: Error, req: Request, res: Response, next) {
   console.log("custom error middleware triggered");
   if (res.statusCode == 401) {
-    res.redirect("/views/panel/login")
+    res.redirect("/views/panel/login");
   } else {
     res.status(500).json({ message: err.message });
   }
+  next();
 });
 
 
