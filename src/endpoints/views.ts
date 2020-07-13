@@ -21,7 +21,7 @@ export const controlsView: RequestHandler = async (req, res) => {
       ? "Verbunden"
       : "Nicht verbunden";
 
-    const userList = (await User.find({})).map(function(userdoc) {
+    const userList = (await User.find({})).map(function (userdoc) {
       return {
         name: userdoc["name"],
         active:
@@ -34,7 +34,15 @@ export const controlsView: RequestHandler = async (req, res) => {
     });
 
 
-    const le = await Liveevent.findOne({ liveeventId: 0 });
+    let le = await Liveevent.findOne({ liveeventId: 0 })["liveevent"];
+    if (!le) {
+      le = {
+        actionText: "",
+        actionUrl: "",
+        inApp: false,
+        isActive: false
+      }
+    }
 
     const currentUser = {
       name: req.auth.name,
@@ -42,8 +50,6 @@ export const controlsView: RequestHandler = async (req, res) => {
       rights: req.auth.admin ? "Administrator" : "Developer"
     }
 
-
-    console.log(le);
     //render
     res.render("controls", {
       firebaseStatus: status,
