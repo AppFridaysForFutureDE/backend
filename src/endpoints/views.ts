@@ -44,6 +44,6 @@ export const controlsView: RequestHandler = async (req, res) => {
       currUser: currentUser
     });
   } else {
-    res.status(401);
+    res.status(401).end();
   }
 };
