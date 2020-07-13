@@ -14,6 +14,7 @@ import {
   liveeventRoutes,
   viewRoutes
 } from "./routes";
+import { UserManager } from "../userManager";
 
 //Initialization
 export const app = express();
@@ -22,6 +23,16 @@ app.use(cookieParser());
 app.use(express.urlencoded());
 app.set("views", path.join(__dirname, "../../src/views"));
 app.set("view engine", "ejs");
+
+//Check Session for status
+app.use("/admin/status", async function(err: Error, req: Request, res: Response, next) { // eslint-disable-line
+  const sessID = req.cookies["fff_sessionid"];
+  if ((await UserManager.checkSessionID(sessID)).valid) {
+    next();
+  } else {
+    res.redirect("/views/panel/login");
+  }
+})
 
 //API Routes
 app.use("/api/v1/strikes", strikeRoutes);
@@ -41,6 +52,9 @@ app.use(expressStatusMonitor({ path: "/admin/status" }));
 //View Routes
 app.use("/views", viewRoutes);
 
+//Error Fallback
 app.use(function(err: Error, req: Request, res: Response, next) { // eslint-disable-line
   res.status(500).json({ message: err.message });
 });
+
+
