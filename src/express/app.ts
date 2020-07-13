@@ -23,6 +23,16 @@ app.use(express.urlencoded());
 app.set("views", path.join(__dirname, "../../src/views"));
 app.set("view engine", "ejs");
 
+//Auth properties
+app.use(async function(req: Request, res: Response, next) {
+  req.auth.session = req.cookies["fff_sessionid"];
+  let { valid, admin, name } = await UserManager.checkSessionID(req.auth.session);
+  req.auth.valid = valid;
+  req.auth.admin = admin && valid;
+  req.auth.name = name;
+  next();
+});
+
 //API Routes
 app.use("/api/v1/strikes", strikeRoutes);
 app.use("/api/v1/ogs", ogRoutes);
@@ -41,8 +51,12 @@ app.use("/admin/controls", controlsRoutes);
 app.use("/views", viewRoutes);
 
 //Error Fallback
-app.use(function(err: Error, req: Request, res: Response, next) { // eslint-disable-line
-  res.status(500).json({ message: err.message });
+app.use(function(err: Error, req: Request, res: Response, next) {
+  if (res.statusCode == 401) {
+    res.redirect("/views/panel/login")
+  } else {
+    res.status(500).json({ message: err.message });
+  }
 });
 
 

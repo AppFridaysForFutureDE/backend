@@ -42,29 +42,13 @@ export abstract class UserManager {
    * return: true, if creation was successful
    */
   public static async createUser(
-    user: { username: string; admin: boolean },
-    sessionID: string
+    user: { username: string; admin: boolean }
   ): Promise<boolean> {
-    console.log(
-      `createUser(user: {username: ${user.username}, admin: ${user.admin}}, sessionID: ${sessionID})`
-    );
-
-    const { valid, admin } = await UserManager.checkSessionID(sessionID);
-
-    if (
-      valid &&
-      admin &&
-      (await User.find({ name: user.username })).length <= 0
-    ) {
-      //lazy operator, so no database request if no privileges
-      await User.create({
-        name: user.username,
-        admin: user.admin
-      });
-      return true;
-    } else {
-      return false;
-    }
+    await User.create({
+      name: user.username,
+      admin: user.admin
+    });
+    return true;
   }
 
   /**
@@ -77,32 +61,20 @@ export abstract class UserManager {
    * return: true, if update was successful
    */
   public static async changePassword(
-    password: string,
-    sessionID: string
+    username: string,
+    passwordNew: string
   ): Promise<boolean> {
-    console.log(
-      `changePassword(password: ${password}, sessionID: ${sessionID})`
+    const salt = this.generateRandomString(16);
+    const pwHash = this.hashPassword(passwordNew, salt);
+    await User.findOneAndUpdate(
+      { name: username },
+      {
+        passwordHash: pwHash,
+        salt: salt,
+      },
+      { upsert: true }
     );
-
-    const { valid, admin } = await UserManager.checkSessionID(sessionID);
-
-    const curruser = (await User.findOne({ activeSession: sessionID }));
-    //users can only modify their own passwords
-    if (curruser) {
-      const salt = this.generateRandomString(16);
-      const pwHash = this.hashPassword(password, salt);
-      await User.findOneAndUpdate(
-        { name: curruser["name"] },
-        {
-          passwordHash: pwHash,
-          salt: salt,
-        },
-        { upsert: true }
-      );
-      return true;
-    } else {
-      return false;
-    }
+    return true;
   }
 
   /**
@@ -115,27 +87,15 @@ export abstract class UserManager {
    * return: true, if update was successful
    */
   public static async makeAdmin(
-    username: string,
-    sessionID: string
+    username: string
   ): Promise<boolean> {
-    console.log(
-      `makeAdmin(username: ${username}, sessionID: ${sessionID})`
+    await User.findOneAndUpdate(
+      { name: username },
+      {
+        admin: true
+      }
     );
-
-    const { valid, admin } = await UserManager.checkSessionID(sessionID);
-
-    //admins only can make someone an admin
-    if (admin) {
-      await User.findOneAndUpdate(
-        { name: username },
-        {
-          admin: true
-        }
-      );
-      return true;
-    } else {
-      return false;
-    }
+    return true;
   }
 
   /**
@@ -148,22 +108,12 @@ export abstract class UserManager {
    * return: true, if removal was successful
    */
   public static async removeUser(
-    username: string,
-    sessionID: string
+    username: string
   ): Promise<boolean> {
-    console.log(`removeUser(username: ${username}, sessionID: ${sessionID})`);
-
-    const { valid, admin } = await UserManager.checkSessionID(sessionID);
-
-    if (valid && admin) {
-      //lazy operator, so no database request if no privileges
-      await User.findOneAndDelete({
-        name: username
-      });
-      return true;
-    } else {
-      return false;
-    }
+    let res = await User.findOneAndDelete({
+      name: username
+    });
+    return true;
   }
 
   /**
@@ -243,14 +193,17 @@ export abstract class UserManager {
    */
   public static async checkSessionID(
     sessionID: string
-  ): Promise<{ valid: boolean; admin: boolean }> {
+  ): Promise<{ valid: boolean; admin: boolean, name: string }> {
+    if (!sessionID) {
+      return { valid: false, admin: false, name: "" };
+    }
     const res = await User.findOne({ activeSession: sessionID });
-    if (res == null || res == undefined) {
-      return { valid: false, admin: false }; //session id doesnt exist
+    if (!res) {
+      return { valid: false, admin: false, name: "" }; //session id doesnt exist
     } else if (Utility.toUnixTimestamp(new Date()) < res["expiration"]) {//is session id not yet expired?
-      return { valid: true, admin: res["admin"] };
+      return { valid: true, admin: res["admin"], name: res["name"]  };
     } else {
-      return { valid: false, admin: false };
+      return { valid: false, admin: false, name: "" };
     }
   }
 }
