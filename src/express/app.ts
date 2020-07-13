@@ -50,7 +50,7 @@ app.use("/p", shareRoutes);
 
 //Controls Routes
 app.use("/admin/controls", controlsRoutes);
-app.use(expressStatusMonitor({ path: "/admin/status" }));
+app.use("/admin/status", expressStatusMonitor({ path: "/admin/status" }));
 
 //View Routes
 app.use("/views", viewRoutes);
