@@ -249,16 +249,16 @@
           <div id="DatenbankPage" class="tab-pane fade show active">
             <br>
             <h3>
-              Liveevent <%= liveevent.isActive %>
+              Liveevent
             </h3>
             <hr class="my-4">
             <form action="/admin/controls/action/liveevent" method="post">
               <input type="hidden" id="id" name="id" value="0">
 
-            <input type="radio" id="active" name="isActive" value="<%= liveevent.isActive %>" <% if (liveevent.isActive) { %>checked<% } %>>
+            <input type="radio" id="active" name="isActive" <% if (liveevent.isActive) { %>checked<% } %>>
               <label for="active">Aktiviert</label><br>
 
-              <input type="radio" id="inactive" name="isActive" value="<%= !liveevent.isActive %>" <% if (!liveevent.isActive) { %>checked<% } %>>
+              <input type="radio" id="inactive" name="isActive" <% if (!liveevent.isActive) { %>checked<% } %>>
               <label for="inactive">Deaktiviert</label><br>
 
               <label for="actionText">Text:</label>
@@ -267,9 +267,9 @@
               <label for="actionUrl">Link:</label>
               <input class="form-control" type="text" id="actionUrl" name="actionUrl" value="<%= liveevent.actionUrl %>"><br>
 
-              <input type="radio" id="inApp" name="inApp" value="<%= liveevent.inApp %>" <% if (liveevent.inApp) { %>checked<% } %>>
+              <input type="radio" id="inApp" name="inApp" <% if (liveevent.inApp) { %>checked<% } %>>
               <label for="inApp">inApp</label><br>
-              <input type="radio" id="notInApp" name="inApp" value="<%= !liveevent.inApp %>" <% if (!liveevent.inApp) { %>checked<% } %>>
+              <input type="radio" id="notInApp" name="inApp" <% if (!liveevent.inApp) { %>checked<% } %>>
               <label for="notInApp">nicht inApp</label><br>
 
               <input type="submit" class="btn btn-primary" value="Aktualisieren">
