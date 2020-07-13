@@ -56,8 +56,8 @@ export const changePassword: RequestHandler = async (req, res) => {
     if (success) {
       await UserManager.logout(req.auth.session);
     }
-    console.log("redirecting to /views/panel/controls" + success ? "" : "?err=true");
-    res.redirect("/views/panel/controls" + success ? "" : "?err=true");
+    console.log("redirecting to /views/panel/controls".concat(success ? "" : "?err=true"));
+    res.redirect("/views/panel/controls".concat(success ? "" : "?err=true"));
   } else {
     res.status(401).end();
   }
