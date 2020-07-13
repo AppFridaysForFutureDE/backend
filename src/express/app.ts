@@ -60,7 +60,6 @@ app.use(function(err: Error, req: Request, res: Response, next) {
   } else {
     res.status(500).json({ message: err.message });
   }
-  next();
 });
 
 

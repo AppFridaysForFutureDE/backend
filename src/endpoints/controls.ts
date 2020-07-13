@@ -40,6 +40,7 @@ export const create: RequestHandler = async (req, res) => {
   const admin: boolean = req.body.admin == "Administrator";
   if (req.auth.admin) {
     const success = await UserManager.createUser({ username, admin });
+    console.log("redirect to control panel");
     res.redirect("/views/panel/controls" + success ? "" : "?err=true");
   } else {
     res.status(401).end();
