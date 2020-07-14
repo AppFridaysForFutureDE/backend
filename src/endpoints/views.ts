@@ -56,7 +56,8 @@ export const controlsView: RequestHandler = async (req, res) => {
       firebaseStatus: status,
       users: userList,
       currUser: currentUser,
-      liveevent: le
+      liveevent: le,
+      error: (req.query.err == "true")
     });
   } else {
     res.redirect("/views/panel/login");
