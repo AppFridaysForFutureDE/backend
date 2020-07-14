@@ -147,7 +147,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
   <script>
     function requestPopulate() {
-      document.getElementById("populate").textContent = "Wird aktualisiert...";
+      document.getElementById("popStatus").textContent = "Wird aktualisiert...";
+      document.getElementById("popButton").disabled = true;
       document.getElementById("popSpinner").hidden = false;
       const populate = new XMLHttpRequest();
       const url = '/admin/controls/action/populateDB';
@@ -157,9 +158,9 @@
         console.log(populate.responseText);
         const state = JSON.parse(populate.responseText);
         if (state.performedPopulate == true) {
-          document.getElementById("populate").textContent = "Datenbank aktualisiert";
+          document.getElementById("popStatus").textContent = "Datenbank aktualisiert";
         } else if (state.performedPopulate == false) {
-          document.getElementById("populate").textContent = "Datenbank konnte nicht aktualisiert werden";
+          document.getElementById("popStatus").textContent = "Datenbank konnte nicht aktualisiert werden";
         }
         document.getElementById("popSpinner").hidden = true;
       }
@@ -281,18 +282,12 @@
             <form action="/admin/controls/action/liveevent" method="post">
               <input type="hidden" id="id" name="id" value="0">
 
-              <input type="radio" id="active" name="isActive" value="on" 
-              <% if (liveevent.isActive) { %>
-                checked
-              <% } %>
-              >
+              <input type="radio" id="active" name="isActive" value="on" <% if (liveevent.isActive) { %> checked
+                <% } %>>
               <label for="active">Aktiviert</label><br>
 
-              <input type="radio" id="inactive" name="isActive" value="off"
-              <% if (!liveevent.isActive) { %>
-                checked
-              <% } %>
-              >
+              <input type="radio" id="inactive" name="isActive" value="off" <% if (!liveevent.isActive) { %> checked
+                <% } %>>
               <label for="inactive">Deaktiviert</label><br>
 
               <label for="actionText">Text:</label>
@@ -303,17 +298,9 @@
               <input class="form-control" type="text" id="actionUrl" name="actionUrl"
                 value="<%= liveevent.actionUrl %>"><br>
 
-              <input type="radio" id="inApp" name="inApp" value="on" 
-              <% if (liveevent.inApp) { %>
-                checked
-              <% } %>
-              >
+              <input type="radio" id="inApp" name="inApp" value="on" <% if (liveevent.inApp) { %> checked <% } %>>
               <label for="inApp">inApp</label><br>
-              <input type="radio" id="notInApp" name="inApp" value="off"
-              <% if (!liveevent.inApp) { %>
-                checked
-              <% } %>
-              >
+              <input type="radio" id="notInApp" name="inApp" value="off" <% if (!liveevent.inApp) { %> checked <% } %>>
               <label for="notInApp">nicht inApp</label><br>
 
               <input type="submit" class="btn btn-primary" value="Aktualisieren">
@@ -323,12 +310,11 @@
               Datenbank füllen
             </h3>
             <hr class="my-4">
-            <div id="popSpinner" hidden="true" class="spinner-border" role="status">
-              <span class="sr-only">Loading...</span>
-            </div>
-            <span id="populate">Nicht ausgeführt</span><br><br>
-            <button class="btn btn-primary" type="button" onclick="requestPopulate()">Jetzt Datenbank
-              aktualisieren</button><br><br>
+
+            <button class="btn btn-primary" type="button" id="popButton" onclick="requestPopulate()">
+              <span id="popSpinner" class="spinner-border spinner-border-sm" role="status" hidden="true"></span>
+              <span id="popStatus" class="sr-only">Jetzt Datenbank aktualisieren</span>
+            </button>
           </div>
 
           <div id="ServicesPage" class="tab-pane fade">
