@@ -278,10 +278,18 @@
             <form action="/admin/controls/action/liveevent" method="post">
               <input type="hidden" id="id" name="id" value="0">
 
-              <input type="radio" id="active" name="isActive" value="on" checked>
+              <input type="radio" id="active" name="isActive" value="on" 
+              <% if (liveevent.isActive) { %>
+                checked
+              <% } %>
+              >
               <label for="active">Aktiviert</label><br>
 
-              <input type="radio" id="inactive" name="isActive" value="off">
+              <input type="radio" id="inactive" name="isActive" value="off"
+              <% if (!liveevent.isActive) { %>
+                checked
+              <% } %>
+              >
               <label for="inactive">Deaktiviert</label><br>
 
               <label for="actionText">Text:</label>
@@ -292,9 +300,17 @@
               <input class="form-control" type="text" id="actionUrl" name="actionUrl"
                 value="<%= liveevent.actionUrl %>"><br>
 
-              <input type="radio" id="inApp" name="inApp" value="on" checked>
+              <input type="radio" id="inApp" name="inApp" value="on" 
+              <% if (liveevent.inApp) { %>
+                checked
+              <% } %>
+              >
               <label for="inApp">inApp</label><br>
-              <input type="radio" id="notInApp" name="inApp" value="off">
+              <input type="radio" id="notInApp" name="inApp" value="off"
+              <% if (!liveevent.inApp) { %>
+                checked
+              <% } %>
+              >
               <label for="notInApp">nicht inApp</label><br>
 
               <input type="submit" class="btn btn-primary" value="Aktualisieren">
