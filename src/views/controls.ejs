@@ -168,7 +168,7 @@
 <body>
   <!-- Error Modal -->
   <% if (error) { %>
-  <div id="modalid" data-show="true" class="modal" tabindex="-1" role="dialog">
+  <div id="modalid" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -395,7 +395,7 @@
 
   <script>
     feather.replace()
-    //$("#modalid").modal("show");
+    $("#modalid").modal("show");
     window.onload = function () {
 
       var url = document.location.toString();
