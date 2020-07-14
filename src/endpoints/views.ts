@@ -9,7 +9,7 @@ export const loginView: RequestHandler = async (req, res) => {
   if (req.auth.valid) {
     res.redirect("/views/panel/controls");
   } else {
-    res.render("login", { err: (req.query.err == "true") });
+    res.render("login", { err: req.query.err == "true" });
   }
 };
 
@@ -21,7 +21,7 @@ export const controlsView: RequestHandler = async (req, res) => {
       ? "Verbunden"
       : "Nicht verbunden";
 
-    const userList = (await User.find({})).map(function (userdoc) {
+    const userList = (await User.find({})).map(function(userdoc) {
       return {
         name: userdoc["name"],
         active:
@@ -33,22 +33,18 @@ export const controlsView: RequestHandler = async (req, res) => {
       };
     });
 
-
-    let le: any = await Liveevent.findOne({ liveeventId: 0 });
-    if (!le) {
-      le = {
-        actionText: "",
-        actionUrl: "",
-        inApp: false,
-        isActive: false
-      }
-    }
+    const le = (await Liveevent.findOne({ liveeventId: 0 })) || {
+      actionText: "",
+      actionUrl: "",
+      inApp: false,
+      isActive: false
+    };
 
     const currentUser = {
       name: req.auth.name,
       admin: req.auth.admin,
       rights: req.auth.admin ? "Administrator" : "Developer"
-    }
+    };
 
     console.log(le);
     //render
@@ -57,7 +53,7 @@ export const controlsView: RequestHandler = async (req, res) => {
       users: userList,
       currUser: currentUser,
       liveevent: le,
-      error: (req.query.err == "true")
+      error: req.query.err == "true"
     });
   } else {
     res.redirect("/views/panel/login");

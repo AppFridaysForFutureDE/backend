@@ -28,7 +28,7 @@ export const logout: RequestHandler = async (req, res) => {
 export const remove: RequestHandler = async (req, res) => {
   const username = req.body.username;
   if (req.auth.admin) {
-    let success = await UserManager.removeUser(username);
+    const success = await UserManager.removeUser(username);
     res.redirect("/views/panel/controls".concat(success ? "" : "?err=true"));
   } else {
     res.redirect("/views/panel/login");
@@ -65,15 +65,12 @@ export const changePassword: RequestHandler = async (req, res) => {
 export const makeAdmin: RequestHandler = async (req, res) => {
   const username = req.body.username;
   if (req.auth.admin) {
-    const success = await UserManager.makeAdmin(
-      username
-    );
+    const success = await UserManager.makeAdmin(username);
     res.redirect("/views/panel/controls".concat(success ? "" : "?err=true"));
   } else {
     res.redirect("/views/panel/login");
   }
 };
-
 
 //___________
 //| Actions |
@@ -86,23 +83,22 @@ export const populateDB: RequestHandler = async (req, res) => {
       strikeAccess.retrieveStrikes(),
       meetingAccess.retrieveMeetings()
     ]);
-    res.status(200).json( {performedPopulate: true });
+    res.status(200).json({ performedPopulate: true });
   } else {
-    res.status(200).json( {performedPopulate: false });
+    res.status(200).json({ performedPopulate: false });
   }
 };
 
 export const saveLiveevent: RequestHandler = async (req, res) => {
-
   console.log(req.body);
   if (req.auth.valid) {
-    let result = await Liveevent.findOneAndUpdate(
+    const result = await Liveevent.findOneAndUpdate(
       { liveeventId: req.body.id },
       {
-        isActive: (req.body.isActive == "on"),
+        isActive: req.body.isActive == "on",
         actionText: req.body.actionText,
         actionUrl: req.body.actionUrl,
-        inApp: (req.body.inApp == "on")
+        inApp: req.body.inApp == "on"
       },
       { upsert: true }
     );

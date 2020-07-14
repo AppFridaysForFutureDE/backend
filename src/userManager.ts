@@ -1,6 +1,5 @@
 import { User } from "./models/userModel";
 import crypto from "crypto";
-import { util } from "prettier";
 import Utility from "./utility";
 
 // Manages users
@@ -20,7 +19,9 @@ export abstract class UserManager {
       .slice(0, length);
   }
 
-  public static async createSessionID(username: string) {
+  public static async createSessionID(
+    username: string
+  ): Promise<{ valid: boolean; sessionID: string }> {
     const sessID = "fff_id_" + this.generateRandomString(16); //creates session id
     await User.findOneAndUpdate(
       { name: username },
@@ -41,9 +42,10 @@ export abstract class UserManager {
    *
    * return: true, if creation was successful
    */
-  public static async createUser(
-    user: { username: string; admin: boolean }
-  ): Promise<boolean> {
+  public static async createUser(user: {
+    username: string;
+    admin: boolean;
+  }): Promise<boolean> {
     await User.create({
       name: user.username,
       admin: user.admin
@@ -70,7 +72,7 @@ export abstract class UserManager {
       { name: username },
       {
         passwordHash: pwHash,
-        salt: salt,
+        salt: salt
       },
       { upsert: true }
     );
@@ -86,9 +88,7 @@ export abstract class UserManager {
    *
    * return: true, if update was successful
    */
-  public static async makeAdmin(
-    username: string
-  ): Promise<boolean> {
+  public static async makeAdmin(username: string): Promise<boolean> {
     await User.findOneAndUpdate(
       { name: username },
       {
@@ -107,10 +107,8 @@ export abstract class UserManager {
    *
    * return: true, if removal was successful
    */
-  public static async removeUser(
-    username: string
-  ): Promise<boolean> {
-    let res = await User.findOneAndDelete({
+  public static async removeUser(username: string): Promise<boolean> {
+    await User.findOneAndDelete({
       name: username
     });
     return true;
@@ -170,13 +168,14 @@ export abstract class UserManager {
    * params:
    * sessionID: the session id of the session to end
    */
-  public static async logout(sessionID: string) {
+  public static async logout(sessionID: string): Promise<boolean> {
     console.log(`logout(sessionID: ${sessionID})`);
 
     await User.findOneAndUpdate(
       { activeSession: sessionID },
       { activeSession: "", expiration: 0 }
     );
+    return true;
   }
 
   /**
@@ -193,15 +192,16 @@ export abstract class UserManager {
    */
   public static async checkSessionID(
     sessionID: string
-  ): Promise<{ valid: boolean; admin: boolean, name: string }> {
+  ): Promise<{ valid: boolean; admin: boolean; name: string }> {
     if (!sessionID) {
       return { valid: false, admin: false, name: "" };
     }
     const res = await User.findOne({ activeSession: sessionID });
     if (!res) {
       return { valid: false, admin: false, name: "" }; //session id doesnt exist
-    } else if (Utility.toUnixTimestamp(new Date()) < res["expiration"]) {//is session id not yet expired?
-      return { valid: true, admin: res["admin"], name: res["name"]  };
+    } else if (Utility.toUnixTimestamp(new Date()) < res["expiration"]) {
+      //is session id not yet expired?
+      return { valid: true, admin: res["admin"], name: res["name"] };
     } else {
       return { valid: false, admin: false, name: "" };
     }

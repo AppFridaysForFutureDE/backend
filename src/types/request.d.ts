@@ -4,12 +4,12 @@ Expanding the Express request object with declaration merging to have a property
 https://www.typescriptlang.org/docs/handbook/declaration-merging.html
 */
 declare namespace Express {
-    export interface Request {
-       auth: {
-           valid: boolean,
-           admin: boolean,
-           session: string,
-           name: string
-       }
-    }
- }
+  export interface Request {
+    auth: {
+      valid: boolean;
+      admin: boolean;
+      session: string;
+      name: string;
+    };
+  }
+}

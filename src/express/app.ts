@@ -24,8 +24,10 @@ app.set("views", path.join(__dirname, "../../src/views"));
 app.set("view engine", "ejs");
 
 //Auth properties
-app.use(async function (req: Request, res: Response, next) {
-  let { valid, admin, name } = await UserManager.checkSessionID(req.cookies["fff_sessionid"]);
+app.use(async function(req: Request, res: Response, next) {
+  const { valid, admin, name } = await UserManager.checkSessionID(
+    req.cookies["fff_sessionid"]
+  );
   req.auth = {
     valid: valid,
     admin: admin,
@@ -53,9 +55,6 @@ app.use("/admin/controls", controlsRoutes);
 app.use("/views", viewRoutes);
 
 //Express Error Fallback
-app.use(function (err: Error, req: Request, res: Response, next) {
+app.use(function(err: Error, req: Request, res: Response, next) {
   res.status(500).json({ message: err.message });
 });
-
-
-
