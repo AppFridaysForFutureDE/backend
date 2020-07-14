@@ -17,9 +17,7 @@ export const controlsView: RequestHandler = async (req, res) => {
   //redirect to login if wrong/missing session id
   if (req.auth.valid) {
     //gather all the data for serverside rendering
-    const status = FCMAdmin.getInstance().getStatus()
-      ? "Verbunden"
-      : "Nicht verbunden";
+    const status = FCMAdmin.getInstance().getStatus();
 
     const userList = (await User.find({})).map(function(userdoc) {
       return {

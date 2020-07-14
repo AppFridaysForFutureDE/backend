@@ -323,7 +323,11 @@
               Firebase-Status
             </h3>
             <hr class="my-4">
-            <span id="status"><%= firebaseStatus %></span>
+            <% if (firebaseStatus) { %>
+              <span data-feather="check"></span> Verbunden
+            <% } else { %>
+              <span data-feather="x"></span> Nicht verbunden
+            <% } %>
           </div>
 
           <% if (currUser.admin) { %>
