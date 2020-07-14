@@ -34,7 +34,7 @@ export const controlsView: RequestHandler = async (req, res) => {
     });
 
 
-    let le = await Liveevent.findOne({ liveeventId: 0 })["liveevent"];
+    let le: any = await Liveevent.findOne({ liveeventId: 0 });
     if (!le) {
       le = {
         actionText: "",
