@@ -97,10 +97,10 @@ export const saveLiveevent: RequestHandler = async (req, res) => {
     let result = await Liveevent.findOneAndUpdate(
       { liveeventId: req.body.id },
       {
-        isActive: req.body.isActive,
+        isActive: (req.body.isActive == "on"),
         actionText: req.body.actionText,
         actionUrl: req.body.actionUrl,
-        inApp: req.body.inApp
+        inApp: (req.body.inApp == "on")
       },
       { upsert: true }
     );
