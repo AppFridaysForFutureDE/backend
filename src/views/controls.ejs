@@ -148,7 +148,7 @@
   <script>
     function requestPopulate() {
       const populate = new XMLHttpRequest();
-      const url = '/admin/controls/populateDB';
+      const url = '/admin/controls/action/populateDB';
       populate.open("POST", url);
       populate.send();
       populate.onreadystatechange = (e) => {
