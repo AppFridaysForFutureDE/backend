@@ -147,6 +147,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
   <script>
     function requestPopulate() {
+      document.getElementById("populate").textContent = "Wird aktualisiert...";
+      document.getElementById("popSpinner").hidden = false;
       const populate = new XMLHttpRequest();
       const url = '/admin/controls/action/populateDB';
       populate.open("POST", url);
@@ -159,6 +161,7 @@
         } else if (state.performedPopulate == false) {
           document.getElementById("populate").textContent = "Datenbank konnte nicht aktualisiert werden";
         }
+        document.getElementById("popSpinner").hidden = true;
       }
     }
 
@@ -320,6 +323,9 @@
               Datenbank füllen
             </h3>
             <hr class="my-4">
+            <div id="popSpinner" hidden="true" class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
             <span id="populate">Nicht ausgeführt</span><br><br>
             <button class="btn btn-primary" type="button" onclick="requestPopulate()">Jetzt Datenbank
               aktualisieren</button><br><br>

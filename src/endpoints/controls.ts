@@ -86,9 +86,9 @@ export const populateDB: RequestHandler = async (req, res) => {
       strikeAccess.retrieveStrikes(),
       meetingAccess.retrieveMeetings()
     ]);
-    res.redirect("/views/panel/controls");
+    res.status(200).json( {performedPopulate: true });
   } else {
-    res.redirect("/views/panel/login");
+    res.status(200).json( {performedPopulate: false });
   }
 };
 
