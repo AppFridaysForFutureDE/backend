@@ -93,6 +93,8 @@ export const populateDB: RequestHandler = async (req, res) => {
 };
 
 export const saveLiveevent: RequestHandler = async (req, res) => {
+
+  console.log(req.body);
   if (req.auth.valid) {
     let result = await Liveevent.findOneAndUpdate(
       { liveeventId: req.body.id },

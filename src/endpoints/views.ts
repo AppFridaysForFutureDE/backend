@@ -50,7 +50,6 @@ export const controlsView: RequestHandler = async (req, res) => {
       rights: req.auth.admin ? "Administrator" : "Developer"
     }
 
-    console.log(le);
     //render
     res.render("controls", {
       firebaseStatus: status,
