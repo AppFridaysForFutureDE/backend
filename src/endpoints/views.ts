@@ -43,14 +43,6 @@ export const controlsView: RequestHandler = async (req, res) => {
       admin: req.auth.admin,
       rights: req.auth.admin ? "Administrator" : "Developer"
     };
-
-    //TODO: Refactor
-    let tab: number = Math.abs(req.query.tab) || 0;
-    if (tab > 3 && currentUser.admin) {
-      tab = 3;
-    } else if (tab > 1) {
-      tab = 1;
-    }
     
     //render
     res.render("controls", {
