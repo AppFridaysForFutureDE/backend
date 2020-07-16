@@ -422,10 +422,18 @@
     $("a[data-toggle='tab']").on("click", function (e) {
       e.preventDefault();
       var tab_name = this.getAttribute("href");
-      location.hash = tab_name;
-      localStorage.setItem("activeTab", tab_name);
-      $(this).click();
+      if (localStorage.getItem('activeTab') != tab_name) {
+        location.hash = tab_name;
+        localStorage.setItem("activeTab", tab_name);
+        $(this).click();
+      }
       return false;
+    });
+
+    //when the location on the same page changes, set tab to anchor
+    $(window).on("popstate", function () {
+      var anchor = location.hash || $("a[data-toggle='tab']").first().attr("href");
+      $("a[href='" + anchor + "']").click();
     });
   </script>
 </body>
