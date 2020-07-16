@@ -421,7 +421,7 @@
     //change the anchor and the localStorage when a tab is changed
     $("a[data-toggle='tab']").on("click", function (e) {
       var tab_name = this.getAttribute("href");
-      if (localStorage.getItem('activeTab') != tab_name) {
+      if (location.hash != tab_name) {
         e.preventDefault();
         location.hash = tab_name;
         localStorage.setItem("activeTab", tab_name);
