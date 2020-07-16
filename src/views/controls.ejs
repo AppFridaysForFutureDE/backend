@@ -427,12 +427,6 @@
       $(this).click();
       return false;
     });
-
-    //when the location on the same page changes, set tab to anchor
-    $(window).on("popstate", function () {
-      var anchor = location.hash || $("a[data-toggle='tab']").first().attr("href");
-      $("a[href='" + anchor + "']").click();
-    });
   </script>
 </body>
 
