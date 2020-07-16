@@ -410,12 +410,13 @@
     $("#modalid").modal("show");
 
     //when the page loads, change the tab according to the entry localStorage (or if anchor exists according to that)
+    var activeTab = localStorage.getItem('activeTab');
     if (location.hash) {
       $("a[href='" + location.hash + "']").click();
-    }
-    var activeTab = localStorage.getItem('activeTab');
-    if (activeTab) {
+    } else if (activeTab) {
       $("a[href='" + activeTab + "']").click();
+    } else {
+      $("a[href='#DatenbankPage']").click();
     }
 
     //change the anchor and the localStorage when a tab is changed
