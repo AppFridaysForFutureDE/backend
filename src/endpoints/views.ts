@@ -44,9 +44,14 @@ export const controlsView: RequestHandler = async (req, res) => {
       rights: req.auth.admin ? "Administrator" : "Developer"
     };
 
-    const tab: number = req.query.tab || 0;
-
-    console.log(le);
+    //TODO: Refactor
+    let tab: number = Math.abs(req.query.tab) || 0;
+    if (tab > 3 && currentUser.admin) {
+      tab = 3;
+    } else if (tab > 1) {
+      tab = 1;
+    }
+    
     //render
     res.render("controls", {
       firebaseStatus: status,
