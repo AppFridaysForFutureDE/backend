@@ -44,6 +44,8 @@ export const controlsView: RequestHandler = async (req, res) => {
       rights: req.auth.admin ? "Administrator" : "Developer"
     };
 
+    const tab: number = req.query.tab || 0;
+
     console.log(le);
     //render
     res.render("controls", {
@@ -51,7 +53,8 @@ export const controlsView: RequestHandler = async (req, res) => {
       users: userList,
       currUser: currentUser,
       liveevent: le,
-      error: req.query.err == "true"
+      error: req.query.err == "true",
+      tab: tab
     });
   } else {
     res.redirect("/views/panel/login");

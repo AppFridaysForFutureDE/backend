@@ -238,13 +238,17 @@
         <div class="sidebar-sticky pt-3">
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a class="nav-link active" data-toggle="tab" href="#DatenbankPage">
+              <a class="nav-link <% if (tab == 0) { %> 
+                active
+                <% } %>" data-toggle="tab" href="#DatenbankPage">
                 <span data-feather="file"></span>
-                Datenbank <span class="sr-only">(aktive Seite)</span>
+                Datenbank
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#ServicesPage">
+              <a class="nav-link <% if (tab == 1) { %> 
+                active
+                <% } %>" data-toggle="tab" href="#ServicesPage">
                 <span data-feather="cloud"></span>
                 Services
               </a>
@@ -253,13 +257,17 @@
             <% if (currUser.admin) { %>
             <!-- Render Admin Only tabs here -->
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#UserPage">
+              <a class="nav-link <% if (tab == 2) { %> 
+                active
+                <% } %>" data-toggle="tab" href="#UserPage">
                 <span data-feather="users"></span>
                 Benutzerverwaltung
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#LogPage">
+              <a class="nav-link <% if (tab == 3) { %> 
+                active
+                <% } %>" data-toggle="tab" href="#LogPage">
                 <span data-feather="archive"></span>
                 Logs
               </a>
@@ -273,7 +281,9 @@
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
 
         <div class="tab-content">
-          <div id="DatenbankPage" class="tab-pane fade show active">
+          <div id="DatenbankPage" class="tab-pane fade <% if (tab == 0) { %> 
+            show active
+            <% } %>">
             <br>
             <h3>
               Liveevent
@@ -317,7 +327,9 @@
             </button>
           </div>
 
-          <div id="ServicesPage" class="tab-pane fade">
+          <div id="ServicesPage" class="tab-pane fade <% if (tab == 1) { %> 
+            show active
+            <% } %>">
             <br>
             <h3>
               Firebase-Status
@@ -332,7 +344,9 @@
 
           <% if (currUser.admin) { %>
           <!-- Render Admin Only tabs here -->
-          <div id="UserPage" class="tab-pane fade">
+          <div id="UserPage" class="tab-pane fade <% if (tab == 2) { %> 
+            show active
+            <% } %>">
             <br>
             <h3>
               Benutzerübersicht
@@ -395,7 +409,9 @@
             </div>
           </div>
 
-          <div id="LogPage" class="tab-pane fade">
+          <div id="LogPage" class="tab-pane fade <% if (tab == 3) { %> 
+            show active
+            <% } %>">
             Not yet implemented
           </div>
           <% } %>
@@ -408,18 +424,6 @@
   <script>
     feather.replace()
     $("#modalid").modal("show");
-    window.onload = function () {
-
-      var url = document.location.toString();
-      if (url.match('#')) {
-        $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
-      }
-
-      //Change hash for page-reload
-      $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').on('shown', function (e) {
-        window.location.hash = e.target.hash;
-      });
-    } 
   </script>
 </body>
 
