@@ -410,27 +410,19 @@
     $("#modalid").modal("show");
 
     //when the page loads, change the tab according to the entry localStorage (or if anchor exists according to that)
-    switchTab();
-
-    function switchTab() {
-      if (location.hash) {
-        $("a[href='" + location.hash + "']").click();
-      }
-      var activeTab = localStorage.getItem('activeTab');
-      if (activeTab) {
-        $("a[href='" + activeTab + "']").click();
-      }
+    if (location.hash) {
+      $("a[href='" + location.hash + "']").click();
+    }
+    var activeTab = localStorage.getItem('activeTab');
+    if (activeTab) {
+      $("a[href='" + activeTab + "']").click();
     }
 
     //change the anchor and the localStorage when a tab is changed
     $("a[data-toggle='tab']").on("click", function (e) {
       var tab_name = this.getAttribute("href");
-      if (location.hash != tab_name) {
-        e.preventDefault();
-        location.hash = tab_name;
-        localStorage.setItem("activeTab", tab_name);
-        switchTab();
-      }
+      location.hash = tab_name;
+      localStorage.setItem("activeTab", tab_name);
       return false;
     });
   </script>
