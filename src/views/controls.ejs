@@ -324,9 +324,9 @@
             </h3>
             <hr class="my-4">
             <% if (firebaseStatus) { %>
-              <span data-feather="check"></span> Verbunden
+            <span data-feather="check"></span> Verbunden
             <% } else { %>
-              <span data-feather="x"></span> Nicht verbunden
+            <span data-feather="x"></span> Nicht verbunden
             <% } %>
           </div>
 
@@ -408,6 +408,36 @@
   <script>
     feather.replace()
     $("#modalid").modal("show");
+
+    //when the page loads, change the tab according to the entry localStorage (or if anchor exists according to that)
+    if (location.hash) {
+      $("a[href='" + location.hash + "']").click();
+    }
+    var activeTab = localStorage.getItem('activeTab');
+    if (activeTab) {
+      $("a[href='" + activeTab + "']").click();
+    }
+
+    //change the anchor and the localStorage when a tab is changed
+    $("body").on("click", "a[data-toggle='tab']", function (e) {
+      e.preventDefault()
+      var tab_name = this.getAttribute("href")
+      if (history.pushState) {
+        history.pushState(null, null, tab_name)
+      } else {
+        location.hash = tab_name
+      }
+      localStorage.setItem("activeTab", tab_name)
+
+      $(this).click();
+      return false;
+    });
+
+    //when the location on the same page changes, set tab to anchor
+    $(window).on("popstate", function () {
+      var anchor = location.hash || $("a[data-toggle='tab']").first().attr("href");
+      $("a[href='" + anchor + "']").click();
+    });
   </script>
 </body>
 

@@ -50,8 +50,7 @@ export const controlsView: RequestHandler = async (req, res) => {
       users: userList,
       currUser: currentUser,
       liveevent: le,
-      error: req.query.err == "true",
-      tab: tab
+      error: req.query.err == "true"
     });
   } else {
     res.redirect("/views/panel/login");
