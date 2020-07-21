@@ -1,5 +1,5 @@
 import { OG } from "../models/ogsModel";
-import Utility from "../utility";
+import Utility from "../Utility";
 import nodeFetch from "node-fetch";
 
 //retrieves ogs from website api and saves them to mongodb

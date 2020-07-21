@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { FCMAdmin } from "../services/fcm";
+import FCMAdmin from "../services/FCMAdmin";
 
 export const webhookTriggered: RequestHandler = (req, res) => {
   console.log("Webhook Ghost triggered");

@@ -1,8 +1,8 @@
 import { RequestHandler } from "express";
-import { FCMAdmin } from "../services/fcm";
+import FCMAdmin from "../services/FCMAdmin";
 import { User } from "../models/userModel";
 import { Liveevent } from "../models/liveeventModel";
-import Utility from "../utility";
+import Utility from "../Utility";
 
 export const loginView: RequestHandler = async (req, res) => {
   //redirect to controls if good session id
@@ -43,7 +43,7 @@ export const controlsView: RequestHandler = async (req, res) => {
       admin: req.auth.admin,
       rights: req.auth.admin ? "Administrator" : "Developer"
     };
-    
+
     //render
     res.render("controls", {
       firebaseStatus: status,

@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import { json } from "body-parser";
 import cookieParser from "cookie-parser";
 import path from "path";
+import UserManager from "../UserManager";
 
 //routes
 import {
@@ -13,7 +14,7 @@ import {
   liveeventRoutes,
   viewRoutes
 } from "./routes";
-import { UserManager } from "../userManager";
+import LogManager from "../LogManager";
 
 //Initialization
 export const app = express();
@@ -23,8 +24,9 @@ app.use(express.urlencoded());
 app.set("views", path.join(__dirname, "../../src/views"));
 app.set("view engine", "ejs");
 
-//Auth properties
+//Auth properties & logs
 app.use(async function(req: Request, res: Response, next) {
+  //check authorization and add auth properties to request
   const { valid, admin, name } = await UserManager.checkSessionID(
     req.cookies["fff_sessionid"]
   );
@@ -35,6 +37,11 @@ app.use(async function(req: Request, res: Response, next) {
     session: req.cookies["fff_sessionid"]
   };
   next();
+
+  //if this is an authorized user, log everything they do
+  if (req.auth.valid) {
+    LogManager.log(req.auth.name, req.method, req.url);
+  }
 });
 
 //API Routes

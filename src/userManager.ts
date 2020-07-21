@@ -1,11 +1,10 @@
 import { User } from "./models/userModel";
 import crypto from "crypto";
-import Utility from "./utility";
+import Utility from "./Utility";
 
 // Manages users
 //only static methods: no huge amounts of instances
-//singleton scheme isnt used as this class doesnt handle services that can only be used by one instance at a time
-export abstract class UserManager {
+export default abstract class UserManager {
   public static hashPassword(password: string, salt: string): string {
     const hash = crypto.createHmac("sha512", salt);
     hash.update(password);

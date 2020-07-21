@@ -1,6 +1,6 @@
 import { Strike } from "../models/strikesModel";
-import Utility from "../utility";
-import { FCMAdmin } from "../services/fcm";
+import Utility from "../Utility";
+import FCMAdmin from "../services/FCMAdmin";
 import nodeFetch from "node-fetch";
 
 //retrieves Strikes from website api and saves them to mongodb

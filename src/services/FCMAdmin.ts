@@ -1,7 +1,7 @@
 import * as admin from "firebase-admin";
 
 // Sends push notifications via Firebase Cloud Messaging
-export class FCMAdmin {
+export default class FCMAdmin {
   private static instance: FCMAdmin;
   private firebaseReady: boolean;
 
