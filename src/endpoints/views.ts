@@ -45,7 +45,14 @@ export const controlsView: RequestHandler = async (req, res) => {
       rights: req.auth.admin ? "Administrator" : "Developer"
     };
 
-    const logs = await Log.find({});
+    const logs = (await Log.find({})).map(function(logdoc) {
+      return {
+        username: logdoc["username"],
+        time: logdoc["time"],
+        action: logdoc["action"],
+        endpoint: logdoc["endpoint"]
+      };
+    });
     console.log(logs);
 
     //render
