@@ -3,6 +3,7 @@ import Utility from "./Utility";
 
 export default abstract class LogManager {
   public static async log(username: string, action: string, endpoint: string) {
+    console.log(`log ${username} ${action} ${endpoint}`);
     const time = Utility.toUnixTimestamp(new Date());
     const result = await Log.create({
       username: username,
