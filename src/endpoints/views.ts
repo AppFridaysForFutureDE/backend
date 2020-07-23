@@ -3,6 +3,7 @@ import FCMAdmin from "../services/FCMAdmin";
 import { User } from "../models/userModel";
 import { Liveevent } from "../models/liveeventModel";
 import Utility from "../Utility";
+import { Log } from "../models/logModel";
 
 export const loginView: RequestHandler = async (req, res) => {
   //redirect to controls if good session id
@@ -44,13 +45,16 @@ export const controlsView: RequestHandler = async (req, res) => {
       rights: req.auth.admin ? "Administrator" : "Developer"
     };
 
+    const logs = await Log.find({});
+
     //render
     res.render("controls", {
       firebaseStatus: status,
       users: userList,
       currUser: currentUser,
       liveevent: le,
-      error: req.query.err == "true"
+      error: req.query.err == "true",
+      logs: logs
     });
   } else {
     res.redirect("/views/panel/login");
