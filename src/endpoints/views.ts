@@ -47,7 +47,6 @@ export const controlsView: RequestHandler = async (req, res) => {
     };
 
     const logs = await LogManager.readLogs();
-    console.log(logs);
 
     //render
     res.render("controls", {
