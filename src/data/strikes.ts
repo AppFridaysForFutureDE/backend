@@ -1,5 +1,5 @@
 import { Strike } from "../models/strikesModel";
-import Utility from "../utility";
+import Utility from "../Utility";
 import FCMAdmin from "../services/FCMAdmin";
 import nodeFetch from "node-fetch";
 

@@ -2,7 +2,7 @@ import * as dbHandler from "./test-db-handler";
 import { Strike } from "../models/strikesModel";
 import { app } from "../express/app";
 import request from "supertest";
-import Utility from "../utility";
+import Utility from "../Utility";
 
 beforeAll(async () => await dbHandler.establishConnection());
 afterEach(async () => await dbHandler.clearDatabase());

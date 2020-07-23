@@ -1,6 +1,6 @@
 import { User } from "./models/userModel";
 import crypto from "crypto";
-import Utility from "./utility";
+import Utility from "./Utility";
 
 // Manages users
 //only static methods: no huge amounts of instances

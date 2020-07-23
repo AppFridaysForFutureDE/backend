@@ -1,5 +1,5 @@
 import { Log } from "./models/logModel";
-import Utility from "./utility";
+import Utility from "./Utility";
 
 export default abstract class LogManager {
   public static async log(username: String, action: String, endpoint: String) {

@@ -2,7 +2,7 @@ import { RequestHandler } from "express";
 import { OG } from "../models/ogsModel";
 import { Liveevent } from "../models/liveeventModel";
 import { Strike } from "../models/strikesModel";
-import Utility from "../utility";
+import Utility from "../Utility";
 
 export const getOGs: RequestHandler = (req, res) => {
   const ogId = req.query.ogId;

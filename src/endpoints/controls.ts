@@ -3,7 +3,7 @@ import * as strikeAccess from "../data/strikes";
 import * as meetingAccess from "../data/meetings";
 import * as ogAccess from "../data/ogs";
 import { Liveevent } from "../models/liveeventModel";
-import UserManager from "../userManager";
+import UserManager from "../UserManager";
 
 //___________________
 //| User Management |
