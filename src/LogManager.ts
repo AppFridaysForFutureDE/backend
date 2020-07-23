@@ -27,7 +27,7 @@ export default abstract class LogManager {
           .replace(/T/, " ")
           .replace(/\..+/, ""), //some regex magic from SO to format date string
         user: doc["username"],
-        action: `${doc["action"]} ${doc["endpoint"]}`
+        action: `${doc["method"]} ${doc["endpoint"]}`
       };
     });
   }

@@ -4,6 +4,7 @@ import { User } from "../models/userModel";
 import { Liveevent } from "../models/liveeventModel";
 import Utility from "../Utility";
 import { Log } from "../models/logModel";
+import LogManager from "../LogManager";
 
 export const loginView: RequestHandler = async (req, res) => {
   //redirect to controls if good session id
@@ -45,14 +46,7 @@ export const controlsView: RequestHandler = async (req, res) => {
       rights: req.auth.admin ? "Administrator" : "Developer"
     };
 
-    const logs = (await Log.find({})).map(function(logdoc) {
-      return {
-        username: logdoc["username"],
-        time: logdoc["time"],
-        method: logdoc["method"],
-        endpoint: logdoc["endpoint"]
-      };
-    });
+    const logs = await LogManager.readLogs();
     console.log(logs);
 
     //render
