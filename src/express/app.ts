@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import { json } from "body-parser";
 import cookieParser from "cookie-parser";
 import path from "path";
-import UserManager from "../UserManager";
+import UserManager from "../userManager";
 
 //routes
 import {

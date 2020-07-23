@@ -2,7 +2,7 @@ import { RequestHandler } from "express";
 import FCMAdmin from "../services/FCMAdmin";
 import { User } from "../models/userModel";
 import { Liveevent } from "../models/liveeventModel";
-import Utility from "../Utility";
+import Utility from "../utility";
 import { Log } from "../models/logModel";
 
 export const loginView: RequestHandler = async (req, res) => {

@@ -1,6 +1,6 @@
 import { Strike } from "../models/strikesModel";
 import { OG } from "../models/ogsModel";
-import Utility from "../Utility";
+import Utility from "../utility";
 import { GoogleSpreadsheet } from "google-spreadsheet";
 
 // TODO: Doppelte Einträge ignorieren
