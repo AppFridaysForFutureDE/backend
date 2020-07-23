@@ -49,7 +49,7 @@ export const controlsView: RequestHandler = async (req, res) => {
       return {
         username: logdoc["username"],
         time: logdoc["time"],
-        action: logdoc["action"],
+        method: logdoc["method"],
         endpoint: logdoc["endpoint"]
       };
     });

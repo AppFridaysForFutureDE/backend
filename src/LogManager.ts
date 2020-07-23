@@ -8,8 +8,8 @@ export default abstract class LogManager {
     const result = await Log.create({
       username: username,
       time: time,
-      action: action,
-      enpoint: endpoint
+      method: action,
+      endpoint: endpoint
     });
   }
 
