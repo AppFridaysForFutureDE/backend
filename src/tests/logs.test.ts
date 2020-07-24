@@ -19,7 +19,7 @@ describe("read logs", () => {
     const result = await LogManager.readLogs();
     expect(result[0].action).toBe("GET /test/path?param=value");
     expect(result[0].user).toBe("name");
-    expect(result[0].time).toBe("2020-7-24 15:15:14"); //GMT is used
+    expect(result[0].time).toBe("2020-07-24 15:15:17"); //GMT is used
   });
 });
 
