@@ -5,20 +5,20 @@ import Utility from "./Utility";
 // Manages users
 //only static methods: no huge amounts of instances
 export default abstract class UserManager {
-  public static hashPassword(password: string, salt: string): string {
+  private static hashPassword(password: string, salt: string): string {
     const hash = crypto.createHmac("sha512", salt);
     hash.update(password);
     return hash.digest("hex");
   }
 
-  public static generateRandomString(length: number): string {
+  private static generateRandomString(length: number): string {
     return crypto
       .randomBytes(Math.ceil(length / 2))
       .toString("hex")
       .slice(0, length);
   }
 
-  public static async createSessionID(
+  private static async createSessionID(
     username: string
   ): Promise<{ valid: boolean; sessionID: string }> {
     const sessID = "fff_id_" + this.generateRandomString(16); //creates session id
