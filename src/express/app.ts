@@ -3,6 +3,7 @@ import { json } from "body-parser";
 import cookieParser from "cookie-parser";
 import path from "path";
 import UserManager from "../UserManager";
+import LogManager from "../LogManager";
 
 //routes
 import {
@@ -14,7 +15,6 @@ import {
   liveeventRoutes,
   viewRoutes
 } from "./routes";
-import LogManager from "../LogManager";
 
 //Initialization
 export const app = express();
