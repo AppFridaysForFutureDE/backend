@@ -1,14 +1,15 @@
 import { Log } from "./models/logModel";
 import Utility from "./Utility";
+import express, { Request, Response } from "express";
 
 export default abstract class LogManager {
-  public static async log(username: string, action: string, endpoint: string) {
+  public static async log({ auth, method, url }: Request) {
     const time = Utility.toUnixTimestamp(new Date());
     const result = await Log.create({
-      username: username,
+      username: auth.name,
       time: time,
-      method: action,
-      endpoint: endpoint
+      method: method,
+      endpoint: url
     });
   }
 

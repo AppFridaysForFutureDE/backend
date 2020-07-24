@@ -40,7 +40,7 @@ app.use(async function(req: Request, res: Response, next) {
 
   //if this is an authorized user, log everything they do
   if (req.auth.valid) {
-    LogManager.log(req.auth.name, req.method, req.url);
+    LogManager.log(req);
   }
 });
 
