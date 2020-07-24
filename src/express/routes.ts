@@ -1,14 +1,16 @@
 import { Router } from "express";
 import {
-  populateDB,
-  saveLiveevent,
   login,
   logout,
   create,
   changePassword,
   remove,
   makeAdmin
-} from "../endpoints/controls";
+} from "../endpoints/user";
+import {
+  populateDB,
+  saveLiveevent
+} from "../endpoints/actions"
 import { getLiveevent, getOGs, getStrikes } from "../endpoints/api";
 import { sharePost } from "../endpoints/share";
 import { loginView, controlsView } from "../endpoints/views";
