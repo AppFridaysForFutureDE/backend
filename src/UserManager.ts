@@ -32,15 +32,6 @@ export default abstract class UserManager {
     return { valid: true, sessionID: sessID };
   }
 
-  /**
-   * Creates a new user
-   *
-   * params:
-   * user: the userobject to create
-   * sessionID: the session id of the session that wants to create the user
-   *
-   * return: true, if creation was successful
-   */
   public static async createUser(user: {
     username: string;
     admin: boolean;
@@ -52,15 +43,6 @@ export default abstract class UserManager {
     return true;
   }
 
-  /**
-   * changePassword
-   *
-   * params:
-   * password: the new password
-   * sessionID: the session id of the user
-   *
-   * return: true, if update was successful
-   */
   public static async changePassword(
     username: string,
     passwordNew: string
@@ -78,15 +60,6 @@ export default abstract class UserManager {
     return true;
   }
 
-  /**
-   * makeAdmin
-   *
-   * params:
-   * username: the username to make admin
-   * sessionID: the session id of the user that wants to make the user admin
-   *
-   * return: true, if update was successful
-   */
   public static async makeAdmin(username: string): Promise<boolean> {
     await User.findOneAndUpdate(
       { name: username },
@@ -97,15 +70,6 @@ export default abstract class UserManager {
     return true;
   }
 
-  /**
-   * Removes a user
-   *
-   * params:
-   * username: the name of the user to remove
-   * sessionID: the session id of the session that wants to remove the user
-   *
-   * return: true, if removal was successful
-   */
   public static async removeUser(username: string): Promise<boolean> {
     await User.findOneAndDelete({
       name: username
@@ -113,21 +77,7 @@ export default abstract class UserManager {
     return true;
   }
 
-  /**
-   * Creates sessionid if credentials are correct
-   *
-   * If user logs in for the first time, password is set
-   *
-   * params:
-   * username: the name of the user
-   * password: the password of the user
-   *
-   * return:
-   * {
-   *    valid: true, if credentials were accepted
-   *    sessionID: the created sessionID
-   * }
-   */
+  //Creates sessionid if credentials are correct
   public static async login(
     username: string,
     password: string
@@ -161,12 +111,7 @@ export default abstract class UserManager {
     return { valid: false, sessionID: "" };
   }
 
-  /**
-   * Ends session with sessionid
-   *
-   * params:
-   * sessionID: the session id of the session to end
-   */
+  //Ends session with sessionid
   public static async logout(sessionID: string): Promise<boolean> {
     console.log(`logout(sessionID: ${sessionID})`);
 
@@ -177,32 +122,21 @@ export default abstract class UserManager {
     return true;
   }
 
-  /**
-   * checks session id
-   *
-   * params:
-   * sessionID: the session id to check
-   *
-   * return:
-   * {
-   *    valid: true, if sessionID is allowed
-   *    admin: true, if session has admin privileges
-   * }
-   */
+  //checks a session id
   public static async checkSessionID(
     sessionID: string
   ): Promise<{ valid: boolean; admin: boolean; name: string }> {
-    if (!sessionID) {
-      return { valid: false, admin: false, name: "" };
-    }
     const res = await User.findOne({ activeSession: sessionID });
-    if (!res) {
-      return { valid: false, admin: false, name: "" }; //session id doesnt exist
-    } else if (Utility.toUnixTimestamp(new Date()) < res["expiration"]) {
-      //is session id not yet expired?
+    if (res && Utility.toUnixTimestamp(new Date()) < res["expiration"]) {
+      User.findOneAndUpdate(
+        { activeSession: sessionID },
+        {
+          expiration: Utility.toUnixTimestamp(new Date()) + Utility.Hour //expiration is reset when stuff is done
+        }
+      );
       return { valid: true, admin: res["admin"], name: res["name"] };
     } else {
-      return { valid: false, admin: false, name: "" };
+      return { valid: false, admin: false, name: "" }; //sessionid is invalid or expired
     }
   }
 }
