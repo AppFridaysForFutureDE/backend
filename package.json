@@ -44,7 +44,7 @@
     "start-prod": "node dist/server.js",
     "build": "tsc",
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx; ejslint src/views/*",
-    "lint-fix": "eslint src/ --fix --ext .js,.jsx,.ts,.tsx"
+    "lint-fix": "eslint src/ --fix --ext .js,.jsx,.ts,.tsx; ejslint src/views/*"
   },
   "repository": {
     "type": "git",
