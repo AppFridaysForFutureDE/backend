@@ -113,8 +113,6 @@ export default abstract class UserManager {
 
   //Ends session with sessionid
   public static async logout(sessionID: string): Promise<boolean> {
-    console.log(`logout(sessionID: ${sessionID})`);
-
     await User.findOneAndUpdate(
       { activeSession: sessionID },
       { activeSession: "", expiration: 0 }
