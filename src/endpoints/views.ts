@@ -3,7 +3,6 @@ import FCMAdmin from "../services/FCMAdmin";
 import { User } from "../models/userModel";
 import { Liveevent } from "../models/liveeventModel";
 import Utility from "../Utility";
-import { Log } from "../models/logModel";
 import LogManager from "../LogManager";
 
 export const loginView: RequestHandler = async (req, res) => {

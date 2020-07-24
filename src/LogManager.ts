@@ -1,9 +1,9 @@
 import { Log } from "./models/logModel";
 import Utility from "./Utility";
-import express, { Request, Response } from "express";
+import { Request } from "express";
 
 export default abstract class LogManager {
-  public static async log({ auth, method, url }: Request) {
+  public static async log({ auth, method, url }: Request): Promise<boolean> {
     const time = Utility.toUnixTimestamp(new Date());
     const result = await Log.create({
       username: auth.name,
@@ -11,6 +11,7 @@ export default abstract class LogManager {
       method: method,
       endpoint: url
     });
+    return result ? true : false;
   }
 
   public static async readLogs(): Promise<
@@ -33,8 +34,9 @@ export default abstract class LogManager {
   }
 
   //delete logs older than a week
-  public static async cleanLogs() {
+  public static async cleanLogs(): Promise<number> {
     const minDate = Utility.toUnixTimestamp(new Date()) - 7 * Utility.Day; //a week before the current date
-    await Log.deleteMany({ time: { $lt: minDate } });
+    const result = await Log.deleteMany({ time: { $lt: minDate } });
+    return result.deletedCount || 0;
   }
 }
