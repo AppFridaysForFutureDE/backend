@@ -10,8 +10,6 @@ export const webhookTriggered: RequestHandler = (req, res) => {
   let topic = "";
   let push = false;
 
-  console.log(tags);
-
   tags.forEach(tag => {
     if (tag["description"] == "Themenbereich") {
       topic = tag["name"];
