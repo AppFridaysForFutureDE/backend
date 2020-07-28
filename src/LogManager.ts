@@ -3,19 +3,20 @@ import Utility from "./Utility";
 import { Request } from "express";
 
 export default abstract class LogManager {
-  public static async log({ auth, method, url }: Request): Promise<boolean> {
+  public static async log({ auth, method, url, ip }: Request): Promise<boolean> {
     const time = Utility.toUnixTimestamp(new Date());
     const result = await Log.create({
       username: auth.name,
       time: time,
       method: method,
-      endpoint: url
+      endpoint: url,
+      ip: ip
     });
     return result ? true : false;
   }
 
   public static async readLogs(): Promise<
-    { time: string; user: string; action: string }[]
+    { time: string; user: string; ip: string; action: string }[]
   > {
     let result = await Log.find({});
     result = result.sort((a, b) => {
@@ -28,6 +29,7 @@ export default abstract class LogManager {
           .replace(/T/, " ")
           .replace(/\..+/, ""), //some regex magic from SO to format date string
         user: doc["username"],
+        ip: doc["ip"],
         action: `${doc["method"]} ${doc["endpoint"]}`
       };
     });
