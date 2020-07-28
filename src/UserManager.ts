@@ -73,7 +73,7 @@ export default abstract class UserManager {
   }
 
   public static async removeUser(username: string): Promise<boolean> {
-    console.log("usermngr remove");
+    console.log(username);
     await User.findOneAndDelete({
       name: username
     });
