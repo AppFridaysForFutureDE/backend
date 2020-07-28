@@ -19,6 +19,7 @@ export const logout: RequestHandler = async (req, res) => {
 };
 
 export const remove: RequestHandler = async (req, res) => {
+  console.log("enpoint remove")
   const username = req.body.username;
   if (req.auth.admin) {
     const success = await UserManager.removeUser(username);
