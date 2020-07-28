@@ -7,9 +7,6 @@ const userScheme = new mongoose.Schema({
   passwordHash: {
     type: String
   },
-  salt: {
-    type: String
-  },
   admin: {
     type: Boolean
   },

@@ -6,14 +6,14 @@ import bcrypt from "bcrypt";
 // Manages users
 //only static methods: no huge amounts of instances
 export default abstract class UserManager {
-  private static async hashPassword(password: string, salt: string): Promise<string> {
-    let hashpw = await bcrypt.hash(password, salt);
+  private static hashPassword(password: string, salt: string): Promise<string> {
+    let hashpw = bcrypt.hashSync(password, salt);
     return hashpw;
   }
 
 
-  private static async genSalt() {
-    return await bcrypt.genSalt(10);
+  private static genSalt() {
+    return bcrypt.genSaltSync(10);
   }
 
   private static generateRandomString(length: number): string {
@@ -52,13 +52,12 @@ export default abstract class UserManager {
     username: string,
     passwordNew: string
   ): Promise<boolean> {
-    const salt = await this.genSalt();
+    const salt = this.genSalt();
     const pwHash = this.hashPassword(passwordNew, salt);
     await User.findOneAndUpdate(
       { name: username },
       {
-        passwordHash: pwHash,
-        salt: salt
+        passwordHash: pwHash
       },
       { upsert: true }
     );
@@ -94,13 +93,12 @@ export default abstract class UserManager {
 
     if (user["passwordHash"] == undefined || user["passwordHash"] == null) {
       //first time logging in (create new password)
-      const salt = await this.genSalt();
+      const salt = this.genSalt();
       const pwHash = this.hashPassword(password, salt);
       await User.findOneAndUpdate(
         { name: username },
         {
-          passwordHash: pwHash,
-          salt: salt
+          passwordHash: pwHash
         }
       );
 
