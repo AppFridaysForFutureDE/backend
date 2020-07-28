@@ -44,8 +44,6 @@ app.use(async function(req: Request, res: Response, next) {
   }
 });
 
-app.use(express.static('../assets'));
-
 //API Routes
 app.use("/api/v1/strikes", strikeRoutes);
 app.use("/api/v1/ogs", ogRoutes);
