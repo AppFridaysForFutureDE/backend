@@ -1,14 +1,19 @@
 import { User } from "./models/userModel";
 import crypto from "crypto";
 import Utility from "./Utility";
+import bcrypt from "bcrypt";
 
 // Manages users
 //only static methods: no huge amounts of instances
 export default abstract class UserManager {
-  private static hashPassword(password: string, salt: string): string {
-    const hash = crypto.createHmac("sha512", salt);
-    hash.update(password);
-    return hash.digest("hex");
+  private static async hashPassword(password: string, salt: string): Promise<string> {
+    let hashpw = await bcrypt.hash(password, salt);
+    return hashpw;
+  }
+
+
+  private static async genSalt() {
+    return await bcrypt.genSalt(10);
   }
 
   private static generateRandomString(length: number): string {
@@ -47,7 +52,7 @@ export default abstract class UserManager {
     username: string,
     passwordNew: string
   ): Promise<boolean> {
-    const salt = this.generateRandomString(16);
+    const salt = await this.genSalt();
     const pwHash = this.hashPassword(passwordNew, salt);
     await User.findOneAndUpdate(
       { name: username },
@@ -89,7 +94,7 @@ export default abstract class UserManager {
 
     if (user["passwordHash"] == undefined || user["passwordHash"] == null) {
       //first time logging in (create new password)
-      const salt = this.generateRandomString(16);
+      const salt = await this.genSalt();
       const pwHash = this.hashPassword(password, salt);
       await User.findOneAndUpdate(
         { name: username },

@@ -1,5 +1,4 @@
 import crypto from "crypto";
-import { Coord } from "./models/coordsModel";
 import nodeFetch from "node-fetch";
 
 //TODO: Make static class
