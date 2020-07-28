@@ -6,14 +6,13 @@ import bcrypt from "bcrypt";
 // Manages users
 //only static methods: no huge amounts of instances
 export default abstract class UserManager {
-  private static hashPassword(password: string, salt: string): Promise<string> {
-    let hashpw = bcrypt.hashSync(password, salt);
+  private static hashPassword(password: string): Promise<string> {
+    let hashpw = bcrypt.hashSync(password, 10);
     return hashpw;
   }
 
-
-  private static genSalt() {
-    return bcrypt.genSaltSync(10);
+  private static checkPasswordHash(hash, password): boolean {
+    return bcrypt.compareSync(password, hash);
   }
 
   private static generateRandomString(length: number): string {
@@ -52,8 +51,7 @@ export default abstract class UserManager {
     username: string,
     passwordNew: string
   ): Promise<boolean> {
-    const salt = this.genSalt();
-    const pwHash = this.hashPassword(passwordNew, salt);
+    const pwHash = this.hashPassword(passwordNew);
     await User.findOneAndUpdate(
       { name: username },
       {
@@ -93,8 +91,7 @@ export default abstract class UserManager {
 
     if (user["passwordHash"] == undefined || user["passwordHash"] == null) {
       //first time logging in (create new password)
-      const salt = this.genSalt();
-      const pwHash = this.hashPassword(password, salt);
+      const pwHash = this.hashPassword(password);
       await User.findOneAndUpdate(
         { name: username },
         {
@@ -106,8 +103,7 @@ export default abstract class UserManager {
       return await this.createSessionID(username);
     }
 
-    const pwHash = this.hashPassword(password, user["salt"]);
-    if (pwHash == user["passwordHash"]) {
+    if (this.checkPasswordHash(user["passwordHash"], password)) {
       //check if hashes match
       return await this.createSessionID(username);
     }
