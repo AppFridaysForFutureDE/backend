@@ -7,7 +7,7 @@ import bcrypt from "bcrypt";
 //only static methods: no huge amounts of instances
 export default abstract class UserManager {
   private static hashPassword(password: string): Promise<string> {
-    let hashpw = bcrypt.hashSync(password, 10);
+    const hashpw = bcrypt.hashSync(password, 10);
     return hashpw;
   }
 
