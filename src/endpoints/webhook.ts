@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { FCMAdmin } from "../services/fcm";
+import FCMAdmin from "../services/FCMAdmin";
 
 export const webhookTriggered: RequestHandler = (req, res) => {
   console.log("Webhook Ghost triggered");
@@ -10,7 +10,7 @@ export const webhookTriggered: RequestHandler = (req, res) => {
   let topic = "";
   let push = false;
 
-  tags.array.forEach(tag => {
+  tags.forEach(tag => {
     if (tag["description"] == "Themenbereich") {
       topic = tag["name"];
     }

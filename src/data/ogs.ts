@@ -1,7 +1,5 @@
 import { OG } from "../models/ogsModel";
-import { addPrefix } from "../utility";
-import { addProtocolPrefix } from "../utility";
-import * as util from "../utility";
+import Utility from "../Utility";
 import nodeFetch from "node-fetch";
 
 //retrieves ogs from website api and saves them to mongodb
@@ -23,7 +21,7 @@ export async function retrieveOGs(): Promise<void> {
 
   //upsert ogs
   data.forEach(async og => {
-    const ogid = util.hash(og["name"]);
+    const ogid = Utility.hash(og["name"]);
     OG.findOneAndUpdate(
       { ogId: ogid },
       {
@@ -32,14 +30,14 @@ export async function retrieveOGs(): Promise<void> {
         bundesland: og["state"] || "",
         lat: og["lat"] || "",
         lon: og["lon"] || "",
-        whatsapp: addProtocolPrefix(String(og["whatsapp"] || "")),
-        email: addPrefix("mailto:", String(og["email"] || "")),
-        instagram: addProtocolPrefix(String(og["instagram"] || "")),
-        twitter: addProtocolPrefix(String(og["twitter"] || "")),
-        facebook: addProtocolPrefix(String(og["facebook"] || "")),
-        youtube: addProtocolPrefix(String(og["youtube"] || "")),
-        website: addProtocolPrefix(String(og["website"] || "")),
-        telegram: addProtocolPrefix(String(og["telegram"] || "")),
+        whatsapp: Utility.addProtocolPrefix(String(og["whatsapp"] || "")),
+        email: Utility.addPrefix("mailto:", String(og["email"] || "")),
+        instagram: Utility.addProtocolPrefix(String(og["instagram"] || "")),
+        twitter: Utility.addProtocolPrefix(String(og["twitter"] || "")),
+        facebook: Utility.addProtocolPrefix(String(og["facebook"] || "")),
+        youtube: Utility.addProtocolPrefix(String(og["youtube"] || "")),
+        website: Utility.addProtocolPrefix(String(og["website"] || "")),
+        telegram: Utility.addProtocolPrefix(String(og["telegram"] || "")),
         other: og["other"] || "",
         retrievedAt: now
       },

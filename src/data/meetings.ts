@@ -1,6 +1,6 @@
 import { Strike } from "../models/strikesModel";
 import { OG } from "../models/ogsModel";
-import * as util from "../utility";
+import Utility from "../Utility";
 import { GoogleSpreadsheet } from "google-spreadsheet";
 
 // TODO: Doppelte Einträge ignorieren
@@ -31,11 +31,11 @@ export async function saveAsStrike(
 
   // TODO: Fix time zone
   const jsDate = new Date(year, month - 1, day, hour - 2, minutes);
-  const unixDate = util.toUnixTimestamp(jsDate);
+  const unixDate = Utility.toUnixTimestamp(jsDate);
 
   const now = Date.now();
 
-  const strikeId = "meeting_" + util.hash(createdAt + ogName);
+  const strikeId = "meeting_" + Utility.hash(createdAt + ogName);
 
   await Strike.findOneAndUpdate(
     { strikeId: strikeId },

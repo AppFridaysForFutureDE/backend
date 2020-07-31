@@ -2,6 +2,7 @@ import { CronJob } from "cron";
 import * as strikeAccess from "./data/strikes";
 import * as meetingAccess from "./data/meetings";
 import * as ogAccess from "./data/ogs";
+import LogManager from "./LogManager";
 
 const jobs = [
   {
@@ -34,6 +35,14 @@ const jobs = [
     job: (): void => {
       console.log("Checking Strikes");
       strikeAccess.checkStrikes();
+    }
+  },
+  {
+    desc: "Clean Logs",
+    tab: "15 0 * * *",
+    job: (): void => {
+      console.log("Cleaning Logs");
+      LogManager.cleanLogs();
     }
   }
 ];

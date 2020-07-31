@@ -2,7 +2,7 @@ import * as dbHandler from "./test-db-handler";
 import { Strike } from "../models/strikesModel";
 import { app } from "../express/app";
 import request from "supertest";
-import * as util from "../utility";
+import Utility from "../Utility";
 
 beforeAll(async () => await dbHandler.establishConnection());
 afterEach(async () => await dbHandler.clearDatabase());
@@ -46,7 +46,7 @@ describe("GET /api/v1/strikes", () => {
     const newStrike = new Strike({
       ogId: "testEdge",
       name: "MeinOgName",
-      date: util.toUnixTimestamp(new Date()) - util.day - 60
+      date: Utility.toUnixTimestamp(new Date()) - Utility.Day - 60
     });
     await newStrike.save();
     const responsePast = await request(app).get(
@@ -58,7 +58,7 @@ describe("GET /api/v1/strikes", () => {
     const newStrike = new Strike({
       ogId: "testEdge",
       name: "MeinOgName",
-      date: util.toUnixTimestamp(new Date()) - util.day + 60
+      date: Utility.toUnixTimestamp(new Date()) - Utility.Day + 60
     });
     await newStrike.save();
     const responsePast = await request(app).get(

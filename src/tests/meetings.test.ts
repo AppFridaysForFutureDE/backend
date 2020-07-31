@@ -2,7 +2,6 @@ import * as dbHandler from "./test-db-handler";
 import { Strike } from "../models/strikesModel";
 import { OG } from "../models/ogsModel";
 import { saveAsStrike } from "../data/meetings";
-// const { GoogleSpreadsheet } = require("google-spreadsheet");
 
 beforeAll(async () => {
   await dbHandler.establishConnection();

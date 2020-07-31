@@ -1,6 +1,6 @@
 import { Strike } from "../models/strikesModel";
-import * as util from "../utility";
-import { FCMAdmin } from "../services/fcm";
+import Utility from "../Utility";
+import FCMAdmin from "../services/FCMAdmin";
 import nodeFetch from "node-fetch";
 
 //retrieves Strikes from website api and saves them to mongodb
@@ -22,10 +22,10 @@ export async function retrieveStrikes(): Promise<void> {
       { strikeId: strike["id"] },
       {
         strikeId: strike["id"],
-        ogId: util.hash(strike["localGroupName"]),
+        ogId: Utility.hash(strike["localGroupName"]),
         name: strike["localGroupName"] || "",
         location: strike["locationName"] || "",
-        date: util.toUnixTimestamp(new Date(strike["dateTime"])) || "",
+        date: Utility.toUnixTimestamp(new Date(strike["dateTime"])) || "",
         eventLink: strike["eventLink"] || "",
         additionalInfo: strike["note"] || "",
         retrievedAt: now
@@ -45,8 +45,8 @@ export async function retrieveStrikes(): Promise<void> {
 //-strike is within 24 hours from now
 //should be executed every hour
 export function checkStrikes(): void {
-  const tomorrow: number = util.toUnixTimestamp(new Date()) + util.day;
-  const today: number = util.toUnixTimestamp(new Date());
+  const tomorrow: number = Utility.toUnixTimestamp(new Date()) + Utility.Day;
+  const today: number = Utility.toUnixTimestamp(new Date());
   Strike.find({ date: { $gt: today, $lt: tomorrow } }, function(
     err: Error,
     strikes

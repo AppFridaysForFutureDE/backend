@@ -1,19 +1,48 @@
 import express, { Request, Response } from "express";
 import { json } from "body-parser";
-import expressStatusMonitor from "express-status-monitor";
+import cookieParser from "cookie-parser";
+import path from "path";
+import UserManager from "../UserManager";
+import LogManager from "../LogManager";
 
 //routes
-import { strikeRoutes } from "./routes";
-import { ogRoutes } from "./routes";
-import { webhookRoutes } from "./routes";
-import { shareRoutes } from "./routes";
-import { controlsRoutes } from "./routes";
-import { liveeventRoutes } from "./routes";
+import {
+  strikeRoutes,
+  ogRoutes,
+  webhookRoutes,
+  shareRoutes,
+  controlsRoutes,
+  liveeventRoutes,
+  viewRoutes
+} from "./routes";
 
 //Initialization
 export const app = express();
 app.use(json());
+app.use(cookieParser());
 app.use(express.urlencoded());
+app.set("views", path.join(__dirname, "../../src/views"));
+app.set("view engine", "ejs");
+
+//Auth properties & logs
+app.use(async function(req: Request, res: Response, next) {
+  //check authorization and add auth properties to request
+  const { valid, admin, name } = await UserManager.checkSessionID(
+    req.cookies["fff_sessionid"]
+  );
+  req.auth = {
+    valid: valid,
+    admin: admin,
+    name: name,
+    session: req.cookies["fff_sessionid"]
+  };
+  next();
+
+  //if this is an authorized user, log everything they do
+  if (req.auth.valid) {
+    LogManager.log(req);
+  }
+});
 
 //API Routes
 app.use("/api/v1/strikes", strikeRoutes);
@@ -26,10 +55,13 @@ app.use("/internal/webhooks/ghost", webhookRoutes);
 //Public Routes
 app.use("/p", shareRoutes);
 
-//Admin Routes
+//Controls Routes
 app.use("/admin/controls", controlsRoutes);
-app.use(expressStatusMonitor({ path: "/admin/status" }));
 
-app.use(function(err: Error, req: Request, res: Response, next) { // eslint-disable-line
+//View Routes
+app.use("/views", viewRoutes);
+
+//Express Error Fallback
+app.use(function(err: Error, req: Request, res: Response, next) {
   res.status(500).json({ message: err.message });
 });

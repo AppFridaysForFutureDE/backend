@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="de">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Login</title>
+  <link rel="icon" href="https://app.fffutu.re/img/cropped-icon-32x32.png" sizes="32x32">
+  <link rel="icon" href="https://app.fffutu.re/img/cropped-icon-192x192.png" sizes="192x192">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+      align-items: center;
+      padding-top: 40px;
+      padding-bottom: 40px;
+      background-color: #f5f5f5;
+    }
+
+    .form-signin {
+      width: 100%;
+      max-width: 330px;
+      padding: 15px;
+      margin: auto;
+    }
+
+    .form-signin .checkbox {
+      font-weight: 400;
+    }
+
+    .form-signin .form-control {
+      position: relative;
+      box-sizing: border-box;
+      height: auto;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    .form-signin .form-control:focus {
+      z-index: 2;
+    }
+
+    #inputUsername {
+      margin-bottom: -1px;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    #inputPassword {
+      margin-bottom: 10px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+</head>
+
+<body class="text-center">
+  <form class="form-signin" action="/admin/controls/user/login" method="post">
+    <img class="mb-4" src="/img/fff.png" alt="" width="72" height="72">
+
+    <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+
+    <label for="inputUsername" class="sr-only">Benutzername</label>
+    <input name="username" type="text" id="inputUsername" class="form-control" placeholder="Benutzername" required autofocus>
+
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Passwort" required>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Anmelden</button>
+
+    <br>
+    <% if (err) { %>
+      <div id="errAl" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Mist!</strong> Die Zugangsdaten scheinen falsch zu sein.
+      </div>
+    <% } %>
+  </form>
+
+</body>
+
+</html>

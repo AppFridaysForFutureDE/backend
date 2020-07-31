@@ -5,3 +5,4 @@ dist/
 src/auth/
 .env
 backups/
+content/
