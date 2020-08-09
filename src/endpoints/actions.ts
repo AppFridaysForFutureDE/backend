@@ -38,6 +38,7 @@ export const saveLiveevent: RequestHandler = async (req, res) => {
 
 export const addSlogan: RequestHandler = async (req, res) => {
   if (req.auth.valid) {
+    console.log(req.body);
     const result = await Slogan.create({ title: req.body.title, text: req.body.text, tags: req.body.tags.split(",") });
     res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
   } else {
