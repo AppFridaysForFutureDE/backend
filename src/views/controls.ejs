@@ -147,7 +147,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
   <script>
     function requestPopulate() {
-      document.getElementById("popStatus").textContent = "Wird aktualisiert...";
+      document.getElementById("popStatus").textContent = "FFF-Daten werden aktualisiert";
       document.getElementById("popButton").disabled = true;
       document.getElementById("popSpinner").hidden = false;
       const populate = new XMLHttpRequest();
@@ -158,9 +158,9 @@
         console.log(populate.responseText);
         const state = JSON.parse(populate.responseText);
         if (state.performedPopulate == true) {
-          document.getElementById("popStatus").textContent = "Datenbank aktualisiert";
+          document.getElementById("popStatus").textContent = "FFF-Daten aktualisiert";
         } else if (state.performedPopulate == false) {
-          document.getElementById("popStatus").textContent = "Datenbank konnte nicht aktualisiert werden";
+          document.getElementById("popStatus").textContent = "FFF-Daten konnten nicht aktualisiert werden";
         }
         document.getElementById("popSpinner").hidden = true;
       }
@@ -308,53 +308,42 @@
               Demosprüche
             </h3>
             <hr class="my-4">
-            <div class="table-responsive">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Titel</th>
-                    <th scope="col">Tags (durch Komma getrennt)</th>
-                    <th scope="col">Spruch</th>
-                    <th scope="col">Aktionen</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% for(var i=0; i<=logs.length-1; i++) { %>
-                  <tr>
-                    <th scope="row">
-                      <%= i+1 %>
-                    </th>
-                    <td>
-                      Testtitel
-                    </td>
-                    <td>
-                      Testtags
-                    </td>
-                    <td>
-                      Testspruch<br>
-                      Testspruch<br>
-                      Testspruch
-                    </td>
-                    <td>
+            <div class="container">
+              <div class="row">
+                <% for(var i=0; i<logs.length; i++) { %>
+                <div class="col-sm">
+                  <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">
+                        Testtitel
+                      </h5>
+                      <p class="card-text">
+                        Some quick example text to build on the card title and make up the bulk of the card's content.
+                      </p>
                       <form action="" method="post" style="display: inline;">
                         <input type="hidden" name="index" value="<%= i %>">
                         <input type="submit" value="Entfernen" class="btn btn-primary btn-sm">
                       </form>
-                    </td>
-                  </tr>
-                  <% } %>
-                  <tr>
-                    <form action="" method="post">
-                      <th scope="row"></th>
-                      <td><input type="text" name="title" class="form-control"></td>
-                      <td><input type="text" name="tags" placeholder="Durch Kommas getrennt" class="form-control"></td>
-                      <td><textarea name="text" class="form-control" rows="10"></textarea></td>
-                      <td><input type="submit" value="Hinzufügen" class="btn btn-primary"></td>
-                    </form>
-                  </tr>
-                </tbody>
-              </table>
+                    </div>
+                  </div>
+                </div>
+                <% } %>
+                <div class="col-sm">
+                  <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <form action="" method="post" style="display: inline;">
+                        <h5 class="card-title">
+                          <input type="text" name="title" class="form-control">
+                        </h5>
+                        <p class="card-text">
+                          <textarea class="form-control" name="text" rows="10">
+                        </p>
+                        <input type="submit" value="Hinzufügen" class="form-control">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <br><br>
@@ -366,6 +355,7 @@
               <span id="popSpinner" class="spinner-border spinner-border-sm" role="status" hidden="true"></span>
               <span id="popStatus">Jetzt FFF-Daten aktualisieren</span>
             </button>
+            <br><br>
           </div>
 
           <!-- Service Tab -->
