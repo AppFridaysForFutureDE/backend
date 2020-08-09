@@ -338,6 +338,7 @@
                       <% for(var t=0; t<slogans[i].tags.length; t++) { %>
                       <span class="badge badge-pill badge-secondary"><%= slogans[i].tags[t] %></span>
                       <% } %>
+                      <br>
                       <form action="/admin/controls/slogans/remove" method="post" style="display: inline;">
                         <input type="hidden" name="title" value="<%= slogans[i].title %>">
                         <input type="submit" value="Entfernen" class="btn btn-primary btn-sm">
