@@ -27,7 +27,7 @@ export const controlsView: RequestHandler = async (req, res) => {
           userdoc["activeSession"] != "" &&
           userdoc["activeSession"] != undefined &&
           Utility.toUnixTimestamp(new Date()) < userdoc["expiration"],
-        rights: userdoc["admin"] ? "Administrator" : "Developer",
+        rights: userdoc["admin"] ? "Administrator" : "App-AG Mitglied",
         admin: userdoc["admin"]
       };
     });
@@ -42,7 +42,7 @@ export const controlsView: RequestHandler = async (req, res) => {
     const currentUser = {
       name: req.auth.name,
       admin: req.auth.admin,
-      rights: req.auth.admin ? "Administrator" : "Developer"
+      rights: req.auth.admin ? "Administrator" : "App-AG Mitglied"
     };
 
     const logs = await LogManager.readLogs();

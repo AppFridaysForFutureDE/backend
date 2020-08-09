@@ -233,6 +233,7 @@
   </nav>
   <div class="container-fluid">
     <div class="row">
+      <!-- Sidebar-->
       <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
         <div class="sidebar-sticky pt-3">
           <ul class="nav flex-column">
@@ -301,16 +302,66 @@
 
               <input type="submit" class="btn btn-primary" value="Aktualisieren">
             </form>
-            <br><br>
 
+            <br><br>
             <h3>
-              Datenbank aktualisieren
+              Demosprüche
             </h3>
             <hr class="my-4">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Titel</th>
+                    <th scope="col">Tags (durch Komma getrennt)</th>
+                    <th scope="col">Spruch</th>
+                    <th scope="col">Aktionen</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for(var i=logs.length-1; i>=0; i--) { %>
+                  <tr>
+                    <td>
+                      <%= i %>
+                    </td>
+                    <td>
+                      Testtitel
+                    </td>
+                    <td>
+                      Testtags
+                    </td>
+                    <td>
+                      Testspruch
+                    </td>
+                  </tr>
+                  <% } %>
+                  <tr>
+                    <form action="" method="post">
+                      <th scope="row"></th>
+                      <td><input type="text" name="title" class="form-control"></td>
+                      <td><input type="text" name="tags" placeholder="Durch Kommas getrennt" class="form-control"></td>
+                      <td>
+                        <form action="" method="post" style="display: inline;">
+                          <input type="hidden" name="index" value="<%= i %>">
+                          <input type="submit" value="Entfernen" class="btn btn-primary btn-sm">
+                        </form>
+                      </td>
+                      <td><input type="submit" value="Hinzufügen" class="btn btn-primary"></td>
+                    </form>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
+            <br><br>
+            <h3>
+              FFF-Daten aktualisieren
+            </h3>
+            <hr class="my-4">
             <button class="btn btn-primary" type="button" id="popButton" onclick="requestPopulate()">
               <span id="popSpinner" class="spinner-border spinner-border-sm" role="status" hidden="true"></span>
-              <span id="popStatus">Jetzt Datenbank aktualisieren</span>
+              <span id="popStatus">Jetzt FFF-Daten aktualisieren</span>
             </button>
           </div>
 
@@ -389,7 +440,7 @@
                       <td>
                         <select class="form-control" name="admin">
                           <option>Administrator</option>
-                          <option>Developer</option>
+                          <option>App-AG Mitglied</option>
                         </select>
                       </td>
                       <td><input type="submit" value="Erstellen" class="btn btn-primary"></td>
@@ -407,8 +458,8 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Time</th>
-                    <th scope="col">User</th>
+                    <th scope="col">Uhrzeit</th>
+                    <th scope="col">Benutzer</th>
                     <th scope="col">IP</th>
                     <th scope="col">Aktion</th>
                   </tr>
