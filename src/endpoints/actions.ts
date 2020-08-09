@@ -39,7 +39,7 @@ export const saveLiveevent: RequestHandler = async (req, res) => {
 export const addSlogan: RequestHandler = async (req, res) => {
   if (req.auth.valid) {
     console.log(req.body);
-    const result = await Slogan.create({ title: req.body.title, text: req.body.text, tags: req.body.tags.split(",") });
+    const result = await Slogan.create({ title: req.body.title, text: req.body.text, tags: req.body.tags.split(",").map(t => { return t.trim(); }) });
     res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
   } else {
     res.redirect("/views/panel/login");
