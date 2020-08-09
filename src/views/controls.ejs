@@ -322,9 +322,9 @@
                 <tbody>
                   <% for(var i=logs.length-1; i>=0; i--) { %>
                   <tr>
-                    <td>
+                    <th scope="row">
                       <%= i %>
-                    </td>
+                    </th>
                     <td>
                       Testtitel
                     </td>
@@ -334,6 +334,12 @@
                     <td>
                       Testspruch
                     </td>
+                    <td>
+                      <form action="" method="post" style="display: inline;">
+                        <input type="hidden" name="index" value="<%= i %>">
+                        <input type="submit" value="Entfernen" class="btn btn-primary btn-sm">
+                      </form>
+                    </td>
                   </tr>
                   <% } %>
                   <tr>
@@ -341,12 +347,7 @@
                       <th scope="row"></th>
                       <td><input type="text" name="title" class="form-control"></td>
                       <td><input type="text" name="tags" placeholder="Durch Kommas getrennt" class="form-control"></td>
-                      <td>
-                        <form action="" method="post" style="display: inline;">
-                          <input type="hidden" name="index" value="<%= i %>">
-                          <input type="submit" value="Entfernen" class="btn btn-primary btn-sm">
-                        </form>
-                      </td>
+                      <td><textarea name="text" rows="10" cols="50"></textarea></td>
                       <td><input type="submit" value="Hinzufügen" class="btn btn-primary"></td>
                     </form>
                   </tr>
