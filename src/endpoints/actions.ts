@@ -46,7 +46,7 @@ export const addSlogan: RequestHandler = async (req, res) => {
       return t.trim();
     });
     tags = tags.filter(t => {
-      return t == "" || t == null;
+      return t != "" && t != null;
     });
     const result = await Slogan.create({ title: req.body.title, text: req.body.text, tags: tags });
     res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
