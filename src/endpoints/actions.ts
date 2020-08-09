@@ -42,7 +42,13 @@ export const addSlogan: RequestHandler = async (req, res) => {
       res.redirect("/views/panel/controls".concat("?err=true"));
       return;
     }
-    const result = await Slogan.create({ title: req.body.title, text: req.body.text, tags: req.body.tags.split(",").map(t => { return t.trim() == "" ? null : t.trim(); }) });
+    let tags = req.body.tags.split(",").map(t => {
+      return t.trim();
+    });
+    tags.filter(t => {
+      return t == "" || t == null;
+    });
+    const result = await Slogan.create({ title: req.body.title, text: req.body.text, tags: tags });
     res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
   } else {
     res.redirect("/views/panel/login");
