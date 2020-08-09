@@ -3,19 +3,14 @@ import Utility from "./Utility";
 import { Request } from "express";
 
 export default abstract class LogManager {
-  public static async log({
-    auth,
-    method,
-    url,
-    ip
-  }: Request): Promise<boolean> {
+  public static async log(req: Request): Promise<boolean> {
     const time = Utility.toUnixTimestamp(new Date());
     const result = await Log.create({
-      username: auth.name,
+      username: req.auth.name,
       time: time,
-      method: method,
-      endpoint: url,
-      ip: ip
+      method: req.method,
+      endpoint: req.url,
+      ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress
     });
     return result ? true : false;
   }
