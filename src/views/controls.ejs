@@ -310,8 +310,21 @@
             <hr class="my-4">
             <div class="container mt-4">
               <div class="row">
+                <div class="col-auto mb-3 collapse show slogansToggle">
+                  <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <h1 class="card-text">
+                        <%= logs.length %>
+                      </h1>
+                      <p class="card-text">
+                        Sprüche
+                      </p>
+                      <button class="btn btn-primary" data-toggle="collapse" href=".slogansToggle">Anzeigen</button>
+                    </div>
+                  </div>
+                </div>
                 <% for(var i=0; i<logs.length; i++) { %>
-                <div class="col-auto mb-3">
+                <div class="col-auto mb-3 collapse slogansToggle">
                   <div class="card" style="width: 18rem;">
                     <div class="card-body">
                       <h5 class="card-title">
@@ -336,7 +349,7 @@
                           <input type="text" name="title" class="form-control">
                         </h5>
                         <p class="card-text">
-                          <textarea class="form-control" name="text" rows="10"></textarea>
+                          <textarea class="form-control" name="text" rows="2"></textarea>
                         </p>
                         <input type="submit" value="Hinzufügen" class="form-control">
                       </form>
