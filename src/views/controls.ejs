@@ -318,7 +318,11 @@
                         <%= slogans.length %>
                       </h1>
                       <p class="card-text">
+                        <% if (slogans.length > 1) {  %>
                         Sprüche
+                        <% } else { %>
+                        Spruch
+                        <% } %>
                       </p>
                       <button class="btn btn-primary" data-toggle="collapse" href=".slogansToggle">Anzeigen</button>
                     </div>
