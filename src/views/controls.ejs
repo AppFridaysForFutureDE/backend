@@ -335,8 +335,8 @@
                       <p class="card-text">
                         <%= slogans[i].text %>
                       </p>
-                      <% for(var t=0; t<slogans[i].tags.lenght; t++) { %>
-                      <span class="badge badge-secondary"><%= slogans[i].tags[t] %></span>
+                      <% for(var t=0; t<slogans[i].tags.length; t++) { %>
+                      <span class="badge badge-pill badge-secondary"><%= slogans[i].tags[t] %></span>
                       <% } %>
                       <form action="/admin/controls/slogans/remove" method="post" style="display: inline;">
                         <input type="hidden" name="title" value="<%= slogans[i].title %>">
