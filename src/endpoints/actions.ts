@@ -45,7 +45,7 @@ export const addSlogan: RequestHandler = async (req, res) => {
     let tags = req.body.tags.split(",").map(t => {
       return t.trim();
     });
-    tags.filter(t => {
+    tags = tags.filter(t => {
       return t == "" || t == null;
     });
     const result = await Slogan.create({ title: req.body.title, text: req.body.text, tags: tags });
