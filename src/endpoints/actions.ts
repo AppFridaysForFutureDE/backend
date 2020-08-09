@@ -3,6 +3,7 @@ import * as strikeAccess from "../data/strikes";
 import * as meetingAccess from "../data/meetings";
 import * as ogAccess from "../data/ogs";
 import { Liveevent } from "../models/liveeventModel";
+import { Slogan } from "../models/sloganModel";
 
 export const populateDB: RequestHandler = async (req, res) => {
   if (req.auth.valid) {
@@ -18,7 +19,6 @@ export const populateDB: RequestHandler = async (req, res) => {
 };
 
 export const saveLiveevent: RequestHandler = async (req, res) => {
-  console.log(req.body);
   if (req.auth.valid) {
     const result = await Liveevent.findOneAndUpdate(
       { liveeventId: req.body.id },
@@ -30,6 +30,24 @@ export const saveLiveevent: RequestHandler = async (req, res) => {
       },
       { upsert: true }
     );
+    res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
+  } else {
+    res.redirect("/views/panel/login");
+  }
+};
+
+export const addSlogan: RequestHandler = async (req, res) => {
+  if (req.auth.valid) {
+    const result = await Slogan.create({ title: req.body.title, text: req.body.text, tags: req.body.tags.split(",") });
+    res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
+  } else {
+    res.redirect("/views/panel/login");
+  }
+};
+
+export const deleteSlogan: RequestHandler = async (req, res) => {
+  if (req.auth.valid) {
+    const result = await Slogan.findOneAndDelete({ title: req.body.title });
     res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
   } else {
     res.redirect("/views/panel/login");

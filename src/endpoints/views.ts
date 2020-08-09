@@ -4,6 +4,7 @@ import { User } from "../models/userModel";
 import { Liveevent } from "../models/liveeventModel";
 import Utility from "../Utility";
 import LogManager from "../LogManager";
+import { Slogan } from "../models/sloganModel";
 
 export const loginView: RequestHandler = async (req, res) => {
   //redirect to controls if good session id
@@ -47,6 +48,8 @@ export const controlsView: RequestHandler = async (req, res) => {
 
     const logs = await LogManager.readLogs();
 
+    const slogans = await Slogan.find({});
+
     //render
     res.render("controls", {
       firebaseStatus: status,
@@ -54,7 +57,8 @@ export const controlsView: RequestHandler = async (req, res) => {
       currUser: currentUser,
       liveevent: le,
       error: req.query.err == "true",
-      logs: logs
+      logs: logs,
+      slogans: slogans
     });
   } else {
     res.redirect("/views/panel/login");

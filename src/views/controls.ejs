@@ -323,18 +323,21 @@
                     </div>
                   </div>
                 </div>
-                <% for(var i=0; i<logs.length; i++) { %>
+                <% for(var i=0; i<slogans.length; i++) { %>
                 <div class="col-auto mb-3 collapse slogansToggle">
                   <div class="card" style="width: 18rem;">
                     <div class="card-body">
                       <h5 class="card-title">
-                        Testtitel
+                        <%= slogans[i].title %>
                       </h5>
                       <p class="card-text">
-                        Some quick example text to build on the card title and make up the bulk of the card's content.
+                        <%= slogans[i].text %>
                       </p>
-                      <form action="" method="post" style="display: inline;">
-                        <input type="hidden" name="index" value="<%= i %>">
+                      <% for(var t=0; t<slogans[i].tags.lenght; t++) { %>
+                      <span class="badge badge-secondary"><%= slogans[i].tags[t] %></span>
+                      <% } %>
+                      <form action="/admin/controls/slogans/remove" method="post" style="display: inline;">
+                        <input type="hidden" name="title" value="<%= slogans[i].title %>">
                         <input type="submit" value="Entfernen" class="btn btn-primary btn-sm">
                       </form>
                     </div>
@@ -344,12 +347,15 @@
                 <div class="col-auto mb-3">
                   <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                      <form action="" method="post" style="display: inline;">
+                      <form action="/admin/controls/slogans/add" method="post" style="display: inline;">
                         <h5 class="card-title">
                           <input type="text" name="title" class="form-control">
                         </h5>
                         <p class="card-text">
-                          <textarea class="form-control" name="text" rows="2"></textarea>
+                          <textarea class="form-control" name="text" rows="1"></textarea>
+                        </p>
+                        <p class="card-text">
+                          <input type="text" class="form-control" placeholder="Tags durch Komma getrennt" name="tags">
                         </p>
                         <input type="submit" value="Hinzufügen" class="form-control btn-primary">
                       </form>

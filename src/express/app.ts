@@ -13,7 +13,8 @@ import {
   shareRoutes,
   controlsRoutes,
   liveeventRoutes,
-  viewRoutes
+  viewRoutes,
+  sloganRoutes
 } from "./routes";
 
 //Initialization
@@ -48,6 +49,7 @@ app.use(async function(req: Request, res: Response, next) {
 app.use("/api/v1/strikes", strikeRoutes);
 app.use("/api/v1/ogs", ogRoutes);
 app.use("/api/v1/liveevent", liveeventRoutes);
+app.use("/api/v1/slogans", sloganRoutes);
 
 //Internal Routes
 app.use("/internal/webhooks/ghost", webhookRoutes);
