@@ -320,10 +320,10 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% for(var i=logs.length-1; i>=0; i--) { %>
+                  <% for(var i=0; i<=logs.length-1; i++) { %>
                   <tr>
                     <th scope="row">
-                      <%= i %>
+                      <%= i+1 %>
                     </th>
                     <td>
                       Testtitel
@@ -347,7 +347,7 @@
                       <th scope="row"></th>
                       <td><input type="text" name="title" class="form-control"></td>
                       <td><input type="text" name="tags" placeholder="Durch Kommas getrennt" class="form-control"></td>
-                      <td><textarea name="text" rows="10" cols="50"></textarea></td>
+                      <td><textarea name="text" class="form-control" rows="10"></textarea></td>
                       <td><input type="submit" value="Hinzufügen" class="btn btn-primary"></td>
                     </form>
                   </tr>
@@ -404,7 +404,7 @@
                   <% for(var i=0; i<users.length; i++) {%>
                   <tr>
                     <th scope="row">
-                      <%= i %>
+                      <%= i+1 %>
                     </th>
                     <td>
                       <% if (users[i]["active"]) { %>
