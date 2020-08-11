@@ -339,7 +339,7 @@
                 <div class="col-auto mb-3 collapse slogansToggle">
                   <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                      <form action="/admin/controls/slogans/edit" method="post">
+                      <form action="/admin/controls/slogans/edit" method="post" style="display: inline;">
                         <input type="hidden" name="id" value="<%= slogans[i]._id%>">
                         <h5 class="card-title inputGroup_SloganCard-<%= i %> collapse show">
                           <%= slogans[i].title %>
@@ -369,10 +369,10 @@
 
                         <br><br>
 
-                        <input class="btn btn-primary btn-sm inputGroup_SloganCard-<%= i %> collapse" type="submit"
+                        <input class="btn btn-primary btn-sm mb-1 inputGroup_SloganCard-<%= i %> collapse" type="submit"
                           value="Speichern">
                       </form>
-                      <button class="btn btn-primary btn-sm inputGroup_SloganCard-<%= i %> collapse" data-toggle="collapse"
+                      <button class="btn btn-primary btn-sm mb-1 inputGroup_SloganCard-<%= i %> collapse" data-toggle="collapse"
                         href=".inputGroup_SloganCard-<%= i %>">Abbrechen</button>
                       <button class="btn btn-primary btn-sm mb-1 inputGroup_SloganCard-<%= i %> collapse show"
                         data-toggle="collapse" href=".inputGroup_SloganCard-<%= i %>">Bearbeiten</button><br>
