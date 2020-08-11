@@ -358,13 +358,17 @@
                           <input type="text" class="form-control" placeholder="Tags durch Komma getrennt" name="tags" value="<%= slogans[i].tagsText %>">
                         </p>
 
+                        <br><br>
+
+                        <input class="btn btn-primary" type="submit" value="Speichern">
                       </form>
-                      <br><br>
+                      <button class="btn btn-primary inputGroup_SloganCard-<%= i %> collapse" data-toggle="collapse" href=".inputGroup_SloganCard-<%= i %>">Abbrechen</button>
+                      <button class="btn btn-primary inputGroup_SloganCard-<%= i %> collapse show" data-toggle="collapse" href=".inputGroup_SloganCard-<%= i %>">Bearbeiten</button>
                       <form action="/admin/controls/slogans/remove" method="post" style="display: inline;">
                         <input type="hidden" name="id" value="<%= slogans[i]._id %>">
                         <input type="submit" value="Entfernen" class="btn btn-primary btn-sm">
                       </form>
-                      <button class="btn btn-primary" data-toggle="collapse" href=".inputGroup_SloganCard-<%= i %>"></button>
+                      
                     </div>
                   </div>
                 </div>
