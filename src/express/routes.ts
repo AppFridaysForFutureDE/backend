@@ -7,7 +7,7 @@ import {
   remove,
   makeAdmin
 } from "../endpoints/user";
-import { populateDB, saveLiveevent, addSlogan, deleteSlogan } from "../endpoints/actions";
+import { populateDB, saveLiveevent, addSlogan, deleteSlogan, editSlogan } from "../endpoints/actions";
 import { getLiveevent, getOGs, getStrikes, getSlogans } from "../endpoints/api";
 import { sharePost } from "../endpoints/share";
 import { loginView, controlsView } from "../endpoints/views";
@@ -31,6 +31,7 @@ controlsRoutes.post("/user/changePassword", changePassword);
 controlsRoutes.post("/user/remove", remove);
 controlsRoutes.post("/user/makeAdmin", makeAdmin);
 controlsRoutes.post("/slogans/add", addSlogan);
+controlsRoutes.post("/slogans/edit", editSlogan);
 controlsRoutes.post("/slogans/remove", deleteSlogan);
 
 liveeventRoutes.get("/", getLiveevent);

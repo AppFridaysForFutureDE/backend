@@ -21,7 +21,7 @@ export const getOGs: RequestHandler = (req, res) => {
 };
 
 export const getLiveevent: RequestHandler = (req, res) => {
-  let liveeventId = req.query.liveeventId;
+  let liveeventId = req.query.liveeventId || "";
   if (liveeventId == "" || liveeventId == null) {
     liveeventId = 0;
   }

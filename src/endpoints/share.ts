@@ -6,9 +6,9 @@ export const sharePost: RequestHandler = async (req, res) => {
     `https://app.fffutu.re/ghost/api/v3/content/posts/${req.params.post}/?key=${process.env.GHOST_CONTENT_KEY}`
   );
   let data = [];
-  let title = "aaaa";
-  let desc = "aaaa";
-  let imageUrl = "aaaaaa";
+  let title = "";
+  let desc = "";
+  let imageUrl = "";
   try {
     data = await response.json();
     title = data["posts"][0]["title"];

@@ -27,8 +27,8 @@ export const saveLiveevent: RequestHandler = async (req, res) => {
     { liveeventId: req.body.id },
     {
       isActive: req.body.isActive == "on",
-      actionText: req.body.actionText,
-      actionUrl: req.body.actionUrl,
+      actionText: req.body.actionText || "",
+      actionUrl: req.body.actionUrl || "",
       inApp: req.body.inApp == "on"
     },
     { upsert: true }
@@ -41,17 +41,13 @@ export const addSlogan: RequestHandler = async (req, res) => {
     res.redirect("/views/panel/login");
     return;
   }
-  if (await Slogan.findOne({ title: req.body.title })) {
-    res.redirect("/views/panel/controls".concat("?err=true"));
-    return;
-  }
-  let tags = req.body.tags.split(",").map(t => {
+  let tags = (req.body.tags || "").split(",").map(t => {
     return t.trim();
   });
   tags = tags.filter(t => {
     return t != "" && t != null;
   });
-  const result = await Slogan.create({ title: req.body.title, text: req.body.text, tags: tags });
+  const result = await Slogan.create({ title: req.body.title || "", text: req.body.text || "", tags: tags });
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 
 };
@@ -61,6 +57,21 @@ export const deleteSlogan: RequestHandler = async (req, res) => {
     res.redirect("/views/panel/login");
     return;
   }
-  const result = await Slogan.findOneAndDelete({ title: req.body.title });
+  const result = await Slogan.findByIdAndDelete(req.body.id || "");
+  res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
+};
+
+export const editSlogan: RequestHandler = async (req, res) => {
+  if (!req.auth.valid) {
+    res.redirect("/views/panel/login");
+    return;
+  }
+  let tags = (req.body.tags || "").split(",").map(t => {
+    return t.trim();
+  });
+  tags = tags.filter(t => {
+    return t != "" && t != null;
+  });
+  const result = await Slogan.findByIdAndUpdate(req.body.id || "", { title: req.body.title || "", text: req.body.text || "", tags: tags })
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };
