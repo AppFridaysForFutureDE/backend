@@ -353,9 +353,8 @@
                           <%= slogans[i].text %>
                         </p>
                         <p class="card-text inputGroup_SloganCard-<%= i %> collapse">
-                          <textarea placeholder="Text" class="form-control" name="text" rows="1">
-                            <%= slogans[i].text %>
-                          </textarea>
+                          <textarea placeholder="Text" class="form-control" name="text"
+                            rows="1"><%= slogans[i].text %></textarea>
                         </p>
 
                         <% for(var t=0; t<slogans[i].tags.length; t++) { %>
@@ -372,8 +371,8 @@
                         <input class="btn btn-primary btn-sm mb-1 inputGroup_SloganCard-<%= i %> collapse" type="submit"
                           value="Speichern">
                       </form>
-                      <button class="btn btn-primary btn-sm mb-1 inputGroup_SloganCard-<%= i %> collapse" data-toggle="collapse"
-                        href=".inputGroup_SloganCard-<%= i %>">Abbrechen</button>
+                      <button class="btn btn-primary btn-sm mb-1 inputGroup_SloganCard-<%= i %> collapse"
+                        data-toggle="collapse" href=".inputGroup_SloganCard-<%= i %>">Abbrechen</button>
                       <button class="btn btn-primary btn-sm mb-1 inputGroup_SloganCard-<%= i %> collapse show"
                         data-toggle="collapse" href=".inputGroup_SloganCard-<%= i %>">Bearbeiten</button><br>
                       <form action="/admin/controls/slogans/remove" method="post" style="display: inline;">
