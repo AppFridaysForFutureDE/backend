@@ -2,6 +2,8 @@ import { RequestHandler } from "express";
 import { OG } from "../models/ogsModel";
 import { Liveevent } from "../models/liveeventModel";
 import { Strike } from "../models/strikesModel";
+import { Banner } from "../models/bannersModel";
+import { Campaign } from "../models/campaignsModel";
 import Utility from "../Utility";
 
 export const getOGs: RequestHandler = (req, res) => {
@@ -49,5 +51,17 @@ export const getStrikes: RequestHandler = (req, res) => {
         res.status(200).json({ ogId: ogId, strikes: strikes });
       }
     );
+  }
+};
+
+export const getCampaigns: RequestHandler = async (req, res) => {
+  try {
+    // TODO: order by sortOrder
+    // TODO: only return values specified in json http://moux.dev/campaigns.json
+    const banners = await Banner.find({ active: true }).exec();
+    const campaigns = await Campaign.find({ active: true }).exec();
+    res.status(200).json({ banners: banners, campaigns: campaigns });
+  } catch (err) {
+    console.error(err);
   }
 };
