@@ -341,9 +341,6 @@
                     <div class="card-body">
                       <form action="/admin/controls/slogans/edit" method="post" style="display: inline;">
                         <input type="hidden" name="id" value="<%= slogans[i]._id%>">
-                        <h5 class="card-title inputGroup_SloganCard-<%= i %> collapse show">
-                          <%= slogans[i].title %>
-                        </h5>
                         <h5 class="card-title inputGroup_SloganCard-<%= i %> collapse">
                           <input type="text" name="title" placeholder="Titel" value="<%= slogans[i].title %>"
                             class="form-control">
@@ -388,9 +385,6 @@
                   <div class="card" style="width: 18rem;">
                     <div class="card-body">
                       <form action="/admin/controls/slogans/add" method="post" style="display: inline;">
-                        <h5 class="card-title">
-                          <input type="text" name="title" placeholder="Titel" class="form-control">
-                        </h5>
                         <p class="card-text">
                           <textarea placeholder="Text" class="form-control" name="text" rows="1"></textarea>
                         </p>

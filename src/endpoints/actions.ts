@@ -48,7 +48,6 @@ export const addSlogan: RequestHandler = async (req, res) => {
     return t != "" && t != null;
   });
   const result = await Slogan.create({
-    title: req.body.title || "",
     text: req.body.text || "",
     tags: tags
   });
@@ -76,7 +75,6 @@ export const editSlogan: RequestHandler = async (req, res) => {
     return t != "" && t != null;
   });
   const result = await Slogan.findByIdAndUpdate(req.body.id || "", {
-    title: req.body.title || "",
     text: req.body.text || "",
     tags: tags
   });

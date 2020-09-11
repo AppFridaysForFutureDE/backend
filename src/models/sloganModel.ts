@@ -1,9 +1,6 @@
 import mongoose from "mongoose";
 
 const sloganScheme = new mongoose.Schema({
-  title: {
-    type: String
-  },
   tags: {
     type: [String]
   },

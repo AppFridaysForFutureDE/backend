@@ -54,7 +54,6 @@ export const controlsView: RequestHandler = async (req, res) => {
   const slogans = (await Slogan.find({})).map(s => {
     return {
       _id: s._id,
-      title: s["title"],
       text: s["text"],
       tags: s["tags"],
       tagsText: s["tags"].join(", ")
