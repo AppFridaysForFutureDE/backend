@@ -53,9 +53,15 @@ export const getStrikes: RequestHandler = (req, res) => {
   }
 };
 
-export const getSlogans: RequestHandler = (req, res) => {
-  Slogan.find({}, function(err: Error, slogans) {
-    if (err) return console.error(err);
+export const getSlogans: RequestHandler = async (req, res) => {
+  try {
+    const rawSlogans = await Slogan.find({});
+
+    const slogans = rawSlogans.map(slogan => {
+      return { id: slogan._id, text: slogan["text"], tags: slogan["tags"] };
+    });
     res.status(200).json({ slogans: slogans });
-  });
+  } catch (err) {
+    return console.error(err);
+  }
 };
