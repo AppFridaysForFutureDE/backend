@@ -341,11 +341,6 @@
                     <div class="card-body">
                       <form action="/admin/controls/slogans/edit" method="post" style="display: inline;">
                         <input type="hidden" name="id" value="<%= slogans[i]._id%>">
-                        <h5 class="card-title inputGroup_SloganCard-<%= i %> collapse">
-                          <input type="text" name="title" placeholder="Titel" value="<%= slogans[i].title %>"
-                            class="form-control">
-                        </h5>
-
                         <p class="card-text inputGroup_SloganCard-<%= i %> collapse show">
                           <%= slogans[i].text %>
                         </p>
