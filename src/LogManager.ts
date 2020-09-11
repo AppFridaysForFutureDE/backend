@@ -10,7 +10,7 @@ export default abstract class LogManager {
       time: time,
       method: req.method,
       endpoint: req.url,
-      ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress
+      ip: req.headers["x-forwarded-for"] || req.connection.remoteAddress
     });
     return result ? true : false;
   }

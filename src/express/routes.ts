@@ -7,7 +7,13 @@ import {
   remove,
   makeAdmin
 } from "../endpoints/user";
-import { populateDB, saveLiveevent, addSlogan, deleteSlogan, editSlogan } from "../endpoints/actions";
+import {
+  populateDB,
+  saveLiveevent,
+  addSlogan,
+  deleteSlogan,
+  editSlogan
+} from "../endpoints/actions";
 import { getLiveevent, getOGs, getStrikes, getSlogans } from "../endpoints/api";
 import { sharePost } from "../endpoints/share";
 import { loginView, controlsView } from "../endpoints/views";

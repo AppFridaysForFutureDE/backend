@@ -24,7 +24,7 @@ export const controlsView: RequestHandler = async (req, res) => {
   //gather all the data for serverside rendering
   const status = FCMAdmin.getInstance().getStatus();
 
-  const userList = (await User.find({})).map(function (userdoc) {
+  const userList = (await User.find({})).map(function(userdoc) {
     return {
       name: userdoc["name"],
       active:

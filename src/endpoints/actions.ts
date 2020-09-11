@@ -47,9 +47,12 @@ export const addSlogan: RequestHandler = async (req, res) => {
   tags = tags.filter(t => {
     return t != "" && t != null;
   });
-  const result = await Slogan.create({ title: req.body.title || "", text: req.body.text || "", tags: tags });
+  const result = await Slogan.create({
+    title: req.body.title || "",
+    text: req.body.text || "",
+    tags: tags
+  });
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
-
 };
 
 export const deleteSlogan: RequestHandler = async (req, res) => {
@@ -72,6 +75,10 @@ export const editSlogan: RequestHandler = async (req, res) => {
   tags = tags.filter(t => {
     return t != "" && t != null;
   });
-  const result = await Slogan.findByIdAndUpdate(req.body.id || "", { title: req.body.title || "", text: req.body.text || "", tags: tags })
+  const result = await Slogan.findByIdAndUpdate(req.body.id || "", {
+    title: req.body.title || "",
+    text: req.body.text || "",
+    tags: tags
+  });
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };

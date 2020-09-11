@@ -8,12 +8,12 @@ import Utility from "../Utility";
 export const getOGs: RequestHandler = (req, res) => {
   const ogId = req.query.ogId;
   if (ogId == "" || ogId == null) {
-    OG.find({}, function (err: Error, ogs) {
+    OG.find({}, function(err: Error, ogs) {
       if (err) return console.error(err);
       res.status(200).json({ count: ogs.length, ogs: ogs });
     });
   } else {
-    OG.find({ ogId: ogId }, function (err: Error, ogs) {
+    OG.find({ ogId: ogId }, function(err: Error, ogs) {
       if (err) return console.error(err);
       res.status(200).json({ count: ogs.length, ogs: ogs });
     });
@@ -25,7 +25,7 @@ export const getLiveevent: RequestHandler = (req, res) => {
   if (liveeventId == "" || liveeventId == null) {
     liveeventId = 0;
   }
-  Liveevent.findOne({ liveeventId: liveeventId }, function (err: Error, event) {
+  Liveevent.findOne({ liveeventId: liveeventId }, function(err: Error, event) {
     if (err) return console.error(err);
     res.status(200).json({ liveeventId: liveeventId, liveevent: event });
   });
@@ -45,7 +45,7 @@ export const getStrikes: RequestHandler = (req, res) => {
   } else {
     Strike.find(
       { ogId: ogId, date: { $gt: minDate }, strikeId: { $ne: "866" } },
-      function (err: Error, strikes) {
+      function(err: Error, strikes) {
         if (err) return console.error(err);
         res.status(200).json({ ogId: ogId, strikes: strikes });
       }
@@ -54,8 +54,8 @@ export const getStrikes: RequestHandler = (req, res) => {
 };
 
 export const getSlogans: RequestHandler = (req, res) => {
-  Slogan.find({}, function (err: Error, slogans) {
+  Slogan.find({}, function(err: Error, slogans) {
     if (err) return console.error(err);
     res.status(200).json({ slogans: slogans });
-  })
+  });
 };
