@@ -22,6 +22,12 @@
       vertical-align: text-bottom;
     }
 
+    .collapsing {
+      -webkit-transition: none;
+      transition: none;
+      display: none;
+    }
+
     /*
  * Sidebar
  */
@@ -147,7 +153,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
   <script>
     function requestPopulate() {
-      document.getElementById("popStatus").textContent = "Wird aktualisiert...";
+      document.getElementById("popStatus").textContent = "FFF-Daten werden aktualisiert";
       document.getElementById("popButton").disabled = true;
       document.getElementById("popSpinner").hidden = false;
       const populate = new XMLHttpRequest();
@@ -158,9 +164,9 @@
         console.log(populate.responseText);
         const state = JSON.parse(populate.responseText);
         if (state.performedPopulate == true) {
-          document.getElementById("popStatus").textContent = "Datenbank aktualisiert";
+          document.getElementById("popStatus").textContent = "FFF-Daten aktualisiert";
         } else if (state.performedPopulate == false) {
-          document.getElementById("popStatus").textContent = "Datenbank konnte nicht aktualisiert werden";
+          document.getElementById("popStatus").textContent = "FFF-Daten konnten nicht aktualisiert werden";
         }
         document.getElementById("popSpinner").hidden = true;
       }
@@ -233,6 +239,7 @@
   </nav>
   <div class="container-fluid">
     <div class="row">
+      <!-- Sidebar-->
       <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
         <div class="sidebar-sticky pt-3">
           <ul class="nav flex-column">
@@ -268,6 +275,7 @@
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
 
         <div class="tab-content">
+          <!-- Datenbank Tab -->
           <div id="DatenbankPage" class="tab-pane fade">
             <br>
             <h3>
@@ -300,19 +308,105 @@
 
               <input type="submit" class="btn btn-primary" value="Aktualisieren">
             </form>
-            <br><br>
 
+            <br><br>
             <h3>
-              Datenbank aktualisieren
+              Demosprüche
             </h3>
             <hr class="my-4">
+            <div class="container mt-4">
+              <div class="row">
+                <% if(slogans.length > 0) { %>
+                <div class="col-auto mb-3 collapse show slogansToggle">
+                  <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <h1 class="card-text">
+                        <%= slogans.length %>
+                      </h1>
+                      <p class="card-text">
+                        <% if (slogans.length > 1) {  %>
+                        Sprüche
+                        <% } else { %>
+                        Spruch
+                        <% } %>
+                      </p>
+                      <button class="btn btn-primary" data-toggle="collapse" href=".slogansToggle">Anzeigen</button>
+                    </div>
+                  </div>
+                </div>
+                <% } %>
+                <% for(var i=0; i<slogans.length; i++) { %>
+                <div class="col-auto mb-3 collapse slogansToggle">
+                  <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <form action="/admin/controls/slogans/edit" method="post" style="display: inline;">
+                        <input type="hidden" name="id" value="<%= slogans[i]._id%>">
+                        <p class="card-text inputGroup_SloganCard-<%= i %> collapse show">
+                          <%= slogans[i].text %>
+                        </p>
+                        <p class="card-text inputGroup_SloganCard-<%= i %> collapse">
+                          <textarea placeholder="Text" class="form-control" name="text"
+                            rows="1"><%= slogans[i].text %></textarea>
+                        </p>
 
+                        <% for(var t=0; t<slogans[i].tags.length; t++) { %>
+                        <span
+                          class="badge badge-pill badge-secondary inputGroup_SloganCard-<%= i %> collapse show"><%= slogans[i].tags[t] %></span>
+                        <% } %>
+                        <p class="card-text inputGroup_SloganCard-<%= i %> collapse">
+                          <input type="text" class="form-control" placeholder="Tags durch Komma getrennt" name="tags"
+                            value="<%= slogans[i].tagsText %>">
+                        </p>
+
+                        <br><br>
+
+                        <input class="btn btn-primary btn-sm mb-1 inputGroup_SloganCard-<%= i %> collapse" type="submit"
+                          value="Speichern">
+                      </form>
+                      <button class="btn btn-primary btn-sm mb-1 inputGroup_SloganCard-<%= i %> collapse"
+                        data-toggle="collapse" href=".inputGroup_SloganCard-<%= i %>">Abbrechen</button>
+                      <button class="btn btn-primary btn-sm mb-1 inputGroup_SloganCard-<%= i %> collapse show"
+                        data-toggle="collapse" href=".inputGroup_SloganCard-<%= i %>">Bearbeiten</button><br>
+                      <form action="/admin/controls/slogans/remove" method="post" style="display: inline;">
+                        <input type="hidden" name="id" value="<%= slogans[i]._id %>">
+                        <input type="submit" value="Entfernen" class="btn btn-primary btn-sm">
+                      </form>
+
+                    </div>
+                  </div>
+                </div>
+                <% } %>
+                <div class="col-auto mb-3">
+                  <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <form action="/admin/controls/slogans/add" method="post" style="display: inline;">
+                        <p class="card-text">
+                          <textarea placeholder="Text" class="form-control" name="text" rows="1"></textarea>
+                        </p>
+                        <p class="card-text">
+                          <input type="text" class="form-control" placeholder="Tags durch Komma getrennt" name="tags">
+                        </p>
+                        <input type="submit" value="Hinzufügen" class="form-control btn-primary">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <br><br>
+            <h3>
+              FFF-Daten aktualisieren
+            </h3>
+            <hr class="my-4">
             <button class="btn btn-primary" type="button" id="popButton" onclick="requestPopulate()">
               <span id="popSpinner" class="spinner-border spinner-border-sm" role="status" hidden="true"></span>
-              <span id="popStatus">Jetzt Datenbank aktualisieren</span>
+              <span id="popStatus">Jetzt FFF-Daten aktualisieren</span>
             </button>
+            <br><br>
           </div>
 
+          <!-- Service Tab -->
           <div id="ServicesPage" class="tab-pane fade">
             <br>
             <h3>
@@ -328,6 +422,7 @@
 
           <% if (currUser.admin) { %>
           <!-- Render Admin Only tabs here -->
+          <!-- User Tab -->
           <div id="UserPage" class="tab-pane fade">
             <br>
             <h3>
@@ -349,7 +444,7 @@
                   <% for(var i=0; i<users.length; i++) {%>
                   <tr>
                     <th scope="row">
-                      <%= i %>
+                      <%= i+1 %>
                     </th>
                     <td>
                       <% if (users[i]["active"]) { %>
@@ -386,7 +481,7 @@
                       <td>
                         <select class="form-control" name="admin">
                           <option>Administrator</option>
-                          <option>Developer</option>
+                          <option>App-AG Mitglied</option>
                         </select>
                       </td>
                       <td><input type="submit" value="Erstellen" class="btn btn-primary"></td>
@@ -397,14 +492,15 @@
             </div>
           </div>
 
+          <!-- Log Tab -->
           <div id="LogPage" class="tab-pane fade">
             <div class="table-responsive">
               <table class="table table-striped">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Time</th>
-                    <th scope="col">User</th>
+                    <th scope="col">Uhrzeit</th>
+                    <th scope="col">Benutzer</th>
                     <th scope="col">IP</th>
                     <th scope="col">Aktion</th>
                   </tr>
