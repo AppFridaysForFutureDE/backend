@@ -14,7 +14,7 @@ import {
   deleteSlogan,
   editSlogan
 } from "../endpoints/actions";
-import { getLiveevent, getOGs, getStrikes, getSlogans } from "../endpoints/api";
+import { getLiveevent, getOGs, getStrikes, getSlogans, getCampaigns } from "../endpoints/api";
 import { sharePost } from "../endpoints/share";
 import { loginView, controlsView } from "../endpoints/views";
 import { webhookTriggered } from "../endpoints/webhook";

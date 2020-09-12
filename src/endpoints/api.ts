@@ -55,7 +55,6 @@ export const getStrikes: RequestHandler = (req, res) => {
   }
 };
 
-<<<<<<< HEAD
 export const getCampaigns: RequestHandler = async (req, res) => {
   try {
     const banners = await Banner.find({ active: true })
@@ -83,7 +82,7 @@ export const getCampaigns: RequestHandler = async (req, res) => {
     console.error(err);
   }
 };
-=======
+
 export const getSlogans: RequestHandler = async (req, res) => {
   try {
     const rawSlogans = await Slogan.find({});
@@ -96,4 +95,3 @@ export const getSlogans: RequestHandler = async (req, res) => {
     return console.error(err);
   }
 };
->>>>>>> 76a0289f6cafcfee36b621893fadc2f2b625938a

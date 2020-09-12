@@ -14,7 +14,7 @@ import {
   controlsRoutes,
   liveeventRoutes,
   viewRoutes,
-  campaignRoutes
+  campaignRoutes,
   sloganRoutes
 } from "./routes";
 
@@ -50,11 +50,8 @@ app.use(async function(req: Request, res: Response, next) {
 app.use("/api/v1/strikes", strikeRoutes);
 app.use("/api/v1/ogs", ogRoutes);
 app.use("/api/v1/liveevent", liveeventRoutes);
-<<<<<<< HEAD
 app.use("/api/v1/campaigns", campaignRoutes);
-=======
 app.use("/api/v1/slogans", sloganRoutes);
->>>>>>> 76a0289f6cafcfee36b621893fadc2f2b625938a
 
 //Internal Routes
 app.use("/internal/webhooks/ghost", webhookRoutes);
