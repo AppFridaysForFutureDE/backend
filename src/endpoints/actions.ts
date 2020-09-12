@@ -4,6 +4,7 @@ import * as meetingAccess from "../data/meetings";
 import * as ogAccess from "../data/ogs";
 import { Liveevent } from "../models/liveeventModel";
 import { Slogan } from "../models/sloganModel";
+import { Banner } from "../models/bannersModel";
 
 export const populateDB: RequestHandler = async (req, res) => {
   if (!req.auth.valid) {
@@ -36,6 +37,7 @@ export const saveLiveevent: RequestHandler = async (req, res) => {
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };
 
+//Slogans
 export const addSlogan: RequestHandler = async (req, res) => {
   if (!req.auth.valid) {
     res.redirect("/views/panel/login");
@@ -77,6 +79,47 @@ export const editSlogan: RequestHandler = async (req, res) => {
   const result = await Slogan.findByIdAndUpdate(req.body.id || "", {
     text: req.body.text || "",
     tags: tags
+  });
+  res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
+};
+
+//Campaigns
+
+
+//Banners
+export const addBanner: RequestHandler = async (req, res) => {
+  if (!req.auth.valid) {
+    res.redirect("/views/panel/login");
+    return;
+  }
+  const result = await Banner.create({
+    imageUrl: req.body.imageUrl || "",
+    link: req.body.link || "",
+    inApp: req.body.inApp || "",
+    active: req.body.active || "",
+  });
+  res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
+};
+
+export const deleteBanner: RequestHandler = async (req, res) => {
+  if (!req.auth.valid) {
+    res.redirect("/views/panel/login");
+    return;
+  }
+  const result = await Banner.findByIdAndDelete(req.body.id || "");
+  res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
+};
+
+export const editBanner: RequestHandler = async (req, res) => {
+  if (!req.auth.valid) {
+    res.redirect("/views/panel/login");
+    return;
+  }
+  const result = await Banner.findByIdAndUpdate(req.body.id || "", {
+    imageUrl: req.body.imageUrl || "",
+    link: req.body.link || "",
+    inApp: req.body.inApp || "",
+    active: req.body.active || "",
   });
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };
