@@ -5,6 +5,7 @@ import * as ogAccess from "../data/ogs";
 import { Liveevent } from "../models/liveeventModel";
 import { Slogan } from "../models/sloganModel";
 import { Banner } from "../models/bannersModel";
+import { Campaign } from "../models/campaignsModel";
 
 export const populateDB: RequestHandler = async (req, res) => {
   if (!req.auth.valid) {
@@ -84,7 +85,48 @@ export const editSlogan: RequestHandler = async (req, res) => {
 };
 
 //Campaigns
+export const addCampaign: RequestHandler = async (req, res) => {
+  if (!req.auth.valid) {
+    res.redirect("/views/panel/login");
+    return;
+  }
+  const result = await Campaign.create({
+    name: req.body.name || "",
+    icon: req.body.icon || "",
+    text: req.body.text || "",
+    cta: req.body.cta || "",
+    link: req.body.link || "",
+    inApp: req.body.inApp || "",
+    active: req.body.active || ""
+  });
+  res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
+};
 
+export const deleteCampaign: RequestHandler = async (req, res) => {
+  if (!req.auth.valid) {
+    res.redirect("/views/panel/login");
+    return;
+  }
+  const result = await Campaign.findByIdAndDelete(req.body.id || "");
+  res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
+};
+
+export const editCampaign: RequestHandler = async (req, res) => {
+  if (!req.auth.valid) {
+    res.redirect("/views/panel/login");
+    return;
+  }
+  const result = await Campaign.findByIdAndUpdate(req.body.id || "", {
+    name: req.body.name || "",
+    icon: req.body.icon || "",
+    text: req.body.text || "",
+    cta: req.body.cta || "",
+    link: req.body.link || "",
+    inApp: req.body.inApp || "",
+    active: req.body.active || ""
+  });
+  res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
+};
 
 //Banners
 export const addBanner: RequestHandler = async (req, res) => {
@@ -96,7 +138,7 @@ export const addBanner: RequestHandler = async (req, res) => {
     imageUrl: req.body.imageUrl || "",
     link: req.body.link || "",
     inApp: req.body.inApp || "",
-    active: req.body.active || "",
+    active: req.body.active || ""
   });
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };
@@ -119,7 +161,7 @@ export const editBanner: RequestHandler = async (req, res) => {
     imageUrl: req.body.imageUrl || "",
     link: req.body.link || "",
     inApp: req.body.inApp || "",
-    active: req.body.active || "",
+    active: req.body.active || ""
   });
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };
