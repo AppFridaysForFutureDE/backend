@@ -396,6 +396,79 @@
 
             <br><br>
             <h3>
+              Kampagnen
+            </h3>
+            <hr class="my-4">
+            <div class="container mt-4">
+              <div class="row">
+                <% if(campaigns.length > 0) { %>
+                <div class="col-auto mb-3 collapse show campaignToggle">
+                  <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <h1 class="card-text">
+                        <%= campaigns.length %>
+                      </h1>
+                      <p class="card-text">
+                        <% if (campaigns.length > 1) {  %>
+                        Kampagnen
+                        <% } else { %>
+                        Kampagne
+                        <% } %>
+                      </p>
+                      <button class="btn btn-primary" data-toggle="collapse" href=".campaignToggle">Anzeigen</button>
+                    </div>
+                  </div>
+                </div>
+                <% } %>
+                <% for(var i=0; i<slogans.length; i++) { %>
+                <div class="col-auto mb-3 collapse campaignToggle">
+                  <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <form action="/admin/controls/campaigns/edit" method="post" style="display: inline;">
+                        <input type="hidden" name="id" value="<%= campaigns[i]._id%>">
+                        <p class="card-text inputGroup_CampaignCard-<%= i %> collapse show">
+                          <%= campaigns[i].text %>
+                        </p>
+                        <p class="card-text inputGroup_CampaignCard-<%= i %> collapse">
+                          <textarea placeholder="Text" class="form-control" name="text"
+                            rows="1"><%= campaigns[i].text %></textarea>
+                        </p>
+
+                        <br><br>
+
+                        <input class="btn btn-primary btn-sm mb-1 inputGroup_CampaignCard-<%= i %> collapse" type="submit"
+                          value="Speichern">
+                      </form>
+                      <button class="btn btn-primary btn-sm mb-1 inputGroup_CampaignCard-<%= i %> collapse"
+                        data-toggle="collapse" href=".inputGroup_CampaignCard-<%= i %>">Abbrechen</button>
+                      <button class="btn btn-primary btn-sm mb-1 inputGroup_CampaignCard-<%= i %> collapse show"
+                        data-toggle="collapse" href=".inputGroup_CampaignCard-<%= i %>">Bearbeiten</button><br>
+                      <form action="/admin/controls/campaigns/remove" method="post" style="display: inline;">
+                        <input type="hidden" name="id" value="<%= campaigns[i]._id %>">
+                        <input type="submit" value="Entfernen" class="btn btn-primary btn-sm">
+                      </form>
+
+                    </div>
+                  </div>
+                </div>
+                <% } %>
+                <div class="col-auto mb-3">
+                  <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <form action="/admin/controls/campaigns/add" method="post" style="display: inline;">
+                        <p class="card-text">
+                          <textarea placeholder="Text" class="form-control" name="text" rows="1"></textarea>
+                        </p>
+                        <input type="submit" value="Hinzufügen" class="form-control btn-primary">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <br><br>
+            <h3>
               FFF-Daten aktualisieren
             </h3>
             <hr class="my-4">
