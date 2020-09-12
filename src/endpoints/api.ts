@@ -4,6 +4,7 @@ import { Liveevent } from "../models/liveeventModel";
 import { Strike } from "../models/strikesModel";
 import { Banner } from "../models/bannersModel";
 import { Campaign } from "../models/campaignsModel";
+import { Slogan } from "../models/sloganModel";
 import Utility from "../Utility";
 
 export const getOGs: RequestHandler = (req, res) => {
@@ -22,7 +23,7 @@ export const getOGs: RequestHandler = (req, res) => {
 };
 
 export const getLiveevent: RequestHandler = (req, res) => {
-  let liveeventId = req.query.liveeventId;
+  let liveeventId = req.query.liveeventId || "";
   if (liveeventId == "" || liveeventId == null) {
     liveeventId = 0;
   }
@@ -54,6 +55,7 @@ export const getStrikes: RequestHandler = (req, res) => {
   }
 };
 
+<<<<<<< HEAD
 export const getCampaigns: RequestHandler = async (req, res) => {
   try {
     const banners = await Banner.find({ active: true })
@@ -81,3 +83,17 @@ export const getCampaigns: RequestHandler = async (req, res) => {
     console.error(err);
   }
 };
+=======
+export const getSlogans: RequestHandler = async (req, res) => {
+  try {
+    const rawSlogans = await Slogan.find({});
+
+    const slogans = rawSlogans.map(slogan => {
+      return { id: slogan._id, text: slogan["text"], tags: slogan["tags"] };
+    });
+    res.status(200).json({ slogans: slogans });
+  } catch (err) {
+    return console.error(err);
+  }
+};
+>>>>>>> 76a0289f6cafcfee36b621893fadc2f2b625938a
