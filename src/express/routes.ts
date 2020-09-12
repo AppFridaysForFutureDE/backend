@@ -15,7 +15,10 @@ import {
   editSlogan,
   addCampaign,
   editCampaign,
-  deleteCampaign
+  deleteCampaign,
+  deleteBanner,
+  editBanner,
+  addBanner
 } from "../endpoints/actions";
 import { getLiveevent, getOGs, getStrikes, getSlogans, getCampaigns } from "../endpoints/api";
 import { sharePost } from "../endpoints/share";
@@ -46,6 +49,9 @@ controlsRoutes.post("/slogans/remove", deleteSlogan);
 controlsRoutes.post("/campaigns/add", addCampaign);
 controlsRoutes.post("/campaigns/edit", editCampaign);
 controlsRoutes.post("/campaigns/remove", deleteCampaign);
+controlsRoutes.post("/banners/add", addBanner);
+controlsRoutes.post("/banners/edit", editBanner);
+controlsRoutes.post("/banners/remove", deleteBanner);
 
 liveeventRoutes.get("/", getLiveevent);
 
