@@ -5,6 +5,8 @@ import { Liveevent } from "../models/liveeventModel";
 import Utility from "../Utility";
 import LogManager from "../LogManager";
 import { Slogan } from "../models/sloganModel";
+import { Campaign } from "../models/campaignsModel";
+import { Banner } from "../models/bannersModel";
 
 export const loginView: RequestHandler = async (req, res) => {
   //redirect to controls if good session id
@@ -60,6 +62,10 @@ export const controlsView: RequestHandler = async (req, res) => {
     };
   });
 
+  const campaigns = await Campaign.find({});
+
+  const banners = await Banner.find({});
+
   //render
   res.render("controls", {
     firebaseStatus: status,
@@ -68,6 +74,8 @@ export const controlsView: RequestHandler = async (req, res) => {
     liveevent: le,
     error: req.query.err == "true",
     logs: logs,
-    slogans: slogans
+    slogans: slogans,
+    campaigns: campaigns,
+    banners: banners
   });
 };
