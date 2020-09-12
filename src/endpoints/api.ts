@@ -56,11 +56,26 @@ export const getStrikes: RequestHandler = (req, res) => {
 
 export const getCampaigns: RequestHandler = async (req, res) => {
   try {
-    // TODO: only return values specified in json http://moux.dev/campaigns.json
     const banners = await Banner.find({ active: true })
     const campaigns = await Campaign.find({ active: true })
     banners.sort((a,b) => a["sortOrder"] - b["sortOrder"])
     campaigns.sort((a,b) => a["sortOrder"] - b["sortOrder"])
+    banners.map((doc) => {
+      return {
+        imageUrl: doc["imageUrl"],
+        link: doc["link"],
+        inApp: doc["inApp"],
+      }
+    })
+    campaigns.map((doc) => {
+      return {
+        icon: doc["icon"],
+        text: doc["text"],
+        cta: doc["cta"],
+        link: doc["link"],
+        inApp: doc["inApp"],
+      }
+    })
     res.status(200).json({ banners: banners, campaigns: campaigns });
   } catch (err) {
     console.error(err);
