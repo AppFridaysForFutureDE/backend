@@ -12,7 +12,10 @@ import {
   saveLiveevent,
   addSlogan,
   deleteSlogan,
-  editSlogan
+  editSlogan,
+  addCampaign,
+  editCampaign,
+  deleteCampaign
 } from "../endpoints/actions";
 import { getLiveevent, getOGs, getStrikes, getSlogans, getCampaigns } from "../endpoints/api";
 import { sharePost } from "../endpoints/share";
@@ -40,6 +43,9 @@ controlsRoutes.post("/user/makeAdmin", makeAdmin);
 controlsRoutes.post("/slogans/add", addSlogan);
 controlsRoutes.post("/slogans/edit", editSlogan);
 controlsRoutes.post("/slogans/remove", deleteSlogan);
+controlsRoutes.post("/campaigns/add", addCampaign);
+controlsRoutes.post("/campaigns/edit", editCampaign);
+controlsRoutes.post("/campaigns/remove", deleteCampaign);
 
 liveeventRoutes.get("/", getLiveevent);
 
