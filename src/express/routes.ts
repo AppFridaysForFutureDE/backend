@@ -8,7 +8,7 @@ import {
   makeAdmin
 } from "../endpoints/user";
 import { populateDB, saveLiveevent } from "../endpoints/actions";
-import { getLiveevent, getOGs, getStrikes } from "../endpoints/api";
+import { getLiveevent, getOGs, getStrikes, getCampaigns } from "../endpoints/api";
 import { sharePost } from "../endpoints/share";
 import { loginView, controlsView } from "../endpoints/views";
 import { webhookTriggered } from "../endpoints/webhook";
@@ -18,6 +18,7 @@ export const liveeventRoutes = Router();
 export const ogRoutes = Router();
 export const shareRoutes = Router();
 export const strikeRoutes = Router();
+export const campaignRoutes = Router();
 export const webhookRoutes = Router();
 export const viewRoutes = Router();
 
@@ -37,6 +38,8 @@ ogRoutes.get("/", getOGs);
 shareRoutes.get("/:post", sharePost);
 
 strikeRoutes.get("/", getStrikes);
+
+campaignRoutes.get("/", getCampaigns);
 
 webhookRoutes.post("/", webhookTriggered);
 
