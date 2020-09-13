@@ -57,17 +57,9 @@ export const getStrikes: RequestHandler = (req, res) => {
 
 export const getCampaigns: RequestHandler = async (req, res) => {
   try {
-    let rawBanners = await Banner.find({ active: true })
+    let banner = await Banner.find({ active: true })
     let rawCampaigns = await Campaign.find({ active: true })
-    rawBanners = rawBanners.sort((a,b) => a["sortOrder"] - b["sortOrder"])
     rawCampaigns = rawCampaigns.sort((a,b) => a["sortOrder"] - b["sortOrder"])
-    let banners = rawBanners.map((doc) => {
-      return {
-        imageUrl: doc["imageUrl"],
-        link: doc["link"],
-        inApp: doc["inApp"],
-      }
-    })
     let campaigns = rawCampaigns.map((doc) => {
       return {
         icon: doc["icon"],
@@ -77,7 +69,7 @@ export const getCampaigns: RequestHandler = async (req, res) => {
         inApp: doc["inApp"],
       }
     })
-    res.status(200).json({ banner: banners[0], campaigns: campaigns });
+    res.status(200).json({ banner: banner, campaigns: campaigns });
   } catch (err) {
     console.error(err);
   }
