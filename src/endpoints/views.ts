@@ -66,8 +66,6 @@ export const controlsView: RequestHandler = async (req, res) => {
 
   const banners = await Banner.find({});
 
-  console.log(campaigns);
-  
   //render
   res.render("controls", {
     firebaseStatus: status,
