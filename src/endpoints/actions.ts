@@ -134,8 +134,8 @@ export const saveBanner: RequestHandler = async (req, res) => {
     res.redirect("/views/panel/login");
     return;
   }
-  const result = await Liveevent.findOneAndUpdate(
-    { liveeventId: req.body.id },
+  const result = await Banner.findOneAndUpdate(
+    { },
     {
       active: req.body.active == "on",
       link: req.body.link || "",

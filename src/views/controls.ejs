@@ -309,6 +309,36 @@
 
             <br><br>
             <h3>
+              Banner
+            </h3>
+            <hr class="my-4">
+            <form action="/admin/controls/action/banner" method="post">
+
+              <label for="imageUrl">Text:</label>
+              <input class="form-control" type="text" id="imageUrl" name="imageUrl"
+                value="<%= banner.imageUrl %>"><br>
+
+              <label for="link">Link:</label>
+              <input class="form-control" type="text" id="link" name="link"
+                value="<%= banner.link %>"><br>
+
+              <input type="radio" id="inApp" name="inApp" value="on" <% if (banner.inApp) { %> checked <% } %>>
+              <label for="inApp">In der App</label><br>
+              <input type="radio" id="notInApp" name="inApp" value="off" <% if (!banner.inApp) { %> checked <% } %>>
+              <label for="notInApp">Nicht in der App</label><br>
+
+              <input type="radio" id="active" name="isActive" value="on" <% if (banner.active) { %> checked
+                <% } %>>
+              <label for="active">Aktiviert</label><br>
+              <input type="radio" id="inactive" name="isActive" value="off" <% if (!banner.active) { %> checked
+                <% } %>>
+              <label for="inactive">Deaktiviert</label><br>
+
+              <input type="submit" class="btn btn-primary" value="Aktualisieren">
+            </form>
+
+            <br><br>
+            <h3>
               Demosprüche
             </h3>
             <hr class="my-4">

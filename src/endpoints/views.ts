@@ -76,6 +76,6 @@ export const controlsView: RequestHandler = async (req, res) => {
     logs: logs,
     slogans: slogans,
     campaigns: campaigns,
-    banners: banners
+    banner: banners[0]
   });
 };
