@@ -18,4 +18,4 @@ const feedItemScheme = new mongoose.Schema({
   }
 });
 
-export const feedItem = mongoose.model("banner", feedItemScheme);
+export const feedItem = mongoose.model("feedItem", feedItemScheme);
