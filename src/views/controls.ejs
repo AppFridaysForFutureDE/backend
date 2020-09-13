@@ -478,7 +478,7 @@
                           inApp
                           <% } else { %>
                           nicht inApp
-                          <%> } <%>
+                          <% } %>
                         </p>
                         <p class="card-text inputGroup_CampaignCard-<%= i %> collapse">
                           <input type="radio" id="inApp" name="inApp" value="on" <% if (campaigns[i].inApp) { %> checked
@@ -495,7 +495,7 @@
                           Aktiviert
                           <% } else { %>
                           Deaktiviert
-                          <%> } <%>
+                          <% } %>
                         </p>
                         <p class="card-text inputGroup_CampaignCard-<%= i %> collapse">
                           <input type="radio" id="active" name="active" value="on" <% if (campaigns[i].active) { %>
