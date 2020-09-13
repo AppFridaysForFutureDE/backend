@@ -72,11 +72,7 @@ export const getSlogans: RequestHandler = async (req, res) => {
 
 export const getCampaigns: RequestHandler = async (req, res) => {
   try {
-    const bannerSettings = (await BannerSettings.findOne({})) || { campaignBannerIDs: [], feedBannerID: "" };
-    let banners: any[] = [];
-    bannerSettings["campaignBannerIDs"].forEach(async id => {
-      banners.push(await Banner.findOne({ _id: id }))
-    });
+    const banners = await BannerSettings.find({ campaignBanner: true }));
     let rawCampaigns = await Campaign.find({});
     const campaigns = rawCampaigns.map(doc => {
       return {

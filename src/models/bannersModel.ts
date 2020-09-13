@@ -9,6 +9,9 @@ const bannerScheme = new mongoose.Schema({
   },
   inApp: {
     type: Boolean
+  },
+  campaignBanner: {
+    type: Boolean
   }
 });
 

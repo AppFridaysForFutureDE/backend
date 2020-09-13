@@ -308,120 +308,6 @@
 
             <br><br>
             <h3>
-              Banner
-            </h3>
-            <hr class="my-4">
-            <div class="container mt-4">
-              <div class="row">
-                <% if(banners.length > 0) { %>
-                <div class="col-auto mb-3 collapse show bannerToggle">
-                  <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                      <h1 class="card-text">
-                        <%= banners.length %>
-                      </h1>
-                      <p class="card-text">
-                        Banner
-                      </p>
-                      <button class="btn btn-primary" data-toggle="collapse" href=".bannerToggle">Anzeigen</button>
-                    </div>
-                  </div>
-                </div>
-                <% } %>
-                <% for(var i=0; i<banners.length; i++) { %>
-                <div class="col-auto mb-3 collapse bannerToggle">
-                  <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                      <form action="/admin/controls/banner/edit" method="post" style="display: inline;">
-                        <input type="hidden" name="id" value="<%= banners[i]._id%>">
-
-                        <!-- imageUrl -->
-                        <p class="card-text inputGroup_BannerCard-<%= i %> collapse show">
-                          <b>Bild-Url:</b> <a href="<%= banners[i].imageUrl %>"><%= banners[i].imageUrl %></a>
-                        </p>
-                        <p class="card-text inputGroup_BannerCard-<%= i %> collapse">
-                          <input type="text" class="form-control" placeholder="Bild-URL" name="imageUrl"
-                            value="<%= banners[i].imageUrl %>">
-                        </p>
-
-                        <!-- link -->
-                        <p class="card-text inputGroup_BannerCard-<%= i %> collapse show">
-                          <b>Link:</b> <a href="<%= banners[i].link %>"><%= banners[i].link %></a>
-                        </p>
-                        <p class="card-text inputGroup_BannerCard-<%= i %> collapse">
-                          <input type="text" class="form-control" placeholder="Link" name="link"
-                            value="<%= banners[i].link %>">
-                        </p>
-
-                        <!-- inApp -->
-                        <p class="card-text inputGroup_BannerCard-<%= i %> collapse show">
-                          <% if (banners[i].inApp) { %>
-                          In der App
-                          <% } else { %>
-                          Nicht in der App
-                          <% } %>
-                        </p>
-                        <p class="card-text inputGroup_BannerCard-<%= i %> collapse">
-                          <input type="radio" id="inApp" name="inApp" value="on" <% if (banners[i].inApp) { %> checked
-                            <% } %>>
-                          <label for="active">Ja</label>
-                          <input type="radio" id="NotinApp" name="inApp" value="off" <% if (!banners[i].inApp) { %>
-                            checked <% } %>>
-                          <label for="inactive">Nein</label>
-                        </p>
-
-
-                        <br><br>
-
-                        <input class="btn btn-primary btn-sm mb-1 inputGroup_BannerCard-<%= i %> collapse"
-                          type="submit" value="Speichern">
-                      </form>
-                      <button class="btn btn-primary btn-sm mb-1 inputGroup_BannerCard-<%= i %> collapse"
-                        data-toggle="collapse" href=".inputGroup_BannerCard-<%= i %>">Abbrechen</button>
-                      <button class="btn btn-primary btn-sm mb-1 inputGroup_BannerCard-<%= i %> collapse show"
-                        data-toggle="collapse" href=".inputGroup_BannerCard-<%= i %>">Bearbeiten</button><br>
-                      <form action="/admin/controls/banner/remove" method="post" style="display: inline;">
-                        <input type="hidden" name="id" value="<%= banners[i]._id %>">
-                        <input type="submit" value="Entfernen" class="btn btn-primary btn-sm">
-                      </form>
-
-                    </div>
-                  </div>
-                </div>
-                <% } %>
-                <div class="col-auto mb-3">
-                  <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                      <form action="/admin/controls/banner/add" method="post" style="display: inline;">
-
-                        <!-- imageUrl -->
-                        <p class="card-text">
-                          <input type="text" class="form-control" placeholder="Bild-URL" name="imageUrl" value="">
-                        </p>
-                        
-                        <!-- link -->
-                        <p class="card-text">
-                          <input type="text" class="form-control" placeholder="Link" name="link" value="">
-                        </p>
-
-                        <!-- inApp -->
-                        <p class="card-text">
-                          <input type="radio" id="inApp" name="inApp" value="on" checked>
-                          <label for="active">inApp</label>
-                          <input type="radio" id="NotinApp" name="inApp" value="off">
-                          <label for="inactive">nicht inApp</label>
-                        </p>
-
-                        <input type="submit" value="Hinzufügen" class="form-control btn-primary">
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> 
-
-            <br><br>
-            <h3>
               Demosprüche
             </h3>
             <hr class="my-4">
@@ -504,6 +390,136 @@
                 </div>
               </div>
             </div>
+
+            <br><br>
+            <h3>
+              Banner
+            </h3>
+            <hr class="my-4">
+            <div class="container mt-4">
+              <div class="row">
+                <% if(banners.length > 0) { %>
+                <div class="col-auto mb-3 collapse show bannerToggle">
+                  <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <h1 class="card-text">
+                        <%= banners.length %>
+                      </h1>
+                      <p class="card-text">
+                        Banner
+                      </p>
+                      <button class="btn btn-primary" data-toggle="collapse" href=".bannerToggle">Anzeigen</button>
+                    </div>
+                  </div>
+                </div>
+                <% } %>
+                <% for(var i=0; i<banners.length; i++) { %>
+                <div class="col-auto mb-3 collapse bannerToggle">
+                  <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <form action="/admin/controls/banner/edit" method="post" style="display: inline;">
+                        <input type="hidden" name="id" value="<%= banners[i]._id%>">
+
+                        <!-- imageUrl -->
+                        <p class="card-text inputGroup_BannerCard-<%= i %> collapse show">
+                          <b>Bild-Url:</b> <a href="<%= banners[i].imageUrl %>"><%= banners[i].imageUrl %></a>
+                        </p>
+                        <p class="card-text inputGroup_BannerCard-<%= i %> collapse">
+                          <input type="text" class="form-control" placeholder="Bild-URL" name="imageUrl"
+                            value="<%= banners[i].imageUrl %>">
+                        </p>
+
+                        <!-- link -->
+                        <p class="card-text inputGroup_BannerCard-<%= i %> collapse show">
+                          <b>Link:</b> <a href="<%= banners[i].link %>"><%= banners[i].link %></a>
+                        </p>
+                        <p class="card-text inputGroup_BannerCard-<%= i %> collapse">
+                          <input type="text" class="form-control" placeholder="Link" name="link"
+                            value="<%= banners[i].link %>">
+                        </p>
+
+                        <!-- campaignBanner -->
+                        <p class="card-text inputGroup_BannerCard-<%= i %> collapse show">
+                          <% if (banners[i].campaignBanner) { %>
+                          Banner für Kampagnenseite
+                          <% } %>
+                        </p>
+                        <p class="card-text inputGroup_BannerCard-<%= i %> collapse">
+                          <input type="checkbox" id="campaignBannerCheck" name="campaignBanner" value="on" <% if (banners[i].campaignBanner) { %> checked
+                            <% } %>>
+                          <label for="campaignBannerCheck">Banner für Kampagnenseite</label>
+                        </p>
+
+                        <!-- inApp -->
+                        <p class="card-text inputGroup_BannerCard-<%= i %> collapse show">
+                          <% if (banners[i].inApp) { %>
+                          In der App
+                          <% } else { %>
+                          Nicht in der App
+                          <% } %>
+                        </p>
+                        <p class="card-text inputGroup_BannerCard-<%= i %> collapse">
+                          <input type="radio" id="inApp" name="inApp" value="on" <% if (banners[i].inApp) { %> checked
+                            <% } %>>
+                          <label for="active">Ja</label>
+                          <input type="radio" id="NotinApp" name="inApp" value="off" <% if (!banners[i].inApp) { %>
+                            checked <% } %>>
+                          <label for="inactive">Nein</label>
+                        </p>
+
+                        <br><br>
+
+                        <input class="btn btn-primary btn-sm mb-1 inputGroup_BannerCard-<%= i %> collapse"
+                          type="submit" value="Speichern">
+                      </form>
+                      <button class="btn btn-primary btn-sm mb-1 inputGroup_BannerCard-<%= i %> collapse"
+                        data-toggle="collapse" href=".inputGroup_BannerCard-<%= i %>">Abbrechen</button>
+                      <button class="btn btn-primary btn-sm mb-1 inputGroup_BannerCard-<%= i %> collapse show"
+                        data-toggle="collapse" href=".inputGroup_BannerCard-<%= i %>">Bearbeiten</button><br>
+                      <form action="/admin/controls/banner/remove" method="post" style="display: inline;">
+                        <input type="hidden" name="id" value="<%= banners[i]._id %>">
+                        <input type="submit" value="Entfernen" class="btn btn-primary btn-sm">
+                      </form>
+
+                    </div>
+                  </div>
+                </div>
+                <% } %>
+                <div class="col-auto mb-3">
+                  <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <form action="/admin/controls/banner/add" method="post" style="display: inline;">
+
+                        <!-- imageUrl -->
+                        <p class="card-text">
+                          <input type="text" class="form-control" placeholder="Bild-URL" name="imageUrl" value="">
+                        </p>
+                        
+                        <!-- link -->
+                        <p class="card-text">
+                          <input type="text" class="form-control" placeholder="Link" name="link" value="">
+                        </p>
+
+                        <!-- campaignbanner -->
+                        <p class="card-text">
+                          <input type="checkbox" class="form-control" name="link" value="on">
+                        </p>
+
+                        <!-- inApp -->
+                        <p class="card-text">
+                          <input type="radio" id="inApp" name="inApp" value="on" checked>
+                          <label for="active">inApp</label>
+                          <input type="radio" id="NotinApp" name="inApp" value="off">
+                          <label for="inactive">nicht inApp</label>
+                        </p>
+
+                        <input type="submit" value="Hinzufügen" class="form-control btn-primary">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> 
 
             <br><br>
             <h3>
