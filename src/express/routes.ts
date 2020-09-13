@@ -18,7 +18,7 @@ import {
   deleteCampaign,
   saveBanner
 } from "../endpoints/actions";
-import { getLiveevent, getOGs, getStrikes, getSlogans, getCampaigns } from "../endpoints/api";
+import { getLiveevent, getOGs, getStrikes, getSlogans, getHomefeed } from "../endpoints/api";
 import { sharePost } from "../endpoints/share";
 import { loginView, controlsView } from "../endpoints/views";
 import { webhookTriggered } from "../endpoints/webhook";
@@ -50,7 +50,7 @@ apiRoutes.get("/liveevent", getLiveevent);
 apiRoutes.get("/strikes", getStrikes);
 apiRoutes.get("/slogans", getSlogans);
 apiRoutes.get("/ogs", getOGs);
-apiRoutes.get("/campaigns", getCampaigns);
+apiRoutes.get("/home", getHomefeed);
 
 shareRoutes.get("/:post", sharePost);
 

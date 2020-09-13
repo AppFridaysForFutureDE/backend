@@ -55,7 +55,7 @@ export const getStrikes: RequestHandler = (req, res) => {
   }
 };
 
-export const getCampaigns: RequestHandler = async (req, res) => {
+export const getHomefeed: RequestHandler = async (req, res) => {
   try {
     let banner = await Banner.findOne({ active: true })
     let rawCampaigns = await Campaign.find({ active: true })
