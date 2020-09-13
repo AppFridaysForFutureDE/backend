@@ -15,15 +15,15 @@ import {
   editSlogan,
   addCampaign,
   editCampaign,
-  deleteCampaign,
-  saveBanner
+  deleteCampaign
 } from "../endpoints/actions";
 import {
   getLiveevent,
   getOGs,
   getStrikes,
   getSlogans,
-  getHomefeed
+  getHomefeed,
+  getCampaigns
 } from "../endpoints/api";
 import { sharePost } from "../endpoints/share";
 import { loginView, controlsView } from "../endpoints/views";
@@ -56,6 +56,7 @@ apiRoutes.get("/strikes", getStrikes);
 apiRoutes.get("/slogans", getSlogans);
 apiRoutes.get("/ogs", getOGs);
 apiRoutes.get("/home", getHomefeed);
+apiRoutes.get("/campaigns", getCampaigns)
 
 shareRoutes.get("/:post", sharePost);
 

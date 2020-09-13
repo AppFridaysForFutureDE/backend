@@ -129,20 +129,45 @@ export const editCampaign: RequestHandler = async (req, res) => {
 };
 
 //Banner
-export const saveBanner: RequestHandler = async (req, res) => {
+export const addBanner: RequestHandler = async (req, res) => {
   if (!req.auth.valid) {
     res.redirect("/views/panel/login");
     return;
   }
-  const result = await Banner.findOneAndUpdate(
-    {},
-    {
-      active: req.body.active == "on",
-      link: req.body.link || "",
-      imageUrl: req.body.imageUrl || "",
-      inApp: req.body.inApp == "on"
-    },
-    { upsert: true }
-  );
+  const result = await Campaign.create({
+    name: req.body.name || "",
+    icon: req.body.icon || "",
+    text: req.body.text || "",
+    cta: req.body.cta || "",
+    link: req.body.link || "",
+    inApp: req.body.inApp == "on",
+    active: req.body.active == "on"
+  });
+  res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
+};
+
+export const deleteBanner: RequestHandler = async (req, res) => {
+  if (!req.auth.valid) {
+    res.redirect("/views/panel/login");
+    return;
+  }
+  const result = await Campaign.findByIdAndDelete(req.body.id || "");
+  res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
+};
+
+export const editBanner: RequestHandler = async (req, res) => {
+  if (!req.auth.valid) {
+    res.redirect("/views/panel/login");
+    return;
+  }
+  const result = await Campaign.findByIdAndUpdate(req.body.id || "", {
+    name: req.body.name || "",
+    icon: req.body.icon || "",
+    text: req.body.text || "",
+    cta: req.body.cta || "",
+    link: req.body.link || "",
+    inApp: req.body.inApp == "on",
+    active: req.body.active == "on"
+  });
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };

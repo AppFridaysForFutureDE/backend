@@ -1,10 +1,7 @@
 import mongoose from "mongoose";
 
-const campaignScheme = new mongoose.Schema({
-  name: {
-    type: String
-  },
-  icon: {
+const feedItemScheme = new mongoose.Schema({
+  imageUrl: {
     type: String
   },
   text: {
@@ -21,4 +18,4 @@ const campaignScheme = new mongoose.Schema({
   }
 });
 
-export const Campaign = mongoose.model("campaign", campaignScheme);
+export const feedItem = mongoose.model("banner", feedItemScheme);

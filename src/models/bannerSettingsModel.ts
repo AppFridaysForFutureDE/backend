@@ -1,14 +1,11 @@
 import mongoose from "mongoose";
 
 const bannerScheme = new mongoose.Schema({
-  imageUrl: {
-    type: String
+  campaignBannerIDs: {
+    type: [String]
   },
-  link: {
+  feedBannerID: {
     type: String
-  },
-  inApp: {
-    type: Boolean
   }
 });
 

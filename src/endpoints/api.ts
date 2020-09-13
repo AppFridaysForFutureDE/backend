@@ -55,11 +55,10 @@ export const getStrikes: RequestHandler = (req, res) => {
   }
 };
 
-export const getHomefeed: RequestHandler = async (req, res) => {
+export const getCampaigns: RequestHandler = async (req, res) => {
   try {
-    const banner = await Banner.findOne({ active: true });
+    const banner = await Banner.findOne({ campaignBanner: true });
     let rawCampaigns = await Campaign.find({ active: true });
-    rawCampaigns = rawCampaigns.sort((a, b) => a["sortOrder"] - b["sortOrder"]);
     const campaigns = rawCampaigns.map(doc => {
       return {
         icon: doc["icon"],
@@ -83,6 +82,16 @@ export const getSlogans: RequestHandler = async (req, res) => {
       return { id: slogan._id, text: slogan["text"], tags: slogan["tags"] };
     });
     res.status(200).json({ slogans: slogans });
+  } catch (err) {
+    return console.error(err);
+  }
+};
+
+export const getHomefeed: RequestHandler = async (req, res) => {
+  try {
+    const rawSlogans = await Slogan.find({});
+
+    
   } catch (err) {
     return console.error(err);
   }
