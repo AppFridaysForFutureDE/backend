@@ -7,14 +7,8 @@
   <title>Control Panel</title>
   <link rel="icon" href="https://app.fffutu.re/img/cropped-icon-32x32.png" sizes="32x32">
   <link rel="icon" href="https://app.fffutu.re/img/cropped-icon-192x192.png" sizes="192x192">
-
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <!-- Material Design CDN -->
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" />
-  <!-- Bootstrap-Iconpicker -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-iconpicker/1.10.0/css/bootstrap-iconpicker.min.css" />
   <style>
     body {
       font-size: .875rem;
@@ -143,83 +137,6 @@
         font-size: 3.5rem;
       }
     }
-
-    .mdi::before {
-      font-size: 24px;
-      line-height: 14px;
-    }
-
-    .btn .mdi::before {
-      position: relative;
-      top: 4px;
-    }
-
-    .btn-xs .mdi::before {
-      font-size: 18px;
-      top: 3px;
-    }
-
-    .btn-sm .mdi::before {
-      font-size: 18px;
-      top: 3px;
-    }
-
-    .dropdown-menu .mdi {
-      width: 18px;
-    }
-
-    .dropdown-menu .mdi::before {
-      position: relative;
-      top: 4px;
-      left: -8px;
-    }
-
-    .nav .mdi::before {
-      position: relative;
-      top: 4px;
-    }
-
-    .navbar .navbar-toggle .mdi::before {
-      position: relative;
-      top: 4px;
-      color: #FFF;
-    }
-
-    .breadcrumb .mdi::before {
-      position: relative;
-      top: 4px;
-    }
-
-    .breadcrumb a:hover {
-      text-decoration: none;
-    }
-
-    .breadcrumb a:hover span {
-      text-decoration: underline;
-    }
-
-    .alert .mdi::before {
-      position: relative;
-      top: 4px;
-      margin-right: 2px;
-    }
-
-    .input-group-addon .mdi::before {
-      position: relative;
-      top: 3px;
-    }
-
-    .navbar-brand .mdi::before {
-      position: relative;
-      top: 2px;
-      margin-right: 2px;
-    }
-
-    .list-group-item .mdi::before {
-      position: relative;
-      top: 3px;
-      left: -3px
-    }
   </style>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -232,8 +149,6 @@
     integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
-  <!-- Bootstrap-Iconpicker Bundle -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-iconpicker/1.10.0/js/bootstrap-iconpicker.bundle.min.js"></script>
   <script>
     function requestPopulate() {
       document.getElementById("popStatus").textContent = "FFF-Daten werden aktualisiert";
@@ -523,15 +438,16 @@
 
                         <!-- icon -->
                         <p class="card-text inputGroup_CampaignCard-<%= i %> collapse show">
-                          Icon: <%= campaigns[i].icon %>
+                          <b>Icon:</b> <%= campaigns[i].icon %>
                         </p>
                         <p class="card-text inputGroup_CampaignCard-<%= i %> collapse">
-                          <button class="btn btn-secondary" role="iconpicker" name=icon></button>
+                          <input type="text" class="form-control" placeholder="Icon" name="icon"
+                            value="<%= campaigns[i].icon %>">
                         </p>
 
                         <!-- text -->
                         <p class="card-text inputGroup_CampaignCard-<%= i %> collapse show">
-                          Text: <%= campaigns[i].text %>
+                          <b>Text:</b> <%= campaigns[i].text %>
                         </p>
                         <p class="card-text inputGroup_CampaignCard-<%= i %> collapse">
                           <textarea placeholder="Text" class="form-control" name="text"
@@ -540,7 +456,7 @@
 
                         <!-- cta -->
                         <p class="card-text inputGroup_CampaignCard-<%= i %> collapse show">
-                          Call to Action: <%= campaigns[i].cta %>
+                          <b>Call to Action:</b> <%= campaigns[i].cta %>
                         </p>
                         <p class="card-text inputGroup_CampaignCard-<%= i %> collapse">
                           <input type="text" class="form-control" placeholder="Call to Action" name="cta"
@@ -549,7 +465,7 @@
 
                         <!-- link -->
                         <p class="card-text inputGroup_CampaignCard-<%= i %> collapse show">
-                          Link: <a><%= campaigns[i].link %></a>
+                          <b>Link:</b> <a><%= campaigns[i].link %></a>
                         </p>
                         <p class="card-text inputGroup_CampaignCard-<%= i %> collapse">
                           <input type="text" class="form-control" placeholder="Link" name="link"
