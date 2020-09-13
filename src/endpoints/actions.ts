@@ -6,6 +6,7 @@ import { Liveevent } from "../models/liveeventModel";
 import { Slogan } from "../models/sloganModel";
 import { Banner } from "../models/bannersModel";
 import { Campaign } from "../models/campaignsModel";
+import { feedItem } from "../models/feedItemModel";
 
 export const populateDB: RequestHandler = async (req, res) => {
   if (!req.auth.valid) {
@@ -134,14 +135,10 @@ export const addBanner: RequestHandler = async (req, res) => {
     res.redirect("/views/panel/login");
     return;
   }
-  const result = await Campaign.create({
-    name: req.body.name || "",
-    icon: req.body.icon || "",
-    text: req.body.text || "",
-    cta: req.body.cta || "",
+  const result = await Banner.create({
+    imageUrl: req.body.imageUrl || "",
     link: req.body.link || "",
-    inApp: req.body.inApp == "on",
-    active: req.body.active == "on"
+    inApp: req.body.inApp == "on"
   });
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };
@@ -151,7 +148,7 @@ export const deleteBanner: RequestHandler = async (req, res) => {
     res.redirect("/views/panel/login");
     return;
   }
-  const result = await Campaign.findByIdAndDelete(req.body.id || "");
+  const result = await Banner.findByIdAndDelete(req.body.id || "");
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };
 
@@ -160,14 +157,50 @@ export const editBanner: RequestHandler = async (req, res) => {
     res.redirect("/views/panel/login");
     return;
   }
-  const result = await Campaign.findByIdAndUpdate(req.body.id || "", {
-    name: req.body.name || "",
-    icon: req.body.icon || "",
+  const result = await Banner.findByIdAndUpdate(req.body.id || "", {
+    imageUrl: req.body.imageUrl || "",
+    link: req.body.link || "",
+    inApp: req.body.inApp == "on"
+  });
+  res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
+};
+
+//Feed Items
+export const addFeedItem: RequestHandler = async (req, res) => {
+  if (!req.auth.valid) {
+    res.redirect("/views/panel/login");
+    return;
+  }
+  const result = await feedItem.create({
+    imageUrl: req.body.imageUrl || "",
     text: req.body.text || "",
     cta: req.body.cta || "",
     link: req.body.link || "",
-    inApp: req.body.inApp == "on",
-    active: req.body.active == "on"
+    inApp: req.body.inApp == "on"
+  });
+  res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
+};
+
+export const deleteFeedItem: RequestHandler = async (req, res) => {
+  if (!req.auth.valid) {
+    res.redirect("/views/panel/login");
+    return;
+  }
+  const result = await feedItem.findByIdAndDelete(req.body.id || "");
+  res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
+};
+
+export const editFeedItem: RequestHandler = async (req, res) => {
+  if (!req.auth.valid) {
+    res.redirect("/views/panel/login");
+    return;
+  }
+  const result = await feedItem.findByIdAndUpdate(req.body.id || "", {
+    imageUrl: req.body.imageUrl || "",
+    text: req.body.text || "",
+    cta: req.body.cta || "",
+    link: req.body.link || "",
+    inApp: req.body.inApp == "on"
   });
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };

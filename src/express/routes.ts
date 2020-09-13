@@ -15,7 +15,7 @@ import {
   editSlogan,
   addCampaign,
   editCampaign,
-  deleteCampaign
+  deleteCampaign, addBanner, deleteBanner, editBanner, addFeedItem, editFeedItem, deleteFeedItem
 } from "../endpoints/actions";
 import {
   getLiveevent,
@@ -37,18 +37,29 @@ export const viewRoutes = Router();
 
 controlsRoutes.post("/action/populateDB", populateDB);
 controlsRoutes.post("/action/liveevent", saveLiveevent);
+
 controlsRoutes.post("/user/login", login);
 controlsRoutes.post("/user/logout", logout);
 controlsRoutes.post("/user/create", create);
 controlsRoutes.post("/user/changePassword", changePassword);
 controlsRoutes.post("/user/remove", remove);
 controlsRoutes.post("/user/makeAdmin", makeAdmin);
+
 controlsRoutes.post("/slogans/add", addSlogan);
 controlsRoutes.post("/slogans/edit", editSlogan);
 controlsRoutes.post("/slogans/remove", deleteSlogan);
+
 controlsRoutes.post("/campaigns/add", addCampaign);
 controlsRoutes.post("/campaigns/edit", editCampaign);
 controlsRoutes.post("/campaigns/remove", deleteCampaign);
+
+controlsRoutes.post("/banner/add", addBanner);
+controlsRoutes.post("/banner/edit", editBanner);
+controlsRoutes.post("/banner/remove", deleteBanner);
+
+controlsRoutes.post("/feed/add", addFeedItem);
+controlsRoutes.post("/feed/edit", editFeedItem);
+controlsRoutes.post("/feed/remove", deleteFeedItem);
 
 apiRoutes.get("/liveevent", getLiveevent);
 apiRoutes.get("/strikes", getStrikes);
