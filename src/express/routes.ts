@@ -15,7 +15,7 @@ import {
   editSlogan,
   addCampaign,
   editCampaign,
-  deleteCampaign, addBanner, deleteBanner, editBanner, addFeedItem, editFeedItem, deleteFeedItem
+  deleteCampaign, addBanner, deleteBanner, editBanner, addFeedItem, editFeedItem, deleteFeedItem, updateBannerSettings
 } from "../endpoints/actions";
 import {
   getLiveevent,

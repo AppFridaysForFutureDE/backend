@@ -7,6 +7,8 @@ import LogManager from "../LogManager";
 import { Slogan } from "../models/sloganModel";
 import { Campaign } from "../models/campaignsModel";
 import { Banner } from "../models/bannersModel";
+import { BannerSettings } from "../models/bannerSettingsModel";
+import { feedItem } from "../models/feedItemModel";
 
 export const loginView: RequestHandler = async (req, res) => {
   //redirect to controls if good session id
@@ -64,7 +66,11 @@ export const controlsView: RequestHandler = async (req, res) => {
 
   const campaigns = await Campaign.find({});
 
-  const banner = await Banner.findOne({});
+  const banner = await Banner.find({});
+
+  const feed = await feedItem.find({});
+
+  const bannerSettings = await BannerSettings.findOne({});
 
   //render
   res.render("controls", {
@@ -76,11 +82,8 @@ export const controlsView: RequestHandler = async (req, res) => {
     logs: logs,
     slogans: slogans,
     campaigns: campaigns,
-    banner: banner || {
-      imageUrl: "",
-      link: "",
-      inApp: false,
-      active: false
-    }
+    banners: banner,
+    feed: feed,
+    bannerSettings: bannerSettings
   });
 };
