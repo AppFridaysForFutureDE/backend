@@ -57,7 +57,7 @@ export const getStrikes: RequestHandler = (req, res) => {
 
 export const getCampaigns: RequestHandler = async (req, res) => {
   try {
-    let banner = await Banner.find({ active: true })
+    let banner = await Banner.findOne({ active: true })
     let rawCampaigns = await Campaign.find({ active: true })
     rawCampaigns = rawCampaigns.sort((a,b) => a["sortOrder"] - b["sortOrder"])
     let campaigns = rawCampaigns.map((doc) => {
