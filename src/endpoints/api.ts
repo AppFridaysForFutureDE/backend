@@ -57,18 +57,18 @@ export const getStrikes: RequestHandler = (req, res) => {
 
 export const getCampaigns: RequestHandler = async (req, res) => {
   try {
-    const banners = await Banner.find({ active: true })
-    const campaigns = await Campaign.find({ active: true })
-    banners.sort((a,b) => a["sortOrder"] - b["sortOrder"])
-    campaigns.sort((a,b) => a["sortOrder"] - b["sortOrder"])
-    banners.map((doc) => {
+    let rawBanners = await Banner.find({ active: true })
+    let rawCampaigns = await Campaign.find({ active: true })
+    rawBanners = rawBanners.sort((a,b) => a["sortOrder"] - b["sortOrder"])
+    rawCampaigns = rawCampaigns.sort((a,b) => a["sortOrder"] - b["sortOrder"])
+    let banners = rawBanners.map((doc) => {
       return {
         imageUrl: doc["imageUrl"],
         link: doc["link"],
         inApp: doc["inApp"],
       }
     })
-    campaigns.map((doc) => {
+    let campaigns = rawCampaigns.map((doc) => {
       return {
         icon: doc["icon"],
         text: doc["text"],
