@@ -74,7 +74,7 @@ export const getCampaigns: RequestHandler = async (req, res) => {
   try {
     const bannerSettings = (await BannerSettings.findOne({})) || { campaignBannerIDs: [], feedBannerID: "" };
     let banners: any[] = [];
-    bannerSettings["campaignBannerIDs"].array.forEach(async id => {
+    bannerSettings["campaignBannerIDs"].forEach(async id => {
       banners.push(await Banner.findOne({ _id: id }))
     });
     let rawCampaigns = await Campaign.find({});
