@@ -429,10 +429,9 @@
 
                         <!-- name -->
                         <p class="card-text inputGroup_CampaignCard-<%= i %> collapse show">
-                          <h5>
-                            Name
-                          </h5>
-                          <%= campaigns[i].name %>
+                          <h4>
+                            <%= campaigns[i].name %>
+                          </h4>
                         </p>
                         <p class="card-text inputGroup_CampaignCard-<%= i %> collapse">
                           <input type="text" class="form-control" placeholder="Name" name="name"
@@ -441,10 +440,7 @@
 
                         <!-- icon -->
                         <p class="card-text inputGroup_CampaignCard-<%= i %> collapse show">
-                          <h5>
-                            Icon
-                          </h5>
-                          <%= campaigns[i].icon %>
+                          Icon: <%= campaigns[i].icon %>
                         </p>
                         <p class="card-text inputGroup_CampaignCard-<%= i %> collapse">
                           <input type="text" class="form-control" placeholder="Icon" name="icon"
@@ -453,10 +449,7 @@
 
                         <!-- text -->
                         <p class="card-text inputGroup_CampaignCard-<%= i %> collapse show">
-                          <h5>
-                            Text
-                          </h5>
-                          <%= campaigns[i].text %>
+                          Text: <%= campaigns[i].text %>
                         </p>
                         <p class="card-text inputGroup_CampaignCard-<%= i %> collapse">
                           <textarea placeholder="Text" class="form-control" name="text"
@@ -465,10 +458,7 @@
 
                         <!-- cta -->
                         <p class="card-text inputGroup_CampaignCard-<%= i %> collapse show">
-                          <h5>
-                            Call to Action
-                          </h5>
-                          <%= campaigns[i].cta %>
+                          Call to Action: <%= campaigns[i].cta %>
                         </p>
                         <p class="card-text inputGroup_CampaignCard-<%= i %> collapse">
                           <input type="text" class="form-control" placeholder="Call to Action" name="cta"
@@ -477,10 +467,7 @@
 
                         <!-- link -->
                         <p class="card-text inputGroup_CampaignCard-<%= i %> collapse show">
-                          <h5>
-                            Link
-                          </h5>
-                          <%= campaigns[i].link %>
+                          Link: <a><%= campaigns[i].link %></a>
                         </p>
                         <p class="card-text inputGroup_CampaignCard-<%= i %> collapse">
                           <input type="text" class="form-control" placeholder="Link" name="link"
@@ -489,19 +476,13 @@
 
                         <!-- inApp -->
                         <p class="card-text inputGroup_CampaignCard-<%= i %> collapse show">
-                          <h5>
-                            In der App
-                          </h5>
-                          <% if (campaigns[i].inApp) { %>
+                          In der App: <% if (campaigns[i].inApp) { %>
                           Ja
                           <% } else { %>
                           Nein
                           <% } %>
                         </p>
                         <p class="card-text inputGroup_CampaignCard-<%= i %> collapse">
-                          <h5>
-                            Name
-                          </h5>
                           <input type="radio" id="inApp" name="inApp" value="on" <% if (campaigns[i].inApp) { %> checked
                             <% } %>>
                           <label for="active">Ja</label>
