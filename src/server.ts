@@ -30,7 +30,7 @@ mongoose
     }
   );
 
-  console.log("Creating user from env");
+console.log("Creating user from env");
 if (process.env.FFF_USER) {
   User.findOneAndUpdate(
     { name: process.env.FFF_USER },

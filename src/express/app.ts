@@ -11,7 +11,7 @@ import {
   webhookRoutes,
   shareRoutes,
   controlsRoutes,
-  viewRoutes,
+  viewRoutes
 } from "./routes";
 
 //Initialization

@@ -18,7 +18,13 @@ import {
   deleteCampaign,
   saveBanner
 } from "../endpoints/actions";
-import { getLiveevent, getOGs, getStrikes, getSlogans, getHomefeed } from "../endpoints/api";
+import {
+  getLiveevent,
+  getOGs,
+  getStrikes,
+  getSlogans,
+  getHomefeed
+} from "../endpoints/api";
 import { sharePost } from "../endpoints/share";
 import { loginView, controlsView } from "../endpoints/views";
 import { webhookTriggered } from "../endpoints/webhook";
@@ -44,7 +50,6 @@ controlsRoutes.post("/slogans/remove", deleteSlogan);
 controlsRoutes.post("/campaigns/add", addCampaign);
 controlsRoutes.post("/campaigns/edit", editCampaign);
 controlsRoutes.post("/campaigns/remove", deleteCampaign);
-
 
 apiRoutes.get("/liveevent", getLiveevent);
 apiRoutes.get("/strikes", getStrikes);

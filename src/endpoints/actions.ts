@@ -135,7 +135,7 @@ export const saveBanner: RequestHandler = async (req, res) => {
     return;
   }
   const result = await Banner.findOneAndUpdate(
-    { },
+    {},
     {
       active: req.body.active == "on",
       link: req.body.link || "",

@@ -64,7 +64,7 @@ export const controlsView: RequestHandler = async (req, res) => {
 
   const campaigns = await Campaign.find({});
 
-  const banner = await Banner.findOne({ });
+  const banner = await Banner.findOne({});
 
   //render
   res.render("controls", {

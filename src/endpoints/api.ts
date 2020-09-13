@@ -57,18 +57,18 @@ export const getStrikes: RequestHandler = (req, res) => {
 
 export const getHomefeed: RequestHandler = async (req, res) => {
   try {
-    let banner = await Banner.findOne({ active: true })
-    let rawCampaigns = await Campaign.find({ active: true })
-    rawCampaigns = rawCampaigns.sort((a,b) => a["sortOrder"] - b["sortOrder"])
-    let campaigns = rawCampaigns.map((doc) => {
+    const banner = await Banner.findOne({ active: true });
+    let rawCampaigns = await Campaign.find({ active: true });
+    rawCampaigns = rawCampaigns.sort((a, b) => a["sortOrder"] - b["sortOrder"]);
+    const campaigns = rawCampaigns.map(doc => {
       return {
         icon: doc["icon"],
         text: doc["text"],
         cta: doc["cta"],
         link: doc["link"],
-        inApp: doc["inApp"],
-      }
-    })
+        inApp: doc["inApp"]
+      };
+    });
     res.status(200).json({ banner: banner, campaigns: campaigns });
   } catch (err) {
     console.error(err);
