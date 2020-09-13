@@ -420,12 +420,32 @@
                   </div>
                 </div>
                 <% } %>
-                <% for(var i=0; i<slogans.length; i++) { %>
+                <% for(var i=0; i<campaigns.length; i++) { %>
                 <div class="col-auto mb-3 collapse campaignToggle">
                   <div class="card" style="width: 18rem;">
                     <div class="card-body">
                       <form action="/admin/controls/campaigns/edit" method="post" style="display: inline;">
                         <input type="hidden" name="id" value="<%= campaigns[i]._id%>">
+
+                        <!-- name -->
+                        <p class="card-text inputGroup_CampaignCard-<%= i %> collapse show">
+                          <%= campaigns[i].name %>
+                        </p>
+                        <p class="card-text inputGroup_CampaignCard-<%= i %> collapse">
+                          <input type="text" class="form-control" placeholder="Name" name="name"
+                            value="<%= campaigns[i].name %>">
+                        </p>
+
+                        <!-- icon -->
+                        <p class="card-text inputGroup_CampaignCard-<%= i %> collapse show">
+                          <%= campaigns[i].icon %>
+                        </p>
+                        <p class="card-text inputGroup_CampaignCard-<%= i %> collapse">
+                          <input type="text" class="form-control" placeholder="Icon" name="icon"
+                            value="<%= campaigns[i].icon %>">
+                        </p>
+
+                        <!-- text -->
                         <p class="card-text inputGroup_CampaignCard-<%= i %> collapse show">
                           <%= campaigns[i].text %>
                         </p>
@@ -434,10 +454,63 @@
                             rows="1"><%= campaigns[i].text %></textarea>
                         </p>
 
+                        <!-- cta -->
+                        <p class="card-text inputGroup_CampaignCard-<%= i %> collapse show">
+                          <%= campaigns[i].name %>
+                        </p>
+                        <p class="card-text inputGroup_CampaignCard-<%= i %> collapse">
+                          <input type="text" class="form-control" placeholder="Call to Action" name="cta"
+                            value="<%= campaigns[i].name %>">
+                        </p>
+
+                        <!-- link -->
+                        <p class="card-text inputGroup_CampaignCard-<%= i %> collapse show">
+                          <%= campaigns[i].link %>
+                        </p>
+                        <p class="card-text inputGroup_CampaignCard-<%= i %> collapse">
+                          <input type="text" class="form-control" placeholder="Link" name="link"
+                            value="<%= campaigns[i].link %>">
+                        </p>
+
+                        <!-- inApp -->
+                        <p class="card-text inputGroup_CampaignCard-<%= i %> collapse show">
+                          <% if (campaigns[i].inApp) { %>
+                          inApp
+                          <% } else { %>
+                          nicht inApp
+                          <%> } <%>
+                        </p>
+                        <p class="card-text inputGroup_CampaignCard-<%= i %> collapse">
+                          <input type="radio" id="inApp" name="inApp" value="on" <% if (campaigns[i].inApp) { %> checked
+                            <% } %>>
+                          <label for="active">inApp</label>
+                          <input type="radio" id="NotinApp" name="inApp" value="off" <% if (!campaigns[i].inApp) { %>
+                            checked <% } %>>
+                          <label for="inactive">nicht inApp</label>
+                        </p>
+
+                        <!-- active -->
+                        <p class="card-text inputGroup_CampaignCard-<%= i %> collapse show">
+                          <% if (campaigns[i].active) { %>
+                          Aktiviert
+                          <% } else { %>
+                          Deaktiviert
+                          <%> } <%>
+                        </p>
+                        <p class="card-text inputGroup_CampaignCard-<%= i %> collapse">
+                          <input type="radio" id="active" name="active" value="on" <% if (campaigns[i].active) { %>
+                            checked <% } %>>
+                          <label for="active">Aktiviert</label>
+                          <input type="radio" id="inactive" name="active" value="off" <% if (!campaigns[i].active) { %>
+                            checked <% } %>>
+                          <label for="inactive">Deaktiviert</label>
+                        </p>
+
+
                         <br><br>
 
-                        <input class="btn btn-primary btn-sm mb-1 inputGroup_CampaignCard-<%= i %> collapse" type="submit"
-                          value="Speichern">
+                        <input class="btn btn-primary btn-sm mb-1 inputGroup_CampaignCard-<%= i %> collapse"
+                          type="submit" value="Speichern">
                       </form>
                       <button class="btn btn-primary btn-sm mb-1 inputGroup_CampaignCard-<%= i %> collapse"
                         data-toggle="collapse" href=".inputGroup_CampaignCard-<%= i %>">Abbrechen</button>
@@ -456,9 +529,57 @@
                   <div class="card" style="width: 18rem;">
                     <div class="card-body">
                       <form action="/admin/controls/campaigns/add" method="post" style="display: inline;">
+
+                        <!-- name -->
                         <p class="card-text">
-                          <textarea placeholder="Text" class="form-control" name="text" rows="1"></textarea>
+                          <input type="text" class="form-control" placeholder="Name" name="name"
+                            value="<%= campaigns[i].name %>">
                         </p>
+
+                        <!-- icon -->
+                        <p class="card-text">
+                          <input type="text" class="form-control" placeholder="Icon" name="icon"
+                            value="<%= campaigns[i].icon %>">
+                        </p>
+
+                        <!-- text -->
+                        <p class="card-text">
+                          <textarea placeholder="Text" class="form-control" name="text"
+                            rows="1"><%= campaigns[i].text %></textarea>
+                        </p>
+
+                        <!-- cta -->
+                        <p class="card-text">
+                          <input type="text" class="form-control" placeholder="Call to Action" name="cta"
+                            value="<%= campaigns[i].name %>">
+                        </p>
+
+                        <!-- link -->
+                        <p class="card-text">
+                          <input type="text" class="form-control" placeholder="Link" name="link"
+                            value="<%= campaigns[i].link %>">
+                        </p>
+
+                        <!-- inApp -->
+                        <p class="card-text">
+                          <input type="radio" id="inApp" name="inApp" value="on" <% if (campaigns[i].inApp) { %> checked
+                            <% } %>>
+                          <label for="active">inApp</label>
+                          <input type="radio" id="NotinApp" name="inApp" value="off" <% if (!campaigns[i].inApp) { %>
+                            checked <% } %>>
+                          <label for="inactive">nicht inApp</label>
+                        </p>
+
+                        <!-- active -->
+                        <p class="card-text">
+                          <input type="radio" id="active" name="active" value="on" <% if (campaigns[i].active) { %>
+                            checked <% } %>>
+                          <label for="active">Aktiviert</label>
+                          <input type="radio" id="inactive" name="active" value="off" <% if (!campaigns[i].active) { %>
+                            checked <% } %>>
+                          <label for="inactive">Deaktiviert</label>
+                        </p>
+
                         <input type="submit" value="Hinzufügen" class="form-control btn-primary">
                       </form>
                     </div>
