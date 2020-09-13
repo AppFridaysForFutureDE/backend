@@ -99,7 +99,6 @@ export const addCampaign: RequestHandler = async (req, res) => {
     cta: req.body.cta || "",
     link: req.body.link || "",
     inApp: req.body.inApp == "on",
-    active: req.body.active == "on"
   });
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };
@@ -125,7 +124,6 @@ export const editCampaign: RequestHandler = async (req, res) => {
     cta: req.body.cta || "",
     link: req.body.link || "",
     inApp: req.body.inApp == "on",
-    active: req.body.active == "on"
   });
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };

@@ -397,7 +397,151 @@
               </div>
             </div>
 
-                        
+            <br><br>
+            <h3>
+              Feed
+            </h3>
+            <hr class="my-4">
+            <div class="container mt-4">
+              <div class="row">
+                <% if(feed.length > 0) { %>
+                <div class="col-auto mb-3 collapse show feedToggle">
+                  <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <h1 class="card-text">
+                        <%= feed.length %>
+                      </h1>
+                      <p class="card-text">
+                        <% if (feed.length > 1) {  %>
+                        Feed-Items
+                        <% } else { %>
+                        Feed-Item
+                        <% } %>
+                      </p>
+                      <button class="btn btn-primary" data-toggle="collapse" href=".feedToggle">Anzeigen</button>
+                    </div>
+                  </div>
+                </div>
+                <% } %>
+                <% for(var i=0; i<feed.length; i++) { %>
+                <div class="col-auto mb-3 collapse feedToggle">
+                  <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <form action="/admin/controls/feed/edit" method="post" style="display: inline;">
+                        <input type="hidden" name="id" value="<%= feed[i]._id%>">
+
+                        <!-- imageUrl -->
+                        <p class="card-text inputGroup_FeedCard-<%= i %> collapse show">
+                          <b>Icon:</b> <%= feed[i].imageUrl %>
+                        </p>
+                        <p class="card-text inputGroup_FeedCard-<%= i %> collapse">
+                          <input type="text" class="form-control" placeholder="Bild-URL" name="imageUrl"
+                            value="<%= feed[i].imageUrl %>">
+                        </p>
+
+                        <!-- text -->
+                        <p class="card-text inputGroup_FeedCard-<%= i %> collapse show">
+                          <b>Text:</b> <%= feed[i].text %>
+                        </p>
+                        <p class="card-text inputGroup_FeedCard-<%= i %> collapse">
+                          <textarea placeholder="Text" class="form-control" name="text"
+                            rows="1"><%= feed[i].text %></textarea>
+                        </p>
+
+                        <!-- cta -->
+                        <p class="card-text inputGroup_FeedCard-<%= i %> collapse show">
+                          <b>Call to Action:</b> <%= feed[i].cta %>
+                        </p>
+                        <p class="card-text inputGroup_FeedCard-<%= i %> collapse">
+                          <input type="text" class="form-control" placeholder="Call to Action" name="cta"
+                            value="<%= feed[i].cta %>">
+                        </p>
+
+                        <!-- link -->
+                        <p class="card-text inputGroup_FeedCard-<%= i %> collapse show">
+                          <b>Link:</b> <a href="<%= feed[i].link %>"><%= feed[i].link %></a>
+                        </p>
+                        <p class="card-text inputGroup_FeedCard-<%= i %> collapse">
+                          <input type="text" class="form-control" placeholder="Link" name="link"
+                            value="<%= feed[i].link %>">
+                        </p>
+
+                        <!-- inApp -->
+                        <p class="card-text inputGroup_FeedCard-<%= i %> collapse show">
+                          <% if (feed[i].inApp) { %>
+                          In der App
+                          <% } else { %>
+                          Nicht in der App
+                          <% } %>
+                        </p>
+                        <p class="card-text inputGroup_FeedCard-<%= i %> collapse">
+                          <input type="radio" id="inApp" name="inApp" value="on" <% if (feed[i].inApp) { %> checked
+                            <% } %>>
+                          <label for="active">Ja</label>
+                          <input type="radio" id="NotinApp" name="inApp" value="off" <% if (!feed[i].inApp) { %>
+                            checked <% } %>>
+                          <label for="inactive">Nein</label>
+                        </p>
+
+
+                        <br><br>
+
+                        <input class="btn btn-primary btn-sm mb-1 inputGroup_FeedCard-<%= i %> collapse"
+                          type="submit" value="Speichern">
+                      </form>
+                      <button class="btn btn-primary btn-sm mb-1 inputGroup_FeedCard-<%= i %> collapse"
+                        data-toggle="collapse" href=".inputGroup_FeedCard-<%= i %>">Abbrechen</button>
+                      <button class="btn btn-primary btn-sm mb-1 inputGroup_FeedCard-<%= i %> collapse show"
+                        data-toggle="collapse" href=".inputGroup_FeedCard-<%= i %>">Bearbeiten</button><br>
+                      <form action="/admin/controls/feed/remove" method="post" style="display: inline;">
+                        <input type="hidden" name="id" value="<%= feed[i]._id %>">
+                        <input type="submit" value="Entfernen" class="btn btn-primary btn-sm">
+                      </form>
+
+                    </div>
+                  </div>
+                </div>
+                <% } %>
+                <div class="col-auto mb-3">
+                  <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <form action="/admin/controls/feed/add" method="post" style="display: inline;">
+
+                        <!-- imageUrl -->
+                        <p class="card-text">
+                          <input type="text" class="form-control" placeholder="Bild-URL" name="icon" value="">
+                        </p>
+
+                        <!-- text -->
+                        <p class="card-text">
+                          <textarea placeholder="Text" class="form-control" name="text" rows="1"></textarea>
+                        </p>
+
+                        <!-- cta -->
+                        <p class="card-text">
+                          <input type="text" class="form-control" placeholder="Call to Action" name="cta" value="">
+                        </p>
+
+                        <!-- link -->
+                        <p class="card-text">
+                          <input type="text" class="form-control" placeholder="Link" name="link" value="">
+                        </p>
+
+                        <!-- inApp -->
+                        <p class="card-text">
+                          <input type="radio" id="inApp" name="inApp" value="on" checked>
+                          <label for="active">inApp</label>
+                          <input type="radio" id="NotinApp" name="inApp" value="off">
+                          <label for="inactive">nicht inApp</label>
+                        </p>
+
+                        <input type="submit" value="Hinzufügen" class="form-control btn-primary">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>          
 
             <br><br>
             <h3>
@@ -496,24 +640,6 @@
                           <label for="inactive">Nein</label>
                         </p>
 
-                        <!-- active -->
-                        <p class="card-text inputGroup_CampaignCard-<%= i %> collapse show">
-                          <% if (campaigns[i].active) { %>
-                          Aktiviert
-                          <% } else { %>
-                          Deaktiviert
-                          <% } %>
-                        </p>
-                        <p class="card-text inputGroup_CampaignCard-<%= i %> collapse">
-                          <input type="radio" id="active" name="active" value="on" <% if (campaigns[i].active) { %>
-                            checked <% } %>>
-                          <label for="active">Aktiviert</label>
-                          <input type="radio" id="inactive" name="active" value="off" <% if (!campaigns[i].active) { %>
-                            checked <% } %>>
-                          <label for="inactive">Deaktiviert</label>
-                        </p>
-
-
                         <br><br>
 
                         <input class="btn btn-primary btn-sm mb-1 inputGroup_CampaignCard-<%= i %> collapse"
@@ -568,14 +694,6 @@
                           <label for="active">inApp</label>
                           <input type="radio" id="NotinApp" name="inApp" value="off">
                           <label for="inactive">nicht inApp</label>
-                        </p>
-
-                        <!-- active -->
-                        <p class="card-text">
-                          <input type="radio" id="active" name="active" value="on" checked>
-                          <label for="active">Aktiviert</label>
-                          <input type="radio" id="inactive" name="active" value="off">
-                          <label for="inactive">Deaktiviert</label>
                         </p>
 
                         <input type="submit" value="Hinzufügen" class="form-control btn-primary">
