@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+simport mongoose from "mongoose";
 import { app } from "./express/app";
 import { startCronJobs } from "./cron";
 import dotenv from "dotenv-safe";
@@ -8,23 +8,6 @@ console.log("Loading environment variables");
 dotenv.config({
   allowEmptyValues: true
 });
-
-console.log("Creating user from env");
-if (process.env.FFF_USER) {
-  User.findOneAndUpdate(
-    { name: process.env.FFF_USER },
-    {
-      admin: true
-    },
-    { upsert: true },
-    function(err, doc) {
-      if (err) {
-        console.log("error while creating user from env");
-        console.log(err, doc);
-      }
-    }
-  );
-}
 
 console.log("Connecting to database");
 mongoose
@@ -46,3 +29,20 @@ mongoose
       console.log(error);
     }
   );
+
+  console.log("Creating user from env");
+if (process.env.FFF_USER) {
+  User.findOneAndUpdate(
+    { name: process.env.FFF_USER },
+    {
+      admin: true
+    },
+    { upsert: true },
+    function(err, doc) {
+      if (err) {
+        console.log("error while creating user from env");
+        console.log(err, doc);
+      }
+    }
+  );
+}
