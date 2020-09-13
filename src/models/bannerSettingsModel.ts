@@ -9,4 +9,4 @@ const bannerScheme = new mongoose.Schema({
   }
 });
 
-export const Banner = mongoose.model("banner", bannerScheme);
+export const BannerSettings = mongoose.model("banner", bannerScheme);

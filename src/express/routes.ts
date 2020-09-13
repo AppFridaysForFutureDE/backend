@@ -37,7 +37,6 @@ export const viewRoutes = Router();
 
 controlsRoutes.post("/action/populateDB", populateDB);
 controlsRoutes.post("/action/liveevent", saveLiveevent);
-controlsRoutes.post("/action/banner", saveBanner);
 controlsRoutes.post("/user/login", login);
 controlsRoutes.post("/user/logout", logout);
 controlsRoutes.post("/user/create", create);
