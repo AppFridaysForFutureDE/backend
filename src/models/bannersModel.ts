@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
 
 const bannerScheme = new mongoose.Schema({
+  id: {
+    type: Number
+  },
   imageUrl: {
     type: String
   },

@@ -64,7 +64,7 @@ export const controlsView: RequestHandler = async (req, res) => {
 
   const campaigns = await Campaign.find({});
 
-  const banners = await Banner.find({});
+  const banner = await Banner.findOne({ id: 0});
 
   //render
   res.render("controls", {
@@ -76,7 +76,7 @@ export const controlsView: RequestHandler = async (req, res) => {
     logs: logs,
     slogans: slogans,
     campaigns: campaigns,
-    banner: banners[0] || {
+    banner: banner || {
       imageUrl: "",
       link: "",
       inApp: false,
