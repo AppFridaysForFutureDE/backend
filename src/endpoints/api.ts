@@ -72,7 +72,7 @@ export const getSlogans: RequestHandler = async (req, res) => {
 
 export const getCampaigns: RequestHandler = async (req, res) => {
   try {
-    const banners = await BannerSettings.find({ campaignBanner: true }));
+    const banners = await BannerSettings.find({ campaignBanner: true });
     let rawCampaigns = await Campaign.find({});
     const campaigns = rawCampaigns.map(doc => {
       return {
