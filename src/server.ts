@@ -1,4 +1,4 @@
-simport mongoose from "mongoose";
+import mongoose from "mongoose";
 import { app } from "./express/app";
 import { startCronJobs } from "./cron";
 import dotenv from "dotenv-safe";
