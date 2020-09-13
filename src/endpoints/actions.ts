@@ -96,8 +96,8 @@ export const addCampaign: RequestHandler = async (req, res) => {
     text: req.body.text || "",
     cta: req.body.cta || "",
     link: req.body.link || "",
-    inApp: req.body.inApp || "",
-    active: req.body.active || ""
+    inApp: req.body.inApp == "on",
+    active: req.body.active == "on"
   });
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };
@@ -122,8 +122,8 @@ export const editCampaign: RequestHandler = async (req, res) => {
     text: req.body.text || "",
     cta: req.body.cta || "",
     link: req.body.link || "",
-    inApp: req.body.inApp || "",
-    active: req.body.active || ""
+    inApp: req.body.inApp == "on",
+    active: req.body.active == "on"
   });
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };
@@ -137,8 +137,8 @@ export const addBanner: RequestHandler = async (req, res) => {
   const result = await Banner.create({
     imageUrl: req.body.imageUrl || "",
     link: req.body.link || "",
-    inApp: req.body.inApp || "",
-    active: req.body.active || ""
+    inApp: req.body.inApp == "on",
+    active: req.body.active == "on"
   });
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };
@@ -160,8 +160,8 @@ export const editBanner: RequestHandler = async (req, res) => {
   const result = await Banner.findByIdAndUpdate(req.body.id || "", {
     imageUrl: req.body.imageUrl || "",
     link: req.body.link || "",
-    inApp: req.body.inApp || "",
-    active: req.body.active || ""
+    inApp: req.body.inApp == "on",
+    active: req.body.active == "on"
   });
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };
