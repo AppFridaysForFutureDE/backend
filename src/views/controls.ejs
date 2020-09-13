@@ -533,50 +533,46 @@
                         <!-- name -->
                         <p class="card-text">
                           <input type="text" class="form-control" placeholder="Name" name="name"
-                            value="<%= campaigns[i].name %>">
+                            value="">
                         </p>
 
                         <!-- icon -->
                         <p class="card-text">
                           <input type="text" class="form-control" placeholder="Icon" name="icon"
-                            value="<%= campaigns[i].icon %>">
+                            value="">
                         </p>
 
                         <!-- text -->
                         <p class="card-text">
                           <textarea placeholder="Text" class="form-control" name="text"
-                            rows="1"><%= campaigns[i].text %></textarea>
+                            rows="1"></textarea>
                         </p>
 
                         <!-- cta -->
                         <p class="card-text">
                           <input type="text" class="form-control" placeholder="Call to Action" name="cta"
-                            value="<%= campaigns[i].name %>">
+                            value="">
                         </p>
 
                         <!-- link -->
                         <p class="card-text">
                           <input type="text" class="form-control" placeholder="Link" name="link"
-                            value="<%= campaigns[i].link %>">
+                            value="">
                         </p>
 
                         <!-- inApp -->
                         <p class="card-text">
-                          <input type="radio" id="inApp" name="inApp" value="on" <% if (campaigns[i].inApp) { %> checked
-                            <% } %>>
+                          <input type="radio" id="inApp" name="inApp" value="on" checked>
                           <label for="active">inApp</label>
-                          <input type="radio" id="NotinApp" name="inApp" value="off" <% if (!campaigns[i].inApp) { %>
-                            checked <% } %>>
+                          <input type="radio" id="NotinApp" name="inApp" value="off">
                           <label for="inactive">nicht inApp</label>
                         </p>
 
                         <!-- active -->
                         <p class="card-text">
-                          <input type="radio" id="active" name="active" value="on" <% if (campaigns[i].active) { %>
-                            checked <% } %>>
+                          <input type="radio" id="active" name="active" value="on" checked>
                           <label for="active">Aktiviert</label>
-                          <input type="radio" id="inactive" name="active" value="off" <% if (!campaigns[i].active) { %>
-                            checked <% } %>>
+                          <input type="radio" id="inactive" name="active" value="off">
                           <label for="inactive">Deaktiviert</label>
                         </p>
 
