@@ -7,12 +7,6 @@ const bannerScheme = new mongoose.Schema({
   link: {
     type: String
   },
-  sortOrder: {
-    type: Number
-  },
-  createdAt: {
-    type: Date
-  },
   inApp: {
     type: Boolean
   },

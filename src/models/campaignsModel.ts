@@ -19,9 +19,6 @@ const campaignScheme = new mongoose.Schema({
   sortOrder: {
     type: Number
   },
-  createdAt: {
-    type: Date
-  },
   inApp: {
     type: Boolean
   },

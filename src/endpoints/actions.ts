@@ -128,40 +128,21 @@ export const editCampaign: RequestHandler = async (req, res) => {
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };
 
-//Banners
-export const addBanner: RequestHandler = async (req, res) => {
+//Banner
+export const saveBanner: RequestHandler = async (req, res) => {
   if (!req.auth.valid) {
     res.redirect("/views/panel/login");
     return;
   }
-  const result = await Banner.create({
-    imageUrl: req.body.imageUrl || "",
-    link: req.body.link || "",
-    inApp: req.body.inApp == "on",
-    active: req.body.active == "on"
-  });
-  res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
-};
-
-export const deleteBanner: RequestHandler = async (req, res) => {
-  if (!req.auth.valid) {
-    res.redirect("/views/panel/login");
-    return;
-  }
-  const result = await Banner.findByIdAndDelete(req.body.id || "");
-  res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
-};
-
-export const editBanner: RequestHandler = async (req, res) => {
-  if (!req.auth.valid) {
-    res.redirect("/views/panel/login");
-    return;
-  }
-  const result = await Banner.findByIdAndUpdate(req.body.id || "", {
-    imageUrl: req.body.imageUrl || "",
-    link: req.body.link || "",
-    inApp: req.body.inApp == "on",
-    active: req.body.active == "on"
-  });
+  const result = await Liveevent.findOneAndUpdate(
+    { liveeventId: req.body.id },
+    {
+      active: req.body.active == "on",
+      link: req.body.link || "",
+      imageUrl: req.body.imageUrl || "",
+      inApp: req.body.inApp == "on"
+    },
+    { upsert: true }
+  );
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };

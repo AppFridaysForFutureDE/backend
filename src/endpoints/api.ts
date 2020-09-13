@@ -77,7 +77,7 @@ export const getCampaigns: RequestHandler = async (req, res) => {
         inApp: doc["inApp"],
       }
     })
-    res.status(200).json({ banners: banners, campaigns: campaigns });
+    res.status(200).json({ banner: banners[0], campaigns: campaigns });
   } catch (err) {
     console.error(err);
   }
