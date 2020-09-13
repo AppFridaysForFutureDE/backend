@@ -24,14 +24,10 @@ import { loginView, controlsView } from "../endpoints/views";
 import { webhookTriggered } from "../endpoints/webhook";
 
 export const controlsRoutes = Router();
-export const liveeventRoutes = Router();
-export const ogRoutes = Router();
+export const apiRoutes = Router();
 export const shareRoutes = Router();
-export const strikeRoutes = Router();
-export const campaignRoutes = Router();
 export const webhookRoutes = Router();
 export const viewRoutes = Router();
-export const sloganRoutes = Router();
 
 controlsRoutes.post("/action/populateDB", populateDB);
 controlsRoutes.post("/action/liveevent", saveLiveevent);
@@ -50,17 +46,13 @@ controlsRoutes.post("/campaigns/edit", editCampaign);
 controlsRoutes.post("/campaigns/remove", deleteCampaign);
 
 
-liveeventRoutes.get("/", getLiveevent);
-
-sloganRoutes.get("/", getSlogans);
-
-ogRoutes.get("/", getOGs);
+apiRoutes.get("/liveevent", getLiveevent);
+apiRoutes.get("/strikes", getStrikes);
+apiRoutes.get("/slogans", getSlogans);
+apiRoutes.get("/ogs", getOGs);
+apiRoutes.get("/campaigns", getCampaigns);
 
 shareRoutes.get("/:post", sharePost);
-
-strikeRoutes.get("/", getStrikes);
-
-campaignRoutes.get("/", getCampaigns);
 
 webhookRoutes.post("/", webhookTriggered);
 
