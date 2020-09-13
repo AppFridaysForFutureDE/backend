@@ -96,7 +96,7 @@ export const getCampaigns: RequestHandler = async (req, res) => {
 export const getHomefeed: RequestHandler = async (req, res) => {
   try {
     const bannerSettings = (await BannerSettings.findOne({})) || { campaignBannerIDs: [], feedBannerID: "" };
-    let banner: any = {};
+    let banner: any = { imageUrl: "", link: "", inApp: false };
     if (bannerSettings["feedBannerID"] && bannerSettings["feedBannerID"] != "") {
       banner = await Banner.findOne({ _id: bannerSettings["feedBannerID"] })
     }
