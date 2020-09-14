@@ -15,7 +15,7 @@ import {
   editSlogan,
   addCampaign,
   editCampaign,
-  deleteCampaign, addBanner, deleteBanner, editBanner, addFeedItem, editFeedItem, deleteFeedItem, updateBannerSettings
+  deleteCampaign, addBanner, deleteBanner, editBanner, addFeedItem, editFeedItem, deleteFeedItem, updateBannerSettings, setFeedBanner
 } from "../endpoints/actions";
 import {
   getLiveevent,
@@ -37,7 +37,6 @@ export const viewRoutes = Router();
 
 controlsRoutes.post("/action/populateDB", populateDB);
 controlsRoutes.post("/action/liveevent", saveLiveevent);
-controlsRoutes.post("/action/updateBannerSettings", updateBannerSettings);
 
 controlsRoutes.post("/user/login", login);
 controlsRoutes.post("/user/logout", logout);
@@ -57,6 +56,7 @@ controlsRoutes.post("/campaigns/remove", deleteCampaign);
 controlsRoutes.post("/banner/add", addBanner);
 controlsRoutes.post("/banner/edit", editBanner);
 controlsRoutes.post("/banner/remove", deleteBanner);
+controlsRoutes.post("/banner/setFeedBanner", setFeedBanner);
 
 controlsRoutes.post("/feed/add", addFeedItem);
 controlsRoutes.post("/feed/edit", editFeedItem);

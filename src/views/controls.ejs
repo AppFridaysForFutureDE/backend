@@ -422,7 +422,8 @@
 
                         <!-- imageUrl -->
                         <p class="card-text inputGroup_BannerCard-<%= i %> collapse show">
-                          <img src="<%= banners[i].imageUrl %>" class="card-img-top" alt="Bild konnte nicht geladen werden">
+                          <img src="<%= banners[i].imageUrl %>" class="card-img-top"
+                            alt="Bild konnte nicht geladen werden">
                         </p>
                         <p class="card-text inputGroup_BannerCard-<%= i %> collapse">
                           <input type="text" class="form-control" placeholder="Bild-URL" name="imageUrl"
@@ -445,8 +446,8 @@
                           <% } %>
                         </p>
                         <p class="card-text inputGroup_BannerCard-<%= i %> collapse">
-                          <input type="checkbox" id="campaignBannerCheck" name="campaignBanner" value="on" <% if (banners[i].campaignBanner) { %> checked
-                            <% } %>>
+                          <input type="checkbox" id="campaignBannerCheck" name="campaignBanner" value="on"
+                            <% if (banners[i].campaignBanner) { %> checked <% } %>>
                           <label for="campaignBannerCheck">Banner für Kampagnenseite</label>
                         </p>
 
@@ -469,13 +470,17 @@
 
                         <br><br>
 
-                        <input class="btn btn-primary btn-sm mb-1 inputGroup_BannerCard-<%= i %> collapse"
-                          type="submit" value="Speichern">
+                        <input class="btn btn-primary btn-sm mb-1 inputGroup_BannerCard-<%= i %> collapse" type="submit"
+                          value="Speichern">
                       </form>
                       <button class="btn btn-primary btn-sm mb-1 inputGroup_BannerCard-<%= i %> collapse"
                         data-toggle="collapse" href=".inputGroup_BannerCard-<%= i %>">Abbrechen</button>
                       <button class="btn btn-primary btn-sm mb-1 inputGroup_BannerCard-<%= i %> collapse show"
                         data-toggle="collapse" href=".inputGroup_BannerCard-<%= i %>">Bearbeiten</button><br>
+                      <form action="/admin/controls/banner/setFeedBanner" method="post" style="display: inline;">
+                        <input type="hidden" name="id" value="<%= banners[i]._id %>">
+                        <input type="submit" value="Als Feed-Banner festlegen" class="btn btn-primary btn-sm">
+                      </form>
                       <form action="/admin/controls/banner/remove" method="post" style="display: inline;">
                         <input type="hidden" name="id" value="<%= banners[i]._id %>">
                         <input type="submit" value="Entfernen" class="btn btn-primary btn-sm">
@@ -494,7 +499,7 @@
                         <p class="card-text">
                           <input type="text" class="form-control" placeholder="Bild-URL" name="imageUrl" value="">
                         </p>
-                        
+
                         <!-- link -->
                         <p class="card-text">
                           <input type="text" class="form-control" placeholder="Link" name="link" value="">
@@ -502,7 +507,7 @@
 
                         <!-- campaignbanner -->
                         <p class="card-text">
-                          <input type="checkbox" id="campaignBannerCheckAdd" name="campaignBanner" value="on" >
+                          <input type="checkbox" id="campaignBannerCheckAdd" name="campaignBanner" value="on">
                           <label for="campaignBannerCheckAdd">Banner für Kampagnenseite</label>
                         </p>
 
@@ -520,7 +525,7 @@
                   </div>
                 </div>
               </div>
-            </div> 
+            </div>
 
             <br><br>
             <h3>
@@ -557,7 +562,8 @@
 
                         <!-- imageUrl -->
                         <p class="card-text inputGroup_FeedCard-<%= i %> collapse show">
-                          <img src="<%= feed[i].imageUrl %>" class="card-img-top" alt="Bild konnte nicht geladen werden">
+                          <img src="<%= feed[i].imageUrl %>" class="card-img-top"
+                            alt="Bild konnte nicht geladen werden">
                         </p>
                         <p class="card-text inputGroup_FeedCard-<%= i %> collapse">
                           <input type="text" class="form-control" placeholder="Bild-URL" name="imageUrl"
@@ -603,16 +609,16 @@
                           <input type="radio" id="inApp" name="inApp" value="on" <% if (feed[i].inApp) { %> checked
                             <% } %>>
                           <label for="active">In der App</label>
-                          <input type="radio" id="NotinApp" name="inApp" value="off" <% if (!feed[i].inApp) { %>
-                            checked <% } %>>
+                          <input type="radio" id="NotinApp" name="inApp" value="off" <% if (!feed[i].inApp) { %> checked
+                            <% } %>>
                           <label for="inactive">Nicht in der App</label>
                         </p>
 
 
                         <br><br>
 
-                        <input class="btn btn-primary btn-sm mb-1 inputGroup_FeedCard-<%= i %> collapse"
-                          type="submit" value="Speichern">
+                        <input class="btn btn-primary btn-sm mb-1 inputGroup_FeedCard-<%= i %> collapse" type="submit"
+                          value="Speichern">
                       </form>
                       <button class="btn btn-primary btn-sm mb-1 inputGroup_FeedCard-<%= i %> collapse"
                         data-toggle="collapse" href=".inputGroup_FeedCard-<%= i %>">Abbrechen</button>
@@ -666,7 +672,7 @@
                   </div>
                 </div>
               </div>
-            </div>          
+            </div>
 
             <br><br>
             <h3>
