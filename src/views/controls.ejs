@@ -557,7 +557,7 @@
 
                         <!-- imageUrl -->
                         <p class="card-text inputGroup_FeedCard-<%= i %> collapse show">
-                          <b>Bild-Url:</b> <a href="<%= feed[i].imageUrl %>"><%= feed[i].imageUrl %></a>
+                          <img src="<%= feed[i].imageUrl %>" class="card-img-top" alt="Bild konnte nicht geladen werden">
                         </p>
                         <p class="card-text inputGroup_FeedCard-<%= i %> collapse">
                           <input type="text" class="form-control" placeholder="Bild-URL" name="imageUrl"
@@ -702,11 +702,9 @@
                         <input type="hidden" name="id" value="<%= campaigns[i]._id%>">
 
                         <!-- name -->
-                        <p class="card-text inputGroup_CampaignCard-<%= i %> collapse show">
-                        <h4>
+                        <h5 class="card-title inputGroup_CampaignCard-<%= i %> collapse show">
                           <%= campaigns[i].name %>
-                        </h4>
-                        </p>
+                        </h5>
                         <p class="card-text inputGroup_CampaignCard-<%= i %> collapse">
                           <input type="text" class="form-control" placeholder="Name" name="name"
                             value="<%= campaigns[i].name %>">
