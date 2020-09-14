@@ -92,13 +92,10 @@ export const getCampaigns: RequestHandler = async (req, res) => {
 export const getHomefeed: RequestHandler = async (req, res) => {
   try {
     const bannerSettings = (await BannerSettings.findOne({})) || { feedBannerID: "" };
-    console.log(bannerSettings)
     let banner: any = { imageUrl: "", link: "", inApp: false };
     if (bannerSettings["feedBannerID"] && bannerSettings["feedBannerID"] != "") {
-      console.log("loading banner from db")
       banner = await Banner.findOne({ _id: bannerSettings["feedBannerID"] })
     }
-    console.log(banner)
     let items = await feedItem.find({});
     res.status(200).json({ banner: banner, feed: items });
   } catch (err) {

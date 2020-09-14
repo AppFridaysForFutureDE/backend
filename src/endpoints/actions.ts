@@ -171,7 +171,6 @@ export const setFeedBanner: RequestHandler = async (req, res) => {
     res.redirect("/views/panel/login");
     return;
   }
-  console.log(req.body.feedBannerID)
   const result = await BannerSettings.findOneAndUpdate(
     { },
     {
@@ -179,7 +178,6 @@ export const setFeedBanner: RequestHandler = async (req, res) => {
     },
     { upsert: true }
   );
-  console.log(result)
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };
 

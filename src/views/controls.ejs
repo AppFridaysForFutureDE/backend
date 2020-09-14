@@ -478,11 +478,11 @@
                       <button class="btn btn-primary btn-sm mb-1 inputGroup_BannerCard-<%= i %> collapse show"
                         data-toggle="collapse" href=".inputGroup_BannerCard-<%= i %>">Bearbeiten</button><br>
                       <form action="/admin/controls/banner/setFeedBanner" method="post" style="display: inline;">
-                        <input type="hidden" name="id" value="<%= banners[i]._id %>">
+                        <input type="hidden" name="feedBannerID" value="<%= banners[i]._id %>">
                         <input type="submit" value="Als Feed-Banner festlegen" class="btn btn-primary btn-sm mb-1">
                       </form><br>
                       <form action="/admin/controls/banner/remove" method="post" style="display: inline;">
-                        <input type="hidden" name="feedBannerID" value="<%= banners[i]._id %>">
+                        <input type="hidden" name="id" value="<%= banners[i]._id %>">
                         <input type="submit" value="Entfernen" class="btn btn-primary btn-sm">
                       </form>
                     </div>
