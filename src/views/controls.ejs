@@ -502,15 +502,16 @@
 
                         <!-- campaignbanner -->
                         <p class="card-text">
-                          <input type="checkbox" class="form-control" name="link" value="on">
+                          <input id="campaignBannerAdd" type="checkbox" class="form-control" name="link" value="on">
+                          <label for="campaignBannerAdd">Banner für Kampagnenseite</label>
                         </p>
 
                         <!-- inApp -->
                         <p class="card-text">
                           <input type="radio" id="inApp" name="inApp" value="on" checked>
-                          <label for="active">inApp</label>
+                          <label for="active">In der App</label>
                           <input type="radio" id="NotinApp" name="inApp" value="off">
-                          <label for="inactive">nicht inApp</label>
+                          <label for="inactive">Nicht in der App</label>
                         </p>
 
                         <input type="submit" value="Hinzufügen" class="form-control btn-primary">
@@ -601,10 +602,10 @@
                         <p class="card-text inputGroup_FeedCard-<%= i %> collapse">
                           <input type="radio" id="inApp" name="inApp" value="on" <% if (feed[i].inApp) { %> checked
                             <% } %>>
-                          <label for="active">Ja</label>
+                          <label for="active">In der App</label>
                           <input type="radio" id="NotinApp" name="inApp" value="off" <% if (!feed[i].inApp) { %>
                             checked <% } %>>
-                          <label for="inactive">Nein</label>
+                          <label for="inactive">Nicht in der App</label>
                         </p>
 
 
@@ -654,9 +655,9 @@
                         <!-- inApp -->
                         <p class="card-text">
                           <input type="radio" id="inApp" name="inApp" value="on" checked>
-                          <label for="active">inApp</label>
+                          <label for="active">In der App</label>
                           <input type="radio" id="NotinApp" name="inApp" value="off">
-                          <label for="inactive">nicht inApp</label>
+                          <label for="inactive">Nicht in der App</label>
                         </p>
 
                         <input type="submit" value="Hinzufügen" class="form-control btn-primary">
@@ -758,10 +759,10 @@
                         <p class="card-text inputGroup_CampaignCard-<%= i %> collapse">
                           <input type="radio" id="inApp" name="inApp" value="on" <% if (campaigns[i].inApp) { %> checked
                             <% } %>>
-                          <label for="active">Ja</label>
+                          <label for="active">In der App</label>
                           <input type="radio" id="NotinApp" name="inApp" value="off" <% if (!campaigns[i].inApp) { %>
                             checked <% } %>>
-                          <label for="inactive">Nein</label>
+                          <label for="inactive">Nicht in der App</label>
                         </p>
 
                         <br><br>
@@ -815,9 +816,9 @@
                         <!-- inApp -->
                         <p class="card-text">
                           <input type="radio" id="inApp" name="inApp" value="on" checked>
-                          <label for="active">inApp</label>
+                          <label for="active">In der App</label>
                           <input type="radio" id="NotinApp" name="inApp" value="off">
-                          <label for="inactive">nicht inApp</label>
+                          <label for="inactive">Nicht in der App</label>
                         </p>
 
                         <input type="submit" value="Hinzufügen" class="form-control btn-primary">
