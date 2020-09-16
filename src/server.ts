@@ -3,6 +3,7 @@ import { app } from "./express/app";
 import { startCronJobs } from "./cron";
 import dotenv from "dotenv-safe";
 import { User } from "./models/userModel";
+import { getOGContent } from "./data/ogcontent";
 
 console.log("Loading environment variables");
 dotenv.config({
@@ -30,6 +31,8 @@ mongoose
     }
   );
 
+  getOGContent();
+
 console.log("Creating user from env");
 if (process.env.FFF_USER) {
   User.findOneAndUpdate(
@@ -38,7 +41,7 @@ if (process.env.FFF_USER) {
       admin: true
     },
     { upsert: true },
-    function(err, doc) {
+    function (err, doc) {
       if (err) {
         console.log("error while creating user from env");
         console.log(err, doc);
