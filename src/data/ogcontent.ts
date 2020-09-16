@@ -3,6 +3,7 @@ import { SpreadsheetAdmin } from "../services/SpreadsheetAdmin";
 
 export async function getOGContent(): Promise<void> {
     let ogContentAdmin = new SpreadsheetAdmin(process.env.OGCONTENT_SPREADSHEET_ID || "")
+    await ogContentAdmin.loadDocumentInfo();
     let rows = await ogContentAdmin.getRows();
     rows.forEach(row => {
         OG.findOneAndUpdate({ name: row["Deine OG"]}, {
