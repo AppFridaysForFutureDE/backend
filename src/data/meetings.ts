@@ -1,7 +1,6 @@
 import { Strike } from "../models/strikesModel";
 import { OG } from "../models/ogsModel";
 import Utility from "../Utility";
-import { GoogleSpreadsheet } from "google-spreadsheet";
 
 // TODO: Doppelte Einträge ignorieren
 export async function saveAsStrike(
@@ -53,15 +52,6 @@ export async function saveAsStrike(
     { upsert: true }
   );
 }
-
-export const getRows = async (): Promise<string[]> => {
-  const doc = new GoogleSpreadsheet(process.env.PLENUM_SPREADSHEET_ID || "");
-  doc.useApiKey(process.env.GOOGLE_API_KEY);
-  await doc.loadInfo(); // loads document properties and worksheets
-  const sheet = doc.sheetsByIndex[0];
-  const rows = await sheet.getRows();
-  return rows;
-};
 
 export async function retrieveMeetings(): Promise<void> {
   let rows: string[];
