@@ -52,6 +52,9 @@ const ogScheme = new mongoose.Schema({
   infoText: {
     type: String
   },
+  ogContentEndDate: {
+    type: String
+  },
   retrievedAt: {
     type: Date
   }
