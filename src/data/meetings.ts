@@ -1,7 +1,7 @@
 import { Strike } from "../models/strikesModel";
 import { OG } from "../models/ogsModel";
 import Utility from "../Utility";
-import { SpreadsheetAdmin } from "../services/GoogleSpreadsheets";
+import { SpreadsheetAdmin } from "../services/SpreadsheetAdmin";
 
 // TODO: Doppelte Einträge ignorieren
 export async function saveAsStrike(

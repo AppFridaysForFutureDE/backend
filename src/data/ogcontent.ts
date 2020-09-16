@@ -1,5 +1,5 @@
 import { OG } from "../models/ogsModel";
-import { SpreadsheetAdmin } from "../services/GoogleSpreadsheets";
+import { SpreadsheetAdmin } from "../services/SpreadsheetAdmin";
 
 export async function getOGContent(): Promise<void> {
     let ogContentAdmin = new SpreadsheetAdmin(process.env.OGCONTENT_SPREADSHEET_ID || "")
