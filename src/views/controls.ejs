@@ -419,6 +419,10 @@
                     <div class="card-body">
                       <form action="/admin/controls/banner/edit" method="post" style="display: inline;">
                         <input type="hidden" name="id" value="<%= banners[i]._id%>">
+                        <% if (bannerSettings.feedBannerID == banners[i]._id) { %>
+                          <span class="badge badge-secondary">Feed-Banner</span>
+                          <br>
+                        <% } %>
 
                         <!-- imageUrl -->
                         <p class="card-text inputGroup_BannerCard-<%= i %> collapse show">
