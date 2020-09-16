@@ -1,6 +1,7 @@
 import { Strike } from "../models/strikesModel";
 import { OG } from "../models/ogsModel";
 import Utility from "../Utility";
+import { getRows } from "../services/GoogleSpreadsheets";
 
 // TODO: Doppelte Einträge ignorieren
 export async function saveAsStrike(
@@ -56,7 +57,7 @@ export async function saveAsStrike(
 export async function retrieveMeetings(): Promise<void> {
   let rows: string[];
   try {
-    rows = await getRows();
+    rows = await getRows(process.env.PLENUM_SPREADSHEET_ID || "");
   } catch (e) {
     console.log("Error while retrieving plenum doc");
     console.log(e);
