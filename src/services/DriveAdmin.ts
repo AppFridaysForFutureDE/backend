@@ -11,39 +11,19 @@ export class DriveAdmin {
     // time.
     private TOKEN_PATH = '/var/google-auth/token.json';
 
-    private authDone = false;
-
-    private static instance: DriveAdmin;
-
-    public static getInstance(): DriveAdmin {
-        if (this.instance) {
-            return this.instance;
-        }
-        this.instance = new DriveAdmin();
-        return this.instance;
-    }
-
-    public async loadImageById(id: string): Promise<boolean> {
-        if (!this.authDone) {
-            await this.init()
-        }
-        console.log("AUTHORIZED GOOGLE DRIVE API");
-        return true;
-    }
-
-    /**
-     * Starts OAuth2-Authorization
-     */
-    private async init() {
+    public async loadImageById(id: string): Promise<void> {
         // Load client secrets from a local file.
         fs.readFile('/var/google-auth/credentials.json', (err, content) => {
             if (err) return console.log('Error loading client secret file:', err);
             // Authorize a client with credentials, then call the Google Drive API.
             this.authorize(JSON.parse(content), () => {
-                this.authDone = true;
+                console.log("AUTHROIZED GOOGLE DRIVE API");
+                //do call here
             });
         });
     }
+
+   
 
     /**
      * Create an OAuth2 client with the given credentials, and then execute the
