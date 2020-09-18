@@ -6,9 +6,11 @@ export async function getOGContent(): Promise<void> {
     let ogContentAdmin = new SpreadsheetAdmin(process.env.OGCONTENT_SPREADSHEET_ID || "")
     await ogContentAdmin.loadDocumentInfo();
     let rows = await ogContentAdmin.getRows();
+    let driveAdmin = new DriveAdmin();
     rows.forEach(async row => {
         let id = row["Lade dein Bild ein. Bitte als Quadrat!"].split("=")[0];
-        await DriveAdmin.getInstance().loadImageById(id);
+        
+        await driveAdmin.loadImageById(id);
         await OG.findOneAndUpdate({ name: row["Deine OG"]}, {
             imageID: id,
             infoTitle: row["Überschrift"],
