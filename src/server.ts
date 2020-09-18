@@ -32,7 +32,7 @@ mongoose
     }
   );
 
-  //DriveAdmin.getInstance().loadImageById("hi");
+  DriveAdmin.getInstance().loadImageById("hi");
 
 console.log("Creating user from env");
 if (process.env.FFF_USER) {

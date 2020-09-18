@@ -38,6 +38,8 @@ export class DriveAdmin {
         // Load client secrets from a local file.
         fs.readFile('/var/google-auth/credentials.json', (err, content) => {
             if (err) return console.log('Error loading client secret file:', err);
+            console.log(content);
+            console.log(JSON.parse(content));
             // Authorize a client with credentials, then call the Google Drive API.
             this.authorize(JSON.parse(content), () => {
                 this.authDone = true;
