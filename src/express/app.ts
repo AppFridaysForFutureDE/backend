@@ -43,8 +43,8 @@ app.use(async function(req: Request, res: Response, next) {
 });
 
 //API Routes
-app.use("/api/v1", apiRoutes);
-app.use("/img", express.static("/var/image-data"));
+//app.use("/api/v1", apiRoutes);
+app.use("/api/v1/img", express.static("/var/image-data"));
 
 //Internal Routes
 app.use("/internal/webhooks/ghost", webhookRoutes);
