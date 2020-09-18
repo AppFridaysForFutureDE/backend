@@ -6,8 +6,6 @@ export async function getOGContent(): Promise<void> {
     await ogContentAdmin.loadDocumentInfo();
     let rows = await ogContentAdmin.getRows();
     rows.forEach(async row => {
-        console.log("saving row:");
-        console.log(row["Deine OG"]);
         await OG.findOneAndUpdate({ name: row["Deine OG"]}, {
             imageLink: row["Lade dein Bild ein. Bitte als Quadrat!"],
             infoTitle: row["Überschrift"],

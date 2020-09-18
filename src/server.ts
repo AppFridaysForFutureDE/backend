@@ -31,8 +31,6 @@ mongoose
     }
   );
 
-  getOGContent();
-
 console.log("Creating user from env");
 if (process.env.FFF_USER) {
   User.findOneAndUpdate(
