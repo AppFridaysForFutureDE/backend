@@ -23,13 +23,7 @@ export default class FCMAdmin {
     }
   }
 
-  static getInstance(): FCMAdmin {
-    if (this.instance) {
-      return this.instance;
-    }
-    this.instance = new FCMAdmin();
-    return this.instance;
-  }
+  c
 
   public getStatus(): boolean {
     return this.firebaseReady;

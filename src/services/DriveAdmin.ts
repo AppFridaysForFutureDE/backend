@@ -13,15 +13,14 @@ export class DriveAdmin {
 
     private authDone = false;
 
-    public async init() {
-        // Load client secrets from a local file.
-        fs.readFile('/var/google-auth/credentials.json', (err, content) => {
-            if (err) return console.log('Error loading client secret file:', err);
-            // Authorize a client with credentials, then call the Google Drive API.
-            this.authorize(JSON.parse(content), () => {
-                this.authDone = true;
-            });
-        });
+    private static instance: DriveAdmin;
+
+    public static getInstance(): DriveAdmin {
+        if (this.instance) {
+            return this.instance;
+        }
+        this.instance = new DriveAdmin();
+        return this.instance;
     }
 
     public async loadImageById(id: string): Promise<boolean> {
@@ -32,7 +31,19 @@ export class DriveAdmin {
         return true;
     }
 
-
+    /**
+     * Starts OAuth2-Authorization
+     */
+    private async init() {
+        // Load client secrets from a local file.
+        fs.readFile('/var/google-auth/credentials.json', (err, content) => {
+            if (err) return console.log('Error loading client secret file:', err);
+            // Authorize a client with credentials, then call the Google Drive API.
+            this.authorize(JSON.parse(content), () => {
+                this.authDone = true;
+            });
+        });
+    }
 
     /**
      * Create an OAuth2 client with the given credentials, and then execute the
