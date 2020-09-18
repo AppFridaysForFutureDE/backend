@@ -1,6 +1,6 @@
 const fs = require('fs');
 const readline = require('readline');
-const { google } = require('googleapis');
+const { google, drive } = require('googleapis');
 
 export class DriveAdmin {
 
@@ -11,19 +11,22 @@ export class DriveAdmin {
     // time.
     private TOKEN_PATH = '/var/google-auth/token.json';
 
-    public async loadImageById(id: string): Promise<void> {
+    public async loadFileById(id: string): Promise<void> {
         // Load client secrets from a local file.
         fs.readFile('/var/google-auth/credentials.json', (err, content) => {
             if (err) return console.log('Error loading client secret file:', err);
             // Authorize a client with credentials, then call the Google Drive API.
             this.authorize(JSON.parse(content), () => {
-                console.log("AUTHROIZED GOOGLE DRIVE API");
-                //do call here
+                let dest = fs.createWriteStream(`/var/image-data/${id}`);
+                drive.files.get({
+                    fileId: id,
+                    alt: 'media'
+                })
             });
         });
     }
 
-   
+
 
     /**
      * Create an OAuth2 client with the given credentials, and then execute the
