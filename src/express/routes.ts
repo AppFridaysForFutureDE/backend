@@ -1,4 +1,4 @@
-import { Router } from "express";
+import express, { Router } from "express";
 import {
   login,
   logout,
@@ -68,6 +68,7 @@ apiRoutes.get("/slogans", getSlogans);
 apiRoutes.get("/ogs", getOGs);
 apiRoutes.get("/home", getHomefeed);
 apiRoutes.get("/campaigns", getCampaigns)
+apiRoutes.use("/img", express.static("/var/image-data"));
 
 shareRoutes.get("/:post", sharePost);
 
