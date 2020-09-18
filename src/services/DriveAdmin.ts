@@ -9,13 +9,13 @@ export class DriveAdmin {
     // The file token.json stores the user's access and refresh tokens, and is
     // created automatically when the authorization flow completes for the first
     // time.
-    private TOKEN_PATH = 'token.json';
+    private TOKEN_PATH = '/var/google-auth/token.json';
 
     private authDone = false;
 
     public async init() {
         // Load client secrets from a local file.
-        fs.readFile('credentials.json', (err, content) => {
+        fs.readFile('/var/google-auth/credentials.json', (err, content) => {
             if (err) return console.log('Error loading client secret file:', err);
             // Authorize a client with credentials, then call the Google Drive API.
             this.authorize(JSON.parse(content), () => {
