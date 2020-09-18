@@ -5,7 +5,7 @@ export async function getOGContent(): Promise<void> {
     let ogContentAdmin = new SpreadsheetAdmin(process.env.OGCONTENT_SPREADSHEET_ID || "")
     await ogContentAdmin.loadDocumentInfo();
     let rows = await ogContentAdmin.getRows();
-    rows.forEach(row => {
+    rows.forEach(async row => {
         console.log("saving row:");
         console.log(row["Deine OG"]);
         console.log(await OG.findOne({name: row["Deine OG"]}))
