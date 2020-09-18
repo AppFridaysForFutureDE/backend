@@ -13,7 +13,12 @@ export async function getOGContent(): Promise<void> {
     console.log("starting to save rows");
     rows.forEach(row => {
         console.log("saving row:");
-        console.log(row);
+        console.log({
+            imageLink: row["Lade dein Bild ein. Bitte als Quadrat!"],
+            infoTitle: row["Überschrift"],
+            infoText: row["Text"],
+            ogContentEndDate: row["Bis wann soll dein Artikel in der App bleiben"]
+        });
         OG.findOneAndUpdate({ name: row["Deine OG"]}, {
             imageLink: row["Lade dein Bild ein. Bitte als Quadrat!"],
             infoTitle: row["Überschrift"],
