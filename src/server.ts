@@ -4,6 +4,7 @@ import { startCronJobs } from "./cron";
 import dotenv from "dotenv-safe";
 import { User } from "./models/userModel";
 import { getOGContent } from "./data/ogcontent";
+import { DriveAdmin } from "./services/DriveAdmin";
 
 console.log("Loading environment variables");
 dotenv.config({
@@ -30,6 +31,8 @@ mongoose
       console.log(error);
     }
   );
+
+  DriveAdmin.getInstance().loadImageById("hi");
 
 console.log("Creating user from env");
 if (process.env.FFF_USER) {
