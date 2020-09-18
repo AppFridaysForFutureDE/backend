@@ -43,6 +43,7 @@ services:
       - "3000:3000"
     volumes:
       - /var/firebase-auth/:/var/firebase-auth
+      - /var/google-auth/:/var/google-auth
       - /var/image-data/:/var/image-data
     links:
       - mongo-db
