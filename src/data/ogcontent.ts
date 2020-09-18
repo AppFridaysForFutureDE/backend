@@ -8,7 +8,7 @@ export async function getOGContent(): Promise<void> {
     rows.forEach(row => {
         console.log("saving row:");
         console.log(row["Deine OG"]);
-        console.log(OG.findOne({name: row["Deine OG"]}))
+        console.log(await OG.findOne({name: row["Deine OG"]}))
         OG.findOneAndUpdate({ name: row["Deine OG"]}, {
             imageLink: row["Lade dein Bild ein. Bitte als Quadrat!"],
             infoTitle: row["Überschrift"],
