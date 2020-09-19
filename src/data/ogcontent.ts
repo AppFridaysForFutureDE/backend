@@ -9,7 +9,7 @@ export async function getOGContent(): Promise<void> {
     let driveAdmin = new DriveAdmin();
     rows.forEach(async row => {
         let id = row["Lade dein Bild ein. Bitte als Quadrat!"].split("=")[0];
-        await driveAdmin.loadImageById(id);
+        await driveAdmin.loadFileById(id);
         await OG.findOneAndUpdate({ name: row["Deine OG"]}, {
             imageID: id,
             infoTitle: row["Überschrift"],
