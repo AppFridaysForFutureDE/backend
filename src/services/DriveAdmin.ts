@@ -19,10 +19,8 @@ export class DriveAdmin {
 
     const drive = await google.drive({ version: "v3", auth });
 
-
-    /* const fileId = '1EkgdLY3T-_9hWml0VssdDWQZLEc8qqpMB77Nvsx6khA'; */
-    /* const destPath = path.join(os.tmpdir(), 'important.pdf'); */
-    const filePath = `/var/image-data/${fileId}`
+    // TODO: add image type to filename?
+    const filePath = `/var/image-data/${fileId}`;
 
     if (fs.existsSync(filePath)) {
       console.log(`image already downloaded ${fileId}`);
@@ -30,18 +28,18 @@ export class DriveAdmin {
     }
 
     const dest = fs.createWriteStream(filePath);
-    console.log('dest')
-    console.log(dest)
+    console.log("dest");
+    console.log(dest);
     const res = await drive.files.get(
-      {fileId, alt: 'media'}, //mimeType: 'image/jpg'},
-      {responseType: 'stream'}
+      { fileId, alt: "media" }, //mimeType: 'image/jpg'},
+      { responseType: "stream" }
     );
     await new Promise((resolve, reject) => {
       res.data
-      .on('error', reject)
-      .pipe(dest)
-      .on('error', reject)
-      .on('finish', resolve);
+        .on("error", reject)
+        .pipe(dest)
+        .on("error", reject)
+        .on("finish", resolve);
     });
   }
 }
