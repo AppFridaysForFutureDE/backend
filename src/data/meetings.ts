@@ -55,9 +55,11 @@ export async function saveAsStrike(
 }
 
 export async function retrieveMeetings(): Promise<void> {
-  let meetingAdmin = new SpreadsheetAdmin(process.env.PLENUM_SPREADSHEET_ID || "")
+  const meetingAdmin = new SpreadsheetAdmin(
+    process.env.PLENUM_SPREADSHEET_ID || ""
+  );
   await meetingAdmin.loadDocumentInfo();
-  let rows = await meetingAdmin.getRows();
+  const rows = await meetingAdmin.getRows();
   rows.forEach(row => {
     saveAsStrike(
       row["Zeitstempel"],

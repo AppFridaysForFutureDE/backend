@@ -98,7 +98,7 @@ export const addCampaign: RequestHandler = async (req, res) => {
     text: req.body.text || "",
     cta: req.body.cta || "",
     link: req.body.link || "",
-    inApp: req.body.inApp == "on",
+    inApp: req.body.inApp == "on"
   });
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };
@@ -123,7 +123,7 @@ export const editCampaign: RequestHandler = async (req, res) => {
     text: req.body.text || "",
     cta: req.body.cta || "",
     link: req.body.link || "",
-    inApp: req.body.inApp == "on",
+    inApp: req.body.inApp == "on"
   });
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };
@@ -172,7 +172,7 @@ export const setFeedBanner: RequestHandler = async (req, res) => {
     return;
   }
   const result = await BannerSettings.findOneAndUpdate(
-    { },
+    {},
     {
       feedBannerID: req.body.feedBannerID || ""
     },

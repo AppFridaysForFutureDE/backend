@@ -50,7 +50,7 @@ const jobs = [
     desc: "Get OG Contents",
     tab: "35 * * * *",
     job: (): void => {
-      getOGContent()
+      getOGContent();
     }
   }
 ];

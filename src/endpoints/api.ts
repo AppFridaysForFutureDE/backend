@@ -12,12 +12,12 @@ import { feedItem } from "../models/feedItemModel";
 export const getOGs: RequestHandler = (req, res) => {
   const ogId = req.query.ogId;
   if (ogId == "" || ogId == null) {
-    OG.find({}, function (err: Error, ogs) {
+    OG.find({}, function(err: Error, ogs) {
       if (err) return console.error(err);
       res.status(200).json({ count: ogs.length, ogs: ogs });
     });
   } else {
-    OG.find({ ogId: ogId }, function (err: Error, ogs) {
+    OG.find({ ogId: ogId }, function(err: Error, ogs) {
       if (err) return console.error(err);
       res.status(200).json({ count: ogs.length, ogs: ogs });
     });
@@ -29,7 +29,7 @@ export const getLiveevent: RequestHandler = (req, res) => {
   if (liveeventId == "" || liveeventId == null) {
     liveeventId = 0;
   }
-  Liveevent.findOne({ liveeventId: liveeventId }, function (err: Error, event) {
+  Liveevent.findOne({ liveeventId: liveeventId }, function(err: Error, event) {
     if (err) return console.error(err);
     res.status(200).json({ liveeventId: liveeventId, liveevent: event });
   });
@@ -49,7 +49,7 @@ export const getStrikes: RequestHandler = (req, res) => {
   } else {
     Strike.find(
       { ogId: ogId, date: { $gt: minDate }, strikeId: { $ne: "866" } },
-      function (err: Error, strikes) {
+      function(err: Error, strikes) {
         if (err) return console.error(err);
         res.status(200).json({ ogId: ogId, strikes: strikes });
       }
@@ -73,7 +73,7 @@ export const getSlogans: RequestHandler = async (req, res) => {
 export const getCampaigns: RequestHandler = async (req, res) => {
   try {
     const banners = await Banner.find({ campaignBanner: true });
-    let rawCampaigns = await Campaign.find({});
+    const rawCampaigns = await Campaign.find({});
     const campaigns = rawCampaigns.map(doc => {
       return {
         icon: doc["icon"],
@@ -91,12 +91,17 @@ export const getCampaigns: RequestHandler = async (req, res) => {
 
 export const getHomefeed: RequestHandler = async (req, res) => {
   try {
-    const bannerSettings = (await BannerSettings.findOne({})) || { feedBannerID: "" };
+    const bannerSettings = (await BannerSettings.findOne({})) || {
+      feedBannerID: ""
+    };
     let banner: any = { imageUrl: "", link: "", inApp: false };
-    if (bannerSettings["feedBannerID"] && bannerSettings["feedBannerID"] != "") {
-      banner = await Banner.findOne({ _id: bannerSettings["feedBannerID"] })
+    if (
+      bannerSettings["feedBannerID"] &&
+      bannerSettings["feedBannerID"] != ""
+    ) {
+      banner = await Banner.findOne({ _id: bannerSettings["feedBannerID"] });
     }
-    let items = await feedItem.find({});
+    const items = await feedItem.find({});
     res.status(200).json({ banner: banner, feed: items });
   } catch (err) {
     return console.error(err);
