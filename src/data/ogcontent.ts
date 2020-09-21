@@ -19,7 +19,8 @@ export async function getOGContent(): Promise<void> {
     await OG.findOneAndUpdate(
       { name: row["Deine OG"] },
       {
-        imageLink: `${process.env.WEBSITE_URL}/img/${filename}`,
+        // TODO: make address env dependent
+        imageLink: `https://app.ffutu.re/api/v1/img/${id}`,
         infoTitle: row["Überschrift"],
         infoText: row["Text"],
         ogContentEndDate: row["Bis wann soll dein Artikel in der App bleiben"]

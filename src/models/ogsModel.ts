@@ -43,7 +43,7 @@ const ogScheme = new mongoose.Schema({
   other: {
     type: String
   },
-  imageID: {
+  imageLink: {
     type: String
   },
   infoTitle: {
