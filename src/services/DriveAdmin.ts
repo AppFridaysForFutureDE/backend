@@ -1,11 +1,10 @@
-const fs = require("fs");
-const readline = require("readline");
-const { google, drive } = require("googleapis");
+import * as fs from "fs";
+import { google } from "googleapis";
 
 export class DriveAdmin {
   private drive;
 
-  public async initConnection() {
+  public async initConnection(): Promise<void> {
     try {
       const scopes = ["https://www.googleapis.com/auth/drive"];
 
@@ -14,7 +13,7 @@ export class DriveAdmin {
 
       const auth = new google.auth.JWT(
         credentials.client_email,
-        null,
+        undefined,
         credentials.private_key,
         scopes
       );
@@ -26,10 +25,15 @@ export class DriveAdmin {
     }
   }
 
-  public async loadFileById(fileId: string): Promise<void> {
+  public async getFileType(fileId: string): Promise<string> {
+    const res = await this.drive.files.get({ fileId });
+    return res.data.mimeType.split("/")[1];
+  }
+
+  public async loadFile(fileId: string, fileName: string): Promise<void> {
     // TODO: add image type to filename?
 
-    const filePath = `/var/image-data/${fileId}`;
+    const filePath = `/var/image-data/${fileName}`;
 
     if (fs.existsSync(filePath)) {
       console.log(`image already downloaded ${fileId}`);
