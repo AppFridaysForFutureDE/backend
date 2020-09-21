@@ -3,23 +3,32 @@ const readline = require("readline");
 const { google, drive } = require("googleapis");
 
 export class DriveAdmin {
+  private drive;
+
+  public async initConnection() {
+    try {
+      const scopes = ["https://www.googleapis.com/auth/drive"];
+
+      const credentials = require(process.env.GOOGLE_APPLICATION_CREDENTIALS ||
+        "");
+
+      const auth = new google.auth.JWT(
+        credentials.client_email,
+        null,
+        credentials.private_key,
+        scopes
+      );
+
+      this.drive = await google.drive({ version: "v3", auth });
+    } catch (e) {
+      console.log("Could not access google drive api");
+      console.log(e);
+    }
+  }
+
   public async loadFileById(fileId: string): Promise<void> {
-    // TODO: move auth code to initializer
-    const scopes = ["https://www.googleapis.com/auth/drive"];
-
-    const credentials = require(process.env.GOOGLE_APPLICATION_CREDENTIALS ||
-      "");
-
-    const auth = new google.auth.JWT(
-      credentials.client_email,
-      null,
-      credentials.private_key,
-      scopes
-    );
-
-    const drive = await google.drive({ version: "v3", auth });
-
     // TODO: add image type to filename?
+
     const filePath = `/var/image-data/${fileId}`;
 
     if (fs.existsSync(filePath)) {
@@ -27,10 +36,9 @@ export class DriveAdmin {
       return Promise.resolve();
     }
 
+    console.log(`downloading image ${fileId}`);
     const dest = fs.createWriteStream(filePath);
-    console.log("dest");
-    console.log(dest);
-    const res = await drive.files.get(
+    const res = await this.drive.files.get(
       { fileId, alt: "media" }, //mimeType: 'image/jpg'},
       { responseType: "stream" }
     );
