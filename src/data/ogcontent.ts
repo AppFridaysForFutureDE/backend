@@ -20,7 +20,7 @@ export async function getOGContent(): Promise<void> {
       { name: row["Deine OG"] },
       {
         // TODO: make address env dependent
-        imageLink: `https://app.ffutu.re/api/v1/img/${id}`,
+        imageLink: `https://app.fffutu.re/api/v1/img/${id}`,
         infoTitle: row["Überschrift"],
         infoText: row["Text"],
         ogContentEndDate: row["Bis wann soll dein Artikel in der App bleiben"]
