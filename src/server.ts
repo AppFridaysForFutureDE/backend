@@ -26,14 +26,19 @@ mongoose
       app.listen(3000);
 
       console.log("Server up and running");
+
+      console.log("getting og content");
+      await getOGContent();
+      console.log("finished getting og content");
+
+      /* const n = new DriveAdmin(); */
+      /* n.loadImageById("hi"); */
     },
     error => {
       console.log(error);
     }
   );
 
-  let n = new DriveAdmin; 
-  n.loadImageById("hi");
 
 console.log("Creating user from env");
 if (process.env.FFF_USER) {
@@ -43,7 +48,7 @@ if (process.env.FFF_USER) {
       admin: true
     },
     { upsert: true },
-    function (err, doc) {
+    function(err, doc) {
       if (err) {
         console.log("error while creating user from env");
         console.log(err, doc);
