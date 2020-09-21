@@ -3,7 +3,7 @@ const readline = require("readline");
 const { google, drive } = require("googleapis");
 
 export class DriveAdmin {
-  public async loadFileById(id: string): Promise<void> {
+  public async loadFileById(fileId: string): Promise<void> {
     // TODO: move auth code to initializer
     const scopes = ["https://www.googleapis.com/auth/drive"];
 
@@ -17,23 +17,31 @@ export class DriveAdmin {
       scopes
     );
 
-    const drive = google.drive({ version: "v3", auth });
+    const drive = await google.drive({ version: "v3", auth });
 
-    // TODO: return early if file already present
-    const dest = fs.createWriteStream(`/var/image-data/${id}`);
-    drive.files
-      .get({
-        fileId: id,
-        alt: "media"
-      })
-      .on("end", function() {
-        // TODO: Return promise success ?
-        console.log("Done");
-      })
-      .on("error", function(err) {
-        // TODO: Throw error?
-        console.log("Error during download", err);
-      })
-      .pipe(dest);
+
+    /* const fileId = '1EkgdLY3T-_9hWml0VssdDWQZLEc8qqpMB77Nvsx6khA'; */
+    /* const destPath = path.join(os.tmpdir(), 'important.pdf'); */
+    const filePath = `/var/image-data/${fileId}`
+
+    if (fs.existsSync(filePath)) {
+      console.log(`image already downloaded ${fileId}`);
+      return Promise.resolve();
+    }
+
+    const dest = fs.createWriteStream(filePath);
+    console.log('dest')
+    console.log(dest)
+    const res = await drive.files.get(
+      {fileId, alt: 'media'}, //mimeType: 'image/jpg'},
+      {responseType: 'stream'}
+    );
+    await new Promise((resolve, reject) => {
+      res.data
+      .on('error', reject)
+      .pipe(dest)
+      .on('error', reject)
+      .on('finish', resolve);
+    });
   }
 }
