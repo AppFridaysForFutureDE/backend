@@ -31,8 +31,6 @@ export class DriveAdmin {
   }
 
   public async loadFile(fileId: string, fileName: string): Promise<void> {
-    // TODO: add image type to filename?
-
     const filePath = `/var/image-data/${fileName}`;
 
     if (fs.existsSync(filePath)) {

@@ -14,16 +14,11 @@ export async function getOGContent(): Promise<void> {
 
     rows.forEach(async row => {
       const id = row["Lade dein Bild ein. Bitte als Quadrat!"].split("=")[1];
-      console.log(id);
-      // TODO: add image type to filename?
-
       const fileType = await driveAdmin.getFileType(id);
       const fileName = `${id}.${fileType}`;
 
       await driveAdmin.loadFile(id, fileName);
-      console.log(fileName);
 
-      // TODO: error handeling?
       await OG.findOneAndUpdate(
         { name: row["Deine OG"] },
         {
