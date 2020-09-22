@@ -99,7 +99,7 @@ export const getHomefeed: RequestHandler = async (req, res) => {
       bannerSettings["feedBannerID"] &&
       bannerSettings["feedBannerID"] != ""
     ) {
-      banner = await Banner.findOne({ _id: bannerSettings["feedBannerID"] });
+      banner = await Banner.findById(bannerSettings["feedBannerID"]);
     }
     const items = await feedItem.find({});
     res.status(200).json({ banner: banner, feed: items });
