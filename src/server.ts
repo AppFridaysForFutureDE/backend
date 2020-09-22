@@ -3,28 +3,14 @@ import { app } from "./express/app";
 import { startCronJobs } from "./cron";
 import dotenv from "dotenv-safe";
 import { User } from "./models/userModel";
+import { getOGContent } from "./data/ogcontent";
+import { getStrikeImage } from "./data/strikeImage";
+import * as strikeAccess from "./data/strikes";
 
 console.log("Loading environment variables");
 dotenv.config({
   allowEmptyValues: true
 });
-
-console.log("Creating user from env");
-if (process.env.FFF_USER) {
-  User.findOneAndUpdate(
-    { name: process.env.FFF_USER },
-    {
-      admin: true
-    },
-    { upsert: true },
-    function(err, doc) {
-      if (err) {
-        console.log("error while creating user from env");
-        console.log(err, doc);
-      }
-    }
-  );
-}
 
 console.log("Connecting to database");
 mongoose
@@ -41,8 +27,35 @@ mongoose
       app.listen(3000);
 
       console.log("Server up and running");
+
+      console.log("getting og content");
+      await getOGContent();
+
+      console.log("retrieving new strikes for 25 sept");
+      await strikeAccess.retrieveStrikesNew();
+
+      console.log("getting strike images");
+      await getStrikeImage();
+
+      console.log("Creating user from env");
+      if (process.env.FFF_USER) {
+        User.findOneAndUpdate(
+          { name: process.env.FFF_USER },
+          {
+            admin: true
+          },
+          { upsert: true },
+          function(err, doc) {
+            if (err) {
+              console.log("error while creating user from env");
+              console.log(err, doc);
+            }
+          }
+        );
+      }
     },
     error => {
       console.log(error);
     }
   );
+

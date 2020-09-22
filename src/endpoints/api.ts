@@ -2,8 +2,12 @@ import { RequestHandler } from "express";
 import { OG } from "../models/ogsModel";
 import { Liveevent } from "../models/liveeventModel";
 import { Strike } from "../models/strikesModel";
+import { Banner } from "../models/bannersModel";
+import { Campaign } from "../models/campaignsModel";
 import { Slogan } from "../models/sloganModel";
 import Utility from "../Utility";
+import { BannerSettings } from "../models/bannerSettingsModel";
+import { feedItem } from "../models/feedItemModel";
 
 export const getOGs: RequestHandler = (req, res) => {
   const ogId = req.query.ogId;
@@ -61,6 +65,44 @@ export const getSlogans: RequestHandler = async (req, res) => {
       return { id: slogan._id, text: slogan["text"], tags: slogan["tags"] };
     });
     res.status(200).json({ slogans: slogans });
+  } catch (err) {
+    return console.error(err);
+  }
+};
+
+export const getCampaigns: RequestHandler = async (req, res) => {
+  try {
+    const banners = await Banner.find({ campaignBanner: true });
+    const rawCampaigns = await Campaign.find({});
+    const campaigns = rawCampaigns.map(doc => {
+      return {
+        icon: doc["icon"],
+        text: doc["text"],
+        cta: doc["cta"],
+        link: doc["link"],
+        inApp: doc["inApp"]
+      };
+    });
+    res.status(200).json({ banners: banners, campaigns: campaigns });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const getHomefeed: RequestHandler = async (req, res) => {
+  try {
+    const bannerSettings = (await BannerSettings.findOne({})) || {
+      feedBannerID: ""
+    };
+    let banner: any = { imageUrl: "", link: "", inApp: false };
+    if (
+      bannerSettings["feedBannerID"] &&
+      bannerSettings["feedBannerID"] != ""
+    ) {
+      banner = await Banner.findOne({ _id: bannerSettings["feedBannerID"] });
+    }
+    const items = await feedItem.find({});
+    res.status(200).json({ banner: banner, feed: items });
   } catch (err) {
     return console.error(err);
   }

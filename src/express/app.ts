@@ -7,14 +7,11 @@ import LogManager from "../LogManager";
 
 //routes
 import {
-  strikeRoutes,
-  ogRoutes,
+  apiRoutes,
   webhookRoutes,
   shareRoutes,
   controlsRoutes,
-  liveeventRoutes,
-  viewRoutes,
-  sloganRoutes
+  viewRoutes
 } from "./routes";
 
 //Initialization
@@ -46,10 +43,7 @@ app.use(async function(req: Request, res: Response, next) {
 });
 
 //API Routes
-app.use("/api/v1/strikes", strikeRoutes);
-app.use("/api/v1/ogs", ogRoutes);
-app.use("/api/v1/liveevent", liveeventRoutes);
-app.use("/api/v1/slogans", sloganRoutes);
+app.use("/api/v1", apiRoutes);
 
 //Internal Routes
 app.use("/internal/webhooks/ghost", webhookRoutes);

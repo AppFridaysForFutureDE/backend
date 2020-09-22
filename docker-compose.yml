@@ -43,9 +43,10 @@ services:
       - "3000:3000"
     volumes:
       - /var/firebase-auth/:/var/firebase-auth
+      - /var/image-data/:/var/image-data
     links:
       - mongo-db
-    depends_on: 
+    depends_on:
       - mongo-db
 
   mongo-db:

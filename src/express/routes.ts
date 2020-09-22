@@ -1,4 +1,4 @@
-import { Router } from "express";
+import express, { Router } from "express";
 import {
   login,
   logout,
@@ -12,43 +12,72 @@ import {
   saveLiveevent,
   addSlogan,
   deleteSlogan,
-  editSlogan
+  editSlogan,
+  addCampaign,
+  editCampaign,
+  deleteCampaign,
+  addBanner,
+  deleteBanner,
+  editBanner,
+  addFeedItem,
+  editFeedItem,
+  deleteFeedItem,
+  setFeedBanner
 } from "../endpoints/actions";
-import { getLiveevent, getOGs, getStrikes, getSlogans } from "../endpoints/api";
+import {
+  getLiveevent,
+  getOGs,
+  getStrikes,
+  getSlogans,
+  getHomefeed,
+  getCampaigns
+} from "../endpoints/api";
 import { sharePost } from "../endpoints/share";
 import { loginView, controlsView } from "../endpoints/views";
 import { webhookTriggered } from "../endpoints/webhook";
 
 export const controlsRoutes = Router();
-export const liveeventRoutes = Router();
-export const ogRoutes = Router();
+export const apiRoutes = Router();
 export const shareRoutes = Router();
-export const strikeRoutes = Router();
 export const webhookRoutes = Router();
 export const viewRoutes = Router();
-export const sloganRoutes = Router();
 
 controlsRoutes.post("/action/populateDB", populateDB);
 controlsRoutes.post("/action/liveevent", saveLiveevent);
+
 controlsRoutes.post("/user/login", login);
 controlsRoutes.post("/user/logout", logout);
 controlsRoutes.post("/user/create", create);
 controlsRoutes.post("/user/changePassword", changePassword);
 controlsRoutes.post("/user/remove", remove);
 controlsRoutes.post("/user/makeAdmin", makeAdmin);
+
 controlsRoutes.post("/slogans/add", addSlogan);
 controlsRoutes.post("/slogans/edit", editSlogan);
 controlsRoutes.post("/slogans/remove", deleteSlogan);
 
-liveeventRoutes.get("/", getLiveevent);
+controlsRoutes.post("/campaigns/add", addCampaign);
+controlsRoutes.post("/campaigns/edit", editCampaign);
+controlsRoutes.post("/campaigns/remove", deleteCampaign);
 
-sloganRoutes.get("/", getSlogans);
+controlsRoutes.post("/banner/add", addBanner);
+controlsRoutes.post("/banner/edit", editBanner);
+controlsRoutes.post("/banner/remove", deleteBanner);
+controlsRoutes.post("/banner/setFeedBanner", setFeedBanner);
 
-ogRoutes.get("/", getOGs);
+controlsRoutes.post("/feed/add", addFeedItem);
+controlsRoutes.post("/feed/edit", editFeedItem);
+controlsRoutes.post("/feed/remove", deleteFeedItem);
+
+apiRoutes.get("/liveevent", getLiveevent);
+apiRoutes.get("/strikes", getStrikes);
+apiRoutes.get("/slogans", getSlogans);
+apiRoutes.get("/ogs", getOGs);
+apiRoutes.get("/home", getHomefeed);
+apiRoutes.get("/campaigns", getCampaigns);
+apiRoutes.use("/img", express.static("/var/image-data"));
 
 shareRoutes.get("/:post", sharePost);
-
-strikeRoutes.get("/", getStrikes);
 
 webhookRoutes.post("/", webhookTriggered);
 

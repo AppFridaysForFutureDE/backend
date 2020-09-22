@@ -43,6 +43,18 @@ const ogScheme = new mongoose.Schema({
   other: {
     type: String
   },
+  imageLink: {
+    type: String
+  },
+  infoTitle: {
+    type: String
+  },
+  infoText: {
+    type: String
+  },
+  ogContentEndDate: {
+    type: String
+  },
   retrievedAt: {
     type: Date
   }

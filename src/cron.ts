@@ -3,6 +3,8 @@ import * as strikeAccess from "./data/strikes";
 import * as meetingAccess from "./data/meetings";
 import * as ogAccess from "./data/ogs";
 import LogManager from "./LogManager";
+import { getOGContent } from "./data/ogcontent";
+import { getStrikeImage } from "./data/strikeImage";
 
 const jobs = [
   {
@@ -11,6 +13,7 @@ const jobs = [
     job: (): void => {
       console.log("Retrieving Strikes");
       strikeAccess.retrieveStrikes();
+      strikeAccess.retrieveStrikesNew();
     }
   },
   {
@@ -43,6 +46,20 @@ const jobs = [
     job: (): void => {
       console.log("Cleaning Logs");
       LogManager.cleanLogs();
+    }
+  },
+  {
+    desc: "Get OG Contents",
+    tab: "35 * * * *",
+    job: (): void => {
+      getOGContent();
+    }
+  },
+  {
+    desc: "Get Strike images",
+    tab: "37 * * * *",
+    job: (): void => {
+      getStrikeImage();
     }
   }
 ];
