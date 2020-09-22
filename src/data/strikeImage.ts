@@ -40,24 +40,15 @@ export async function getStrikeImage(): Promise<void> {
       // date + 1.day
       const endTime = startTime + 86400;
 
-      const strike = await Strike.findOne({
-        name: ogName,
-        date: { $gte: startTime, $lte: endTime }
-      });
-
-      if (strike) {
-        console.log(
-          `updating strike for ${ogName} and date ${startTime} with image ${fileName}`
-        );
-        strike.update({
-          // TODO: make address env dependent
+      await Strike.updateMany(
+        {
+          name: ogName,
+          date: { $gte: startTime, $lte: endTime }
+        },
+        {
           imageUrl: `https://app.fffutu.re/api/v1/img/${fileName}`
-        });
-      } else {
-        console.log(
-          `could not find strike for ${ogName} and date ${startTime}`
-        );
-      }
+        }
+      );
     });
   } catch (e) {
     console.log("Could not load og content");
