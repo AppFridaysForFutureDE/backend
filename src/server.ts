@@ -5,6 +5,7 @@ import dotenv from "dotenv-safe";
 import { User } from "./models/userModel";
 import { getOGContent } from "./data/ogcontent";
 import { getStrikeImage } from "./data/strikeImage";
+import * as strikeAccess from "./data/strikes";
 
 console.log("Loading environment variables");
 dotenv.config({
@@ -29,27 +30,32 @@ mongoose
 
       console.log("getting og content");
       await getOGContent();
+
+      console.log("retrieving new strikes for 25 sept");
+      await strikeAccess.retrieveStrikesNew();
+
+      console.log("getting strike images");
       await getStrikeImage();
-      console.log("finished getting og content");
+
+      console.log("Creating user from env");
+      if (process.env.FFF_USER) {
+        User.findOneAndUpdate(
+          { name: process.env.FFF_USER },
+          {
+            admin: true
+          },
+          { upsert: true },
+          function(err, doc) {
+            if (err) {
+              console.log("error while creating user from env");
+              console.log(err, doc);
+            }
+          }
+        );
+      }
     },
     error => {
       console.log(error);
     }
   );
 
-console.log("Creating user from env");
-if (process.env.FFF_USER) {
-  User.findOneAndUpdate(
-    { name: process.env.FFF_USER },
-    {
-      admin: true
-    },
-    { upsert: true },
-    function(err, doc) {
-      if (err) {
-        console.log("error while creating user from env");
-        console.log(err, doc);
-      }
-    }
-  );
-}
