@@ -29,47 +29,62 @@ export async function retrieveStrikesNew(): Promise<void> {
     const id = `25sep${ogId}`;
 
     /* " Uhrzeit": "10:00 Uhr", */
-    const time: string = strike[" Uhrzeit"];
+    /* " Uhrzeit": "10.00 Uhr", */
+    let time: string = strike[" Uhrzeit"];
 
     let hours = 0;
     let minutes = 0;
 
+    let validDate = false;
     try {
-      const splitTime = time.split(":");
-      if (splitTime.length === 2) {
-        hours = parseInt(splitTime[0]) - 2;
-        minutes = parseInt(splitTime[1].split(" ")[0]);
+      if (time.includes(".")) {
+        time = time.replace(".", ":");
       }
+
+      if (!time.includes(":")) {
+        throw "invalid time";
+      }
+
+      const splitTime = time.split(":");
+      if (splitTime.length !== 2) {
+        throw "invalid time";
+      }
+
+      hours = parseInt(splitTime[0]);
+      minutes = parseInt(splitTime[1].split(" ")[0]);
+      validDate = true;
     } catch (err) {
       console.log(`could not parse time ${time}`);
     }
 
-    const jsDate = new Date(2020, 8, 25, hours, minutes);
-    const date = Utility.toUnixTimestamp(jsDate);
+    if (validDate) {
+      const jsDate = new Date(2020, 8, 25, hours - 2, minutes);
+      const date = Utility.toUnixTimestamp(jsDate);
 
-    Strike.findOneAndUpdate(
-      /* { strikeId: strike["id"] }, */
-      { strikeId: id },
-      {
-        /* strikeId: strike["id"], */
-        strikeId: id,
-        /* ogId: Utility.hash(strike["localGroupName"]), */
-        ogId: ogId,
-        /* name: strike["localGroupName"] || "", */
-        name: name || "",
-        location: location || "",
-        date: date || "",
-        eventLink: eventLink || "",
-        additionalInfo: additionalInfo || "",
-        retrievedAt: now
-      },
-      { upsert: true },
-      function(err, doc) {
-        console.log("error while updating strikes");
-        console.log(doc);
-        console.log(err);
-      }
-    );
+      Strike.findOneAndUpdate(
+        /* { strikeId: strike["id"] }, */
+        { strikeId: id },
+        {
+          /* strikeId: strike["id"], */
+          strikeId: id,
+          /* ogId: Utility.hash(strike["localGroupName"]), */
+          ogId: ogId,
+          /* name: strike["localGroupName"] || "", */
+          name: name || "",
+          location: location || "",
+          date: date || "",
+          eventLink: eventLink || "",
+          additionalInfo: additionalInfo || "",
+          retrievedAt: now
+        },
+        { upsert: true },
+        function(err, doc) {
+          console.log("error while updating strikes");
+          console.log(doc);
+          console.log(err);
+        }
+      );
+    }
   });
 }
 
