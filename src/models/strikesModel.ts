@@ -25,6 +25,9 @@ const strikeScheme = new mongoose.Schema({
   notificationSent: {
     type: Boolean
   },
+  imageUrl: {
+    type: String
+  },
   retrievedAt: {
     type: Date
   }
