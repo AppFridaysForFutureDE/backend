@@ -30,7 +30,7 @@ describe("saveAsStrike", () => {
     expect(strikes).toHaveLength(1);
     const strike = strikes[0];
     expect(strike["additionalInfo"]).toBe("Telko Link auf Anfrage");
-    expect(strike["date"]).toBe(1587992400); // 17 CEST -> 15 UTC
+    expect(strike["date"]).toBe(1587999600); // 17 CEST -> 15 UTC
     expect(strike["eventLink"]).toBe("");
     expect(strike["location"]).toBe("Discord");
     expect(strike["notificationSent"]).toBe(true);
@@ -57,7 +57,27 @@ describe("saveAsStrike", () => {
     );
 
     const strikes = await Strike.find({});
-    expect(strikes[0]["date"]).toBe(1605538800); // 17 CET -> 16 UTC
+    expect(strikes[0]["date"]).toBe(1605542400); // 17 CET -> 16 UTC
+  });
+
+  it("accepts seconds", async () => {
+    await new OG({
+      ogId: "0812f239a",
+      name: "München"
+    }).save();
+
+    await saveAsStrike(
+      "10.11.2020 16:36:38",
+      "16.11.2020", // Winter time ( UTC + 1)
+      "17:00:00",
+      "München",
+      "Discord",
+      "",
+      "Telko Link auf Anfrage"
+    );
+
+    const strikes = await Strike.find({});
+    expect(strikes[0]["date"]).toBe(1605542400); // 17 CET -> 16 UTC
   });
 
   // TODO: Test without OG
