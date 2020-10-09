@@ -31,9 +31,6 @@ mongoose
       console.log("getting og content");
       await getOGContent();
 
-      console.log("retrieving new strikes for 25 sept");
-      await strikeAccess.retrieveStrikesNew();
-
       console.log("getting strike images");
       await getStrikeImage();
 
