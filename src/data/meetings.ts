@@ -2,6 +2,7 @@ import { Strike } from "../models/strikesModel";
 import { OG } from "../models/ogsModel";
 import Utility from "../Utility";
 import { SpreadsheetAdmin } from "../services/SpreadsheetAdmin";
+import moment from "moment-timezone";
 
 // TODO: Doppelte Einträge ignorieren
 export async function saveAsStrike(
@@ -18,20 +19,12 @@ export async function saveAsStrike(
     throw "OG nicht in Datenbank gefunden: " + ogName;
   }
 
-  const [day, month, year] = date.split(".").map(string => parseInt(string));
-
-  const regex = /[0-9]{2}/g;
-  const matches = time.match(regex);
-  let hour = 0,
-    minutes = 0;
-  if (matches != null) {
-    hour = parseInt(matches[0] || "0");
-    minutes = parseInt(matches[1] || "0");
-  }
-
-  // TODO: Fix time zone
-  const jsDate = new Date(year, month - 1, day, hour - 2, minutes);
-  const unixDate = Utility.toUnixTimestamp(jsDate);
+  const newDate = moment.tz(
+    `${date} ${time}`,
+    "DD.MM.YYYY HH:mm",
+    "Europe/Berlin"
+  );
+  const unixDate = newDate.unix();
 
   const now = Date.now();
 
