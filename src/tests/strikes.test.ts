@@ -13,7 +13,7 @@ describe("GET /api/v1/strikes", () => {
     const newStrike = new Strike({
       ogId: "test",
       name: "MeinOgName",
-      date: 567
+      date: 567,
     });
     await newStrike.save();
   });
@@ -46,7 +46,7 @@ describe("GET /api/v1/strikes", () => {
     const newStrike = new Strike({
       ogId: "testEdge",
       name: "MeinOgName",
-      date: Utility.toUnixTimestamp(new Date()) - Utility.Day - 60
+      date: Utility.toUnixTimestamp(new Date()) - Utility.Day - 60,
     });
     await newStrike.save();
     const responsePast = await request(app).get(
@@ -58,7 +58,7 @@ describe("GET /api/v1/strikes", () => {
     const newStrike = new Strike({
       ogId: "testEdge",
       name: "MeinOgName",
-      date: Utility.toUnixTimestamp(new Date()) - Utility.Day + 60
+      date: Utility.toUnixTimestamp(new Date()) - Utility.Day + 60,
     });
     await newStrike.save();
     const responsePast = await request(app).get(

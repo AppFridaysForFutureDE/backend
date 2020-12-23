@@ -17,7 +17,7 @@ export const populateDB: RequestHandler = async (req, res) => {
   await Promise.all([
     ogAccess.retrieveOGs(),
     strikeAccess.retrieveStrikes(),
-    meetingAccess.retrieveMeetings()
+    meetingAccess.retrieveMeetings(),
   ]);
   res.status(200).json({ performedPopulate: true });
 };
@@ -33,7 +33,7 @@ export const saveLiveevent: RequestHandler = async (req, res) => {
       isActive: req.body.isActive == "on",
       actionText: req.body.actionText || "",
       actionUrl: req.body.actionUrl || "",
-      inApp: req.body.inApp == "on"
+      inApp: req.body.inApp == "on",
     },
     { upsert: true }
   );
@@ -46,15 +46,15 @@ export const addSlogan: RequestHandler = async (req, res) => {
     res.redirect("/views/panel/login");
     return;
   }
-  let tags = (req.body.tags || "").split(",").map(t => {
+  let tags = (req.body.tags || "").split(",").map((t) => {
     return t.trim();
   });
-  tags = tags.filter(t => {
+  tags = tags.filter((t) => {
     return t != "" && t != null;
   });
   const result = await Slogan.create({
     text: req.body.text || "",
-    tags: tags
+    tags: tags,
   });
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };
@@ -73,15 +73,15 @@ export const editSlogan: RequestHandler = async (req, res) => {
     res.redirect("/views/panel/login");
     return;
   }
-  let tags = (req.body.tags || "").split(",").map(t => {
+  let tags = (req.body.tags || "").split(",").map((t) => {
     return t.trim();
   });
-  tags = tags.filter(t => {
+  tags = tags.filter((t) => {
     return t != "" && t != null;
   });
   const result = await Slogan.findByIdAndUpdate(req.body.id || "", {
     text: req.body.text || "",
-    tags: tags
+    tags: tags,
   });
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };
@@ -98,7 +98,7 @@ export const addCampaign: RequestHandler = async (req, res) => {
     text: req.body.text || "",
     cta: req.body.cta || "",
     link: req.body.link || "",
-    inApp: req.body.inApp == "on"
+    inApp: req.body.inApp == "on",
   });
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };
@@ -123,7 +123,7 @@ export const editCampaign: RequestHandler = async (req, res) => {
     text: req.body.text || "",
     cta: req.body.cta || "",
     link: req.body.link || "",
-    inApp: req.body.inApp == "on"
+    inApp: req.body.inApp == "on",
   });
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };
@@ -138,7 +138,7 @@ export const addBanner: RequestHandler = async (req, res) => {
     imageUrl: req.body.imageUrl || "",
     link: req.body.link || "",
     inApp: req.body.inApp == "on",
-    campaignBanner: req.body.campaignBanner == "on"
+    campaignBanner: req.body.campaignBanner == "on",
   });
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };
@@ -161,7 +161,7 @@ export const editBanner: RequestHandler = async (req, res) => {
     imageUrl: req.body.imageUrl || "",
     link: req.body.link || "",
     inApp: req.body.inApp == "on",
-    campaignBanner: req.body.campaignBanner == "on"
+    campaignBanner: req.body.campaignBanner == "on",
   });
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };
@@ -174,7 +174,7 @@ export const setFeedBanner: RequestHandler = async (req, res) => {
   const result = await BannerSettings.findOneAndUpdate(
     {},
     {
-      feedBannerID: req.body.feedBannerID || ""
+      feedBannerID: req.body.feedBannerID || "",
     },
     { upsert: true }
   );
@@ -192,7 +192,7 @@ export const addFeedItem: RequestHandler = async (req, res) => {
     text: req.body.text || "",
     cta: req.body.cta || "",
     link: req.body.link || "",
-    inApp: req.body.inApp == "on"
+    inApp: req.body.inApp == "on",
   });
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };
@@ -216,7 +216,7 @@ export const editFeedItem: RequestHandler = async (req, res) => {
     text: req.body.text || "",
     cta: req.body.cta || "",
     link: req.body.link || "",
-    inApp: req.body.inApp == "on"
+    inApp: req.body.inApp == "on",
   });
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };

@@ -2,20 +2,20 @@ import mongoose from "mongoose";
 
 const liveeventScheme = new mongoose.Schema({
   liveeventId: {
-    type: Number
+    type: Number,
   },
   isActive: {
-    type: Boolean
+    type: Boolean,
   },
   actionText: {
-    type: String
+    type: String,
   },
   actionUrl: {
-    type: String
+    type: String,
   },
   inApp: {
-    type: Boolean
-  }
+    type: Boolean,
+  },
 });
 
 export const Liveevent = mongoose.model("liveevent", liveeventScheme);

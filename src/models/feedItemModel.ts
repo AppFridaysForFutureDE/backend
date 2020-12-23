@@ -2,20 +2,20 @@ import mongoose from "mongoose";
 
 const feedItemScheme = new mongoose.Schema({
   imageUrl: {
-    type: String
+    type: String,
   },
   text: {
-    type: String
+    type: String,
   },
   cta: {
-    type: String
+    type: String,
   },
   link: {
-    type: String
+    type: String,
   },
   inApp: {
-    type: Boolean
-  }
+    type: Boolean,
+  },
 });
 
 export const feedItem = mongoose.model("feedItem", feedItemScheme);

@@ -2,20 +2,20 @@ import mongoose from "mongoose";
 
 const logScheme = new mongoose.Schema({
   username: {
-    type: String
+    type: String,
   },
   time: {
-    type: Number
+    type: Number,
   },
   method: {
-    type: String
+    type: String,
   },
   endpoint: {
-    type: String
+    type: String,
   },
   ip: {
-    type: String
-  }
+    type: String,
+  },
 });
 
 export const Log = mongoose.model("log", logScheme);

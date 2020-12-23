@@ -10,7 +10,7 @@ export default abstract class LogManager {
       time: time,
       method: req.method,
       endpoint: req.url,
-      ip: req.headers["x-forwarded-for"] || req.connection.remoteAddress
+      ip: req.headers["x-forwarded-for"] || req.connection.remoteAddress,
     });
     return result ? true : false;
   }
@@ -22,7 +22,7 @@ export default abstract class LogManager {
     result = result.sort((a, b) => {
       return a["time"] > b["time"] ? 1 : -1;
     });
-    return result.map(doc => {
+    return result.map((doc) => {
       return {
         time: new Date(doc["time"] * 1000)
           .toISOString()
@@ -30,7 +30,7 @@ export default abstract class LogManager {
           .replace(/\..+/, ""), //some regex magic from SO to format date string
         user: doc["username"],
         ip: doc["ip"],
-        action: `${doc["method"]} ${doc["endpoint"]}`
+        action: `${doc["method"]} ${doc["endpoint"]}`,
       };
     });
   }

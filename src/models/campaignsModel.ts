@@ -2,23 +2,23 @@ import mongoose from "mongoose";
 
 const campaignScheme = new mongoose.Schema({
   name: {
-    type: String
+    type: String,
   },
   icon: {
-    type: String
+    type: String,
   },
   text: {
-    type: String
+    type: String,
   },
   cta: {
-    type: String
+    type: String,
   },
   link: {
-    type: String
+    type: String,
   },
   inApp: {
-    type: Boolean
-  }
+    type: Boolean,
+  },
 });
 
 export const Campaign = mongoose.model("campaign", campaignScheme);

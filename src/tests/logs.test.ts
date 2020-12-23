@@ -14,7 +14,7 @@ describe("read logs", () => {
       username: "name",
       time: 1595603717,
       method: "GET",
-      endpoint: "/test/path?param=value"
+      endpoint: "/test/path?param=value",
     });
     const result = await LogManager.readLogs();
     expect(result[0].action).toBe("GET /test/path?param=value");
@@ -29,7 +29,7 @@ describe("clear logs", () => {
       username: "name",
       time: 6789,
       method: "GET",
-      endpoint: "/test/path?param=value"
+      endpoint: "/test/path?param=value",
     });
     await LogManager.cleanLogs();
     const result = await LogManager.readLogs();
@@ -40,7 +40,7 @@ describe("clear logs", () => {
       username: "name",
       time: 1595603717,
       method: "GET",
-      endpoint: "/test/path?param=value"
+      endpoint: "/test/path?param=value",
     });
     const result = await LogManager.readLogs();
     expect(result).toHaveLength(1);

@@ -5,18 +5,17 @@ import dotenv from "dotenv-safe";
 import { User } from "./models/userModel";
 import { getOGContent } from "./data/ogcontent";
 import { getStrikeImage } from "./data/strikeImage";
-import * as strikeAccess from "./data/strikes";
 
 console.log("Loading environment variables");
 dotenv.config({
-  allowEmptyValues: true
+  allowEmptyValues: true,
 });
 
 console.log("Connecting to database");
 mongoose
   .connect("mongodb://fffapp:fffapp@mongo-db:27017/fffapp", {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   })
   .then(
     async () => {
@@ -39,10 +38,10 @@ mongoose
         User.findOneAndUpdate(
           { name: process.env.FFF_USER },
           {
-            admin: true
+            admin: true,
           },
           { upsert: true },
-          function(err, doc) {
+          function (err, doc) {
             if (err) {
               console.log("error while creating user from env");
               console.log(err, doc);
@@ -51,7 +50,7 @@ mongoose
         );
       }
     },
-    error => {
+    (error) => {
       console.log(error);
     }
   );

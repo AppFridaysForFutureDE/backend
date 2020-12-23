@@ -11,7 +11,7 @@ import {
   webhookRoutes,
   shareRoutes,
   controlsRoutes,
-  viewRoutes
+  viewRoutes,
 } from "./routes";
 
 //Initialization
@@ -23,7 +23,7 @@ app.set("views", path.join(__dirname, "../../src/views"));
 app.set("view engine", "ejs");
 
 //Auth properties & logs
-app.use(async function(req: Request, res: Response, next) {
+app.use(async function (req: Request, res: Response, next) {
   //check authorization and add auth properties to request
   const { valid, admin, name } = await UserManager.checkSessionID(
     req.cookies["fff_sessionid"]
@@ -32,7 +32,7 @@ app.use(async function(req: Request, res: Response, next) {
     valid: valid,
     admin: admin,
     name: name,
-    session: req.cookies["fff_sessionid"]
+    session: req.cookies["fff_sessionid"],
   };
   next();
 
@@ -58,6 +58,6 @@ app.use("/admin/controls", controlsRoutes);
 app.use("/views", viewRoutes);
 
 //Express Error Fallback
-app.use(function(err: Error, req: Request, res: Response, next) {
+app.use(function (err: Error, req: Request, res: Response, next) {
   res.status(500).json({ message: err.message });
 });

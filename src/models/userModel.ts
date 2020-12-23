@@ -2,20 +2,20 @@ import mongoose from "mongoose";
 
 const userScheme = new mongoose.Schema({
   name: {
-    type: String
+    type: String,
   },
   passwordHash: {
-    type: String
+    type: String,
   },
   admin: {
-    type: Boolean
+    type: Boolean,
   },
   activeSession: {
-    type: String
+    type: String,
   },
   expiration: {
-    type: Number
-  }
+    type: Number,
+  },
 });
 
 export const User = mongoose.model("user", userScheme);

@@ -11,7 +11,7 @@ describe("GET /api/v1/ogs", () => {
   it("returns the saved og", async () => {
     const newOg = new OG({
       ogId: "test",
-      name: "MeinOgName"
+      name: "MeinOgName",
     });
     await newOg.save();
 

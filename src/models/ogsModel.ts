@@ -2,62 +2,62 @@ import mongoose from "mongoose";
 
 const ogScheme = new mongoose.Schema({
   ogId: {
-    type: String
+    type: String,
   },
   name: {
-    type: String
+    type: String,
   },
   bundesland: {
-    type: String
+    type: String,
   },
   lat: {
-    type: Number
+    type: Number,
   },
   lon: {
-    type: Number
+    type: Number,
   },
   whatsapp: {
-    type: String
+    type: String,
   },
   email: {
-    type: String
+    type: String,
   },
   instagram: {
-    type: String
+    type: String,
   },
   twitter: {
-    type: String
+    type: String,
   },
   facebook: {
-    type: String
+    type: String,
   },
   youtube: {
-    type: String
+    type: String,
   },
   website: {
-    type: String
+    type: String,
   },
   telegram: {
-    type: String
+    type: String,
   },
   other: {
-    type: String
+    type: String,
   },
   imageLink: {
-    type: String
+    type: String,
   },
   infoTitle: {
-    type: String
+    type: String,
   },
   infoText: {
-    type: String
+    type: String,
   },
   ogContentEndDate: {
-    type: String
+    type: String,
   },
   retrievedAt: {
-    type: Date
-  }
+    type: Date,
+  },
 });
 
 export const OG = mongoose.model("og", ogScheme);

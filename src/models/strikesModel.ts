@@ -2,35 +2,35 @@ import mongoose from "mongoose";
 
 const strikeScheme = new mongoose.Schema({
   strikeId: {
-    type: String
+    type: String,
   },
   ogId: {
-    type: String
+    type: String,
   },
   name: {
-    type: String
+    type: String,
   },
   location: {
-    type: String
+    type: String,
   },
   date: {
-    type: Number
+    type: Number,
   },
   eventLink: {
-    type: String
+    type: String,
   },
   additionalInfo: {
-    type: String
+    type: String,
   },
   notificationSent: {
-    type: Boolean
+    type: Boolean,
   },
   imageUrl: {
-    type: String
+    type: String,
   },
   retrievedAt: {
-    type: Date
-  }
+    type: Date,
+  },
 });
 
 export const Strike = mongoose.model("strike", strikeScheme);

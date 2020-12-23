@@ -13,7 +13,7 @@ export default class FCMAdmin {
 
       admin.initializeApp({
         credential: admin.credential.applicationDefault(),
-        databaseURL: process.env.FIREBASE_URL
+        databaseURL: process.env.FIREBASE_URL,
       });
       this.firebaseReady = true;
       console.log("Successfully established connection to firebase.");
@@ -51,14 +51,14 @@ export default class FCMAdmin {
     const message = {
       notification: {
         title: title,
-        body: body
+        body: body,
       },
       data: {
         payload: payload,
         type: type,
         click_action: "FLUTTER_NOTIFICATION_CLICK" // eslint-disable-line
       },
-      topic: topic
+      topic: topic,
     };
     console.log("Sending message:");
     console.log(message);

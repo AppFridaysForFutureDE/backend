@@ -5,7 +5,7 @@ import {
   create,
   changePassword,
   remove,
-  makeAdmin
+  makeAdmin,
 } from "../endpoints/user";
 import {
   populateDB,
@@ -22,7 +22,7 @@ import {
   addFeedItem,
   editFeedItem,
   deleteFeedItem,
-  setFeedBanner
+  setFeedBanner,
 } from "../endpoints/actions";
 import {
   getLiveevent,
@@ -30,7 +30,7 @@ import {
   getStrikes,
   getSlogans,
   getHomefeed,
-  getCampaigns
+  getCampaigns,
 } from "../endpoints/api";
 import { sharePost } from "../endpoints/share";
 import { loginView, controlsView } from "../endpoints/views";

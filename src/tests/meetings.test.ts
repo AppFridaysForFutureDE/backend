@@ -13,7 +13,7 @@ describe("saveAsStrike", () => {
   it("should save the record", async () => {
     await new OG({
       ogId: "0812f239a",
-      name: "München"
+      name: "München",
     }).save();
 
     await saveAsStrike(
@@ -43,7 +43,7 @@ describe("saveAsStrike", () => {
   it("respects daylight saving time", async () => {
     await new OG({
       ogId: "0812f239a",
-      name: "München"
+      name: "München",
     }).save();
 
     await saveAsStrike(
@@ -63,7 +63,7 @@ describe("saveAsStrike", () => {
   it("accepts seconds", async () => {
     await new OG({
       ogId: "0812f239a",
-      name: "München"
+      name: "München",
     }).save();
 
     await saveAsStrike(

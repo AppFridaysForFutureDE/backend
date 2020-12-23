@@ -30,7 +30,7 @@ export default abstract class UserManager {
       { name: username },
       {
         activeSession: sessID,
-        expiration: Utility.toUnixTimestamp(new Date()) + Utility.Hour //expires after an hour
+        expiration: Utility.toUnixTimestamp(new Date()) + Utility.Hour, //expires after an hour
       }
     );
     return { valid: true, sessionID: sessID };
@@ -42,7 +42,7 @@ export default abstract class UserManager {
   }): Promise<boolean> {
     await User.create({
       name: user.username,
-      admin: user.admin
+      admin: user.admin,
     });
     return true;
   }
@@ -55,7 +55,7 @@ export default abstract class UserManager {
     await User.findOneAndUpdate(
       { name: username },
       {
-        passwordHash: pwHash
+        passwordHash: pwHash,
       },
       { upsert: true }
     );
@@ -66,7 +66,7 @@ export default abstract class UserManager {
     await User.findOneAndUpdate(
       { name: username },
       {
-        admin: true
+        admin: true,
       }
     );
     return true;
@@ -74,7 +74,7 @@ export default abstract class UserManager {
 
   public static async removeUser(username: string): Promise<boolean> {
     await User.findOneAndDelete({
-      name: username
+      name: username,
     });
     return true;
   }
@@ -95,7 +95,7 @@ export default abstract class UserManager {
       await User.findOneAndUpdate(
         { name: username },
         {
-          passwordHash: pwHash
+          passwordHash: pwHash,
         }
       );
 
@@ -128,7 +128,7 @@ export default abstract class UserManager {
       User.findOneAndUpdate(
         { activeSession: sessionID },
         {
-          expiration: Utility.toUnixTimestamp(new Date()) + Utility.Hour //expiration is reset when stuff is done
+          expiration: Utility.toUnixTimestamp(new Date()) + Utility.Hour, //expiration is reset when stuff is done
         }
       );
       return { valid: true, admin: res["admin"], name: res["name"] };

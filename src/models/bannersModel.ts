@@ -2,17 +2,17 @@ import mongoose from "mongoose";
 
 const bannerScheme = new mongoose.Schema({
   imageUrl: {
-    type: String
+    type: String,
   },
   link: {
-    type: String
+    type: String,
   },
   inApp: {
-    type: Boolean
+    type: Boolean,
   },
   campaignBanner: {
-    type: Boolean
-  }
+    type: Boolean,
+  },
 });
 
 export const Banner = mongoose.model("banner", bannerScheme);

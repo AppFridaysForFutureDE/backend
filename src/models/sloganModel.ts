@@ -2,11 +2,11 @@ import mongoose from "mongoose";
 
 const sloganScheme = new mongoose.Schema({
   tags: {
-    type: [String]
+    type: [String],
   },
   text: {
-    type: String
-  }
+    type: String,
+  },
 });
 
 export const Slogan = mongoose.model("slogan", sloganScheme);
