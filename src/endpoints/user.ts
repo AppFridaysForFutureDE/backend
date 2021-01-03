@@ -1,5 +1,6 @@
 import { RequestHandler } from "express";
 import UserManager from "../UserManager";
+import { User } from "../models/userModel";
 
 export const login: RequestHandler = async (req, res) => {
   const username = req.body.username;
