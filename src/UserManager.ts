@@ -36,17 +36,6 @@ export default abstract class UserManager {
     return { valid: true, sessionID: sessID };
   }
 
-  public static async createUser(user: {
-    username: string;
-    admin: boolean;
-  }): Promise<boolean> {
-    await User.create({
-      name: user.username,
-      admin: user.admin,
-    });
-    return true;
-  }
-
   public static async changePassword(
     username: string,
     passwordNew: string

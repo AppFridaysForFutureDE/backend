@@ -10,7 +10,7 @@ afterAll(async () => await dbHandler.closeDatabase());
 
 describe("user management tests", () => {
   beforeEach(async () => {
-    await UserManager.createUser({ username: "name", admin: false });
+    await User.create({ name: "name", admin: false });
   });
   it("created a new user", async () => {
     const res = await User.countDocuments({});

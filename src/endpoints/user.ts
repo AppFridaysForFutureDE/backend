@@ -32,7 +32,7 @@ export const create: RequestHandler = async (req, res) => {
   const username = req.body.username;
   const admin: boolean = req.body.admin == "Administrator";
   if (req.auth.admin) {
-    const success = await UserManager.createUser({ username, admin });
+    const success = await User.create({ name: username, admin: admin });
     res.redirect("/views/panel/controls".concat(success ? "" : "?err=true"));
   } else {
     res.redirect("/views/panel/login");
