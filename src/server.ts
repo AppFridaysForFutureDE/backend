@@ -16,6 +16,7 @@ mongoose
   .connect("mongodb://fffapp:fffapp@mongo-db:27017/fffapp", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
   })
   .then(
     async () => {
