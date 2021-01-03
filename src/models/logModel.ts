@@ -1,21 +1,38 @@
-import mongoose from "mongoose";
+import { model, Schema, Model, Document } from "mongoose";
 
-const logScheme = new mongoose.Schema({
+export interface ILog extends Document {
+  username: string;
+  time: number;
+  method: string;
+  endpoint: string;
+  ip: string;
+}
+
+const logScheme = new Schema({
   username: {
     type: String,
+    required: true,
   },
   time: {
     type: Number,
+    required: true,
   },
   method: {
     type: String,
+    required: true,
   },
   endpoint: {
     type: String,
+    required: true,
   },
   ip: {
     type: String,
+    required: true,
   },
 });
 
-export const Log = mongoose.model("log", logScheme);
+logScheme.methods.readLog = function (this: ILog) {
+  return this.ip; // > 0 ? "Male" : "Female"
+};
+
+export const Log: Model<ILog> = model("log", logScheme);

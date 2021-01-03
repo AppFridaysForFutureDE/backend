@@ -21,6 +21,7 @@ app.use(cookieParser());
 app.use(express.urlencoded());
 app.set("views", path.join(__dirname, "../../src/views"));
 app.set("view engine", "ejs");
+app.set("trust proxy", true); // for logging ip address
 
 //Auth properties & logs
 app.use(async function (req: Request, res: Response, next) {
