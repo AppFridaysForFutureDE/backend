@@ -1,20 +1,33 @@
-import mongoose from "mongoose";
+import { model, Schema, Model, Document } from "mongoose";
 
-const ogScheme = new mongoose.Schema({
+export interface IOg extends Document {
+  ogId: string;
+  name: string;
+  bundesland: string;
+  lat: number;
+  long: number;
+}
+
+const ogScheme = new Schema({
   ogId: {
     type: String,
+    required: true,
   },
   name: {
     type: String,
+    required: true,
   },
   bundesland: {
     type: String,
+    required: true,
   },
   lat: {
     type: Number,
+    required: true,
   },
   lon: {
     type: Number,
+    required: true,
   },
   whatsapp: {
     type: String,
@@ -60,4 +73,4 @@ const ogScheme = new mongoose.Schema({
   },
 });
 
-export const OG = mongoose.model("og", ogScheme);
+export const OG: Model<IOg> = model("og", ogScheme);

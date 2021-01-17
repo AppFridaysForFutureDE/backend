@@ -1,17 +1,27 @@
-import mongoose from "mongoose";
+import { model, Schema, Model, Document } from "mongoose";
 
-const strikeScheme = new mongoose.Schema({
+export interface IStrike extends Document {
+  strikeId: string;
+  ogId: string;
+  name: string;
+  location: string;
+}
+
+const strikeScheme = new Schema({
   strikeId: {
     type: String,
+    required: true,
   },
   ogId: {
     type: String,
+    required: true,
   },
   name: {
     type: String,
   },
   location: {
     type: String,
+    required: true,
   },
   date: {
     type: Number,
@@ -24,6 +34,7 @@ const strikeScheme = new mongoose.Schema({
   },
   notificationSent: {
     type: Boolean,
+    required: true,
   },
   imageUrl: {
     type: String,
@@ -33,4 +44,4 @@ const strikeScheme = new mongoose.Schema({
   },
 });
 
-export const Strike = mongoose.model("strike", strikeScheme);
+export const Strike: Model<IStrike> = model("strike", strikeScheme);

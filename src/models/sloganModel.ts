@@ -1,12 +1,18 @@
-import mongoose from "mongoose";
+import { model, Schema, Model, Document } from "mongoose";
 
-const sloganScheme = new mongoose.Schema({
+export interface ISlogan extends Document {
+  tags?: [string];
+  text: string;
+}
+
+const sloganScheme = new Schema({
   tags: {
     type: [String],
   },
   text: {
     type: String,
+    required: true,
   },
 });
 
-export const Slogan = mongoose.model("slogan", sloganScheme);
+export const Slogan: Model<ISlogan> = model("slogan", sloganScheme);
