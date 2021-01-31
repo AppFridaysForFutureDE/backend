@@ -23,10 +23,7 @@ export default abstract class LogManager {
   public static async readLogs(): Promise<
     { time: string; user: string; ip: string; action: string }[]
   > {
-    const result: [ILog] = await Log.find({}).sort({ time: "desc" });
-    /* result = result.sort((a, b) => { */
-    /*   return a["time"] > b["time"] ? 1 : -1; */
-    /* }); */
+    const result = await Log.find({}).sort({ time: "desc" });
     return result.map((doc) => {
       return {
         time: new Date(doc["time"] * 1000)
