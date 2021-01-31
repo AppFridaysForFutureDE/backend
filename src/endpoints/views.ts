@@ -56,11 +56,18 @@ export const controlsView: RequestHandler = async (req, res) => {
   const logs = await LogManager.readLogs();
 
   const slogans = (await Slogan.find({})).map((s) => {
+    let tagsText;
+    if (s["tags"] == undefined) {
+      tagsText = "";
+    } else {
+      tagsText = s["tags"].join(", ");
+    }
+
     return {
       _id: s._id,
       text: s["text"],
       tags: s["tags"],
-      tagsText: s["tags"].join(", "),
+      tagsText: tagsText,
     };
   });
 
