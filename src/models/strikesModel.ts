@@ -4,7 +4,6 @@ export interface IStrike extends Document {
   strikeId: string;
   ogId: string;
   name: string;
-  location: string;
 }
 
 const strikeScheme = new Schema({
@@ -21,7 +20,6 @@ const strikeScheme = new Schema({
   },
   location: {
     type: String,
-    required: true,
   },
   date: {
     type: Number,
@@ -34,7 +32,6 @@ const strikeScheme = new Schema({
   },
   notificationSent: {
     type: Boolean,
-    required: true,
   },
   imageUrl: {
     type: String,
