@@ -10,7 +10,7 @@ import { BannerSettings } from "../models/bannerSettingsModel";
 import { feedItem } from "../models/feedItemModel";
 
 export const getOGs: RequestHandler = (req, res) => {
-  const ogId = req.query.ogId;
+  const ogId = req.query.ogId as string;
   if (ogId == "" || ogId == null) {
     OG.find({}, function (err: Error, ogs) {
       if (err) return console.error(err);
@@ -25,9 +25,9 @@ export const getOGs: RequestHandler = (req, res) => {
 };
 
 export const getLiveevent: RequestHandler = (req, res) => {
-  let liveeventId = req.query.liveeventId || "";
+  let liveeventId = req.query.liveeventId as string;
   if (liveeventId == "" || liveeventId == null) {
-    liveeventId = 0;
+    liveeventId = "0";
   }
   Liveevent.findOne({ liveeventId: liveeventId }, function (err: Error, event) {
     if (err) return console.error(err);
@@ -36,7 +36,7 @@ export const getLiveevent: RequestHandler = (req, res) => {
 };
 
 export const getStrikes: RequestHandler = (req, res) => {
-  const ogId = req.query.ogId;
+  const ogId = req.query.ogId as string;
   //Setzt mindestdatum für streiks auf 0, wenn anfrage festlegt, dass auch vergangene streiks zurückgegeben werden sollen
   //sonst ist das mindestdatum das aktuelle - 24h => so werden auch erst kürzlich beendete streiks noch angezeigt
   const minDate =
