@@ -12,6 +12,9 @@ describe("GET /api/v1/ogs", () => {
     const newOg = new OG({
       ogId: "test",
       name: "MeinOgName",
+      bundesland: "Bayern",
+      lat: 48.1371079,
+      lon: 11.5753822,
     });
     await newOg.save();
 
