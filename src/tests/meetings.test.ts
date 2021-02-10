@@ -6,16 +6,20 @@ import { saveAsStrike } from "../data/meetings";
 beforeAll(async () => {
   await dbHandler.establishConnection();
 });
+beforeEach(async () => {
+  await new OG({
+    ogId: "0812f239a",
+    name: "München",
+    bundesland: "Bayern",
+    lat: 48.1371079,
+    lon: 11.5753822,
+  }).save();
+});
 afterEach(async () => await dbHandler.clearDatabase());
 afterAll(async () => await dbHandler.closeDatabase());
 
 describe("saveAsStrike", () => {
   it("should save the record", async () => {
-    await new OG({
-      ogId: "0812f239a",
-      name: "München"
-    }).save();
-
     await saveAsStrike(
       "21.04.2020 16:36:38",
       "27.04.2020", // Summer time ( UTC + 2)
@@ -41,11 +45,6 @@ describe("saveAsStrike", () => {
   });
 
   it("respects daylight saving time", async () => {
-    await new OG({
-      ogId: "0812f239a",
-      name: "München"
-    }).save();
-
     await saveAsStrike(
       "10.11.2020 16:36:38",
       "16.11.2020", // Winter time ( UTC + 1)
@@ -61,11 +60,6 @@ describe("saveAsStrike", () => {
   });
 
   it("accepts seconds", async () => {
-    await new OG({
-      ogId: "0812f239a",
-      name: "München"
-    }).save();
-
     await saveAsStrike(
       "10.11.2020 16:36:38",
       "16.11.2020", // Winter time ( UTC + 1)

@@ -43,10 +43,6 @@ export default class Utility {
 
   //creates shortened sha256 hash
   public static hash(s: string): string {
-    return crypto
-      .createHash("sha256")
-      .update(s)
-      .digest("hex")
-      .substring(0, 13);
+    return crypto.createHash("sha256").update(s).digest("hex").substring(0, 13);
   }
 }

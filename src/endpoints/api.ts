@@ -10,14 +10,14 @@ import { BannerSettings } from "../models/bannerSettingsModel";
 import { feedItem } from "../models/feedItemModel";
 
 export const getOGs: RequestHandler = (req, res) => {
-  const ogId = req.query.ogId;
+  const ogId = req.query.ogId as string;
   if (ogId == "" || ogId == null) {
-    OG.find({}, function(err: Error, ogs) {
+    OG.find({}, function (err: Error, ogs) {
       if (err) return console.error(err);
       res.status(200).json({ count: ogs.length, ogs: ogs });
     });
   } else {
-    OG.find({ ogId: ogId }, function(err: Error, ogs) {
+    OG.find({ ogId: ogId }, function (err: Error, ogs) {
       if (err) return console.error(err);
       res.status(200).json({ count: ogs.length, ogs: ogs });
     });
@@ -25,18 +25,18 @@ export const getOGs: RequestHandler = (req, res) => {
 };
 
 export const getLiveevent: RequestHandler = (req, res) => {
-  let liveeventId = req.query.liveeventId || "";
+  let liveeventId = req.query.liveeventId as string;
   if (liveeventId == "" || liveeventId == null) {
-    liveeventId = 0;
+    liveeventId = "0";
   }
-  Liveevent.findOne({ liveeventId: liveeventId }, function(err: Error, event) {
+  Liveevent.findOne({ liveeventId: liveeventId }, function (err: Error, event) {
     if (err) return console.error(err);
     res.status(200).json({ liveeventId: liveeventId, liveevent: event });
   });
 };
 
 export const getStrikes: RequestHandler = (req, res) => {
-  const ogId = req.query.ogId;
+  const ogId = req.query.ogId as string;
   //Setzt mindestdatum für streiks auf 0, wenn anfrage festlegt, dass auch vergangene streiks zurückgegeben werden sollen
   //sonst ist das mindestdatum das aktuelle - 24h => so werden auch erst kürzlich beendete streiks noch angezeigt
   const minDate =
@@ -49,7 +49,7 @@ export const getStrikes: RequestHandler = (req, res) => {
   } else {
     Strike.find(
       { ogId: ogId, date: { $gt: minDate }, strikeId: { $ne: "866" } },
-      function(err: Error, strikes) {
+      function (err: Error, strikes) {
         if (err) return console.error(err);
         res.status(200).json({ ogId: ogId, strikes: strikes });
       }
@@ -61,7 +61,7 @@ export const getSlogans: RequestHandler = async (req, res) => {
   try {
     const rawSlogans = await Slogan.find({});
 
-    const slogans = rawSlogans.map(slogan => {
+    const slogans = rawSlogans.map((slogan) => {
       return { id: slogan._id, text: slogan["text"], tags: slogan["tags"] };
     });
     res.status(200).json({ slogans: slogans });
@@ -74,13 +74,13 @@ export const getCampaigns: RequestHandler = async (req, res) => {
   try {
     const banners = await Banner.find({ campaignBanner: true });
     const rawCampaigns = await Campaign.find({});
-    const campaigns = rawCampaigns.map(doc => {
+    const campaigns = rawCampaigns.map((doc) => {
       return {
         icon: doc["icon"],
         text: doc["text"],
         cta: doc["cta"],
         link: doc["link"],
-        inApp: doc["inApp"]
+        inApp: doc["inApp"],
       };
     });
     res.status(200).json({ banners: banners, campaigns: campaigns });
@@ -92,14 +92,16 @@ export const getCampaigns: RequestHandler = async (req, res) => {
 export const getHomefeed: RequestHandler = async (req, res) => {
   try {
     const bannerSettings = (await BannerSettings.findOne({})) || {
-      feedBannerID: ""
+      feedBannerID: "",
     };
-    let banner: any = { imageUrl: "", link: "", inApp: false };
+    let banner;
     if (
       bannerSettings["feedBannerID"] &&
       bannerSettings["feedBannerID"] != ""
     ) {
       banner = await Banner.findById(bannerSettings["feedBannerID"]);
+    } else {
+      banner = { imageUrl: "", link: "", inApp: false };
     }
     const items = await feedItem.find({});
     res.status(200).json({ banner: banner, feed: items });

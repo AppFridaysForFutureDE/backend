@@ -17,7 +17,7 @@ export async function retrieveStrikes(): Promise<void> {
   const now = Date.now();
 
   //loop through strikes
-  data.forEach(strike => {
+  data.forEach((strike) => {
     Strike.findOneAndUpdate(
       { strikeId: strike["id"] },
       {
@@ -28,10 +28,10 @@ export async function retrieveStrikes(): Promise<void> {
         date: Utility.toUnixTimestamp(new Date(strike["dateTime"])) || "",
         eventLink: strike["eventLink"] || "",
         additionalInfo: strike["note"] || "",
-        retrievedAt: now
+        retrievedAt: now,
       },
       { upsert: true },
-      function(err, doc) {
+      function (err, doc) {
         console.log("error while updating strikes");
         console.log(doc);
         console.log(err);
@@ -47,34 +47,34 @@ export async function retrieveStrikes(): Promise<void> {
 export function checkStrikes(): void {
   const tomorrow: number = Utility.toUnixTimestamp(new Date()) + Utility.Day;
   const today: number = Utility.toUnixTimestamp(new Date());
-  Strike.find({ date: { $gt: today, $lt: tomorrow } }, function(
-    err: Error,
-    strikes
-  ) {
-    //check if an error occured
-    if (err) return console.error(err);
+  Strike.find(
+    { date: { $gt: today, $lt: tomorrow } },
+    function (err: Error, strikes) {
+      //check if an error occured
+      if (err) return console.error(err);
 
-    //loop through strikes
-    strikes.forEach(async strike => {
-      if (
-        strike["notificationSent"] == "false" ||
-        strike["notificationSent"] == null
-      ) {
-        //send notification
-        FCMAdmin.getInstance().sendMessage(
-          `og_${strike["ogId"]}`,
-          `Streikalarm in ${strike["name"]}`,
-          `Demnächst findet hier ein Streik statt: ${strike["location"]}, ${strike["name"]}`,
-          "strike",
-          strike["ogId"]
-        );
+      //loop through strikes
+      strikes.forEach(async (strike) => {
+        if (
+          strike["notificationSent"] == "false" ||
+          strike["notificationSent"] == null
+        ) {
+          //send notification
+          FCMAdmin.getInstance().sendMessage(
+            `og_${strike["ogId"]}`,
+            `Streikalarm in ${strike["name"]}`,
+            `Demnächst findet hier ein Streik statt: ${strike["location"]}, ${strike["name"]}`,
+            "strike",
+            strike["ogId"]
+          );
 
-        //Update Notification Status of strike
-        await Strike.updateOne(
-          { strikeId: strike["strikeId"] },
-          { notificationSent: true }
-        );
-      }
-    });
-  });
+          //Update Notification Status of strike
+          await Strike.updateOne(
+            { strikeId: strike["strikeId"] },
+            { notificationSent: true }
+          );
+        }
+      });
+    }
+  );
 }

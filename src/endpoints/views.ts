@@ -28,7 +28,7 @@ export const controlsView: RequestHandler = async (req, res) => {
   //gather all the data for serverside rendering
   const status = FCMAdmin.getInstance().getStatus();
 
-  const userList = (await User.find({})).map(function(userdoc) {
+  const userList = (await User.find({})).map(function (userdoc) {
     return {
       name: userdoc["name"],
       active:
@@ -36,7 +36,7 @@ export const controlsView: RequestHandler = async (req, res) => {
         userdoc["activeSession"] != undefined &&
         Utility.toUnixTimestamp(new Date()) < userdoc["expiration"],
       rights: userdoc["admin"] ? "Administrator" : "App-AG Mitglied",
-      admin: userdoc["admin"]
+      admin: userdoc["admin"],
     };
   });
 
@@ -44,23 +44,30 @@ export const controlsView: RequestHandler = async (req, res) => {
     actionText: "",
     actionUrl: "",
     inApp: false,
-    isActive: false
+    isActive: false,
   };
 
   const currentUser = {
     name: req.auth.name,
     admin: req.auth.admin,
-    rights: req.auth.admin ? "Administrator" : "App-AG Mitglied"
+    rights: req.auth.admin ? "Administrator" : "App-AG Mitglied",
   };
 
   const logs = await LogManager.readLogs();
 
-  const slogans = (await Slogan.find({})).map(s => {
+  const slogans = (await Slogan.find({})).map((s) => {
+    let tagsText;
+    if (s["tags"] == undefined) {
+      tagsText = "";
+    } else {
+      tagsText = s["tags"].join(", ");
+    }
+
     return {
       _id: s._id,
       text: s["text"],
       tags: s["tags"],
-      tagsText: s["tags"].join(", ")
+      tagsText: tagsText,
     };
   });
 
@@ -84,6 +91,6 @@ export const controlsView: RequestHandler = async (req, res) => {
     campaigns: campaigns,
     banners: banner,
     feed: feed,
-    bannerSettings: bannerSettings
+    bannerSettings: bannerSettings,
   });
 };

@@ -2,27 +2,28 @@ import * as dbHandler from "./test-db-handler";
 import { User } from "../models/userModel";
 import UserManager from "../UserManager";
 
-beforeAll(async () => {
-  await dbHandler.establishConnection();
-});
+beforeAll(async () => await dbHandler.establishConnection());
 afterEach(async () => await dbHandler.clearDatabase());
 afterAll(async () => await dbHandler.closeDatabase());
 
 describe("user management tests", () => {
   beforeEach(async () => {
-    await UserManager.createUser({ username: "name", admin: false });
+    await User.create({ name: "luke", admin: false });
   });
+
   it("created a new user", async () => {
     const res = await User.countDocuments({});
     expect(res).toBe(1);
   });
+
   it("make admin", async () => {
-    UserManager.makeAdmin("name");
+    UserManager.makeAdmin("luke");
     const res = await User.find({});
     expect(res[0]["admin"]).toBe(true);
   });
+
   it("remove user", async () => {
-    UserManager.removeUser("name");
+    UserManager.removeUser("luke");
     const res = await User.countDocuments({});
     expect(res).toBe(0);
   });

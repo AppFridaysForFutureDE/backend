@@ -8,8 +8,9 @@ export class DriveAdmin {
     try {
       const scopes = ["https://www.googleapis.com/auth/drive"];
 
-      const credentials = require(process.env.GOOGLE_APPLICATION_CREDENTIALS ||
-        "");
+      const credentials = await import(
+        process.env.GOOGLE_APPLICATION_CREDENTIALS || ""
+      );
 
       const auth = new google.auth.JWT(
         credentials.client_email,

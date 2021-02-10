@@ -15,13 +15,12 @@ const mongod = new MongoMemoryServer();
  * Connect to the in-memory database.
  */
 export const establishConnection = async (): Promise<void> => {
-  const uri = await mongod.getConnectionString();
+  const uri = await mongod.getUri();
 
   const mongooseOpts = {
     useNewUrlParser: true,
-    autoReconnect: true,
-    reconnectTries: Number.MAX_VALUE,
-    reconnectInterval: 1000
+    useUnifiedTopology: true,
+    useFindAndModify: false,
   };
 
   await mongoose.connect(uri, mongooseOpts);

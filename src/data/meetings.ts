@@ -41,7 +41,7 @@ export async function saveAsStrike(
       eventLink: link || "",
       additionalInfo: additionalInfo || "",
       notificationSent: true,
-      retrievedAt: now
+      retrievedAt: now,
     },
     { upsert: true }
   );
@@ -53,7 +53,7 @@ export async function retrieveMeetings(): Promise<void> {
   );
   await meetingAdmin.loadDocumentInfo();
   const rows = await meetingAdmin.getRows();
-  rows.forEach(row => {
+  rows.forEach((row) => {
     saveAsStrike(
       row["Zeitstempel"],
       row["Datum des Plenums"],
@@ -66,7 +66,7 @@ export async function retrieveMeetings(): Promise<void> {
       () => {
         console.log("successfully imported row " + row["Zeitstempel"]);
       },
-      error => {
+      (error) => {
         console.log(`error while importing row ${row["Zeitstempel"]} ${error}`);
       }
     );

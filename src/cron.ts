@@ -13,7 +13,7 @@ const jobs = [
     job: (): void => {
       console.log("Retrieving Strikes");
       strikeAccess.retrieveStrikes();
-    }
+    },
   },
   {
     desc: "Retrieve Meetings",
@@ -21,7 +21,7 @@ const jobs = [
     job: (): void => {
       console.log("Retrieving Meetings");
       meetingAccess.retrieveMeetings();
-    }
+    },
   },
   {
     desc: "Retrieve OGs",
@@ -29,7 +29,7 @@ const jobs = [
     job: (): void => {
       console.log("Retrieving OGs");
       ogAccess.retrieveOGs();
-    }
+    },
   },
   {
     desc: "Check Strike Notifications",
@@ -37,7 +37,7 @@ const jobs = [
     job: (): void => {
       console.log("Checking Strikes");
       strikeAccess.checkStrikes();
-    }
+    },
   },
   {
     desc: "Clean Logs",
@@ -45,26 +45,26 @@ const jobs = [
     job: (): void => {
       console.log("Cleaning Logs");
       LogManager.cleanLogs();
-    }
+    },
   },
   {
     desc: "Get OG Contents",
     tab: "35 * * * *",
     job: (): void => {
       getOGContent();
-    }
+    },
   },
   {
     desc: "Get Strike images",
     tab: "37 * * * *",
     job: (): void => {
       getStrikeImage();
-    }
-  }
+    },
+  },
 ];
 
 export const startCronJobs = (): void => {
-  jobs.forEach(job => {
+  jobs.forEach((job) => {
     const cronjob = new CronJob(job.tab, job.job, null, true, "Europe/Berlin");
     cronjob.start();
   });

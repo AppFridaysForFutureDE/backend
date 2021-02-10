@@ -12,7 +12,7 @@ export async function getOGContent(): Promise<void> {
     const driveAdmin = new DriveAdmin();
     await driveAdmin.initConnection();
 
-    rows.forEach(async row => {
+    rows.forEach(async (row) => {
       const id = row["Lade dein Bild ein. Bitte als Quadrat!"].split("=")[1];
       const fileType = await driveAdmin.getFileType(id);
       const fileName = `${id}.${fileType}`;
@@ -26,7 +26,8 @@ export async function getOGContent(): Promise<void> {
           imageLink: `https://app.fffutu.re/api/v1/img/${fileName}`,
           infoTitle: row["Überschrift"],
           infoText: row["Text"],
-          ogContentEndDate: row["Bis wann soll dein Artikel in der App bleiben"]
+          ogContentEndDate:
+            row["Bis wann soll dein Artikel in der App bleiben"],
         }
       );
     });

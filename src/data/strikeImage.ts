@@ -13,7 +13,7 @@ export async function getStrikeImage(): Promise<void> {
     const driveAdmin = new DriveAdmin();
     await driveAdmin.initConnection();
 
-    rows.forEach(async row => {
+    rows.forEach(async (row) => {
       const id = row["Bild hochladen"].split("=")[1];
       const fileType = await driveAdmin.getFileType(id);
       const fileName = `${id}.${fileType}`;
@@ -32,7 +32,7 @@ export async function getStrikeImage(): Promise<void> {
 
       const [day, month, year] = date
         .split(".")
-        .map(string => parseInt(string));
+        .map((string) => parseInt(string));
 
       const jsDate = new Date(year, month - 1, day);
       const startTime = Utility.toUnixTimestamp(jsDate);
@@ -43,10 +43,10 @@ export async function getStrikeImage(): Promise<void> {
       await Strike.updateMany(
         {
           name: ogName,
-          date: { $gte: startTime, $lte: endTime }
+          date: { $gte: startTime, $lte: endTime },
         },
         {
-          imageUrl: `https://app.fffutu.re/api/v1/img/${fileName}`
+          imageUrl: `https://app.fffutu.re/api/v1/img/${fileName}`,
         }
       );
     });

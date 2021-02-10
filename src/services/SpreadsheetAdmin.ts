@@ -13,7 +13,7 @@ export class SpreadsheetAdmin {
     }
   }
 
-  public async loadDocumentInfo() {
+  public async loadDocumentInfo(): Promise<void> {
     try {
       await this.Spreadsheet.loadInfo(); // loads document properties and worksheets
     } catch (e) {

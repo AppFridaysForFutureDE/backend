@@ -1,24 +1,39 @@
-import mongoose from "mongoose";
+import { model, Schema, Model, Document } from "mongoose";
 
-const campaignScheme = new mongoose.Schema({
+export interface ICampaign extends Document {
+  name: string;
+  icon: string;
+  text: string;
+  cta: string;
+  link: string;
+  inApp: boolean;
+}
+
+const campaignScheme = new Schema({
   name: {
-    type: String
+    type: String,
+    required: true,
   },
   icon: {
-    type: String
+    type: String,
+    required: true,
   },
   text: {
-    type: String
+    type: String,
+    required: true,
   },
   cta: {
-    type: String
+    type: String,
+    required: true,
   },
   link: {
-    type: String
+    type: String,
+    required: true,
   },
   inApp: {
-    type: Boolean
-  }
+    type: Boolean,
+    required: true,
+  },
 });
 
-export const Campaign = mongoose.model("campaign", campaignScheme);
+export const Campaign: Model<ICampaign> = model("campaign", campaignScheme);

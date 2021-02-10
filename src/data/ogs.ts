@@ -20,7 +20,7 @@ export async function retrieveOGs(): Promise<void> {
   await OG.updateMany({}, { other: "DELETE" });
 
   //upsert ogs
-  data.forEach(async og => {
+  data.forEach(async (og) => {
     const ogid = Utility.hash(og["name"]);
     OG.findOneAndUpdate(
       { ogId: ogid },
@@ -39,10 +39,10 @@ export async function retrieveOGs(): Promise<void> {
         website: Utility.addProtocolPrefix(String(og["website"] || "")),
         telegram: Utility.addProtocolPrefix(String(og["telegram"] || "")),
         other: og["other"] || "",
-        retrievedAt: now
+        retrievedAt: now,
       },
       { upsert: true },
-      function(err, og) {
+      function (err, og) {
         console.log("error while upserting ogs");
         console.log(og);
         console.log(err);
