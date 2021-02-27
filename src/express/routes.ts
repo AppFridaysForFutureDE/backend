@@ -70,7 +70,7 @@ controlsRoutes.post("/feed/add", addFeedItem);
 controlsRoutes.post("/feed/edit", editFeedItem);
 controlsRoutes.post("/feed/remove", deleteFeedItem);
 
-apiRoutes.post("/comment", createComment);
+apiRoutes.post("/comments", createComment);
 apiRoutes.get("/liveevent", getLiveevent);
 apiRoutes.get("/strikes", getStrikes);
 apiRoutes.get("/slogans", getSlogans);
