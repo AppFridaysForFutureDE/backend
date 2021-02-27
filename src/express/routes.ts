@@ -35,6 +35,7 @@ import {
 import { sharePost } from "../endpoints/share";
 import { loginView, controlsView } from "../endpoints/views";
 import { webhookTriggered } from "../endpoints/webhook";
+import { createComment } from "../endpoints/commentController";
 
 export const controlsRoutes = Router();
 export const apiRoutes = Router();
@@ -69,6 +70,7 @@ controlsRoutes.post("/feed/add", addFeedItem);
 controlsRoutes.post("/feed/edit", editFeedItem);
 controlsRoutes.post("/feed/remove", deleteFeedItem);
 
+apiRoutes.post("/comment", createComment);
 apiRoutes.get("/liveevent", getLiveevent);
 apiRoutes.get("/strikes", getStrikes);
 apiRoutes.get("/slogans", getSlogans);
