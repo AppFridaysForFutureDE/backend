@@ -8,15 +8,14 @@ export const createComment: RequestHandler = async (req, res) => {
       name: req.body.name,
       age: req.body.age,
       content: req.body.content,
-      publish: req.body.publish,
+      publish: req.body.publish || false,
       articleReference: req.body.articleReference,
     });
 
     // TODO: redirect to new success page
-    /* res.redirect("/views/panel/controls"); */
-    res.send(200);
+    res.send("Vielen Dank, wir haben deinen Leserbrief erhalten.");
   } catch (e) {
     console.log(`Error while saving comment ${e}`);
-    res.send(442);
+    res.sendStatus(442);
   }
 };
