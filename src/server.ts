@@ -32,7 +32,7 @@ mongoose
       console.log("getting og content");
       await getOGContent();
 
-      console.log("retrieving new strikes for 25 sept");
+      console.log("retrieving new strikes for march 19");
       await strikeAccess.retrieveStrikesNew();
 
       console.log("getting strike images");

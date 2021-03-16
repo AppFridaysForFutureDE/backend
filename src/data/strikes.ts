@@ -26,7 +26,7 @@ export async function retrieveStrikesNew(): Promise<void> {
 
     const additionalInfo = strike[" zusatzinfo"];
 
-    const id = `25sep${ogId}`;
+    const id = `19mar${ogId}`;
 
     /* " Uhrzeit": "10:00 Uhr", */
     /* " Uhrzeit": "10.00 Uhr", */
@@ -35,7 +35,6 @@ export async function retrieveStrikesNew(): Promise<void> {
     let hours = 0;
     let minutes = 0;
 
-    let validDate = false;
     try {
       if (time.includes(".")) {
         time = time.replace(".", ":");
@@ -52,39 +51,35 @@ export async function retrieveStrikesNew(): Promise<void> {
 
       hours = parseInt(splitTime[0]);
       minutes = parseInt(splitTime[1].split(" ")[0]);
-      validDate = true;
     } catch (err) {
-      console.log(`could not parse time ${time}`);
+      console.log(`could not parse time ${time}. setting it to 12 o clock`);
+      hours = 12;
+      minutes = 0;
     }
 
-    if (validDate) {
-      const jsDate = new Date(2020, 3, 19, hours - 1, minutes);
-      const date = Utility.toUnixTimestamp(jsDate);
+    // March 19 CET
+    const jsDate = new Date(2021, 2, 19, hours - 1, minutes);
+    const date = Utility.toUnixTimestamp(jsDate);
 
-      Strike.findOneAndUpdate(
-        /* { strikeId: strike["id"] }, */
-        { strikeId: id },
-        {
-          /* strikeId: strike["id"], */
-          strikeId: id,
-          /* ogId: Utility.hash(strike["localGroupName"]), */
-          ogId: ogId,
-          /* name: strike["localGroupName"] || "", */
-          name: name || "",
-          location: location || "",
-          date: date || "",
-          eventLink: eventLink || "",
-          additionalInfo: additionalInfo || "",
-          retrievedAt: now
-        },
-        { upsert: true },
-        function(err, doc) {
-          console.log("error while updating strikes");
-          console.log(doc);
-          console.log(err);
-        }
-      );
-    }
+    Strike.findOneAndUpdate(
+      { strikeId: id },
+      {
+        strikeId: id,
+        ogId: ogId,
+        name: name || "",
+        location: location || "",
+        date: date || "",
+        eventLink: eventLink || "",
+        additionalInfo: additionalInfo || "",
+        retrievedAt: now,
+      },
+      { upsert: true },
+      function (err, doc) {
+        console.log("error while updating strikes");
+        console.log(doc);
+        console.log(err);
+      }
+    );
   });
 }
 
