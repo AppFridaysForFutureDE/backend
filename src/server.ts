@@ -5,6 +5,7 @@ import dotenv from "dotenv-safe";
 import { User } from "./models/userModel";
 import { getOGContent } from "./data/ogcontent";
 import { getStrikeImage } from "./data/strikeImage";
+import * as strikeAccess from "./data/strikes";
 
 console.log("Loading environment variables");
 dotenv.config({
@@ -30,6 +31,9 @@ mongoose
 
       console.log("getting og content");
       await getOGContent();
+
+      console.log("retrieving new strikes for 25 sept");
+      await strikeAccess.retrieveStrikesNew();
 
       console.log("getting strike images");
       await getStrikeImage();
