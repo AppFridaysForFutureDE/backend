@@ -45,9 +45,9 @@ export async function retrieveStrikesNew(): Promise<void> {
       }
 
       const splitTime = time.split(":");
-      if (splitTime.length !== 2) {
-        throw "invalid time";
-      }
+      /* if (splitTime.length !== 2) { */
+      /*   throw "invalid time"; */
+      /* } */
 
       hours = parseInt(splitTime[0]);
       minutes = parseInt(splitTime[1].split(" ")[0]);
