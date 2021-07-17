@@ -90,9 +90,10 @@ export const getCampaigns: RequestHandler = async (req, res) => {
 
 export const getHomefeed: RequestHandler = async (req, res) => {
   try {
-    // TODO
-    // banner = await Banner.findById(bannerSettings["feedBannerID"]);
-    const banner = { imageUrl: "", link: "", inApp: false };
+    let banner = await Banner.findOne({ campaignBanner: false });
+    if (!banner) {
+      banner = new Banner({imageUrl: "", link: "", inApp: false, campaignBanner: false});
+    }
     const items = await feedItem.find({});
     res.status(200).json({ banner: banner, feed: items });
   } catch (err) {
