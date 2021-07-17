@@ -22,7 +22,6 @@ import {
   addFeedItem,
   editFeedItem,
   deleteFeedItem,
-  setFeedBanner,
 } from "../endpoints/actions";
 import {
   getLiveevent,
@@ -63,7 +62,6 @@ controlsRoutes.post("/campaigns/remove", deleteCampaign);
 controlsRoutes.post("/banner/add", addBanner);
 controlsRoutes.post("/banner/edit", editBanner);
 controlsRoutes.post("/banner/remove", deleteBanner);
-controlsRoutes.post("/banner/setFeedBanner", setFeedBanner);
 
 controlsRoutes.post("/feed/add", addFeedItem);
 controlsRoutes.post("/feed/edit", editFeedItem);

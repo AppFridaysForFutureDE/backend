@@ -7,6 +7,9 @@ export interface IBanner extends Document {
   campaignBanner: boolean;
 }
 
+// a banner can be either presented
+// on the campaign page -> campaignBanner = true
+// or on the home page -> campaignBanner = false
 const bannerScheme = new Schema({
   imageUrl: {
     type: String,

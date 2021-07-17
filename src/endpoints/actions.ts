@@ -7,7 +7,6 @@ import { Slogan } from "../models/sloganModel";
 import { Banner } from "../models/bannersModel";
 import { Campaign } from "../models/campaignsModel";
 import { feedItem } from "../models/feedItemModel";
-import { BannerSettings } from "../models/bannerSettingsModel";
 
 export const populateDB: RequestHandler = async (req, res) => {
   if (!req.auth.valid) {
@@ -163,21 +162,6 @@ export const editBanner: RequestHandler = async (req, res) => {
     inApp: req.body.inApp == "on",
     campaignBanner: req.body.campaignBanner == "on",
   });
-  res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
-};
-
-export const setFeedBanner: RequestHandler = async (req, res) => {
-  if (!req.auth.valid) {
-    res.redirect("/views/panel/login");
-    return;
-  }
-  const result = await BannerSettings.findOneAndUpdate(
-    {},
-    {
-      feedBannerID: req.body.feedBannerID || "",
-    },
-    { upsert: true }
-  );
   res.redirect("/views/panel/controls".concat(result ? "" : "?err=true"));
 };
 
