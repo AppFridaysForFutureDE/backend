@@ -1,12 +1,21 @@
-#!/bin/sh
-#This should be run as cronjob, for example daily
-echo "Creating Backup folder"
-if [ ! -d "/root/backend/backups" ]; then
-  mkdir backups
+#!/bin/bash
+#This should be run as a daily cronjob
+# root@app:~# crontab -e
+# 0 3 * * * cd /root/backend && ./backup
+
+if [ "${PWD##*/}" != "backend" ]; then
+  echo 'We are in the wrong directory!';
+  exit
 fi
-folder="/root/backend/backups/backup_$(date +"%Y-%m-%d--%H-%M-%S")"
-mkdir "$folder"
-echo "Created folder $folder"
+
+if [[ ! -d 'backups' ]]; then
+  echo "Creating backups folder";
+  mkdir backups;
+fi
+
+folder="backups/$(date +"%Y-%m-%d_%H:%M:%S")"
+
+mkdir "$folder";
 
 echo "Dumping MySQL Database..."
 docker exec backend_mysql-db_1 /usr/bin/mysqldump -u root --password=root db > "$folder/database.sql"
@@ -17,3 +26,28 @@ docker cp backend_ghost_1:/var/lib/ghost/content "$folder/content"
 echo "Copied content folder"
 
 echo "Backup $folder was created"
+
+# ---------------
+# keep backup of the last 7 days
+for i in {0..7}; do
+  keep+=($(date +%Y-%m-%d -d "-$i day"));
+done
+
+# keep backup of the last 9 weeks (on sunday)
+for i in {0..9}; do
+  keep+=($(date +%Y-%m-%d -d "sunday-$((i+1)) week"));
+done
+
+echo "Keeping backups for: ${keep[*]}"
+
+cd backups
+backups=(*)
+echo "Current backups are: ${backups[*]}"
+
+for backup in "${backups[@]}"; do
+  date="$(echo "$backup" | cut -d'_' -f 1)";
+  if [[ ! "${keep[*]}" =~ "$date" ]]; then
+    echo "Deleting backup $backup";
+    rm -rf "$backup"
+  fi
+done
