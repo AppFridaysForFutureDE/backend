@@ -72,7 +72,7 @@ controlsRoutes.post("/feed/remove", deleteFeedItem);
 apiRoutes.use("/*", (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET");
-  next()
+  next();
 });
 
 apiRoutes.get("/liveevent", getLiveevent);
