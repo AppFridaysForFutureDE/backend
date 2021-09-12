@@ -67,6 +67,12 @@ controlsRoutes.post("/feed/add", addFeedItem);
 controlsRoutes.post("/feed/edit", editFeedItem);
 controlsRoutes.post("/feed/remove", deleteFeedItem);
 
+apiRoutes.use("/*", (req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET");
+  next();
+});
+
 apiRoutes.get("/liveevent", getLiveevent);
 apiRoutes.get("/strikes", getStrikes);
 apiRoutes.get("/slogans", getSlogans);
