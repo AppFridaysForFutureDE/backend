@@ -6,7 +6,6 @@ import { Banner } from "../models/bannersModel";
 import { Campaign } from "../models/campaignsModel";
 import { Slogan } from "../models/sloganModel";
 import Utility from "../Utility";
-import { BannerSettings } from "../models/bannerSettingsModel";
 import { feedItem } from "../models/feedItemModel";
 
 export const getOGs: RequestHandler = (req, res) => {
@@ -91,17 +90,9 @@ export const getCampaigns: RequestHandler = async (req, res) => {
 
 export const getHomefeed: RequestHandler = async (req, res) => {
   try {
-    const bannerSettings = (await BannerSettings.findOne({})) || {
-      feedBannerID: "",
-    };
-    let banner;
-    if (
-      bannerSettings["feedBannerID"] &&
-      bannerSettings["feedBannerID"] != ""
-    ) {
-      banner = await Banner.findById(bannerSettings["feedBannerID"]);
-    } else {
-      banner = { imageUrl: "", link: "", inApp: false };
+    let banner = await Banner.findOne({ campaignBanner: false });
+    if (!banner) {
+      banner = new Banner({imageUrl: "", link: "", inApp: false, campaignBanner: false});
     }
     const items = await feedItem.find({});
     res.status(200).json({ banner: banner, feed: items });
