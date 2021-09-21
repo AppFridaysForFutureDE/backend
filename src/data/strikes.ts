@@ -26,7 +26,7 @@ export async function retrieveStrikesNew(): Promise<void> {
 
     const additionalInfo = strike[" zusatzinfo"];
 
-    const id = `24sep21{ogId}`;
+    const id = `24sep21${ogId}`;
 
     /* " Uhrzeit": "10:00 Uhr", */
     /* " Uhrzeit": "10.00 Uhr", */
