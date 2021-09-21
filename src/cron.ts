@@ -13,6 +13,7 @@ const jobs = [
     job: (): void => {
       console.log("Retrieving Strikes");
       strikeAccess.retrieveStrikes();
+      strikeAccess.retrieveStrikesNew();
     },
   },
   {

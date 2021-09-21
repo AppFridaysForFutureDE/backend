@@ -3,6 +3,86 @@ import Utility from "../Utility";
 import FCMAdmin from "../services/FCMAdmin";
 import nodeFetch from "node-fetch";
 
+export async function retrieveStrikesNew(): Promise<void> {
+  const response = await nodeFetch(
+    "https://fridaysforfuture.de/map/mapdata-24092021.json"
+  );
+  let data = [];
+  try {
+    data = await response.json();
+  } catch (error) {
+    return;
+  }
+
+  //get retrievedAt date/time
+  const now = Date.now();
+
+  //loop through strikes
+  data.forEach((strike) => {
+    const ogId = Utility.hash(strike[" Name"]);
+    const name = strike[" Name"];
+    const location = strike[" Startpunkt"];
+    const eventLink = strike[" Facebook event"];
+
+    const additionalInfo = strike[" zusatzinfo"];
+
+    const id = `24sep21{ogId}`;
+
+    /* " Uhrzeit": "10:00 Uhr", */
+    /* " Uhrzeit": "10.00 Uhr", */
+    let time: string = strike[" Uhrzeit"];
+
+    let hours = 0;
+    let minutes = 0;
+
+    try {
+      if (time.includes(".")) {
+        time = time.replace(".", ":");
+      }
+
+      if (!time.includes(":")) {
+        throw "invalid time";
+      }
+
+      const splitTime = time.split(":");
+      /* if (splitTime.length !== 2) { */
+      /*   throw "invalid time"; */
+      /* } */
+
+      hours = parseInt(splitTime[0]);
+      minutes = parseInt(splitTime[1].split(" ")[0]);
+    } catch (err) {
+      console.log(`could not parse time ${time}. setting it to 12 o clock`);
+      hours = 12;
+      minutes = 0;
+    }
+
+    // September 24 CEST
+    const jsDate = new Date(2021, 8, 24, hours - 2, minutes);
+    const date = Utility.toUnixTimestamp(jsDate);
+
+    Strike.findOneAndUpdate(
+      { strikeId: id },
+      {
+        strikeId: id,
+        ogId: ogId,
+        name: name || "",
+        location: location || "",
+        date: date || "",
+        eventLink: eventLink || "",
+        additionalInfo: additionalInfo || "",
+        retrievedAt: now,
+      },
+      { upsert: true },
+      function (err, doc) {
+        console.log("error while updating strikes");
+        console.log(doc);
+        console.log(err);
+      }
+    );
+  });
+}
+
 //retrieves Strikes from website api and saves them to mongodb
 export async function retrieveStrikes(): Promise<void> {
   const response = await nodeFetch(`${process.env.WEBSITE_URL}/strike`);
