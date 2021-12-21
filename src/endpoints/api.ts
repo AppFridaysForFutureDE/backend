@@ -94,7 +94,7 @@ export const getHomefeed: RequestHandler = async (req, res) => {
     if (!banner) {
       banner = new Banner({imageUrl: "", link: "", inApp: false, campaignBanner: false});
     }
-    const items = await feedItem.find({});
+    const items = await feedItem.find({}, null, {sort: {_id: -1}});
     res.status(200).json({ banner: banner, feed: items });
   } catch (err) {
     return console.error(err);
